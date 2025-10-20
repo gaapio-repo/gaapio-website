@@ -13,6 +13,7 @@ import { ComplianceSecuritySection } from "@/components/home/ComplianceSecurityS
 import { KeyBenefitsSection } from "@/components/home/KeyBenefitsSection";
 import { WhatYoullLearnSection } from "@/components/home/WhatYoullLearnSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 
 export default function Index() {
   const [showMetrics, setShowMetrics] = useState(false);
@@ -112,6 +113,9 @@ export default function Index() {
 
       {/* Final CTA Section */}
       <FinalCtaSection />
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
       
       <Footer />
     </div>
