@@ -36,10 +36,18 @@ function App() {
   useEffect(() => {
     const checkConstructionMode = async () => {
       try {
+        // Set a timeout to prevent infinite loading
+        const timeoutId = setTimeout(() => {
+          console.warn('Construction mode check timed out');
+          setIsUnderConstruction(false);
+        }, 3000);
+
         const { data, error } = await supabase
           .from('site_config')
           .select('under_construction')
           .single();
+
+        clearTimeout(timeoutId);
 
         if (error) {
           console.error('Error checking construction mode:', error);
