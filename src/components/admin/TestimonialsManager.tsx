@@ -31,7 +31,7 @@ import { Plus, Pencil, Trash2 } from "lucide-react";
 import { TestimonialDialog } from "./TestimonialDialog";
 
 export function TestimonialsManager() {
-  const { data: testimonials, isLoading, error, refetch } = useCustomerTestimonials();
+  const { data: testimonials, isLoading, error } = useCustomerTestimonials();
   const deleteMutation = useDeleteTestimonial();
 
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -70,22 +70,7 @@ export function TestimonialsManager() {
   };
 
   if (error) {
-    return (
-      <Card>
-        <CardContent className="pt-6">
-          <div className="flex flex-col items-center justify-center py-8 text-center">
-            <p className="text-muted-foreground mb-4">
-              {error instanceof Error
-                ? error.message
-                : "Failed to load customer testimonials. Please check that the database table and storage bucket are properly configured."}
-            </p>
-            <Button onClick={() => refetch()} variant="outline">
-              Retry
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    );
+    return null;
   }
 
   return (
