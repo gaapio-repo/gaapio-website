@@ -113,9 +113,6 @@ export default function Index() {
 
       {/* Final CTA Section */}
       <FinalCtaSection />
-
-      {/* Testimonials Section */}
-      <TestimonialsSection />
       
       <Footer />
     </div>
