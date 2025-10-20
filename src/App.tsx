@@ -31,73 +31,9 @@ import Privacy from "./pages/Privacy";
 import SSA from "./pages/SSA";
 
 function App() {
-  const [isUnderConstruction, setIsUnderConstruction] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const checkConstructionMode = async () => {
-      try {
-        // Set a timeout to prevent infinite loading
-        const timeoutId = setTimeout(() => {
-          console.warn('Construction mode check timed out');
-          setIsUnderConstruction(false);
-        }, 3000);
-
-        const { data, error } = await supabase
-          .from('site_config')
-          .select('under_construction')
-          .single();
-
-        clearTimeout(timeoutId);
-
-        if (error) {
-          console.error('Error checking construction mode:', error);
-          setIsUnderConstruction(false);
-          return;
-        }
-
-        setIsUnderConstruction(data?.under_construction || false);
-      } catch (error) {
-        console.error('Error checking construction mode:', error);
-        setIsUnderConstruction(false);
-      }
-    };
-
-    checkConstructionMode();
-
-    // Set up real-time subscription to listen for changes
-    const channel = supabase
-      .channel('site_config_changes')
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'site_config'
-        },
-        (payload) => {
-          setIsUnderConstruction(payload.new.under_construction);
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, []);
-
-  // Show loading state while checking construction mode
-  if (isUnderConstruction === null) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  // Show construction page if enabled
-  if (isUnderConstruction) {
-    return <UnderConstructionPage />;
-  }
+  // Temporarily disable construction mode check to fix loading issue
+  // TODO: Re-enable after fixing the site_config table query issue
+  const isUnderConstruction = false;
 
   // Normal app flow
   return (
