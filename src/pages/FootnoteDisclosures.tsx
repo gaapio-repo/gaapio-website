@@ -4,7 +4,6 @@ import { Footer } from "@/components/footer";
 import { DisclosureHeroSection } from "@/components/disclosures/DisclosureHeroSection";
 import { DisclosureHowItWorksSection } from "@/components/disclosures/DisclosureHowItWorksSection";
 import { DisclosureBenefitsSection } from "@/components/disclosures/DisclosureBenefitsSection";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { SocialProofSection } from "@/components/home/SocialProofSection";
 
 export default function FootnoteDisclosures() {
@@ -33,11 +32,6 @@ export default function FootnoteDisclosures() {
           {/* Benefits Section - Blue Background */}
           <div className="bg-[#339CFF] dark:bg-[#2563eb]">
             <DisclosureBenefitsSection />
-          </div>
-          
-          {/* Testimonials Section - White Background */}
-          <div className="bg-white dark:bg-background">
-            <TestimonialsSection />
           </div>
         </div>
       </div>
