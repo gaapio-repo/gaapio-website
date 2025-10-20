@@ -31,8 +31,12 @@ import Privacy from "./pages/Privacy";
 import SSA from "./pages/SSA";
 
 function App() {
+  console.log("[App] Starting...");
+  
   // Completely disable construction mode check - causing loading issues
   const isUnderConstruction = false;
+  
+  console.log("[App] Rendering routes...");
 
   // Normal app flow
   return (
