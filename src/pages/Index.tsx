@@ -12,7 +12,6 @@ import { SocialProofSection } from "@/components/home/SocialProofSection";
 import { ComplianceSecuritySection } from "@/components/home/ComplianceSecuritySection";
 import { KeyBenefitsSection } from "@/components/home/KeyBenefitsSection";
 import { WhatYoullLearnSection } from "@/components/home/WhatYoullLearnSection";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 
 export default function Index() {
@@ -113,9 +112,6 @@ export default function Index() {
 
       {/* Final CTA Section */}
       <FinalCtaSection />
-
-      {/* Testimonials Section */}
-      <TestimonialsSection />
       
       <Footer />
     </div>

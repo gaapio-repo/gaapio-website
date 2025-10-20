@@ -5,18 +5,6 @@ import App from './App.tsx'
 import './index.css'
 import './App.css'
 import { ThemeProvider } from './components/theme-toggle.tsx'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-// Create a client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      staleTime: 5 * 60 * 1000,
-      refetchOnWindowFocus: false,
-    },
-  },
-})
 
 // Get the root element
 const rootElement = document.getElementById("root");
@@ -28,10 +16,8 @@ if (!rootElement) {
 // Create the root and render the app
 createRoot(rootElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="system" storageKey="gaapio-theme">
-        <App />
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ThemeProvider defaultTheme="system" storageKey="gaapio-theme">
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
