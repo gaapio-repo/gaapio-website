@@ -34,15 +34,24 @@ export function useCustomerTestimonials() {
   return useQuery({
     queryKey: ["customer-testimonials"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("customer_testimonials")
-        .select("*")
-        .order("display_order", { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from("customer_testimonials")
+          .select("*")
+          .order("display_order", { ascending: true });
 
-      if (error) throw error;
-      return data as CustomerTestimonial[];
+        if (error) {
+          console.error("Error fetching testimonials:", error);
+          return [];
+        }
+        return data as CustomerTestimonial[];
+      } catch (err) {
+        console.error("Unexpected error:", err);
+        return [];
+      }
     },
-    throwOnError: false,
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 }
 
@@ -51,16 +60,25 @@ export function useActiveTestimonials() {
   return useQuery({
     queryKey: ["customer-testimonials", "active"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("customer_testimonials")
-        .select("*")
-        .eq("is_active", true)
-        .order("display_order", { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from("customer_testimonials")
+          .select("*")
+          .eq("is_active", true)
+          .order("display_order", { ascending: true });
 
-      if (error) throw error;
-      return data as CustomerTestimonial[];
+        if (error) {
+          console.error("Error fetching active testimonials:", error);
+          return [];
+        }
+        return data as CustomerTestimonial[];
+      } catch (err) {
+        console.error("Unexpected error:", err);
+        return [];
+      }
     },
-    throwOnError: false,
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 }
 

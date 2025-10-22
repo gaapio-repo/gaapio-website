@@ -31,20 +31,24 @@ export function useCustomerLogos() {
   return useQuery({
     queryKey: ["customer-logos-admin"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("customer_logos")
-        .select("*")
-        .order("display_order", { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from("customer_logos")
+          .select("*")
+          .order("display_order", { ascending: true });
 
-      if (error) {
-        console.error("Error fetching customer logos:", error);
-        throw error;
+        if (error) {
+          console.error("Error fetching customer logos:", error);
+          return [];
+        }
+        return (data as CustomerLogo[]) || [];
+      } catch (err) {
+        console.error("Unexpected error:", err);
+        return [];
       }
-      return data as CustomerLogo[];
     },
-    retry: 1,
-    retryDelay: 1000,
-    throwOnError: false,
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 }
 
@@ -53,15 +57,25 @@ export function useActiveCustomerLogos() {
   return useQuery({
     queryKey: ["customer-logos-active"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("customer_logos")
-        .select("*")
-        .eq("is_active", true)
-        .order("display_order", { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from("customer_logos")
+          .select("*")
+          .eq("is_active", true)
+          .order("display_order", { ascending: true });
 
-      if (error) throw error;
-      return data as CustomerLogo[];
+        if (error) {
+          console.error("Error fetching active customer logos:", error);
+          return [];
+        }
+        return (data as CustomerLogo[]) || [];
+      } catch (err) {
+        console.error("Unexpected error:", err);
+        return [];
+      }
     },
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 }
 
