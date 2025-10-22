@@ -39,7 +39,7 @@ function App() {
         const { data, error } = await supabase
           .from('site_config')
           .select('under_construction')
-          .single();
+          .maybeSingle();
 
         if (error) {
           console.error('Error checking construction mode:', error);
