@@ -134,7 +134,7 @@ export function Footer() {
                 <li className="flex items-center justify-center md:justify-start space-x-2">
                   <Instagram className="h-3 w-3 text-gray-300" />
                   <a 
-                    href="https://www.instagram.com/gaapio_inc" 
+                    href="https://www.instagram.com/gaapio_inc/" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
