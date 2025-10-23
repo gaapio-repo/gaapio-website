@@ -1,5 +1,5 @@
 
-import { Github, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Github, Linkedin, Twitter, Youtube, Instagram, Facebook } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
@@ -129,6 +129,50 @@ export function Footer() {
                     className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
                   >
                     LinkedIn
+                  </a>
+                </li>
+                <li className="flex items-center justify-center md:justify-start space-x-2">
+                  <Instagram className="h-3 w-3 text-gray-300" />
+                  <a 
+                    href="https://www.instagram.com/gaapio_inc" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  >
+                    Instagram
+                  </a>
+                </li>
+                <li className="flex items-center justify-center md:justify-start space-x-2">
+                  <Facebook className="h-3 w-3 text-gray-300" />
+                  <a 
+                    href="https://www.facebook.com/profile.php?id=61582424325696" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  >
+                    Facebook
+                  </a>
+                </li>
+                <li className="flex items-center justify-center md:justify-start space-x-2">
+                  <Twitter className="h-3 w-3 text-gray-300" />
+                  <a 
+                    href="https://x.com/gaapio_inc" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  >
+                    X
+                  </a>
+                </li>
+                <li className="flex items-center justify-center md:justify-start space-x-2">
+                  <Youtube className="h-3 w-3 text-gray-300" />
+                  <a 
+                    href="https://www.tiktok.com/@gaapio" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  >
+                    TikTok
                   </a>
                 </li>
               </ul>
