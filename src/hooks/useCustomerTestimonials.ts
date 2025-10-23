@@ -79,6 +79,7 @@ export function useActiveTestimonials() {
     },
     retry: false,
     refetchOnWindowFocus: false,
+    throwOnError: false,
   });
 }
 
