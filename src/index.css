@@ -142,14 +142,7 @@
   }
 }
 
-@font-face {
-  font-family: 'Inter var';
-  font-weight: 100 900;
-  font-display: swap;
-  font-style: normal;
-  font-named-instance: 'Regular';
-  src: url('https://rsms.me/inter/font-files/Inter-roman.var.woff2?v=3.19') format('woff2');
-}
+/* Inter font now loaded from Google Fonts in index.html */
 
 @layer utilities {
   .hero-glow {
