@@ -136,14 +136,14 @@ export function Header() {
                   <NavigationMenuContent className="!w-screen">
                     <div className="w-full px-4 py-6">
                       <div className="max-w-7xl mx-auto">
-                         <div className="rounded-xl border border-blue-200 shadow-2xl bg-gradient-to-br from-blue-400 to-blue-500 dark:from-blue-500 dark:to-blue-600 dark:border-blue-300/20 overflow-hidden">
-                           <div className="grid grid-cols-2 gap-0">
-                             {/* Left Column - Product Navigation */}
-                             <div className="border-r border-blue-300/40 dark:border-blue-400/30 p-6 bg-gradient-to-br from-blue-300/30 to-transparent">
-                               <h3 className="text-xs font-bold text-white mb-4 uppercase tracking-wider flex items-center gap-2">
-                                 <div className="h-1 w-8 bg-white rounded-full"></div>
-                                 Our Products
-                               </h3>
+                         <div className="rounded-xl border border-gray-200 shadow-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 dark:border-gray-700 overflow-hidden">
+                            <div className="grid grid-cols-2 gap-0">
+                              {/* Left Column - Product Navigation */}
+                              <div className="border-r border-gray-200 dark:border-gray-700 p-6 bg-gradient-to-br from-gray-100/50 to-transparent dark:from-gray-800/50">
+                                <h3 className="text-xs font-bold text-gray-900 dark:text-white mb-4 uppercase tracking-wider flex items-center gap-2">
+                                  <div className="h-1 w-8 bg-gray-900 dark:bg-white rounded-full"></div>
+                                  Our Products
+                                </h3>
                                <div className="space-y-2">
                                 {products.map((product) => (
                                   <NavigationMenuLink key={product.name} asChild>
@@ -152,8 +152,8 @@ export function Header() {
                                       onMouseEnter={() => setHoveredProduct(product)}
                                        className={cn(
                                          "flex items-start gap-4 p-4 rounded-lg transition-all group",
-                                         "hover:bg-white/20 dark:hover:bg-white/10",
-                                         hoveredProduct.name === product.name && "bg-white/20 dark:bg-white/10"
+                                         "hover:bg-gray-200/50 dark:hover:bg-gray-700/50",
+                                         hoveredProduct.name === product.name && "bg-gray-200/50 dark:bg-gray-700/50"
                                        )}
                                     >
                                        <div className={cn(
@@ -165,19 +165,19 @@ export function Header() {
                                          <product.icon className={cn(
                                            "h-5 w-5 transition-colors",
                                            hoveredProduct.name === product.name
-                                             ? "text-blue-500"
-                                             : "text-blue-400 group-hover:text-blue-500"
+                                             ? "text-primary"
+                                             : "text-gray-600 group-hover:text-primary"
                                          )} />
                                        </div>
                                        <div className="flex-1">
-                                         <div className="font-semibold text-white transition-colors">
+                                         <div className="font-semibold text-gray-900 dark:text-white transition-colors">
                                            {product.name}
                                          </div>
-                                         <div className="text-sm text-blue-100 mt-1">
+                                         <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                                            {product.description}
                                          </div>
                                       </div>
-                                      <ChevronRight className="h-4 w-4 text-white/60 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                      <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                                     </Link>
                                   </NavigationMenuLink>
                                 ))}
@@ -185,29 +185,29 @@ export function Header() {
                             </div>
 
                              {/* Right Column - Product Details */}
-                             <div className="p-8 bg-gradient-to-br from-blue-500/50 to-transparent">
+                             <div className="p-8 bg-gradient-to-br from-gray-100/50 to-transparent dark:from-gray-800/50">
                                <div className="flex items-start gap-4 mb-6">
-                                 <div className="p-3 rounded-xl bg-white shadow-lg">
-                                   <hoveredProduct.icon className="h-8 w-8 text-blue-500" />
+                                 <div className="p-3 rounded-xl bg-white dark:bg-gray-700 shadow-lg">
+                                   <hoveredProduct.icon className="h-8 w-8 text-primary" />
                                  </div>
                                  <div>
-                                   <h3 className="text-xl font-bold text-white mb-2">
+                                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                                      {hoveredProduct.name}
                                    </h3>
-                                   <p className="text-blue-100">
+                                   <p className="text-gray-600 dark:text-gray-300">
                                      {hoveredProduct.description}
                                    </p>
                                 </div>
                               </div>
 
                                <div className="space-y-3 mb-6">
-                                 <h4 className="text-sm font-semibold text-white uppercase tracking-wide">
+                                 <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wide">
                                    Key Features
                                  </h4>
                                  {hoveredProduct.features.map((feature, idx) => (
                                    <div key={idx} className="flex items-start gap-3">
-                                     <div className="mt-1 h-1.5 w-1.5 rounded-full bg-white flex-shrink-0" />
-                                     <span className="text-sm text-blue-100">
+                                     <div className="mt-1 h-1.5 w-1.5 rounded-full bg-gray-900 dark:bg-white flex-shrink-0" />
+                                     <span className="text-sm text-gray-600 dark:text-gray-300">
                                        {feature}
                                      </span>
                                    </div>
@@ -216,7 +216,7 @@ export function Header() {
 
                                <Link
                                  to={hoveredProduct.href}
-                                 className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-blue-100 transition-colors group bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg"
+                                 className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors group bg-gray-200/50 hover:bg-gray-300/50 dark:bg-gray-700/50 dark:hover:bg-gray-600/50 px-4 py-2 rounded-lg"
                               >
                                 Learn more
                                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
