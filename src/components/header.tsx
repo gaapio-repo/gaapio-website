@@ -3,14 +3,46 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Logo } from "@/components/logo";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight } from "lucide-react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+
+const products = [
+  {
+    name: "Accounting Memos",
+    href: "/accounting-memos",
+    icon: FileText,
+    description: "AI-powered technical accounting memos",
+    features: ["Automated memo generation", "ASC guidance integration", "Collaborative review workflow"],
+  },
+  {
+    name: "Footnote Disclosures",
+    href: "/footnote-disclosures",
+    icon: FileCheck,
+    description: "Generate compliant financial statement disclosures",
+    features: ["SEC-compliant templates", "Real-time guidance updates", "Multi-standard support"],
+  },
+  {
+    name: "Contract Analysis",
+    href: "/contract-analysis",
+    icon: FileSearch,
+    description: "Extract key terms and analyze contracts instantly",
+    features: ["AI-powered extraction", "Risk identification", "Revenue recognition analysis"],
+  },
+  {
+    name: "Guidance Updates",
+    href: "/guidance-updates",
+    icon: Bell,
+    description: "Stay current with the latest accounting standards",
+    features: ["Real-time notifications", "Impact analysis", "Implementation guidance"],
+  },
+];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [enableSelfSignup, setEnableSelfSignup] = useState(true);
+  const [hoveredProduct, setHoveredProduct] = useState(products[0]);
   const location = useLocation();
 
   useEffect(() => {
@@ -60,7 +92,7 @@ export function Header() {
           <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
             <NavigationMenu>
               <NavigationMenuList className="flex items-center space-x-4">
-                {/* Products Dropdown */}
+                {/* Products Mega Menu */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className="text-gray-700 dark:text-gray-200 text-base font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white"
@@ -68,44 +100,92 @@ export function Header() {
                   Products
                 </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-auto min-w-[12rem] max-w-[18.5rem] p-1 mt-2 rounded-xl border border-neutral-200 shadow-lg bg-white dark:bg-neutral-900 dark:border-white/10 animate-in fade-in-0 zoom-in-95 duration-150">
-                      <div className="space-y-1">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to="/accounting-memos"
-                            className="flex items-center h-10 px-4 rounded-lg text-sm font-semibold tracking-normal leading-tight text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-neutral-100 transition-colors focus-visible:ring-2 focus-visible:ring-black/5 dark:focus-visible:ring-white/20 focus-visible:outline-none"
-                          >
-                            Accounting Memos
+                    <div className="fixed left-0 right-0 top-16 z-50">
+                      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="mt-2 rounded-xl border border-neutral-200 shadow-2xl bg-white dark:bg-neutral-900 dark:border-white/10 animate-in fade-in-0 zoom-in-95 duration-150">
+                          <div className="grid grid-cols-2 gap-0">
+                            {/* Left Column - Product Navigation */}
+                            <div className="border-r border-neutral-200 dark:border-neutral-800 p-6">
+                              <div className="space-y-2">
+                                {products.map((product) => (
+                                  <NavigationMenuLink key={product.name} asChild>
+                                    <Link
+                                      to={product.href}
+                                      onMouseEnter={() => setHoveredProduct(product)}
+                                      className={cn(
+                                        "flex items-start gap-4 p-4 rounded-lg transition-all group",
+                                        "hover:bg-neutral-50 dark:hover:bg-neutral-800",
+                                        hoveredProduct.name === product.name && "bg-neutral-50 dark:bg-neutral-800"
+                                      )}
+                                    >
+                                      <div className={cn(
+                                        "p-2 rounded-lg transition-colors",
+                                        hoveredProduct.name === product.name 
+                                          ? "bg-blue-100 dark:bg-blue-900/30" 
+                                          : "bg-neutral-100 dark:bg-neutral-800 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30"
+                                      )}>
+                                        <product.icon className={cn(
+                                          "h-5 w-5 transition-colors",
+                                          hoveredProduct.name === product.name
+                                            ? "text-blue-600 dark:text-blue-400"
+                                            : "text-neutral-600 dark:text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400"
+                                        )} />
+                                      </div>
+                                      <div className="flex-1">
+                                        <div className="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                          {product.name}
+                                        </div>
+                                        <div className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                                          {product.description}
+                                        </div>
+                                      </div>
+                                      <ChevronRight className="h-4 w-4 text-neutral-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    </Link>
+                                  </NavigationMenuLink>
+                                ))}
+                              </div>
+                            </div>
 
-                          </Link>
-                        </NavigationMenuLink>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to="/footnote-disclosures"
-                            className="flex items-center h-10 px-4 rounded-lg text-sm font-semibold tracking-normal leading-tight text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-neutral-100 transition-colors focus-visible:ring-2 focus-visible:ring-black/5 dark:focus-visible:ring-white/20 focus-visible:outline-none"
-                          >
-                            Footnote Disclosures
+                            {/* Right Column - Product Details */}
+                            <div className="p-8 bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-800/50">
+                              <div className="flex items-start gap-4 mb-6">
+                                <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-900/30">
+                                  <hoveredProduct.icon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                                </div>
+                                <div>
+                                  <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
+                                    {hoveredProduct.name}
+                                  </h3>
+                                  <p className="text-neutral-600 dark:text-neutral-400">
+                                    {hoveredProduct.description}
+                                  </p>
+                                </div>
+                              </div>
 
-                          </Link>
-                        </NavigationMenuLink>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to="/contract-analysis"
-                            className="flex items-center h-10 px-4 rounded-lg text-sm font-semibold tracking-normal leading-tight text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-neutral-100 transition-colors focus-visible:ring-2 focus-visible:ring-black/5 dark:focus-visible:ring-white/20 focus-visible:outline-none"
-                          >
-                            Contract Analysis
+                              <div className="space-y-3 mb-6">
+                                <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wide">
+                                  Key Features
+                                </h4>
+                                {hoveredProduct.features.map((feature, idx) => (
+                                  <div key={idx} className="flex items-start gap-3">
+                                    <div className="mt-1 h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-400 flex-shrink-0" />
+                                    <span className="text-sm text-neutral-700 dark:text-neutral-300">
+                                      {feature}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
 
-                          </Link>
-                        </NavigationMenuLink>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to="/guidance-updates"
-                            className="flex items-center h-10 px-4 rounded-lg text-sm font-semibold tracking-normal leading-tight text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-neutral-100 transition-colors focus-visible:ring-2 focus-visible:ring-black/5 dark:focus-visible:ring-white/20 focus-visible:outline-none"
-                          >
-                            Guidance Updates
-
-                          </Link>
-                        </NavigationMenuLink>
+                              <Link
+                                to={hoveredProduct.href}
+                                className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors group"
+                              >
+                                Learn more
+                                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </NavigationMenuContent>
