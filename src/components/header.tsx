@@ -100,8 +100,8 @@ export function Header() {
                   Products
                 </NavigationMenuTrigger>
                   <NavigationMenuContent className="!w-screen">
-                    <div className="w-full px-8 py-6">
-                      <div className="max-w-7xl mx-auto">
+                    <div className="w-full flex justify-center px-8 py-6">
+                      <div className="w-full max-w-5xl">
                         <div className="rounded-xl border border-neutral-200 shadow-2xl bg-white dark:bg-neutral-900 dark:border-white/10">
                           <div className="grid grid-cols-2 gap-0">
                             {/* Left Column - Product Navigation */}
