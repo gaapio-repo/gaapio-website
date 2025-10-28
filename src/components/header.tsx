@@ -102,12 +102,12 @@ export function Header() {
                   <NavigationMenuContent className="!w-screen">
                     <div className="w-full px-4 py-6">
                       <div className="max-w-7xl mx-auto">
-                         <div className="rounded-xl border border-neutral-200 shadow-2xl bg-white dark:bg-neutral-900 dark:border-white/10 overflow-hidden">
+                         <div className="rounded-xl border border-blue-200 shadow-2xl bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-900 dark:to-blue-950 dark:border-blue-800 overflow-hidden">
                            <div className="grid grid-cols-2 gap-0">
                              {/* Left Column - Product Navigation */}
-                             <div className="border-r border-neutral-200 dark:border-neutral-800 p-6 bg-gradient-to-br from-blue-50/60 via-white to-white dark:from-blue-950/20 dark:via-neutral-900 dark:to-neutral-900">
-                               <h3 className="text-xs font-bold text-blue-600 dark:text-blue-400 mb-4 uppercase tracking-wider flex items-center gap-2">
-                                 <div className="h-1 w-8 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
+                             <div className="border-r border-blue-500/30 dark:border-blue-700 p-6 bg-gradient-to-br from-blue-500/30 to-transparent">
+                               <h3 className="text-xs font-bold text-white mb-4 uppercase tracking-wider flex items-center gap-2">
+                                 <div className="h-1 w-8 bg-white rounded-full"></div>
                                  Our Products
                                </h3>
                                <div className="space-y-2">
@@ -116,34 +116,34 @@ export function Header() {
                                     <Link
                                       to={product.href}
                                       onMouseEnter={() => setHoveredProduct(product)}
-                                      className={cn(
-                                        "flex items-start gap-4 p-4 rounded-lg transition-all group",
-                                        "hover:bg-neutral-50 dark:hover:bg-neutral-800",
-                                        hoveredProduct.name === product.name && "bg-neutral-50 dark:bg-neutral-800"
-                                      )}
+                                       className={cn(
+                                         "flex items-start gap-4 p-4 rounded-lg transition-all group",
+                                         "hover:bg-white/20 dark:hover:bg-white/10",
+                                         hoveredProduct.name === product.name && "bg-white/20 dark:bg-white/10"
+                                       )}
                                     >
-                                      <div className={cn(
-                                        "p-2 rounded-lg transition-colors",
-                                        hoveredProduct.name === product.name 
-                                          ? "bg-blue-100 dark:bg-blue-900/30" 
-                                          : "bg-neutral-100 dark:bg-neutral-800 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30"
-                                      )}>
-                                        <product.icon className={cn(
-                                          "h-5 w-5 transition-colors",
-                                          hoveredProduct.name === product.name
-                                            ? "text-blue-600 dark:text-blue-400"
-                                            : "text-neutral-600 dark:text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400"
-                                        )} />
+                                       <div className={cn(
+                                         "p-2 rounded-lg transition-colors",
+                                         hoveredProduct.name === product.name 
+                                           ? "bg-white shadow-lg" 
+                                           : "bg-white/50 group-hover:bg-white group-hover:shadow-lg"
+                                       )}>
+                                         <product.icon className={cn(
+                                           "h-5 w-5 transition-colors",
+                                           hoveredProduct.name === product.name
+                                             ? "text-blue-600"
+                                             : "text-blue-500 group-hover:text-blue-600"
+                                         )} />
+                                       </div>
+                                       <div className="flex-1">
+                                         <div className="font-semibold text-white transition-colors">
+                                           {product.name}
+                                         </div>
+                                         <div className="text-sm text-blue-100 mt-1">
+                                           {product.description}
+                                         </div>
                                       </div>
-                                      <div className="flex-1">
-                                        <div className="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                          {product.name}
-                                        </div>
-                                        <div className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-                                          {product.description}
-                                        </div>
-                                      </div>
-                                      <ChevronRight className="h-4 w-4 text-neutral-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                      <ChevronRight className="h-4 w-4 text-white/60 opacity-0 group-hover:opacity-100 transition-opacity" />
                                     </Link>
                                   </NavigationMenuLink>
                                 ))}
@@ -151,38 +151,38 @@ export function Header() {
                             </div>
 
                              {/* Right Column - Product Details */}
-                             <div className="p-8 bg-gradient-to-br from-blue-50/30 via-neutral-50 to-white dark:from-blue-950/10 dark:via-neutral-900 dark:to-neutral-800/50">
+                             <div className="p-8 bg-gradient-to-br from-blue-700/50 to-transparent">
                                <div className="flex items-start gap-4 mb-6">
-                                 <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 shadow-lg shadow-blue-500/20">
-                                   <hoveredProduct.icon className="h-8 w-8 text-white" />
+                                 <div className="p-3 rounded-xl bg-white shadow-lg">
+                                   <hoveredProduct.icon className="h-8 w-8 text-blue-600" />
                                  </div>
-                                <div>
-                                  <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
-                                    {hoveredProduct.name}
-                                  </h3>
-                                  <p className="text-neutral-600 dark:text-neutral-400">
-                                    {hoveredProduct.description}
-                                  </p>
+                                 <div>
+                                   <h3 className="text-xl font-bold text-white mb-2">
+                                     {hoveredProduct.name}
+                                   </h3>
+                                   <p className="text-blue-100">
+                                     {hoveredProduct.description}
+                                   </p>
                                 </div>
                               </div>
 
-                              <div className="space-y-3 mb-6">
-                                <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wide">
-                                  Key Features
-                                </h4>
-                                {hoveredProduct.features.map((feature, idx) => (
-                                  <div key={idx} className="flex items-start gap-3">
-                                    <div className="mt-1 h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-400 flex-shrink-0" />
-                                    <span className="text-sm text-neutral-700 dark:text-neutral-300">
-                                      {feature}
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
+                               <div className="space-y-3 mb-6">
+                                 <h4 className="text-sm font-semibold text-white uppercase tracking-wide">
+                                   Key Features
+                                 </h4>
+                                 {hoveredProduct.features.map((feature, idx) => (
+                                   <div key={idx} className="flex items-start gap-3">
+                                     <div className="mt-1 h-1.5 w-1.5 rounded-full bg-white flex-shrink-0" />
+                                     <span className="text-sm text-blue-100">
+                                       {feature}
+                                     </span>
+                                   </div>
+                                 ))}
+                               </div>
 
-                              <Link
-                                to={hoveredProduct.href}
-                                className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors group"
+                               <Link
+                                 to={hoveredProduct.href}
+                                 className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-blue-100 transition-colors group bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg"
                               >
                                 Learn more
                                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
