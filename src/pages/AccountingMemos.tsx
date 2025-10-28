@@ -5,7 +5,6 @@ import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/home/HeroSectionRight";
 import { HowItWorksSection } from "@/components/home/HowItWorksSection";
 import { BenefitsSection } from "@/components/home/BenefitsSection";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { SocialProofSection } from "@/components/home/SocialProofSection";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { setProtectionStatus, setSitePassword, getSessionVersion } from "@/utils/securityUtils";
@@ -71,7 +70,6 @@ export default function AccountingMemos() {
           <HowItWorksSection />
           <SocialProofSection />
           <BenefitsSection />
-          <TestimonialsSection />
         </div>
       </div>
       

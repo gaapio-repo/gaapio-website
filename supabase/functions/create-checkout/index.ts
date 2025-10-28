@@ -74,7 +74,7 @@ serve(async (req: Request) => {
     const lineItems = [];
     
     for (const priceId of priceIds) {
-      const actualPriceId = priceLookup[priceId] || priceId;
+      const actualPriceId = priceLookup[priceId as keyof typeof priceLookup] || priceId;
       
       lineItems.push({
         price: actualPriceId,
