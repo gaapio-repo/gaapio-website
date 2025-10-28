@@ -12,7 +12,9 @@ export default defineConfig({
     headers: {
       'X-Content-Type-Options': 'nosniff',
       'X-XSS-Protection': '1; mode=block',
-      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.gpteng.co; style-src 'self' 'unsafe-inline' https://rsms.me; font-src 'self' https://rsms.me; img-src 'self' data: blob:; connect-src 'self' https://bxojxrcerefklsrqkmrs.supabase.co wss://bxojxrcerefklsrqkmrs.supabase.co; frame-src 'self'; frame-ancestors 'self' https://*.lovableproject.com https://*.lovable.app https://*.lovable.dev; media-src 'self';",
+      'X-Frame-Options': 'ALLOWALL',
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.gpteng.co; style-src 'self' 'unsafe-inline' https://rsms.me; font-src 'self' https://rsms.me; img-src 'self' data: blob:; connect-src 'self' https://bxojxrcerefklsrqkmrs.supabase.co wss://bxojxrcerefklsrqkmrs.supabase.co; frame-ancestors 'self' https://*.lovableproject.com https://*.lovable.app https://*.lovable.dev; media-src 'self';",
+      'Permissions-Policy': 'accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), usb=()',
       'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
       'Referrer-Policy': 'strict-origin-when-cross-origin',
       'Cache-Control': 'max-age=31536000, immutable',
