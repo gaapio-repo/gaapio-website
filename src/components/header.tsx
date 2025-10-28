@@ -56,8 +56,8 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Desktop Navigation - Right Aligned */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
             <NavigationMenu>
               <NavigationMenuList className="flex items-center space-x-4">
                 {/* Products Dropdown */}
@@ -151,9 +151,10 @@ export function Header() {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
+          </div>
 
-            {/* Action Buttons */}
-            <div className="flex items-center space-x-4 ml-6">
+          {/* Action Buttons - Right Aligned */}
+          <div className="hidden md:flex items-center space-x-4">
               <Button variant="blue" asChild>
               <Link to="/request-demo">Request a Demo</Link>
               </Button>
@@ -167,7 +168,6 @@ export function Header() {
               </a>
               <ModeToggle />
             </div>
-          </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
