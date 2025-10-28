@@ -61,7 +61,7 @@ export const Logo = memo(({ className = "" }: { className?: string }) => {
 
         className="logo-image"
         style={{
-          height: window.innerWidth <= 640 ? '48px' : '64px',
+          height: window.innerWidth <= 640 ? '72px' : '96px',
           width: 'auto',
           maxHeight: 'none',
           maxWidth: 'none'
