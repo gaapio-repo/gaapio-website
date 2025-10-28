@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { StripePricingTable } from "@/components/signup/StripePricingTable";
+
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -83,11 +83,14 @@ export default function SignUp() {
         );
       case 2:
         return (
-          <div className="space-y-6 w-full">
-            <h2 className="text-xl font-semibold">Select a Plan</h2>
-            <div className="stripe-pricing-wrapper w-full">
-              <StripePricingTable pricingTableId={getPricingTableId()} />
-            </div>
+          <div className="space-y-6 w-full text-center py-12">
+            <h2 className="text-2xl font-semibold">Select a Plan</h2>
+            <p className="text-muted-foreground max-w-md mx-auto">
+              Pricing details coming soon. Please contact us for more information.
+            </p>
+            <Button onClick={() => navigate("/contact")} size="lg">
+              Contact Sales
+            </Button>
           </div>
         );
       default:
