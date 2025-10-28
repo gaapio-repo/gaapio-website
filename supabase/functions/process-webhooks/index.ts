@@ -89,7 +89,6 @@ Deno.serve(async (req) => {
           }
         } catch (error) {
           console.error(`Error processing webhook ${webhook.id}:`, error)
-          const errorMessage = error instanceof Error ? error.message : String(error)
           
           // Update webhook status to failed and increment retry count
           await supabase
@@ -97,11 +96,11 @@ Deno.serve(async (req) => {
             .update({
               status: 'failed',
               retry_count: webhook.retry_count + 1,
-              error_message: errorMessage,
+              error_message: error.message,
             })
             .eq('id', webhook.id)
 
-          return { id: webhook.id, success: false, error: errorMessage }
+          return { id: webhook.id, success: false, error: error.message }
         }
       })
     )
@@ -118,9 +117,8 @@ Deno.serve(async (req) => {
     )
   } catch (error) {
     console.error('Error in process-webhooks function:', error)
-    const errorMessage = error instanceof Error ? error.message : String(error)
     return new Response(
-      JSON.stringify({ success: false, error: errorMessage }),
+      JSON.stringify({ success: false, error: error.message }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
     )
   }

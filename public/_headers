@@ -1,8 +1,22 @@
+
 /*
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
   X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
-  Referrer-Policy: strict-origin-when-cross-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.gpteng.co; style-src 'self' 'unsafe-inline' https://rsms.me; font-src 'self' https://rsms.me; img-src 'self' data: blob:; connect-src 'self' https://bxojxrcerefklsrqkmrs.supabase.co wss://bxojxrcerefklsrqkmrs.supabase.co; frame-ancestors 'self' https://*.lovableproject.com https://*.lovable.app https://*.lovable.dev; media-src 'self';
-  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), microphone=(), payment=()
+  Content-Type: text/html
+/*.js
+  Content-Type: text/javascript
+/*.tsx
+  Content-Type: text/javascript
+/*.css
+  Content-Type: text/css
+/*.json
+  Content-Type: application/json
+/*.png
+  Content-Type: image/png
+/*.jpg
+  Content-Type: image/jpeg
+/*.svg
+  Content-Type: image/svg+xml
 

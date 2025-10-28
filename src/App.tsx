@@ -31,12 +31,65 @@ import Privacy from "./pages/Privacy";
 import SSA from "./pages/SSA";
 
 function App() {
-  console.log("[App] Starting...");
-  
-  // Completely disable construction mode check - causing loading issues
-  const isUnderConstruction = false;
-  
-  console.log("[App] Rendering routes...");
+  const [isUnderConstruction, setIsUnderConstruction] = useState(false);
+
+  useEffect(() => {
+    // Check if we need to clear auth state (for debugging)
+    const urlParams = new URLSearchParams(window.location.search);
+    const clearAuth = urlParams.get('clearAuth') === 'true';
+    
+    if (clearAuth) {
+      console.log('Clearing auth state...');
+      supabase.auth.signOut();
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = '/';
+      return;
+    }
+
+    // Check construction mode with error handling
+    const checkConstructionMode = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('site_config')
+          .select('under_construction')
+          .single();
+
+        if (error) {
+          console.error('Error checking construction mode:', error);
+          setIsUnderConstruction(false);
+          return;
+        }
+
+        setIsUnderConstruction(data?.under_construction || false);
+      } catch (error) {
+        console.error('Error in construction check:', error);
+        setIsUnderConstruction(false);
+      }
+    };
+
+    checkConstructionMode();
+
+    // Set up real-time subscription
+    const channel = supabase
+      .channel('site_config_changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'site_config'
+        },
+        (payload) => {
+          setIsUnderConstruction(payload.new.under_construction);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   // Normal app flow
   return (

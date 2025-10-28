@@ -27,8 +27,6 @@ if (!rootElement) {
 }
 
 // Create the root and render the app
-console.log("[Main] Starting app render...");
-
 createRoot(rootElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>

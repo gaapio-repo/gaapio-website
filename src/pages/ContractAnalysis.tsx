@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer";
 import { ContractHeroSection } from "@/components/contract/ContractHeroSection";
 import { ContractHowItWorksSection } from "@/components/contract/ContractHowItWorksSection";
 import { BenefitsSection } from "@/components/home/BenefitsSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { SocialProofSection } from "@/components/home/SocialProofSection";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { setProtectionStatus, setSitePassword, getSessionVersion } from "@/utils/securityUtils";
@@ -69,6 +70,7 @@ export default function ContractAnalysis() {
           <ContractHowItWorksSection />
           <SocialProofSection />
           <BenefitsSection />
+          <TestimonialsSection />
         </div>
       </div>
       

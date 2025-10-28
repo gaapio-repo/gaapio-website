@@ -10,7 +10,7 @@ export function TestimonialsSection() {
   const [isVisible, setIsVisible] = useState(true);
   const [inView, setInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const { data: testimonials, isLoading, error } = useActiveTestimonials();
+  const { data: testimonials, isLoading } = useActiveTestimonials();
 
   useEffect(() => {
     // Check feature toggle setting
@@ -49,12 +49,19 @@ export function TestimonialsSection() {
     return null;
   }
 
-  // If there's an error or no testimonials, don't show the section
-  if (error || !testimonials || testimonials.length === 0) {
-    return null;
+  if (isLoading) {
+    return (
+      <section className="py-20 md:py-32">
+        <ResponsiveContainer>
+          <div className="text-center">
+            <p className="text-muted-foreground">Loading testimonials...</p>
+          </div>
+        </ResponsiveContainer>
+      </section>
+    );
   }
 
-  if (isLoading) {
+  if (!testimonials || testimonials.length === 0) {
     return null;
   }
 

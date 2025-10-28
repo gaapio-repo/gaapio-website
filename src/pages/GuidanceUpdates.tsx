@@ -6,6 +6,7 @@ import { GuidanceHowItWorksSection } from "@/components/guidance/GuidanceHowItWo
 import { SocialProofSection } from "@/components/home/SocialProofSection";
 import { NeverMissUpdateSection } from "@/components/guidance/NeverMissUpdateSection";
 import { GuidanceMakesSenseSection } from "@/components/guidance/GuidanceMakesSenseSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { FinalCtaBanner } from "@/components/guidance/FinalCtaBanner";
 
 export default function GuidanceUpdates() {
@@ -32,6 +33,11 @@ export default function GuidanceUpdates() {
           
           {/* Guidance Makes Sense Section - White Background */}
           <GuidanceMakesSenseSection />
+          
+          {/* Testimonials Section - Light Gradient Background */}
+          <div className="bg-gradient-to-b from-[#f4faff] to-white dark:from-[#1A1F2B] dark:to-[#1A1F2B]">
+            <TestimonialsSection />
+          </div>
           
           {/* Final CTA Banner - White Background */}
           <FinalCtaBanner />

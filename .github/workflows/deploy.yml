@@ -53,9 +53,15 @@ jobs:
       - name: Copy index.html to 404.html for client-side routing
         run: |
           cp dist/index.html dist/404.html
-      - name: Copy _headers file
+      - name: Create _headers file
         run: |
-          cp public/_headers dist/_headers
+          cat > dist/_headers << EOL
+          /*
+            Strict-Transport-Security: max-age=31536000; includeSubDomains
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-XSS-Protection: 1; mode=block
+          EOL
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

@@ -60,8 +60,6 @@ export function useActiveTestimonials() {
       if (error) throw error;
       return data as CustomerTestimonial[];
     },
-    retry: false,
-    throwOnError: false,
   });
 }
 
