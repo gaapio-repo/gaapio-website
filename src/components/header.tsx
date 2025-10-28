@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Logo } from "@/components/logo";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase } from "lucide-react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
@@ -38,11 +38,41 @@ const products = [
   },
 ];
 
+const companyPages = [
+  {
+    name: "Why We Built This",
+    href: "/why-we-built-this",
+    icon: Lightbulb,
+    description: "Our story and mission behind Gaapio"
+  },
+  {
+    name: "About Us",
+    href: "/about-us",
+    icon: Users,
+    description: "Meet the team and learn about our expertise"
+  },
+  {
+    name: "Trust and Security",
+    href: "https://security.gaapio.com",
+    icon: ShieldCheck,
+    description: "Our commitment to security and compliance",
+    external: true
+  },
+  {
+    name: "Careers",
+    href: "/careers",
+    icon: Briefcase,
+    description: "Join our team and help shape the future"
+  }
+];
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [isCompanyOpen, setIsCompanyOpen] = useState(false);
   const [enableSelfSignup, setEnableSelfSignup] = useState(true);
   const [hoveredProduct, setHoveredProduct] = useState(products[0]);
+  const [hoveredCompanyPage, setHoveredCompanyPage] = useState(companyPages[0]);
   const location = useLocation();
 
   useEffect(() => {
@@ -73,6 +103,10 @@ export function Header() {
 
   const toggleProducts = () => {
     setIsProductsOpen(!isProductsOpen);
+  };
+
+  const toggleCompany = () => {
+    setIsCompanyOpen(!isCompanyOpen);
   };
 
   const isActive = (path: string) => location.pathname === path;
@@ -195,25 +229,90 @@ export function Header() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* Other Navigation Items */}
+                {/* Company Mega Menu */}
                 <NavigationMenuItem>
-                  <Link 
-                    to="/about-us" 
-                    className="text-gray-700 dark:text-gray-200 font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2"
-                  >
-                    About
-                  </Link>
-                </NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-700 dark:text-gray-200 text-base font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white">
+                    Company
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="!w-screen">
+                    <div className="w-full px-4 py-6">
+                      <div className="max-w-7xl mx-auto">
+                        <div className="rounded-xl border border-blue-200 shadow-2xl bg-gradient-to-br from-blue-400 to-blue-500 dark:from-blue-500 dark:to-blue-600 dark:border-blue-300/20 overflow-hidden">
+                          <div className="grid grid-cols-5 gap-0">
+                            {/* Left Column - Company Pages */}
+                            <div className="col-span-3 border-r border-blue-300/40 dark:border-blue-400/30 p-8 bg-gradient-to-br from-blue-300/30 to-transparent">
+                              <h3 className="text-xs font-bold text-white mb-6 uppercase tracking-wider flex items-center gap-2">
+                                <div className="h-1 w-8 bg-white rounded-full"></div>
+                                Company
+                              </h3>
+                              <div className="space-y-2">
+                                {companyPages.map((page) => (
+                                  page.external ? (
+                                    <a
+                                      key={page.name}
+                                      href={page.href}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="group flex items-start gap-4 p-4 rounded-lg transition-all hover:bg-white/20"
+                                      onMouseEnter={() => setHoveredCompanyPage(page)}
+                                    >
+                                      <div className="p-2 rounded-lg transition-colors bg-white/60 group-hover:bg-white group-hover:shadow-lg">
+                                        <page.icon className="h-5 w-5 text-blue-400 group-hover:text-blue-500 transition-colors" />
+                                      </div>
+                                      <div className="flex-1">
+                                        <h4 className="font-semibold text-white mb-1 group-hover:text-white">
+                                          {page.name}
+                                        </h4>
+                                        <p className="text-sm text-blue-100">
+                                          {page.description}
+                                        </p>
+                                      </div>
+                                    </a>
+                                  ) : (
+                                    <Link
+                                      key={page.name}
+                                      to={page.href}
+                                      className="group flex items-start gap-4 p-4 rounded-lg transition-all hover:bg-white/20"
+                                      onMouseEnter={() => setHoveredCompanyPage(page)}
+                                    >
+                                      <div className="p-2 rounded-lg transition-colors bg-white/60 group-hover:bg-white group-hover:shadow-lg">
+                                        <page.icon className="h-5 w-5 text-blue-400 group-hover:text-blue-500 transition-colors" />
+                                      </div>
+                                      <div className="flex-1">
+                                        <h4 className="font-semibold text-white mb-1 group-hover:text-white">
+                                          {page.name}
+                                        </h4>
+                                        <p className="text-sm text-blue-100">
+                                          {page.description}
+                                        </p>
+                                      </div>
+                                    </Link>
+                                  )
+                                ))}
+                              </div>
+                            </div>
 
-                <NavigationMenuItem>
-                  <a 
-                    href="https://security.gaapio.com" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-700 dark:text-gray-200 font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2"
-                  >
-                    Security
-                  </a>
+                            {/* Right Column - Featured Content */}
+                            <div className="col-span-2 p-8 bg-gradient-to-br from-blue-500/50 to-transparent">
+                              <div className="flex items-start gap-4 mb-6">
+                                <div className="p-3 rounded-xl bg-white shadow-lg">
+                                  <hoveredCompanyPage.icon className="h-8 w-8 text-blue-500" />
+                                </div>
+                                <div>
+                                  <h3 className="text-xl font-bold text-white mb-2">
+                                    {hoveredCompanyPage.name}
+                                  </h3>
+                                  <p className="text-blue-100 text-sm leading-relaxed">
+                                    {hoveredCompanyPage.description}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
@@ -325,23 +424,49 @@ export function Header() {
                 )}
               </div>
 
-              {/* Other Menu Items */}
-              <Link
-                to="/about-us"
-                className={`block px-3 py-2 rounded-md text-base font-medium text-center transition-colors ${isActive('/about-us') ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20' : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'}`}
-                onClick={closeMenu}
-              >
-                About
-              </Link>
-              <a
-                href="https://security.gaapio.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block px-3 py-2 rounded-md text-base font-medium text-center text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                onClick={closeMenu}
-              >
-                Security
-              </a>
+              {/* Company Section */}
+              <div>
+                <button
+                  onClick={toggleCompany}
+                  className="w-full flex items-center justify-center px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <span>Company</span>
+                  {isCompanyOpen ? (
+                    <ChevronDown className="h-4 w-4 ml-2" />
+                  ) : (
+                    <ChevronRight className="h-4 w-4 ml-2" />
+                  )}
+                </button>
+                
+                {/* Company Submenu */}
+                {isCompanyOpen && (
+                  <div className="pl-4 space-y-1 mt-1">
+                    {companyPages.map((page) => (
+                      page.external ? (
+                        <a
+                          key={page.name}
+                          href={page.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block px-3 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                          onClick={closeMenu}
+                        >
+                          {page.name}
+                        </a>
+                      ) : (
+                        <Link
+                          key={page.name}
+                          to={page.href}
+                          className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive(page.href) ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'}`}
+                          onClick={closeMenu}
+                        >
+                          {page.name}
+                        </Link>
+                      )
+                    ))}
+                  </div>
+                )}
+              </div>
               <Link
                 to="/faq"
                 className={`block px-3 py-2 rounded-md text-base font-medium text-center transition-colors ${isActive('/faq') ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20' : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'}`}

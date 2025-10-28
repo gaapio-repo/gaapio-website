@@ -16,6 +16,8 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
+import WhyWeBuiltThis from "./pages/WhyWeBuiltThis";
+import Careers from "./pages/Careers";
 import Resources from "./pages/Resources";
 import FAQ from "./pages/FAQ";
 import SignUp from "./pages/SignUp";
@@ -67,6 +69,8 @@ function App() {
             <Route path="/blog/post" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/why-we-built-this" element={<WhyWeBuiltThis />} />
+            <Route path="/careers" element={<Careers />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/signup" element={<SignUp />} />
