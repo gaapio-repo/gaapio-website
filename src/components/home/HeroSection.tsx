@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GradientBackground } from "./GradientBackground";
-import { FloatingUIElements } from "./FloatingUIElements";
+import { MiniAnimatedMemo } from "./MiniAnimatedMemo";
 
 interface HeroSectionProps {
   title?: string;
@@ -85,9 +85,9 @@ export const HeroSection = memo(function HeroSection({
             </p>
           </div>
           
-          {/* Right Column - Floating UI Elements */}
+          {/* Right Column - Animated Memo */}
           <div className="relative h-[500px] md:h-[600px] animate-fade-up" style={{ animationDelay: "200ms" }}>
-            {isClient && <FloatingUIElements />}
+            {isClient && <MiniAnimatedMemo type="memo" />}
           </div>
         </div>
       </div>
