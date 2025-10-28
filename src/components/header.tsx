@@ -102,11 +102,15 @@ export function Header() {
                   <NavigationMenuContent className="!w-screen">
                     <div className="w-full px-4 py-6">
                       <div className="max-w-7xl mx-auto">
-                        <div className="rounded-xl border border-neutral-200 shadow-2xl bg-white dark:bg-neutral-900 dark:border-white/10">
-                          <div className="grid grid-cols-2 gap-0">
-                            {/* Left Column - Product Navigation */}
-                            <div className="border-r border-neutral-200 dark:border-neutral-800 p-6">
-                              <div className="space-y-2">
+                         <div className="rounded-xl border border-neutral-200 shadow-2xl bg-white dark:bg-neutral-900 dark:border-white/10 overflow-hidden">
+                           <div className="grid grid-cols-2 gap-0">
+                             {/* Left Column - Product Navigation */}
+                             <div className="border-r border-neutral-200 dark:border-neutral-800 p-6 bg-gradient-to-br from-blue-50/60 via-white to-white dark:from-blue-950/20 dark:via-neutral-900 dark:to-neutral-900">
+                               <h3 className="text-xs font-bold text-blue-600 dark:text-blue-400 mb-4 uppercase tracking-wider flex items-center gap-2">
+                                 <div className="h-1 w-8 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
+                                 Our Products
+                               </h3>
+                               <div className="space-y-2">
                                 {products.map((product) => (
                                   <NavigationMenuLink key={product.name} asChild>
                                     <Link
@@ -146,12 +150,12 @@ export function Header() {
                               </div>
                             </div>
 
-                            {/* Right Column - Product Details */}
-                            <div className="p-8 bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-800/50">
-                              <div className="flex items-start gap-4 mb-6">
-                                <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-900/30">
-                                  <hoveredProduct.icon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-                                </div>
+                             {/* Right Column - Product Details */}
+                             <div className="p-8 bg-gradient-to-br from-blue-50/30 via-neutral-50 to-white dark:from-blue-950/10 dark:via-neutral-900 dark:to-neutral-800/50">
+                               <div className="flex items-start gap-4 mb-6">
+                                 <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 shadow-lg shadow-blue-500/20">
+                                   <hoveredProduct.icon className="h-8 w-8 text-white" />
+                                 </div>
                                 <div>
                                   <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
                                     {hoveredProduct.name}
