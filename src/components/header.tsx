@@ -101,7 +101,7 @@ export function Header() {
                 </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="fixed left-0 right-0 top-16 z-50">
-                      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                      <div className="max-w-7xl mx-auto px-8">
                         <div className="mt-2 rounded-xl border border-neutral-200 shadow-2xl bg-white dark:bg-neutral-900 dark:border-white/10 animate-in fade-in-0 zoom-in-95 duration-150">
                           <div className="grid grid-cols-2 gap-0">
                             {/* Left Column - Product Navigation */}
