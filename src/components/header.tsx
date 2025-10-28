@@ -102,10 +102,10 @@ export function Header() {
                   <NavigationMenuContent className="!w-screen">
                     <div className="w-full px-4 py-6">
                       <div className="max-w-7xl mx-auto">
-                         <div className="rounded-xl border border-blue-200 shadow-2xl bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-900 dark:to-blue-950 dark:border-blue-800 overflow-hidden">
+                         <div className="rounded-xl border border-blue-200 shadow-2xl bg-gradient-to-br from-blue-400 to-blue-500 dark:from-blue-500 dark:to-blue-600 dark:border-blue-300/20 overflow-hidden">
                            <div className="grid grid-cols-2 gap-0">
                              {/* Left Column - Product Navigation */}
-                             <div className="border-r border-blue-500/30 dark:border-blue-700 p-6 bg-gradient-to-br from-blue-500/30 to-transparent">
+                             <div className="border-r border-blue-300/40 dark:border-blue-400/30 p-6 bg-gradient-to-br from-blue-300/30 to-transparent">
                                <h3 className="text-xs font-bold text-white mb-4 uppercase tracking-wider flex items-center gap-2">
                                  <div className="h-1 w-8 bg-white rounded-full"></div>
                                  Our Products
@@ -126,13 +126,13 @@ export function Header() {
                                          "p-2 rounded-lg transition-colors",
                                          hoveredProduct.name === product.name 
                                            ? "bg-white shadow-lg" 
-                                           : "bg-white/50 group-hover:bg-white group-hover:shadow-lg"
+                                           : "bg-white/60 group-hover:bg-white group-hover:shadow-lg"
                                        )}>
                                          <product.icon className={cn(
                                            "h-5 w-5 transition-colors",
                                            hoveredProduct.name === product.name
-                                             ? "text-blue-600"
-                                             : "text-blue-500 group-hover:text-blue-600"
+                                             ? "text-blue-500"
+                                             : "text-blue-400 group-hover:text-blue-500"
                                          )} />
                                        </div>
                                        <div className="flex-1">
@@ -151,10 +151,10 @@ export function Header() {
                             </div>
 
                              {/* Right Column - Product Details */}
-                             <div className="p-8 bg-gradient-to-br from-blue-700/50 to-transparent">
+                             <div className="p-8 bg-gradient-to-br from-blue-500/50 to-transparent">
                                <div className="flex items-start gap-4 mb-6">
                                  <div className="p-3 rounded-xl bg-white shadow-lg">
-                                   <hoveredProduct.icon className="h-8 w-8 text-blue-600" />
+                                   <hoveredProduct.icon className="h-8 w-8 text-blue-500" />
                                  </div>
                                  <div>
                                    <h3 className="text-xl font-bold text-white mb-2">
