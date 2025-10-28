@@ -145,7 +145,7 @@ export const AnimatedMemo = () => {
     >
       <div
         ref={memoContainerRef}
-        className={`memo-card ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`memo-card-right ${loaded ? 'opacity-100' : 'opacity-0'}`}
         style={{
           backgroundColor: isDark ? "#1a1a1a" : "#ffffff",
           borderColor: isDark ? "#333333" : "#e5e7eb",

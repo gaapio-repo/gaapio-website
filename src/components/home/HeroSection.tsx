@@ -82,8 +82,8 @@ export const HeroSection = memo(function HeroSection({
           </div>
           
           {/* Right Column - Animated Memo */}
-          <div className="relative h-[500px] md:h-[600px] lg:h-[700px] -mr-16 md:-mr-24 lg:-mr-32 overflow-visible animate-fade-up flex justify-end" style={{ animationDelay: "200ms" }}>
-            <div className="absolute right-0 inset-y-0 scale-90 md:scale-100 lg:scale-110 origin-right">
+          <div className="relative h-[500px] md:h-[600px] lg:h-[700px] -mr-16 md:-mr-24 lg:-mr-32 overflow-visible animate-fade-up flex justify-end items-center" style={{ animationDelay: "200ms" }}>
+            <div className="relative scale-90 md:scale-100 lg:scale-110">
               {isClient && <AnimatedMemo />}
             </div>
           </div>
