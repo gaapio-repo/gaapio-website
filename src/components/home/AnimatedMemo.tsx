@@ -132,8 +132,18 @@ export const AnimatedMemo = () => {
   }, []);
 
   return (
-    <div className="memo-animation-container">
-      <div 
+    <div
+      className="memo-animation-container"
+      style={{
+        position: 'relative',
+        overflow: 'visible',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px'
+      }}
+    >
+      <div
         ref={memoContainerRef}
         className={`memo-card ${loaded ? 'opacity-100' : 'opacity-0'}`}
         style={{
@@ -143,7 +153,11 @@ export const AnimatedMemo = () => {
             ? "0 0 15px rgba(255,255,255,0.05)" 
             : "0 0 15px rgba(0,0,0,0.1)",
           maxWidth: "850px",
-          width: "100%"
+          width: "100%",
+          border: "1px solid",
+          borderRadius: "8px",
+          position: "relative",
+          transformOrigin: "center"
         }}
       >
         <img 
@@ -155,7 +169,8 @@ export const AnimatedMemo = () => {
           style={{
             width: "100%",
             height: "auto",
-            objectFit: "contain"
+            objectFit: "contain",
+            borderRadius: "8px"
           }}
         />
         
