@@ -58,7 +58,7 @@ export const HeroSection = memo(function HeroSection({
           {/* Left Column - Text Content */}
           <div className="flex flex-col items-start text-left space-y-8 animate-fade-up">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
-              <span className="text-white">
+              <span className="text-gray-900 dark:text-white">
                 {firstPart}
               </span>
               {" "}
@@ -67,23 +67,25 @@ export const HeroSection = memo(function HeroSection({
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-800 dark:text-white/90 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
               {subtitle}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-up" style={{ animationDelay: "200ms" }}>
-              <Button size="lg" className="bg-white text-blue-600 hover:bg-white/90 text-base px-8 py-6 h-auto font-semibold" asChild>
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6 h-auto font-semibold" asChild>
                 <Link to="/request-demo">Request a Demo</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-base px-8 py-6 h-auto font-semibold" asChild>
+              <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary/10 text-base px-8 py-6 h-auto font-semibold" asChild>
                 <Link to="/contact">Ask a Question</Link>
               </Button>
             </div>
           </div>
           
           {/* Right Column - Animated Memo */}
-          <div className="relative h-[500px] md:h-[600px] animate-fade-up" style={{ animationDelay: "200ms" }}>
-            {isClient && <MiniAnimatedMemo type="memo" />}
+          <div className="relative h-[600px] md:h-[700px] lg:h-[800px] -mr-4 md:-mr-8 lg:-mr-16 overflow-visible animate-fade-up" style={{ animationDelay: "200ms" }}>
+            <div className="absolute inset-0 scale-110 md:scale-125 lg:scale-150 origin-left">
+              {isClient && <MiniAnimatedMemo type="memo" />}
+            </div>
           </div>
         </div>
       </div>
