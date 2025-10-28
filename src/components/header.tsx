@@ -185,7 +185,7 @@ export function Header() {
                             </div>
 
                              {/* Right Column - Product Details */}
-                             <div className="p-8 bg-gradient-to-br from-blue-100/80 to-blue-50/50 dark:from-blue-900/30 dark:to-blue-900/10">
+                             <div className="p-8 bg-gradient-to-br from-[hsl(207,90%,90%)] to-[hsl(207,90%,95%)] dark:from-[hsl(207,90%,20%)] dark:to-[hsl(207,90%,15%)]">
                                <div className="flex items-start gap-4 mb-6">
                                  <div className="p-3 rounded-xl bg-[#339CFF] shadow-lg">
                                    <hoveredProduct.icon className="h-8 w-8 text-white" />
