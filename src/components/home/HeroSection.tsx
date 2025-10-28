@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GradientBackground } from "./GradientBackground";
-import { MiniAnimatedMemo } from "./MiniAnimatedMemo";
+import { AnimatedMemo } from "./AnimatedMemo";
 
 interface HeroSectionProps {
   title?: string;
@@ -62,7 +62,7 @@ export const HeroSection = memo(function HeroSection({
                 {firstPart}
               </span>
               {" "}
-              <span className="gradient-text-blue inline-block">
+              <span className="text-white dark:text-white inline-block">
                 {secondPart}
               </span>
             </h1>
@@ -82,9 +82,9 @@ export const HeroSection = memo(function HeroSection({
           </div>
           
           {/* Right Column - Animated Memo */}
-          <div className="relative h-[600px] md:h-[700px] lg:h-[800px] -mr-4 md:-mr-8 lg:-mr-16 overflow-visible animate-fade-up" style={{ animationDelay: "200ms" }}>
-            <div className="absolute inset-0 scale-110 md:scale-125 lg:scale-150 origin-left">
-              {isClient && <MiniAnimatedMemo type="memo" />}
+          <div className="relative h-[500px] md:h-[600px] lg:h-[700px] -mr-8 md:-mr-12 lg:-mr-20 overflow-visible animate-fade-up" style={{ animationDelay: "200ms" }}>
+            <div className="absolute inset-0 scale-90 md:scale-100 lg:scale-110 origin-left">
+              {isClient && <AnimatedMemo />}
             </div>
           </div>
         </div>
