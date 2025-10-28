@@ -10,8 +10,8 @@ interface HeroSectionProps {
 }
 
 export const HeroSection = memo(function HeroSection({ 
-  title = "Better Accounting Memos. Faster.",
-  subtitle = "Join thousands of accounting firms that use Gaapio to create technical accounting memos faster, ensure compliance, and deliver better insights to clients."
+  title = "Your AI-Powered Technical Accounting Platform",
+  subtitle = "AI-Powered. CPA-Approved."
 }: HeroSectionProps) {
   const [isClient, setIsClient] = useState(false);
   const [enableSelfSignup, setEnableSelfSignup] = useState(true);
@@ -79,10 +79,6 @@ export const HeroSection = memo(function HeroSection({
                 <Link to="/contact">Ask a Question</Link>
               </Button>
             </div>
-            
-            <p className="text-sm text-white/70 animate-fade-up" style={{ animationDelay: "300ms" }}>
-              No credit card required • 14-day free trial
-            </p>
           </div>
           
           {/* Right Column - Animated Memo */}
