@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { setProtectionStatus, setSitePassword, getSessionVersion } from "@/utils/securityUtils";
 import { HeroSection } from "@/components/home/HeroSection";
+import { MetricsBar } from "@/components/home/MetricsBar";
 import { ProductHighlightsSection } from "@/components/home/ProductHighlightsSection";
 import { SocialProofSection } from "@/components/home/SocialProofSection";
 import { ComplianceSecuritySection } from "@/components/home/ComplianceSecuritySection";
@@ -26,6 +27,9 @@ export default function Index() {
       
       {/* Hero Section */}
       <HeroSection />
+
+      {/* Metrics Bar */}
+      <MetricsBar />
 
       {/* Product Highlights Section */}
       <ProductHighlightsSection />

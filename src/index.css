@@ -37,6 +37,11 @@
     
     /* Custom benefits section background */
     --benefits-bg: #f4faff; /* light blue-tinted background */
+    
+    /* Hero gradient colors */
+    --hero-gradient-from: 207 90% 61%; /* #339CFF */
+    --hero-gradient-via: 195 85% 55%; /* Cyan-blue */
+    --hero-gradient-to: 187 84% 60%; /* Bright cyan */
   }
 
   .dark {
@@ -70,6 +75,11 @@
     
     /* Custom benefits section background for dark mode */
     --benefits-bg: #1A1F2B; /* dark navy-gray background */
+    
+    /* Hero gradient colors - darker for dark mode */
+    --hero-gradient-from: 207 90% 54%; /* Darker blue */
+    --hero-gradient-via: 195 70% 45%; /* Darker cyan-blue */
+    --hero-gradient-to: 187 75% 50%; /* Darker cyan */
   }
 }
 
@@ -158,6 +168,47 @@
   
   .glass-card {
     @apply bg-background/50 backdrop-blur-md border border-border/50;
+  }
+  
+  /* Gradient text utilities */
+  .gradient-text-blue {
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-from)), hsl(var(--hero-gradient-to)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Hero gradient background */
+  .hero-gradient-bg {
+    background: linear-gradient(135deg, 
+      hsl(var(--hero-gradient-from)) 0%, 
+      hsl(var(--hero-gradient-via)) 50%, 
+      hsl(var(--hero-gradient-to)) 100%
+    );
+  }
+  
+  /* Floating animation */
+  @keyframes float {
+    0%, 100% { 
+      transform: translateY(0px) scale(1); 
+    }
+    50% { 
+      transform: translateY(-20px) scale(1.02); 
+    }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+  
+  .animate-float-delayed-more {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 4s;
   }
 
   /* Utility classes for screen readers */

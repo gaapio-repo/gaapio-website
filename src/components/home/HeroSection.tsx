@@ -1,9 +1,8 @@
-
 import { Button } from "@/components/ui/button";
-import { ArrowDownCircle } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatedMemo } from "./AnimatedMemo";
+import { GradientBackground } from "./GradientBackground";
+import { FloatingUIElements } from "./FloatingUIElements";
 
 interface HeroSectionProps {
   title?: string;
@@ -11,8 +10,8 @@ interface HeroSectionProps {
 }
 
 export const HeroSection = memo(function HeroSection({ 
-  title = "Your AI-Powered Technical Accounting Platform",
-  subtitle = "AI-Powered. CPA-Approved."
+  title = "Better Accounting Memos. Faster.",
+  subtitle = "Join thousands of accounting firms that use Gaapio to create technical accounting memos faster, ensure compliance, and deliver better insights to clients."
 }: HeroSectionProps) {
   const [isClient, setIsClient] = useState(false);
   const [enableSelfSignup, setEnableSelfSignup] = useState(true);
@@ -42,50 +41,55 @@ export const HeroSection = memo(function HeroSection({
       window.removeEventListener('storage', handleStorageChange);
     };
   }, [enableSelfSignup]);
-  
-  // Scroll to Product Highlights section when arrow is clicked
-  const scrollToNextSection = () => {
-    const nextSection = document.getElementById('product-highlights');
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+
+  // Split title into parts for gradient effect
+  const titleParts = title.split(" ");
+  const firstPart = titleParts.slice(0, 2).join(" "); // "Better Accounting"
+  const secondPart = titleParts.slice(2).join(" "); // "Memos. Faster."
 
   return (
-    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 bg-white dark:bg-background overflow-hidden">
-      {/* Hero content with improved spacing */}
-      <div className="container px-4 md:px-6 flex flex-col items-center relative z-10">
-        {/* Text content centered */}
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-8 md:mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up dark:text-white">
-            {title}
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 animate-fade-up dark:text-gray-300" style={{ animationDelay: "100ms" }}>
-            {subtitle}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
-            <Button size="lg" variant="blue" asChild>
-              <Link to="/request-demo">Request a Demo</Link>
-            </Button>
-            <Button size="lg" variant="blueOutline" asChild>
-              <Link to="/contact">Ask a Question</Link>
-            </Button>
+    <section className="relative min-h-[90vh] md:min-h-[85vh] flex items-center pt-32 pb-16 overflow-hidden">
+      {/* Gradient Background */}
+      <GradientBackground />
+      
+      {/* Content */}
+      <div className="container px-4 md:px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Column - Text Content */}
+          <div className="flex flex-col items-start text-left space-y-8 animate-fade-up">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
+              <span className="text-white">
+                {firstPart}
+              </span>
+              {" "}
+              <span className="gradient-text-blue inline-block">
+                {secondPart}
+              </span>
+            </h1>
+            
+            <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
+              {subtitle}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade-up" style={{ animationDelay: "200ms" }}>
+              <Button size="lg" className="bg-white text-blue-600 hover:bg-white/90 text-base px-8 py-6 h-auto font-semibold" asChild>
+                <Link to="/request-demo">Request a Demo</Link>
+              </Button>
+              <Button size="lg" variant="outline" className="border-2 border-white text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-base px-8 py-6 h-auto font-semibold" asChild>
+                <Link to="/contact">Ask a Question</Link>
+              </Button>
+            </div>
+            
+            <p className="text-sm text-white/70 animate-fade-up" style={{ animationDelay: "300ms" }}>
+              No credit card required • 14-day free trial
+            </p>
+          </div>
+          
+          {/* Right Column - Floating UI Elements */}
+          <div className="relative h-[500px] md:h-[600px] animate-fade-up" style={{ animationDelay: "200ms" }}>
+            {isClient && <FloatingUIElements />}
           </div>
         </div>
-        
-        {/* Constrained animated memo display with better mobile spacing */}
-        <div className="hero-memo-container mb-24 md:mb-16">
-          {isClient && <AnimatedMemo />}
-        </div>
-      </div>
-      
-      {/* Down arrow for scrolling to next section - now with proper spacing */}
-      <div 
-        className="animate-fade-up absolute bottom-8 md:bottom-6" 
-        style={{ animationDelay: "400ms" }} 
-        onClick={scrollToNextSection}
-      >
-        <ArrowDownCircle className="h-10 w-10 text-muted-foreground/50 dark:text-gray-400/70 animate-pulse-slow cursor-pointer" aria-hidden="true" />
       </div>
     </section>
   );
