@@ -201,7 +201,7 @@ const JobCard = ({ job }: { job: JobListing }) => {
           </div>
           
           <div className="pt-4">
-            <Button asChild className="w-full sm:w-auto shadow-lg hover:shadow-xl" size="lg">
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto" asChild>
               <Link to="/contact" state={{ role: job.title }}>
                 Apply for This Role
               </Link>
