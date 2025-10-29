@@ -76,21 +76,22 @@ const jobListings: JobListing[] = [
     department: "Sales",
     location: "Remote",
     type: "Full-time",
-    description: "Drive revenue growth by bringing Gaapio to accounting firms and finance teams. Own the full sales cycle with enterprise clients and become a trusted advisor to accounting leaders.",
+    description: "Are you an accountant who wants to sell? Leverage your Big 4, controller, or accounting firm experience to help other firms discover Gaapio. Your accounting expertise is your superpower in sales.",
     responsibilities: [
       "Drive revenue growth by closing deals with mid-market and enterprise accounting firms",
       "Build and nurture relationships with CFOs, controllers, and accounting partners",
       "Own the full sales cycle from prospecting through contract negotiation",
-      "Conduct product demos that showcase Gaapio's value proposition",
+      "Conduct product demos that showcase Gaapio's value proposition—speaking accountant-to-accountant",
       "Collaborate with customer success to ensure smooth onboarding and expansion",
       "Provide market feedback to shape product roadmap and positioning"
     ],
     qualifications: [
-      "5+ years of B2B SaaS sales experience with proven track record of exceeding quota",
-      "Experience selling to accounting firms, finance teams, or professional services",
-      "Strong understanding of accounting workflows and pain points (preferred)",
-      "Excellent presentation and communication skills",
-      "Consultative selling approach with ability to understand complex business needs",
+      "Accounting background (Big 4, controller, or accounting firm experience strongly preferred)",
+      "CPA or working toward CPA certification is a plus",
+      "3-5+ years of professional accounting experience with desire to transition into sales",
+      "Deep understanding of accounting workflows, pain points, and industry challenges",
+      "Excellent presentation and communication skills—able to speak the language of accountants",
+      "Consultative approach with ability to understand complex business needs",
       "Self-starter who thrives in a fast-paced startup environment"
     ],
     icon: TrendingUp
@@ -101,22 +102,23 @@ const jobListings: JobListing[] = [
     department: "Sales",
     location: "Remote",
     type: "Full-time",
-    description: "Join our sales team and help accounting firms discover how AI can transform their work. Identify opportunities, conduct demos, and be part of our growth story.",
+    description: "Accountant ready to try sales? Your Big 4, controller, or accounting firm experience makes you the perfect person to help other accountants discover Gaapio. Use your expertise to drive impact and revenue.",
     responsibilities: [
       "Identify and qualify new business opportunities through outbound prospecting",
       "Conduct compelling product demonstrations to accounting firms and finance teams",
       "Guide prospects through the sales process from initial contact to close",
-      "Collaborate with prospects to deeply understand their workflows and challenges",
+      "Leverage your accounting background to deeply understand workflows and challenges",
       "Maintain accurate pipeline and forecast data in our CRM",
       "Work closely with senior sales team members to develop your skills"
     ],
     qualifications: [
-      "2+ years of sales experience (B2B SaaS preferred)",
-      "Hunger to learn, grow, and exceed targets",
-      "Strong communication and presentation skills",
-      "Interest in accounting, finance, or professional services industries",
-      "Competitive drive with collaborative team mindset",
-      "Comfortable with technology and learning new software quickly"
+      "Accounting background (Big 4, controller, or accounting firm experience strongly preferred)",
+      "2-4+ years of professional accounting experience with interest in sales",
+      "CPA or working toward CPA certification is a plus",
+      "Strong understanding of accounting workflows and industry pain points",
+      "Hunger to learn, grow, and exceed targets in a sales role",
+      "Excellent communication and presentation skills",
+      "Competitive drive with collaborative team mindset"
     ],
     icon: Briefcase
   }
