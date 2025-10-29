@@ -132,13 +132,13 @@ const JobCard = ({ job }: { job: JobListing }) => {
   const departmentStyles = job.department === "Engineering" 
     ? {
         gradient: "from-accent/30 via-accent/40 to-accent/30",
-        iconBg: "bg-gradient-to-br from-primary to-primary/80",
+        iconBg: "bg-[#339CFF]",
         badgeBg: "bg-primary/20 text-primary border-primary/30",
         borderColor: "border-l-primary"
       }
     : {
         gradient: "from-accent/30 via-accent/40 to-accent/30",
-        iconBg: "bg-gradient-to-br from-primary to-primary/80",
+        iconBg: "bg-[#339CFF]",
         badgeBg: "bg-primary/20 text-primary border-primary/30",
         borderColor: "border-l-primary"
       };
