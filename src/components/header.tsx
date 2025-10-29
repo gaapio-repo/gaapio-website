@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 const products = [
   {
-    name: "Research/Internal GPT",
+    name: "Accounting Research",
     href: "/research-gpt",
     icon: Brain,
     description: "Your firm's AI-powered research assistant",
