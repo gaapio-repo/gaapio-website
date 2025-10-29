@@ -16,7 +16,7 @@ const products = [
     features: ["Internal knowledge base search", "Natural language queries", "Contextual answers from your firm's documents"],
   },
   {
-    name: "Accounting Memos",
+    name: "Memos",
     href: "/accounting-memos",
     icon: FileText,
     description: "AI-powered technical accounting memos",
@@ -443,7 +443,7 @@ export function Header() {
                       className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive('/accounting-memos') ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'}`}
                       onClick={closeMenu}
                     >
-                      Accounting Memos
+                      Memos
                     </Link>
                     <Link
                       to="/footnote-disclosures"

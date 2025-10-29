@@ -48,7 +48,7 @@ export function ProductHighlightsSection() {
     },
     {
       id: "memos",
-      label: "ACCOUNTING MEMOS",
+      label: "MEMOS",
       title: "Better Memos, Faster.",
       bulletPoints: [
         "Version history, reviewer comments, and internal sign offs",
