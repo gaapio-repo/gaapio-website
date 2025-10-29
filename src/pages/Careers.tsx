@@ -129,16 +129,16 @@ const JobCard = ({ job }: { job: JobListing }) => {
   // Department-specific styling
   const departmentStyles = job.department === "Engineering" 
     ? {
-        gradient: "from-blue-500/10 via-purple-500/10 to-blue-500/10",
-        iconBg: "bg-gradient-to-br from-blue-500 to-purple-600",
-        badgeBg: "bg-blue-500/20 text-blue-700 dark:text-blue-300 border-blue-500/30",
-        borderColor: "border-l-blue-500"
+        gradient: "from-primary/5 via-primary/10 to-primary/5",
+        iconBg: "bg-gradient-to-br from-primary to-primary/80",
+        badgeBg: "bg-primary/20 text-primary border-primary/30",
+        borderColor: "border-l-primary"
       }
     : {
-        gradient: "from-orange-500/10 via-pink-500/10 to-orange-500/10",
-        iconBg: "bg-gradient-to-br from-orange-500 to-pink-600",
-        badgeBg: "bg-orange-500/20 text-orange-700 dark:text-orange-300 border-orange-500/30",
-        borderColor: "border-l-orange-500"
+        gradient: "from-primary/5 via-primary/10 to-primary/5",
+        iconBg: "bg-gradient-to-br from-primary to-primary/80",
+        badgeBg: "bg-primary/20 text-primary border-primary/30",
+        borderColor: "border-l-primary"
       };
 
   return (
@@ -238,7 +238,7 @@ const Careers = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative min-h-[46vh] flex items-center pt-20 pb-12 overflow-hidden">
+        <section className="relative min-h-[38vh] flex items-center pt-16 pb-10 overflow-hidden">
           {/* Gradient Background */}
           <GradientBackground />
           
@@ -299,9 +299,9 @@ const Careers = () => {
               backed by real traction and fueled by purpose.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-blue-500/10 via-background to-purple-500/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 via-background to-primary/10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/50">
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-primary/30">
                     <Target className="h-7 w-7 text-white" />
                   </div>
                   <CardTitle className="text-xl">Mission-Driven Work</CardTitle>
@@ -314,9 +314,9 @@ const Careers = () => {
                 </CardContent>
               </Card>
 
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-green-500/10 via-background to-emerald-500/10 hover:border-green-500/50 hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 via-background to-primary/10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-green-500/50">
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-primary/30">
                     <TrendingUp className="h-7 w-7 text-white" />
                   </div>
                   <CardTitle className="text-xl">Rapid Growth</CardTitle>
@@ -329,9 +329,9 @@ const Careers = () => {
                 </CardContent>
               </Card>
 
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-purple-500/10 via-background to-pink-500/10 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 via-background to-primary/10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-purple-500/50">
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-primary/30">
                     <Zap className="h-7 w-7 text-white" />
                   </div>
                   <CardTitle className="text-xl">Cutting-Edge Tech</CardTitle>
@@ -344,24 +344,24 @@ const Careers = () => {
                 </CardContent>
               </Card>
 
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-orange-500/10 via-background to-amber-500/10 hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 via-background to-primary/10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-orange-500/50">
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-primary/30">
                     <Heart className="h-7 w-7 text-white" />
                   </div>
                   <CardTitle className="text-xl">True Flexibility</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-base leading-relaxed">
-                    Remote-first from day one. Work from anywhere with flexible hours. 
+                    Remote-first from day one. Work from anywhere with flexible hours.
                     We measure results, not hours. Take time off when you need it—unlimited PTO.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-cyan-500/10 via-background to-teal-500/10 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 via-background to-primary/10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-cyan-500 to-teal-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-cyan-500/50">
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-primary/30">
                     <Coffee className="h-7 w-7 text-white" />
                   </div>
                   <CardTitle className="text-xl">Growth & Learning</CardTitle>
@@ -374,9 +374,9 @@ const Careers = () => {
                 </CardContent>
               </Card>
 
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-rose-500/10 via-background to-red-500/10 hover:border-rose-500/50 hover:shadow-2xl hover:shadow-rose-500/20 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 via-background to-primary/10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-rose-500 to-red-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-rose-500/50">
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-primary/30">
                     <Rocket className="h-7 w-7 text-white" />
                   </div>
                   <CardTitle className="text-xl">Ownership & Impact</CardTitle>
@@ -393,18 +393,18 @@ const Careers = () => {
         </section>
         
         {/* Perks & Benefits Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-orange-500/5">
+        <section className="py-20 px-4 bg-gradient-to-br from-primary/5 via-muted/30 to-primary/5">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
+            <h2 className="text-4xl font-bold text-center mb-4">
               Perks & Benefits
             </h2>
             <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto text-lg">
               We take care of our team so you can focus on doing your best work
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-green-500/5 to-emerald-500/10 hover:border-green-500/50 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 to-primary/10 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
                     <DollarSign className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Competitive Salary + Equity</CardTitle>
@@ -414,9 +414,9 @@ const Careers = () => {
                 </CardContent>
               </Card>
               
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-blue-500/5 to-cyan-500/10 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 to-primary/10 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
                     <Shield className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Health Benefits</CardTitle>
@@ -426,9 +426,9 @@ const Careers = () => {
                 </CardContent>
               </Card>
               
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-pink-500/5 to-rose-500/10 hover:border-pink-500/50 hover:shadow-xl hover:shadow-pink-500/10 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 to-primary/10 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
                     <Heart className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Unlimited PTO</CardTitle>
@@ -438,9 +438,9 @@ const Careers = () => {
                 </CardContent>
               </Card>
               
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-purple-500/5 to-indigo-500/10 hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 to-primary/10 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
                     <Building className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Home Office Stipend</CardTitle>
@@ -450,9 +450,9 @@ const Careers = () => {
                 </CardContent>
               </Card>
               
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-orange-500/5 to-amber-500/10 hover:border-orange-500/50 hover:shadow-xl hover:shadow-orange-500/10 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 to-primary/10 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
                     <TrendingUp className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">401(k) Matching</CardTitle>
@@ -462,9 +462,9 @@ const Careers = () => {
                 </CardContent>
               </Card>
               
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-teal-500/5 to-cyan-500/10 hover:border-teal-500/50 hover:shadow-xl hover:shadow-teal-500/10 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 to-primary/10 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
                     <Coffee className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Learning Budget</CardTitle>
@@ -474,9 +474,9 @@ const Careers = () => {
                 </CardContent>
               </Card>
               
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-yellow-500/5 to-orange-500/10 hover:border-yellow-500/50 hover:shadow-xl hover:shadow-yellow-500/10 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 to-primary/10 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
                     <Zap className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Latest Tools</CardTitle>
@@ -486,9 +486,9 @@ const Careers = () => {
                 </CardContent>
               </Card>
               
-              <Card className="group border-2 border-transparent bg-gradient-to-br from-red-500/5 to-pink-500/10 hover:border-red-500/50 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 hover:scale-105">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-primary/5 to-primary/10 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-pink-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
                     <Users className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Team Retreats</CardTitle>
@@ -502,19 +502,19 @@ const Careers = () => {
         </section>
 
         {/* Our Values Section */}
-        <section className="py-20 px-4 bg-gradient-to-b from-background via-blue-500/5 to-background">
+        <section className="py-20 px-4 bg-gradient-to-b from-background via-primary/5 to-background">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h2 className="text-4xl font-bold text-center mb-4">
               Our Values
             </h2>
             <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto text-lg">
               These principles guide how we work, make decisions, and treat each other
             </p>
             <div className="space-y-6">
-              <Card className="group border-l-[6px] border-l-blue-500 bg-gradient-to-r from-blue-500/5 to-transparent hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:scale-[1.02]">
+              <Card className="group border-l-[6px] border-l-primary bg-gradient-to-r from-primary/5 to-transparent hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader>
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg group-hover:rotate-12 transition-transform">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg group-hover:rotate-12 transition-transform">
                       <Target className="h-6 w-6 text-white" />
                     </div>
                     <div>
@@ -528,10 +528,10 @@ const Careers = () => {
                 </CardHeader>
               </Card>
               
-              <Card className="group border-l-[6px] border-l-purple-500 bg-gradient-to-r from-purple-500/5 to-transparent hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 hover:scale-[1.02]">
+              <Card className="group border-l-[6px] border-l-primary bg-gradient-to-r from-primary/5 to-transparent hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader>
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg group-hover:rotate-12 transition-transform">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg group-hover:rotate-12 transition-transform">
                       <Rocket className="h-6 w-6 text-white" />
                     </div>
                     <div>
@@ -545,10 +545,10 @@ const Careers = () => {
                 </CardHeader>
               </Card>
               
-              <Card className="group border-l-[6px] border-l-orange-500 bg-gradient-to-r from-orange-500/5 to-transparent hover:shadow-xl hover:shadow-orange-500/10 transition-all duration-300 hover:scale-[1.02]">
+              <Card className="group border-l-[6px] border-l-primary bg-gradient-to-r from-primary/5 to-transparent hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader>
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg group-hover:rotate-12 transition-transform">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg group-hover:rotate-12 transition-transform">
                       <Zap className="h-6 w-6 text-white" />
                     </div>
                     <div>
@@ -562,10 +562,10 @@ const Careers = () => {
                 </CardHeader>
               </Card>
               
-              <Card className="group border-l-[6px] border-l-green-500 bg-gradient-to-r from-green-500/5 to-transparent hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300 hover:scale-[1.02]">
+              <Card className="group border-l-[6px] border-l-primary bg-gradient-to-r from-primary/5 to-transparent hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader>
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg group-hover:rotate-12 transition-transform">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg group-hover:rotate-12 transition-transform">
                       <Users className="h-6 w-6 text-white" />
                     </div>
                     <div>
@@ -579,10 +579,10 @@ const Careers = () => {
                 </CardHeader>
               </Card>
               
-              <Card className="group border-l-[6px] border-l-teal-500 bg-gradient-to-r from-teal-500/5 to-transparent hover:shadow-xl hover:shadow-teal-500/10 transition-all duration-300 hover:scale-[1.02]">
+              <Card className="group border-l-[6px] border-l-primary bg-gradient-to-r from-primary/5 to-transparent hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader>
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg group-hover:rotate-12 transition-transform">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg group-hover:rotate-12 transition-transform">
                       <Heart className="h-6 w-6 text-white" />
                     </div>
                     <div>
