@@ -166,11 +166,11 @@ export function Header() {
                                       className={cn(
                                         "flex items-start gap-4 p-4 rounded-xl transition-all group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm",
                                         "hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100/50 dark:hover:from-blue-900/30 dark:hover:to-blue-800/20",
-                                        "hover:shadow-lg hover:shadow-blue-500/20 hover:border-blue-300 dark:hover:border-blue-700",
+                                        "hover:shadow-lg hover:shadow-[#339CFF]/20 hover:border-[#339CFF]/30 dark:hover:border-[#339CFF]/50",
                                         "border border-gray-200 dark:border-gray-700"
                                       )}
                                     >
-                                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-md group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-blue-500/50 transition-all">
+                                      <div className="p-2.5 rounded-xl bg-[#339CFF] shadow-md group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#339CFF]/50 transition-all">
                                         <product.icon className="h-5 w-5 text-white" />
                                       </div>
                                       <div className="flex-1 min-w-0">
@@ -181,7 +181,7 @@ export function Header() {
                                           {product.description}
                                         </div>
                                       </div>
-                                      <ChevronRight className="h-4 w-4 text-blue-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all flex-shrink-0" />
+                                      <ChevronRight className="h-4 w-4 text-[#339CFF] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all flex-shrink-0" />
                                     </Link>
                                   </NavigationMenuLink>
                                 ))}
@@ -198,79 +198,72 @@ export function Header() {
                   <NavigationMenuTrigger className="text-gray-700 dark:text-gray-200 text-base font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white">
                     Company
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="!w-screen">
+                  <NavigationMenuContent className="!w-screen z-[100]">
                     <div className="w-full px-4 py-6">
-                      <div className="max-w-7xl mx-auto">
-                        <div className="rounded-xl border border-blue-200 shadow-2xl bg-gradient-to-br from-blue-400 to-blue-500 dark:from-blue-500 dark:to-blue-600 dark:border-blue-300/20 overflow-hidden">
-                          <div className="grid grid-cols-5 gap-0">
-                            {/* Left Column - Company Pages */}
-                            <div className="col-span-3 border-r border-blue-300/40 dark:border-blue-400/30 p-8 bg-gradient-to-br from-blue-300/30 to-transparent">
-                              <h3 className="text-xs font-bold text-white mb-6 uppercase tracking-wider flex items-center gap-2">
-                                <div className="h-1 w-8 bg-white rounded-full"></div>
-                                Company
-                              </h3>
-                              <div className="space-y-2">
-                                {companyPages.map((page) => (
-                                  page.external ? (
-                                    <a
-                                      key={page.name}
-                                      href={page.href}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="group flex items-start gap-4 p-4 rounded-lg transition-all hover:bg-white/20"
-                                      onMouseEnter={() => setHoveredCompanyPage(page)}
-                                    >
-                                      <div className="p-2 rounded-lg transition-colors bg-white/60 group-hover:bg-white group-hover:shadow-lg">
-                                        <page.icon className="h-5 w-5 text-blue-400 group-hover:text-blue-500 transition-colors" />
+                      <div className="max-w-5xl mx-auto">
+                        <div className="rounded-xl border border-blue-200 dark:border-blue-700 shadow-2xl bg-gradient-to-br from-gray-100 via-blue-50 to-gray-100 dark:from-gray-800 dark:via-blue-900/20 dark:to-gray-800 overflow-hidden">
+                          <div className="p-8">
+                            <h3 className="text-xs font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider flex items-center gap-2">
+                              <div className="h-1 w-10 bg-gradient-to-r from-[#339CFF] to-blue-600 rounded-full"></div>
+                              Company
+                            </h3>
+                            
+                            {/* Two Column Grid - 2 items on each side */}
+                            <div className="grid grid-cols-2 gap-6">
+                              {companyPages.map((page) => (
+                                page.external ? (
+                                  <a
+                                    key={page.name}
+                                    href={page.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={cn(
+                                      "flex items-start gap-4 p-4 rounded-xl transition-all group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm",
+                                      "hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100/50 dark:hover:from-blue-900/30 dark:hover:to-blue-800/20",
+                                      "hover:shadow-lg hover:shadow-[#339CFF]/20 hover:border-[#339CFF]/30 dark:hover:border-[#339CFF]/50",
+                                      "border border-gray-200 dark:border-gray-700"
+                                    )}
+                                  >
+                                    <div className="p-2.5 rounded-xl bg-[#339CFF] shadow-md group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#339CFF]/50 transition-all">
+                                      <page.icon className="h-5 w-5 text-white" />
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <div className="font-semibold text-gray-900 dark:text-white transition-colors mb-1 leading-tight">
+                                        {page.name}
                                       </div>
-                                      <div className="flex-1">
-                                        <h4 className="font-semibold text-white mb-1 group-hover:text-white">
-                                          {page.name}
-                                        </h4>
-                                        <p className="text-sm text-blue-100">
-                                          {page.description}
-                                        </p>
+                                      <div className="text-xs text-gray-600 dark:text-gray-400 leading-snug">
+                                        {page.description}
                                       </div>
-                                    </a>
-                                  ) : (
+                                    </div>
+                                    <ChevronRight className="h-4 w-4 text-[#339CFF] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all flex-shrink-0" />
+                                  </a>
+                                ) : (
+                                  <NavigationMenuLink key={page.name} asChild>
                                     <Link
-                                      key={page.name}
                                       to={page.href}
-                                      className="group flex items-start gap-4 p-4 rounded-lg transition-all hover:bg-white/20"
-                                      onMouseEnter={() => setHoveredCompanyPage(page)}
+                                      className={cn(
+                                        "flex items-start gap-4 p-4 rounded-xl transition-all group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm",
+                                        "hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100/50 dark:hover:from-blue-900/30 dark:hover:to-blue-800/20",
+                                        "hover:shadow-lg hover:shadow-[#339CFF]/20 hover:border-[#339CFF]/30 dark:hover:border-[#339CFF]/50",
+                                        "border border-gray-200 dark:border-gray-700"
+                                      )}
                                     >
-                                      <div className="p-2 rounded-lg transition-colors bg-white/60 group-hover:bg-white group-hover:shadow-lg">
-                                        <page.icon className="h-5 w-5 text-blue-400 group-hover:text-blue-500 transition-colors" />
+                                      <div className="p-2.5 rounded-xl bg-[#339CFF] shadow-md group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#339CFF]/50 transition-all">
+                                        <page.icon className="h-5 w-5 text-white" />
                                       </div>
-                                      <div className="flex-1">
-                                        <h4 className="font-semibold text-white mb-1 group-hover:text-white">
+                                      <div className="flex-1 min-w-0">
+                                        <div className="font-semibold text-gray-900 dark:text-white transition-colors mb-1 leading-tight">
                                           {page.name}
-                                        </h4>
-                                        <p className="text-sm text-blue-100">
+                                        </div>
+                                        <div className="text-xs text-gray-600 dark:text-gray-400 leading-snug">
                                           {page.description}
-                                        </p>
+                                        </div>
                                       </div>
+                                      <ChevronRight className="h-4 w-4 text-[#339CFF] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all flex-shrink-0" />
                                     </Link>
-                                  )
-                                ))}
-                              </div>
-                            </div>
-
-                            {/* Right Column - Featured Content */}
-                            <div className="col-span-2 p-8 bg-gradient-to-br from-blue-500/50 to-transparent">
-                              <div className="flex items-start gap-4 mb-6">
-                                <div className="p-3 rounded-xl bg-white shadow-lg">
-                                  <hoveredCompanyPage.icon className="h-8 w-8 text-blue-500" />
-                                </div>
-                                <div>
-                                  <h3 className="text-xl font-bold text-white mb-2">
-                                    {hoveredCompanyPage.name}
-                                  </h3>
-                                  <p className="text-blue-100 text-sm leading-relaxed">
-                                    {hoveredCompanyPage.description}
-                                  </p>
-                                </div>
-                              </div>
+                                  </NavigationMenuLink>
+                                )
+                              ))}
                             </div>
                           </div>
                         </div>
