@@ -35,7 +35,7 @@ export function ProductHighlightsSection() {
   const products = [
     {
       id: "research-gpt",
-      label: "RESEARCH/INTERNAL GPT",
+      label: "Accounting Research",
       title: "Your Firm's AI Research Assistant",
       bulletPoints: [
         "Search your firm's internal knowledge base with natural language",
