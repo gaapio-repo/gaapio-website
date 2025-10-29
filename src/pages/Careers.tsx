@@ -303,10 +303,10 @@ const Careers = () => {
               accounting with AI, we want to talk—regardless of your background or where you see yourself above.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6 h-auto font-semibold">
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6 h-auto font-semibold" asChild>
                 <Link to="/contact">Apply Now</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary/10 text-base px-8 py-6 h-auto font-semibold">
+              <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary/10 text-base px-8 py-6 h-auto font-semibold" asChild>
                 <Link to="/about-us">Learn More About Gaapio</Link>
               </Button>
             </div>
