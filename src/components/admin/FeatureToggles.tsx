@@ -14,6 +14,12 @@ interface FeatureToggle {
 export function FeatureToggles() {
   const [featureToggles, setFeatureToggles] = useState<FeatureToggle[]>([
     {
+      id: "customer-logos",
+      name: "Customer Logos Section",
+      description: "Show or hide the customer logos section on the homepage",
+      enabled: true
+    },
+    {
       id: "testimonials",
       name: "Testimonials Section",
       description: "Show or hide the testimonials section on the homepage",
@@ -47,11 +53,17 @@ export function FeatureToggles() {
   }, [featureToggles]);
 
   const handleToggleChange = (id: string, checked: boolean) => {
-    setFeatureToggles(
-      featureToggles.map((toggle) =>
-        toggle.id === id ? { ...toggle, enabled: checked } : toggle
-      )
+    const updatedToggles = featureToggles.map((toggle) =>
+      toggle.id === id ? { ...toggle, enabled: checked } : toggle
     );
+    setFeatureToggles(updatedToggles);
+    
+    // Trigger storage event for other tabs/windows
+    localStorage.setItem("featureToggles", JSON.stringify(updatedToggles));
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'featureToggles',
+      newValue: JSON.stringify(updatedToggles)
+    }));
   };
 
   return (

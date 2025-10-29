@@ -7,7 +7,37 @@ import { useActiveCustomerLogos } from "@/hooks/useCustomerLogos";
 export function TrustBarSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
   const { data: logos, isLoading } = useActiveCustomerLogos();
+
+  useEffect(() => {
+    // Check feature toggle setting
+    const checkToggle = () => {
+      const savedToggles = localStorage.getItem("featureToggles");
+      if (savedToggles) {
+        const toggles = JSON.parse(savedToggles);
+        const logosToggle = toggles.find((toggle: any) => toggle.id === "customer-logos");
+        if (logosToggle) {
+          setIsEnabled(logosToggle.enabled);
+        }
+      }
+    };
+
+    checkToggle();
+
+    // Listen for changes in localStorage (from admin panel)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'featureToggles') {
+        checkToggle();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,6 +60,11 @@ export function TrustBarSection() {
       }
     };
   }, []);
+
+  // Don't render if feature is disabled
+  if (!isEnabled) {
+    return null;
+  }
 
   // Don't render if no logos or still loading
   if (isLoading || !logos || logos.length === 0) {

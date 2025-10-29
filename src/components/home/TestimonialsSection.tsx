@@ -14,14 +14,27 @@ export function TestimonialsSection() {
 
   useEffect(() => {
     // Check feature toggle setting
-    const savedToggles = localStorage.getItem("featureToggles");
-    if (savedToggles) {
-      const toggles = JSON.parse(savedToggles);
-      const testimonialsToggle = toggles.find((toggle: any) => toggle.id === "testimonials");
-      if (testimonialsToggle) {
-        setIsVisible(testimonialsToggle.enabled);
+    const checkToggle = () => {
+      const savedToggles = localStorage.getItem("featureToggles");
+      if (savedToggles) {
+        const toggles = JSON.parse(savedToggles);
+        const testimonialsToggle = toggles.find((toggle: any) => toggle.id === "testimonials");
+        if (testimonialsToggle) {
+          setIsVisible(testimonialsToggle.enabled);
+        }
       }
-    }
+    };
+
+    checkToggle();
+
+    // Listen for changes in localStorage (from admin panel)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'featureToggles') {
+        checkToggle();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
 
     // Set up intersection observer for animation
     const observer = new IntersectionObserver(
@@ -39,6 +52,7 @@ export function TestimonialsSection() {
     }
 
     return () => {
+      window.removeEventListener('storage', handleStorageChange);
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
