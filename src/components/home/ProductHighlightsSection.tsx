@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { FileText, FileCheck, Bell, FileSearch, Brain } from "lucide-react";
+import { FileText, FileCheck, Bell, FileSearch, Brain, Shield } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 
@@ -96,6 +96,19 @@ export function ProductHighlightsSection() {
       ],
       href: "/guidance-updates",
       icon: Bell,
+      iconColor: "#339CFF"
+    },
+    {
+      id: "sox-controls",
+      label: "SOX CONTROLS (COMING SOON)",
+      title: "Streamline SOX Compliance & Control Testing",
+      bulletPoints: [
+        "Automated control testing and documentation",
+        "Risk assessment and monitoring workflows",
+        "Audit-ready compliance reports"
+      ],
+      href: "/sox-controls",
+      icon: Shield,
       iconColor: "#339CFF"
     }
   ];

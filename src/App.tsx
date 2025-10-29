@@ -13,6 +13,7 @@ import FootnoteDisclosures from "./pages/FootnoteDisclosures";
 import ContractAnalysis from "./pages/ContractAnalysis";
 import GuidanceUpdates from "./pages/GuidanceUpdates";
 import ResearchGPT from "./pages/ResearchGPT";
+import SOXControls from "./pages/SOXControls";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
@@ -67,6 +68,7 @@ function App() {
             <Route path="/contract-analysis" element={<ContractAnalysis />} />
             <Route path="/guidance-updates" element={<GuidanceUpdates />} />
             <Route path="/research-gpt" element={<ResearchGPT />} />
+            <Route path="/sox-controls" element={<SOXControls />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/post" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />

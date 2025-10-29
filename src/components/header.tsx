@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Logo } from "@/components/logo";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain, Shield } from "lucide-react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
@@ -42,6 +42,13 @@ const products = [
     icon: Bell,
     description: "Stay current with the latest accounting standards",
     features: ["Real-time notifications", "Impact analysis", "Implementation guidance"],
+  },
+  {
+    name: "SOX Controls (Coming Soon)",
+    href: "/sox-controls",
+    icon: Shield,
+    description: "Streamline SOX compliance and control testing",
+    features: ["Automated control testing", "Risk assessment workflows", "Compliance documentation"],
   },
 ];
 
