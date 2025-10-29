@@ -253,24 +253,40 @@ export function Header() {
                       <div className="max-w-2xl mx-auto">
                         <div className="rounded-2xl shadow-2xl bg-white dark:bg-gray-900 overflow-hidden border border-gray-200 dark:border-gray-800">
                           <div className="bg-gray-50 dark:bg-gray-800/50 p-6">
-                            <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-5 uppercase tracking-wider px-3">
+                            <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-5 uppercase tracking-wider px-3">
                               Company
                             </h3>
                             <div className="grid grid-cols-2 gap-2">
-                              {companyPages.map((page) => (
+                              {companyPages.map((page, index) => (
                                 page.external ? (
                                   <a
                                     key={page.name}
                                     href={page.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-3 px-3 py-3 rounded-lg transition-all group hover:bg-blue-100 dark:hover:bg-blue-900/30"
+                                    onMouseEnter={() => setHoveredCompanyPage(page)}
+                                    className={cn(
+                                      "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
+                                      (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
+                                        ? "bg-blue-100 dark:bg-blue-900/30"
+                                        : "hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                                    )}
                                   >
-                                    <div className="p-1.5 rounded-md transition-colors flex-shrink-0 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 group-hover:bg-[#339CFF] group-hover:text-white">
+                                    <div className={cn(
+                                      "p-1.5 rounded-md transition-colors flex-shrink-0",
+                                      (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
+                                        ? "bg-[#339CFF] text-white"
+                                        : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                                    )}>
                                       <page.icon className="h-4 w-4" />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                      <span className="font-medium text-sm transition-colors text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white block truncate">
+                                      <span className={cn(
+                                        "font-medium text-sm transition-colors block truncate",
+                                        (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
+                                          ? "text-gray-900 dark:text-white"
+                                          : "text-gray-700 dark:text-gray-300"
+                                      )}>
                                         {page.name}
                                       </span>
                                     </div>
@@ -279,13 +295,29 @@ export function Header() {
                                   <NavigationMenuLink key={page.name} asChild>
                                     <Link
                                       to={page.href}
-                                      className="flex items-center gap-3 px-3 py-3 rounded-lg transition-all group hover:bg-blue-100 dark:hover:bg-blue-900/30"
+                                      onMouseEnter={() => setHoveredCompanyPage(page)}
+                                      className={cn(
+                                        "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
+                                        (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
+                                          ? "bg-blue-100 dark:bg-blue-900/30"
+                                          : "hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                                      )}
                                     >
-                                      <div className="p-1.5 rounded-md transition-colors flex-shrink-0 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 group-hover:bg-[#339CFF] group-hover:text-white">
+                                      <div className={cn(
+                                        "p-1.5 rounded-md transition-colors flex-shrink-0",
+                                        (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
+                                          ? "bg-[#339CFF] text-white"
+                                          : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                                      )}>
                                         <page.icon className="h-4 w-4" />
                                       </div>
                                       <div className="flex-1 min-w-0">
-                                        <span className="font-medium text-sm transition-colors text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white block truncate">
+                                        <span className={cn(
+                                          "font-medium text-sm transition-colors block truncate",
+                                          (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
+                                            ? "text-gray-900 dark:text-white"
+                                            : "text-gray-700 dark:text-gray-300"
+                                        )}>
                                           {page.name}
                                         </span>
                                       </div>
