@@ -1,6 +1,6 @@
 
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import React from 'react'
 import App from './App.tsx'
 import './index.css'
 import './App.css'
@@ -30,11 +30,11 @@ if (!rootElement) {
 console.log("[Main] Starting app render...");
 
 createRoot(rootElement).render(
-  <React.StrictMode>
+  <StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="system" storageKey="gaapio-theme">
         <App />
       </ThemeProvider>
     </QueryClientProvider>
-  </React.StrictMode>
+  </StrictMode>
 );
