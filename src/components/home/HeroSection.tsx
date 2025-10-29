@@ -54,7 +54,7 @@ export const HeroSection = memo(function HeroSection({
       
       {/* Content */}
       <div className="container px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 xl:gap-16 items-center">
           {/* Left Column - Text Content */}
           <div className="flex flex-col items-start text-left space-y-6 md:space-y-8 animate-fade-up order-1">
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
@@ -82,8 +82,8 @@ export const HeroSection = memo(function HeroSection({
           </div>
           
           {/* Right Column - Animated Memo */}
-          <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] -mx-4 sm:mx-0 lg:-mr-8 xl:-mr-32 2xl:-mr-48 overflow-visible animate-fade-up flex justify-center lg:justify-end items-center order-2" style={{ animationDelay: "200ms" }}>
-            <div className="relative scale-50 sm:scale-60 md:scale-70 lg:scale-80 xl:scale-90 2xl:scale-95">
+          <div className="relative h-[300px] sm:h-[400px] md:h-[450px] xl:h-[600px] 2xl:h-[700px] -mx-4 sm:mx-0 xl:-mr-8 2xl:-mr-32 overflow-hidden animate-fade-up flex justify-center xl:justify-end items-center order-2" style={{ animationDelay: "200ms" }}>
+            <div className="relative scale-50 sm:scale-60 md:scale-65 xl:scale-80 2xl:scale-90">
               {isClient && <AnimatedMemo />}
             </div>
           </div>

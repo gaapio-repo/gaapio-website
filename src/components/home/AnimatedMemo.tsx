@@ -34,7 +34,8 @@ export const AnimatedMemo = () => {
   const getScale = () => {
     if (width < 480) return 0.35;   // Mobile phones
     if (width < 768) return 0.5;    // Tablets
-    if (width < 1024) return 0.6;   // Small laptops
+    if (width < 1024) return 0.58;  // Small laptops
+    if (width < 1280) return 0.62;  // Medium laptops (critical range)
     return 0.7;                     // Larger screens
   };
 
