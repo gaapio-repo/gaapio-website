@@ -1,132 +1,107 @@
 import { Link } from "react-router-dom";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Lightbulb, Heart, Target, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const WhyWeBuiltThis = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/20">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-background">
       <Header />
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="py-20 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
-              <Lightbulb className="h-4 w-4" />
-              <span className="text-sm font-medium">Our Story</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+        <section className="pt-32 pb-16 px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
               Why We Built Gaapio
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              Born from the frustration of spending countless hours on repetitive accounting tasks, 
-              Gaapio was created to give accountants their time back.
-            </p>
+            <div className="w-20 h-1 bg-[#339CFF] mx-auto"></div>
           </div>
         </section>
 
-        {/* The Problem Section */}
-        <section className="py-16 px-4 bg-background">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-start gap-6 mb-8">
-              <div className="p-4 rounded-xl bg-destructive/10">
-                <Target className="h-8 w-8 text-destructive" />
-              </div>
-              <div>
-                <h2 className="text-3xl font-bold mb-4">The Problem We Saw</h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  As former Big Four accountants, we spent years watching talented professionals 
-                  waste their expertise on repetitive, time-consuming tasks. Research that should 
-                  take minutes stretched into hours. Disclosures that could be standardized required 
-                  constant reinvention. Contract reviews consumed entire afternoons.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  The worst part? These weren't challenges that required human judgment or expertise—
-                  they were just tedious, mechanical processes that ate up billable hours and left 
-                  accountants exhausted and unfulfilled.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Article Content */}
+        <article className="pb-20 px-4">
+          <div className="max-w-3xl mx-auto prose prose-lg dark:prose-invert">
+            
+            {/* A Love for Technical Accounting */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                A Love for Technical Accounting
+              </h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                Before AI, before software, there was the puzzle. Accounting has always been this beautiful mix of structure and judgment—the rules are clear, but the real skill lies in interpreting and applying them. We didn&apos;t get into accounting because it was easy; we got into it because it was complex. There&apos;s a quiet satisfaction in getting it right—not just balancing debits and credits, but understanding the reasoning behind the standard.
+              </p>
+            </section>
 
-        {/* Our Vision Section */}
-        <section className="py-16 px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-start gap-6 mb-8">
-              <div className="p-4 rounded-xl bg-primary/10">
-                <Heart className="h-8 w-8 text-primary" />
-              </div>
-              <div>
-                <h2 className="text-3xl font-bold mb-4">Our Vision</h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  We believe accountants should spend their time on what matters: strategic thinking, 
-                  client relationships, and high-value analysis. Not formatting disclosures or searching 
-                  through ASC guidance for the hundredth time.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  That's why we built Gaapio—to automate the tedious work and amplify human expertise. 
-                  Our AI doesn't replace accountants; it empowers them to focus on the work that truly 
-                  requires their professional judgment.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+            {/* Navigating the Waves of Change */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                Navigating the Waves of Change
+              </h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                Over the years, we worked through the release of multiple new accounting standards—ASC 815, ASC 606, and ASC 842. Each one reshaped the profession and left a lasting mark on how we think about financial reporting. We reviewed exposure drafts, tuned in to FASB board meetings, and spent months—sometimes years—navigating adoption projects. These standards demanded deep analysis, careful documentation, and relentless collaboration. The work was rigorous, rewarding, and exhausting. We helped hundreds of companies work through changes in hedge accounting and lease accounting. We saw firsthand how easy it was to get things wrong—even with an auditor&apos;s sign-off.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                Back then, AI wasn&apos;t even on anyone&apos;s radar. The idea that software could actually understand accounting, let alone help with it, would have sounded absurd. But fast forward a few years, and the world changed. AI can now read, reason, and synthesize complex information—the very kind of thinking work accountants do every day.
+              </p>
+            </section>
 
-        {/* What Makes Us Different Section */}
-        <section className="py-16 px-4 bg-background">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-start gap-6 mb-8">
-              <div className="p-4 rounded-xl bg-accent/50">
-                <Zap className="h-8 w-8 text-primary" />
-              </div>
-              <div>
-                <h2 className="text-3xl font-bold mb-4">What Makes Us Different</h2>
-                <div className="space-y-4">
-                  <div className="border-l-4 border-primary pl-6">
-                    <h3 className="text-xl font-semibold mb-2">Built by Accountants</h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      We're not tech people trying to understand accounting. We're accountants who 
-                      learned to code because we were tired of the status quo.
-                    </p>
-                  </div>
-                  <div className="border-l-4 border-primary pl-6">
-                    <h3 className="text-xl font-semibold mb-2">Purpose-Built AI</h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      Our AI is specifically trained on accounting standards, not general knowledge. 
-                      It understands ASC references, revenue recognition nuances, and disclosure requirements.
-                    </p>
-                  </div>
-                  <div className="border-l-4 border-primary pl-6">
-                    <h3 className="text-xl font-semibold mb-2">Continuous Improvement</h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      We're constantly updating our models with the latest guidance, incorporating 
-                      user feedback, and expanding capabilities based on real accounting needs.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* When Possibility Met Experience */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                When Possibility Met Experience
+              </h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                That realization changed everything. For the first time, we could imagine combining our accounting experience with this new technology to make something genuinely useful: a system that helps accountants get to the right answer faster and easier, without losing the rigor that good accounting demands.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                We didn&apos;t want AI to replace judgment—we wanted it to amplify it. The smartest accountants already have the instincts and experience to make the right call. What they need is the right research, the right guidance, and a structured way to document their reasoning. That&apos;s what Gaapio is built to do.
+              </p>
+            </section>
+
+            {/* From Prototype to Purpose */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                From Prototype to Purpose
+              </h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                We started small—testing how AI could help draft policy memos, analyze proposed treatments, and summarize disclosures. Then we layered on structure: ASC topics, version histories, and detailed CPA review tools. The result is a workspace where human judgment stays in control. Every AI response is transparent, auditable, and built to be discussed, challenged, and improved.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                Because the goal isn&apos;t to automate accounting—it&apos;s to empower accountants. To help them research faster, write clearer, and spend more time thinking critically instead of formatting documents. To make it easier to get it right.
+              </p>
+            </section>
+
+            {/* Our Mission */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                Our Mission
+              </h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                We&apos;re accountants turned builders. We&apos;ve lived the standard adoptions, the late nights before audit, the endless redlines. We know how high the bar is for good accounting work—and we wouldn&apos;t want it any other way. But now that AI can help us synthesize and reason more efficiently, there&apos;s no reason the process has to be as hard or as slow as it&apos;s always been.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                That&apos;s why we built Gaapio—to combine our experience with AI and help accountants get it right quicker and easier, without ever losing sight of the judgment that makes this profession so vital.
+              </p>
+            </section>
+
           </div>
-        </section>
+        </article>
 
         {/* Call to Action Section */}
-        <section className="py-20 px-4">
+        <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">Join Us in Transforming Accounting</h2>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              We're on a mission to give accountants their time back. Whether you're at a Big Four 
-              firm, a mid-size practice, or working in corporate accounting, Gaapio can help you 
-              work smarter, not harder.
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+              Join Us in Transforming Accounting
+            </h2>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
+              Ready to see how Gaapio can help you work smarter? Request a demo or reach out to learn more about our mission.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="text-lg px-8">
+              <Button asChild size="lg" variant="blue">
                 <Link to="/request-demo">Request a Demo</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="text-lg px-8">
+              <Button asChild size="lg" variant="blueOutline">
                 <Link to="/about-us">Meet Our Team</Link>
               </Button>
             </div>
