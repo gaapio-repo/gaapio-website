@@ -10,7 +10,6 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { MetricsBar } from "@/components/home/MetricsBar";
 import { ProductHighlightsSection } from "@/components/home/ProductHighlightsSection";
 import { SocialProofSection } from "@/components/home/SocialProofSection";
-import { ComplianceSecuritySection } from "@/components/home/ComplianceSecuritySection";
 import { KeyBenefitsSection } from "@/components/home/KeyBenefitsSection";
 import { WhatYoullLearnSection } from "@/components/home/WhatYoullLearnSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
@@ -36,9 +35,6 @@ export default function Index() {
 
       {/* Social Proof Section (Trusted by Companies) */}
       <SocialProofSection />
-
-      {/* Compliance & Security Section */}
-      <ComplianceSecuritySection />
 
       {/* Key Benefits Section */}
       <KeyBenefitsSection />
