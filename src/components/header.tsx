@@ -147,98 +147,45 @@ export function Header() {
                 >
                   Products
                 </NavigationMenuTrigger>
-                  <NavigationMenuContent className="!w-screen">
+                  <NavigationMenuContent className="!w-screen z-[100]">
                     <div className="w-full px-4 py-6">
-                      <div className="max-w-7xl mx-auto">
-                         <div className="rounded-xl border border-gray-200 shadow-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 dark:border-gray-700 overflow-hidden">
-                            <div className="grid grid-cols-2 gap-0 overflow-hidden">
-                              {/* Left Column - Product Navigation */}
-                               <div className="p-8 bg-white dark:bg-gray-800 shadow-[4px_0_16px_-8px_rgba(0,0,0,0.1)]">
-                                 <h3 className="text-xs font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider flex items-center gap-2">
-                                   <div className="h-1 w-10 bg-[#339CFF] rounded-full"></div>
-                                   Our Products
-                                 </h3>
-                               <div className="space-y-1">
+                      <div className="max-w-5xl mx-auto">
+                         <div className="rounded-xl border border-blue-200 dark:border-blue-700 shadow-2xl bg-gradient-to-br from-gray-100 via-blue-50 to-gray-100 dark:from-gray-800 dark:via-blue-900/20 dark:to-gray-800 overflow-hidden">
+                            <div className="p-8">
+                              <h3 className="text-xs font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider flex items-center gap-2">
+                                <div className="h-1 w-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
+                                Our Products
+                              </h3>
+                              
+                              {/* Two Column Grid - 3 products each side */}
+                              <div className="grid grid-cols-2 gap-6">
                                 {products.map((product) => (
                                   <NavigationMenuLink key={product.name} asChild>
                                     <Link
                                       to={product.href}
-                                      onMouseEnter={() => setHoveredProduct(product)}
-                                       className={cn(
-                                         "flex items-start gap-4 p-4 rounded-xl transition-all group",
-                                         "hover:bg-blue-50/80 dark:hover:bg-blue-900/20",
-                                         hoveredProduct.name === product.name && "bg-blue-50/80 dark:bg-blue-900/20 shadow-sm"
-                                       )}
+                                      className={cn(
+                                        "flex items-start gap-4 p-4 rounded-xl transition-all group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm",
+                                        "hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100/50 dark:hover:from-blue-900/30 dark:hover:to-blue-800/20",
+                                        "hover:shadow-lg hover:shadow-blue-500/20 hover:border-blue-300 dark:hover:border-blue-700",
+                                        "border border-gray-200 dark:border-gray-700"
+                                      )}
                                     >
-                                       <div className={cn(
-                                         "p-2.5 rounded-xl transition-all",
-                                         hoveredProduct.name === product.name 
-                                           ? "bg-[#339CFF] shadow-md scale-105" 
-                                           : "bg-gray-100 dark:bg-gray-700 group-hover:bg-[#339CFF] group-hover:shadow-md group-hover:scale-105"
-                                       )}>
-                                         <product.icon className={cn(
-                                           "h-5 w-5 transition-colors",
-                                           hoveredProduct.name === product.name
-                                             ? "text-white"
-                                             : "text-gray-600 dark:text-gray-300 group-hover:text-white"
-                                         )} />
-                                       </div>
-                                       <div className="flex-1">
-                                         <div className="font-semibold text-gray-900 dark:text-white transition-colors mb-0.5">
-                                           {product.name}
-                                         </div>
-                                         <div className="text-sm text-gray-600 dark:text-gray-400">
-                                           {product.description}
-                                         </div>
+                                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-md group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-blue-500/50 transition-all">
+                                        <product.icon className="h-5 w-5 text-white" />
                                       </div>
-                                      <ChevronRight className={cn(
-                                        "h-4 w-4 text-[#339CFF] transition-all",
-                                        hoveredProduct.name === product.name ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0"
-                                      )} />
+                                      <div className="flex-1 min-w-0">
+                                        <div className="font-semibold text-gray-900 dark:text-white transition-colors mb-1 leading-tight">
+                                          {product.name}
+                                        </div>
+                                        <div className="text-xs text-gray-600 dark:text-gray-400 leading-snug">
+                                          {product.description}
+                                        </div>
+                                      </div>
+                                      <ChevronRight className="h-4 w-4 text-blue-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all flex-shrink-0" />
                                     </Link>
                                   </NavigationMenuLink>
                                 ))}
                               </div>
-                            </div>
-
-                             {/* Right Column - Product Details */}
-                             <div className="p-8 bg-gradient-to-br from-[hsl(207,85%,88%)] to-[hsl(207,85%,92%)] dark:from-[hsl(207,60%,18%)] dark:to-[hsl(207,55%,15%)]">
-                               <div className="flex items-start gap-4 mb-8">
-                                 <div className="p-3.5 rounded-2xl bg-[#339CFF] shadow-lg ring-4 ring-white/50 dark:ring-black/20">
-                                   <hoveredProduct.icon className="h-8 w-8 text-white" />
-                                 </div>
-                                 <div>
-                                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                                     {hoveredProduct.name}
-                                   </h3>
-                                   <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-                                     {hoveredProduct.description}
-                                   </p>
-                                </div>
-                              </div>
-
-                               <div className="space-y-4 mb-8">
-                                 <h4 className="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-widest">
-                                   Key Features
-                                 </h4>
-                                 {hoveredProduct.features.map((feature, idx) => (
-                                   <div key={idx} className="flex items-start gap-3">
-                                     <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#339CFF] flex-shrink-0" />
-                                     <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                                       {feature}
-                                     </span>
-                                   </div>
-                                 ))}
-                               </div>
-
-                               <Link
-                                 to={hoveredProduct.href}
-                                 className="inline-flex items-center gap-2 text-sm font-semibold text-[#339CFF] dark:text-[#4DB0FF] hover:gap-3 transition-all group bg-white/80 hover:bg-white dark:bg-gray-800/50 dark:hover:bg-gray-800/80 px-5 py-2.5 rounded-xl shadow-sm hover:shadow-md"
-                              >
-                                Learn more
-                                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                              </Link>
-                            </div>
                           </div>
                         </div>
                       </div>
