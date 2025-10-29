@@ -48,7 +48,7 @@ export const HeroSection = memo(function HeroSection({
   const secondPart = titleParts.slice(2).join(" "); // "Memos. Faster."
 
   return (
-    <section className="relative min-h-[90vh] md:min-h-[85vh] flex items-center pt-32 pb-16 overflow-x-hidden">
+    <section className="relative min-h-[90vh] md:min-h-[85vh] flex items-center pt-32 pb-16 overflow-visible">
       {/* Gradient Background */}
       <GradientBackground />
       
@@ -82,7 +82,7 @@ export const HeroSection = memo(function HeroSection({
           </div>
           
           {/* Right Column - Animated Memo */}
-          <div className="relative h-[300px] sm:h-[400px] md:h-[450px] xl:h-[600px] 2xl:h-[700px] -mx-4 sm:mx-0 xl:-mr-8 2xl:-mr-32 overflow-hidden animate-fade-up flex justify-center xl:justify-end items-center order-2" style={{ animationDelay: "200ms" }}>
+          <div className="relative h-[300px] sm:h-[400px] md:h-[450px] xl:h-[600px] 2xl:h-[700px] -mx-4 sm:mx-0 xl:-mr-8 2xl:-mr-32 overflow-visible animate-fade-up flex justify-center xl:justify-end items-center order-2" style={{ animationDelay: "200ms" }}>
             <div className="relative scale-50 sm:scale-60 md:scale-65 xl:scale-80 2xl:scale-90">
               {isClient && <AnimatedMemo />}
             </div>
