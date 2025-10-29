@@ -32,6 +32,7 @@ export function ProductHighlightsSection() {
     };
   }, []);
 
+  // Product order: Memos, Footnote Disclosures, Contract Analysis, Accounting Research, Guidance Updates, SOX Controls
   const products = [
     {
       id: "memos",

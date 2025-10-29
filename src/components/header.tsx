@@ -7,6 +7,7 @@ import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Be
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
+// Product order: Memos, Footnote Disclosures, Contract Analysis, Accounting Research, Guidance Updates, SOX Controls
 const products = [
   {
     name: "Memos",
