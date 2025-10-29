@@ -129,11 +129,11 @@ export function ProductHighlightsSection() {
       <ResponsiveContainer>
         <div className="text-center mb-16 relative z-10">
 
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Gaapio's Core Solutions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Gaapio's Solutions</h2>
 
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
            We built a platform for a reason, need something that isn't on here? Let us know! </p>
-        </div>        
+        </div>
         <div 
           className={cn(
             "max-w-7xl mx-auto transition-all duration-1000",
@@ -171,9 +171,9 @@ export function ProductHighlightsSection() {
                     <TabsContent
                       key={product.id}
                       value={product.id}
-                      className="mt-0 data-[state=active]:animate-in data-[state=active]:fade-in-50 data-[state=active]:slide-in-from-right-2"
+                      className="mt-0 h-full data-[state=active]:animate-in data-[state=active]:fade-in-50 data-[state=active]:slide-in-from-right-2"
                     >
-                      <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 h-full">
+                      <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 h-full flex flex-col">
                         <div className="mb-6">
                           <span className="text-sm font-bold text-[#339CFF] tracking-wider">
                             {product.label}
@@ -185,9 +185,7 @@ export function ProductHighlightsSection() {
                         </h3>
 
                         {/* Bullet points */}
-
-                        {/* Bullet points */}
-                        <ul className="space-y-3 mb-8">
+                        <ul className="space-y-3 mb-8 flex-grow">
                           {product.bulletPoints.map((point, pointIndex) => (
                             <li key={pointIndex} className="flex items-start">
                               <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#339CFF] mt-2 mr-3"></div>
@@ -198,7 +196,7 @@ export function ProductHighlightsSection() {
                           ))}
                         </ul>
 
-                        <Button asChild variant="blue" className="w-auto">
+                        <Button asChild variant="blue" className="w-auto mt-auto">
                           <Link to={product.href}>
                             Learn more →
                           </Link>
