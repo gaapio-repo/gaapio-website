@@ -201,7 +201,7 @@ const JobCard = ({ job }: { job: JobListing }) => {
           </div>
           
           <div className="pt-4">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto" asChild>
+            <Button size="lg" variant="blue" className="w-full sm:w-auto" asChild>
               <Link to="/contact" state={{ role: job.title }}>
                 Apply for This Role
               </Link>
@@ -303,7 +303,7 @@ const Careers = () => {
               accounting with AI, we want to talk—regardless of your background or where you see yourself above.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6 h-auto font-semibold" asChild>
+              <Button size="lg" variant="blue" className="text-base px-8 py-6 h-auto font-semibold" asChild>
                 <Link to="/contact">Apply Now</Link>
               </Button>
               <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary/10 text-base px-8 py-6 h-auto font-semibold" asChild>
