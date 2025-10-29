@@ -54,10 +54,10 @@ export const HeroSection = memo(function HeroSection({
       
       {/* Content */}
       <div className="container px-4 md:px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Column - Text Content */}
-          <div className="flex flex-col items-start text-left space-y-8 animate-fade-up">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
+          <div className="flex flex-col items-start text-left space-y-6 md:space-y-8 animate-fade-up order-1">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
               <span className="text-gray-900 dark:text-white">
                 {firstPart}
               </span>
@@ -67,7 +67,7 @@ export const HeroSection = memo(function HeroSection({
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-800 dark:text-white/90 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
+            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-gray-800 dark:text-white/90 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
               {subtitle}
             </p>
             
@@ -82,8 +82,8 @@ export const HeroSection = memo(function HeroSection({
           </div>
           
           {/* Right Column - Animated Memo */}
-          <div className="relative h-[500px] md:h-[600px] lg:h-[700px] -mr-8 md:-mr-32 lg:-mr-48 xl:-mr-64 overflow-visible animate-fade-up flex justify-end items-center" style={{ animationDelay: "200ms" }}>
-            <div className="relative scale-75 md:scale-85 lg:scale-95">
+          <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] -mx-4 sm:mx-0 lg:-mr-8 xl:-mr-32 2xl:-mr-48 overflow-visible animate-fade-up flex justify-center lg:justify-end items-center order-2" style={{ animationDelay: "200ms" }}>
+            <div className="relative scale-50 sm:scale-60 md:scale-70 lg:scale-80 xl:scale-90 2xl:scale-95">
               {isClient && <AnimatedMemo />}
             </div>
           </div>
