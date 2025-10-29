@@ -34,7 +34,19 @@ export function ProductHighlightsSection() {
 
   const products = [
     {
-
+      id: "research-gpt",
+      label: "RESEARCH/INTERNAL GPT",
+      title: "Your Firm's AI Research Assistant",
+      bulletPoints: [
+        "Search your firm's internal knowledge base with natural language",
+        "Get instant answers from your documents and resources",
+        "Contextual responses tailored to your firm's expertise"
+      ],
+      href: "/research-gpt",
+      icon: Brain,
+      iconColor: "#339CFF"
+    },
+    {
       id: "memos",
       label: "ACCOUNTING MEMOS",
       title: "Better Memos, Faster.",
@@ -45,7 +57,6 @@ export function ProductHighlightsSection() {
       ],
       href: "/accounting-memos",
       icon: FileText,
-
       iconColor: "#339CFF"
     },
     {
@@ -59,9 +70,7 @@ export function ProductHighlightsSection() {
       ],
       href: "/footnote-disclosures",
       icon: FileCheck,
-
       iconColor: "#339CFF"
-
     },
     {
       id: "contracts",
@@ -87,19 +96,6 @@ export function ProductHighlightsSection() {
       ],
       href: "/guidance-updates",
       icon: Bell,
-      iconColor: "#339CFF"
-    },
-    {
-      id: "research-gpt",
-      label: "RESEARCH/INTERNAL GPT",
-      title: "Your Firm's AI Research Assistant",
-      bulletPoints: [
-        "Search your firm's internal knowledge base with natural language",
-        "Get instant answers from your documents and resources",
-        "Contextual responses tailored to your firm's expertise"
-      ],
-      href: "/research-gpt",
-      icon: Brain,
       iconColor: "#339CFF"
     }
   ];
@@ -133,7 +129,7 @@ export function ProductHighlightsSection() {
               : "opacity-0 translate-y-[30px]"
           )}
         >
-          <Tabs defaultValue="memos" className="w-full">
+          <Tabs defaultValue="research-gpt" className="w-full">
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Left side - Tab buttons */}
               <div className="lg:w-1/3">

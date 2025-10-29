@@ -9,6 +9,13 @@ import { cn } from "@/lib/utils";
 
 const products = [
   {
+    name: "Research/Internal GPT",
+    href: "/research-gpt",
+    icon: Brain,
+    description: "Your firm's AI-powered research assistant",
+    features: ["Internal knowledge base search", "Natural language queries", "Contextual answers from your firm's documents"],
+  },
+  {
     name: "Accounting Memos",
     href: "/accounting-memos",
     icon: FileText,
@@ -35,13 +42,6 @@ const products = [
     icon: Bell,
     description: "Stay current with the latest accounting standards",
     features: ["Real-time notifications", "Impact analysis", "Implementation guidance"],
-  },
-  {
-    name: "Research/Internal GPT",
-    href: "/research-gpt",
-    icon: Brain,
-    description: "Your firm's AI-powered research assistant",
-    features: ["Internal knowledge base search", "Natural language queries", "Contextual answers from your firm's documents"],
   },
 ];
 
