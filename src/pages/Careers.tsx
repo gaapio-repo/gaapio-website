@@ -289,29 +289,29 @@ const Careers = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 bg-primary">
+        <section className="py-20 px-4 bg-primary/5">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               Ready to Make an Impact?
             </h2>
-            <p className="text-xl text-white/90 mb-6 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-6 leading-relaxed max-w-2xl mx-auto">
               Whether you see a role that fits or want to start a conversation about future opportunities, 
               we'd love to hear from you.
             </p>
-            <p className="text-base text-white/80 mb-10 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-base text-muted-foreground mb-10 leading-relaxed max-w-2xl mx-auto">
               We're committed to building a diverse and inclusive team. If you're passionate about transforming 
               accounting with AI, we want to talk—regardless of your background or where you see yourself above.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 text-base px-8 py-6 h-auto font-semibold">
+              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6 h-auto font-semibold">
                 <Link to="/contact">Apply Now</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 text-base px-8 py-6 h-auto font-semibold">
+              <Button asChild size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary/10 text-base px-8 py-6 h-auto font-semibold">
                 <Link to="/about-us">Learn More About Gaapio</Link>
               </Button>
             </div>
-            <p className="text-sm text-white/80 max-w-2xl mx-auto">
-              <strong className="text-white">Equal Opportunity:</strong> Gaapio is an equal opportunity employer. We celebrate diversity 
+            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+              <strong className="text-foreground">Equal Opportunity:</strong> Gaapio is an equal opportunity employer. We celebrate diversity 
               and are committed to creating an inclusive environment for all employees.
             </p>
           </div>
