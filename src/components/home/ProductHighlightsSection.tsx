@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { FileText, FileCheck, Bell, FileSearch } from "lucide-react";
+import { FileText, FileCheck, Bell, FileSearch, Brain } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 
@@ -87,6 +87,19 @@ export function ProductHighlightsSection() {
       ],
       href: "/guidance-updates",
       icon: Bell,
+      iconColor: "#339CFF"
+    },
+    {
+      id: "research-gpt",
+      label: "RESEARCH/INTERNAL GPT",
+      title: "Your Firm's AI Research Assistant",
+      bulletPoints: [
+        "Search your firm's internal knowledge base with natural language",
+        "Get instant answers from your documents and resources",
+        "Contextual responses tailored to your firm's expertise"
+      ],
+      href: "/research-gpt",
+      icon: Brain,
       iconColor: "#339CFF"
     }
   ];

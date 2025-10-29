@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Logo } from "@/components/logo";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain } from "lucide-react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
@@ -35,6 +35,13 @@ const products = [
     icon: Bell,
     description: "Stay current with the latest accounting standards",
     features: ["Real-time notifications", "Impact analysis", "Implementation guidance"],
+  },
+  {
+    name: "Research/Internal GPT",
+    href: "/research-gpt",
+    icon: Brain,
+    description: "Your firm's AI-powered research assistant",
+    features: ["Internal knowledge base search", "Natural language queries", "Contextual answers from your firm's documents"],
   },
 ];
 
