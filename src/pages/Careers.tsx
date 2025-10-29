@@ -125,19 +125,34 @@ const jobListings: JobListing[] = [
 const JobCard = ({ job }: { job: JobListing }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const Icon = job.icon;
+  
+  // Department-specific styling
+  const departmentStyles = job.department === "Engineering" 
+    ? {
+        gradient: "from-blue-500/10 via-purple-500/10 to-blue-500/10",
+        iconBg: "bg-gradient-to-br from-blue-500 to-purple-600",
+        badgeBg: "bg-blue-500/20 text-blue-700 dark:text-blue-300 border-blue-500/30",
+        borderColor: "border-l-blue-500"
+      }
+    : {
+        gradient: "from-orange-500/10 via-pink-500/10 to-orange-500/10",
+        iconBg: "bg-gradient-to-br from-orange-500 to-pink-600",
+        badgeBg: "bg-orange-500/20 text-orange-700 dark:text-orange-300 border-orange-500/30",
+        borderColor: "border-l-orange-500"
+      };
 
   return (
-    <Card className="border-2 hover:border-primary/50 transition-all duration-300 animate-fade-in">
+    <Card className={`group border-l-4 ${departmentStyles.borderColor} bg-gradient-to-r ${departmentStyles.gradient} hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 animate-fade-in`}>
       <CardHeader>
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-primary/10 w-fit">
-              <Icon className="h-6 w-6 text-primary" />
+            <div className={`p-4 rounded-2xl ${departmentStyles.iconBg} w-fit shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+              <Icon className="h-8 w-8 text-white" />
             </div>
             <div>
-              <CardTitle className="text-xl mb-2">{job.title}</CardTitle>
-              <div className="flex flex-wrap gap-2 mb-2">
-                <Badge variant="secondary">{job.department}</Badge>
+              <CardTitle className="text-2xl mb-3 group-hover:text-primary transition-colors">{job.title}</CardTitle>
+              <div className="flex flex-wrap gap-2 mb-3">
+                <Badge className={`${departmentStyles.badgeBg} border`}>{job.department}</Badge>
                 <Badge variant="outline" className="gap-1">
                   <MapPin className="h-3 w-3" />
                   {job.location}
@@ -147,7 +162,7 @@ const JobCard = ({ job }: { job: JobListing }) => {
                   {job.type}
                 </Badge>
               </div>
-              <CardDescription className="text-base">{job.description}</CardDescription>
+              <CardDescription className="text-base leading-relaxed">{job.description}</CardDescription>
             </div>
           </div>
         </div>
@@ -156,14 +171,14 @@ const JobCard = ({ job }: { job: JobListing }) => {
       {isExpanded && (
         <CardContent className="pt-0 space-y-6 animate-accordion-down">
           <div>
-            <h4 className="font-semibold text-sm mb-3 flex items-center gap-2">
-              <Target className="h-4 w-4 text-primary" />
+            <h4 className="font-semibold text-base mb-4 flex items-center gap-2">
+              <Target className="h-5 w-5 text-primary" />
               Key Responsibilities
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {job.responsibilities.map((resp, idx) => (
-                <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                <li key={idx} className="text-sm text-muted-foreground flex items-start gap-3 pl-2">
+                  <span className="text-primary mt-1 text-lg">•</span>
                   <span>{resp}</span>
                 </li>
               ))}
@@ -171,14 +186,14 @@ const JobCard = ({ job }: { job: JobListing }) => {
           </div>
           
           <div>
-            <h4 className="font-semibold text-sm mb-3 flex items-center gap-2">
-              <Award className="h-4 w-4 text-primary" />
+            <h4 className="font-semibold text-base mb-4 flex items-center gap-2">
+              <Award className="h-5 w-5 text-primary" />
               What We're Looking For
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {job.qualifications.map((qual, idx) => (
-                <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                <li key={idx} className="text-sm text-muted-foreground flex items-start gap-3 pl-2">
+                  <span className="text-primary mt-1 text-lg">•</span>
                   <span>{qual}</span>
                 </li>
               ))}
@@ -186,7 +201,7 @@ const JobCard = ({ job }: { job: JobListing }) => {
           </div>
           
           <div className="pt-4">
-            <Button asChild className="w-full sm:w-auto">
+            <Button asChild className="w-full sm:w-auto shadow-lg hover:shadow-xl" size="lg">
               <Link to="/contact" state={{ role: job.title }}>
                 Apply for This Role
               </Link>
@@ -198,7 +213,7 @@ const JobCard = ({ job }: { job: JobListing }) => {
       <CardContent className="pt-0">
         <Button
           variant="ghost"
-          className="w-full justify-center gap-2"
+          className="w-full justify-center gap-2 hover:bg-primary/10"
           onClick={() => setIsExpanded(!isExpanded)}
         >
           {isExpanded ? (
@@ -274,98 +289,100 @@ const Careers = () => {
         </section>
 
         {/* Why Join Us Section */}
-        <section className="py-16 px-4">
+        <section className="py-20 px-4 bg-gradient-to-b from-background via-primary/5 to-background">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">Why Join Gaapio?</h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-primary via-purple-600 to-primary bg-clip-text text-transparent">
+              Why Join Gaapio?
+            </h2>
+            <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto text-lg">
               Be part of something bigger. Join a team that's revolutionizing how accountants work, 
               backed by real traction and fueled by purpose.
             </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-blue-500/10 via-background to-purple-500/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4">
-                    <Target className="h-6 w-6 text-primary" />
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/50">
+                    <Target className="h-7 w-7 text-white" />
                   </div>
-                  <CardTitle>Mission-Driven Work</CardTitle>
+                  <CardTitle className="text-xl">Mission-Driven Work</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base leading-relaxed">
                     Build tools that give accountants their time back and help them focus on strategic, 
                     meaningful work. Your code makes a real difference every day.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-green-500/10 via-background to-emerald-500/10 hover:border-green-500/50 hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4">
-                    <TrendingUp className="h-6 w-6 text-primary" />
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-green-500/50">
+                    <TrendingUp className="h-7 w-7 text-white" />
                   </div>
-                  <CardTitle>Rapid Growth</CardTitle>
+                  <CardTitle className="text-xl">Rapid Growth</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base leading-relaxed">
                     Join at the perfect inflection point—early enough to have massive impact on direction, 
                     established enough to have clear product-market fit and customer traction.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-purple-500/10 via-background to-pink-500/10 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4">
-                    <Zap className="h-6 w-6 text-primary" />
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-purple-500/50">
+                    <Zap className="h-7 w-7 text-white" />
                   </div>
-                  <CardTitle>Cutting-Edge Tech</CardTitle>
+                  <CardTitle className="text-xl">Cutting-Edge Tech</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base leading-relaxed">
                     Work with GPT-4, Claude, and the latest AI models. Modern stack including React, 
                     TypeScript, Supabase, and innovative AI integrations you won't find elsewhere.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-orange-500/10 via-background to-amber-500/10 hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4">
-                    <Heart className="h-6 w-6 text-primary" />
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-orange-500/50">
+                    <Heart className="h-7 w-7 text-white" />
                   </div>
-                  <CardTitle>True Flexibility</CardTitle>
+                  <CardTitle className="text-xl">True Flexibility</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base leading-relaxed">
                     Remote-first from day one. Work from anywhere with flexible hours. 
                     We measure results, not hours. Take time off when you need it—unlimited PTO.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-cyan-500/10 via-background to-teal-500/10 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4">
-                    <Coffee className="h-6 w-6 text-primary" />
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-cyan-500 to-teal-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-cyan-500/50">
+                    <Coffee className="h-7 w-7 text-white" />
                   </div>
-                  <CardTitle>Growth & Learning</CardTitle>
+                  <CardTitle className="text-xl">Growth & Learning</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base leading-relaxed">
                     Professional development budget for courses, conferences, and books. 
                     Work directly with founders. Learn from experts in both accounting and engineering.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-rose-500/10 via-background to-red-500/10 hover:border-rose-500/50 hover:shadow-2xl hover:shadow-rose-500/20 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4">
-                    <Rocket className="h-6 w-6 text-primary" />
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-rose-500 to-red-600 w-fit mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-rose-500/50">
+                    <Rocket className="h-7 w-7 text-white" />
                   </div>
-                  <CardTitle>Ownership & Impact</CardTitle>
+                  <CardTitle className="text-xl">Ownership & Impact</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base leading-relaxed">
                     Your work directly shapes the product. No layers of bureaucracy. 
                     Ship features that reach thousands of users. Plus equity—you'll own part of what we build.
                   </CardDescription>
@@ -376,106 +393,108 @@ const Careers = () => {
         </section>
         
         {/* Perks & Benefits Section */}
-        <section className="py-16 px-4 bg-secondary/20">
+        <section className="py-20 px-4 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-orange-500/5">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">Perks & Benefits</h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
+              Perks & Benefits
+            </h2>
+            <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto text-lg">
               We take care of our team so you can focus on doing your best work
             </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Card className="border hover:border-primary/50 transition-all">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-green-500/5 to-emerald-500/10 hover:border-green-500/50 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-2 rounded-lg bg-primary/10 w-fit mb-2">
-                    <DollarSign className="h-5 w-5 text-primary" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                    <DollarSign className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Competitive Salary + Equity</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>Top of market compensation with meaningful equity ownership</CardDescription>
+                  <CardDescription className="leading-relaxed">Top of market compensation with meaningful equity ownership</CardDescription>
                 </CardContent>
               </Card>
               
-              <Card className="border hover:border-primary/50 transition-all">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-blue-500/5 to-cyan-500/10 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-2 rounded-lg bg-primary/10 w-fit mb-2">
-                    <Shield className="h-5 w-5 text-primary" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                    <Shield className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Health Benefits</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>Premium health, dental, and vision insurance for you and your family</CardDescription>
+                  <CardDescription className="leading-relaxed">Premium health, dental, and vision insurance for you and your family</CardDescription>
                 </CardContent>
               </Card>
               
-              <Card className="border hover:border-primary/50 transition-all">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-pink-500/5 to-rose-500/10 hover:border-pink-500/50 hover:shadow-xl hover:shadow-pink-500/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-2 rounded-lg bg-primary/10 w-fit mb-2">
-                    <Heart className="h-5 w-5 text-primary" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                    <Heart className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Unlimited PTO</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>Take the time you need to recharge. We trust you to manage your time</CardDescription>
+                  <CardDescription className="leading-relaxed">Take the time you need to recharge. We trust you to manage your time</CardDescription>
                 </CardContent>
               </Card>
               
-              <Card className="border hover:border-primary/50 transition-all">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-purple-500/5 to-indigo-500/10 hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-2 rounded-lg bg-primary/10 w-fit mb-2">
-                    <Building className="h-5 w-5 text-primary" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                    <Building className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Home Office Stipend</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>Budget to create your perfect remote workspace</CardDescription>
+                  <CardDescription className="leading-relaxed">Budget to create your perfect remote workspace</CardDescription>
                 </CardContent>
               </Card>
               
-              <Card className="border hover:border-primary/50 transition-all">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-orange-500/5 to-amber-500/10 hover:border-orange-500/50 hover:shadow-xl hover:shadow-orange-500/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-2 rounded-lg bg-primary/10 w-fit mb-2">
-                    <TrendingUp className="h-5 w-5 text-primary" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                    <TrendingUp className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">401(k) Matching</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>We match your retirement contributions to help secure your future</CardDescription>
+                  <CardDescription className="leading-relaxed">We match your retirement contributions to help secure your future</CardDescription>
                 </CardContent>
               </Card>
               
-              <Card className="border hover:border-primary/50 transition-all">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-teal-500/5 to-cyan-500/10 hover:border-teal-500/50 hover:shadow-xl hover:shadow-teal-500/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-2 rounded-lg bg-primary/10 w-fit mb-2">
-                    <Coffee className="h-5 w-5 text-primary" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                    <Coffee className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Learning Budget</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>Annual budget for courses, conferences, books, and professional growth</CardDescription>
+                  <CardDescription className="leading-relaxed">Annual budget for courses, conferences, books, and professional growth</CardDescription>
                 </CardContent>
               </Card>
               
-              <Card className="border hover:border-primary/50 transition-all">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-yellow-500/5 to-orange-500/10 hover:border-yellow-500/50 hover:shadow-xl hover:shadow-yellow-500/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-2 rounded-lg bg-primary/10 w-fit mb-2">
-                    <Zap className="h-5 w-5 text-primary" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                    <Zap className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Latest Tools</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>Access to premium software, tools, and AI services you need to excel</CardDescription>
+                  <CardDescription className="leading-relaxed">Access to premium software, tools, and AI services you need to excel</CardDescription>
                 </CardContent>
               </Card>
               
-              <Card className="border hover:border-primary/50 transition-all">
+              <Card className="group border-2 border-transparent bg-gradient-to-br from-red-500/5 to-pink-500/10 hover:border-red-500/50 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="p-2 rounded-lg bg-primary/10 w-fit mb-2">
-                    <Users className="h-5 w-5 text-primary" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-pink-600 w-fit mb-3 group-hover:rotate-6 transition-transform shadow-md">
+                    <Users className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">Team Retreats</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>Annual in-person gatherings to connect, collaborate, and celebrate</CardDescription>
+                  <CardDescription className="leading-relaxed">Annual in-person gatherings to connect, collaborate, and celebrate</CardDescription>
                 </CardContent>
               </Card>
             </div>
@@ -483,60 +502,97 @@ const Careers = () => {
         </section>
 
         {/* Our Values Section */}
-        <section className="py-16 px-4">
+        <section className="py-20 px-4 bg-gradient-to-b from-background via-blue-500/5 to-background">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">Our Values</h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Our Values
+            </h2>
+            <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto text-lg">
               These principles guide how we work, make decisions, and treat each other
             </p>
-            <div className="space-y-4">
-              <Card className="border-l-4 border-l-primary">
+            <div className="space-y-6">
+              <Card className="group border-l-[6px] border-l-blue-500 bg-gradient-to-r from-blue-500/5 to-transparent hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader>
-                  <CardTitle className="text-lg">🎯 Customer Obsession</CardTitle>
-                  <CardDescription className="text-base">
-                    Every feature, every decision starts with understanding accountants' pain points. 
-                    We don't build what's easy—we build what matters.
-                  </CardDescription>
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg group-hover:rotate-12 transition-transform">
+                      <Target className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl mb-2">Customer Obsession</CardTitle>
+                      <CardDescription className="text-base leading-relaxed">
+                        Every feature, every decision starts with understanding accountants' pain points. 
+                        We don't build what's easy—we build what matters.
+                      </CardDescription>
+                    </div>
+                  </div>
                 </CardHeader>
               </Card>
               
-              <Card className="border-l-4 border-l-primary">
+              <Card className="group border-l-[6px] border-l-purple-500 bg-gradient-to-r from-purple-500/5 to-transparent hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader>
-                  <CardTitle className="text-lg">🚀 Bias for Action</CardTitle>
-                  <CardDescription className="text-base">
-                    Speed matters. We make decisions quickly, ship iteratively, and learn from real users. 
-                    Perfect is the enemy of done.
-                  </CardDescription>
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg group-hover:rotate-12 transition-transform">
+                      <Rocket className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl mb-2">Bias for Action</CardTitle>
+                      <CardDescription className="text-base leading-relaxed">
+                        Speed matters. We make decisions quickly, ship iteratively, and learn from real users. 
+                        Perfect is the enemy of done.
+                      </CardDescription>
+                    </div>
+                  </div>
                 </CardHeader>
               </Card>
               
-              <Card className="border-l-4 border-l-primary">
+              <Card className="group border-l-[6px] border-l-orange-500 bg-gradient-to-r from-orange-500/5 to-transparent hover:shadow-xl hover:shadow-orange-500/10 transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader>
-                  <CardTitle className="text-lg">💡 Intellectual Curiosity</CardTitle>
-                  <CardDescription className="text-base">
-                    We ask "why?" constantly. We dive deep into problems, explore new technologies, 
-                    and always look for better ways to do things.
-                  </CardDescription>
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg group-hover:rotate-12 transition-transform">
+                      <Zap className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl mb-2">Intellectual Curiosity</CardTitle>
+                      <CardDescription className="text-base leading-relaxed">
+                        We ask "why?" constantly. We dive deep into problems, explore new technologies, 
+                        and always look for better ways to do things.
+                      </CardDescription>
+                    </div>
+                  </div>
                 </CardHeader>
               </Card>
               
-              <Card className="border-l-4 border-l-primary">
+              <Card className="group border-l-[6px] border-l-green-500 bg-gradient-to-r from-green-500/5 to-transparent hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader>
-                  <CardTitle className="text-lg">🤝 Radical Transparency</CardTitle>
-                  <CardDescription className="text-base">
-                    Open communication, honest feedback, and shared context. We trust our team with the full picture—
-                    financials, strategy, challenges, and wins.
-                  </CardDescription>
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg group-hover:rotate-12 transition-transform">
+                      <Users className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl mb-2">Radical Transparency</CardTitle>
+                      <CardDescription className="text-base leading-relaxed">
+                        Open communication, honest feedback, and shared context. We trust our team with the full picture—
+                        financials, strategy, challenges, and wins.
+                      </CardDescription>
+                    </div>
+                  </div>
                 </CardHeader>
               </Card>
               
-              <Card className="border-l-4 border-l-primary">
+              <Card className="group border-l-[6px] border-l-teal-500 bg-gradient-to-r from-teal-500/5 to-transparent hover:shadow-xl hover:shadow-teal-500/10 transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader>
-                  <CardTitle className="text-lg">🌱 Sustainable Excellence</CardTitle>
-                  <CardDescription className="text-base">
-                    We're here for the long game. High performance shouldn't mean burnout. 
-                    We build a pace we can maintain while delivering exceptional results.
-                  </CardDescription>
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg group-hover:rotate-12 transition-transform">
+                      <Heart className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl mb-2">Sustainable Excellence</CardTitle>
+                      <CardDescription className="text-base leading-relaxed">
+                        We're here for the long game. High performance shouldn't mean burnout. 
+                        We build a pace we can maintain while delivering exceptional results.
+                      </CardDescription>
+                    </div>
+                  </div>
                 </CardHeader>
               </Card>
             </div>
@@ -544,77 +600,38 @@ const Careers = () => {
         </section>
 
         
-        {/* What to Expect Section */}
-        <section className="py-16 px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">What to Expect</h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Our hiring process is designed to be respectful of your time while ensuring mutual fit
-            </p>
-            <div className="grid md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-xl font-bold text-primary">1</span>
-                </div>
-                <h3 className="font-semibold mb-2">Apply</h3>
-                <p className="text-sm text-muted-foreground">Submit your application and tell us why you're excited about Gaapio</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-xl font-bold text-primary">2</span>
-                </div>
-                <h3 className="font-semibold mb-2">Initial Chat</h3>
-                <p className="text-sm text-muted-foreground">30-minute conversation to learn about each other</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-xl font-bold text-primary">3</span>
-                </div>
-                <h3 className="font-semibold mb-2">Deep Dive</h3>
-                <p className="text-sm text-muted-foreground">Technical interview or case study relevant to the role</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-xl font-bold text-primary">4</span>
-                </div>
-                <h3 className="font-semibold mb-2">Team Meet</h3>
-                <p className="text-sm text-muted-foreground">Chat with team members and founders to ensure cultural fit</p>
-              </div>
-            </div>
-            <p className="text-center text-sm text-muted-foreground mt-8">
-              Timeline: We aim to complete the process in 1-2 weeks and provide feedback at every stage
-            </p>
-          </div>
-        </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 bg-gradient-to-b from-primary/5 to-background">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
-              <Mail className="h-8 w-8 text-primary" />
+        <section className="py-24 px-4 bg-gradient-to-br from-primary/10 via-purple-500/10 to-pink-500/10 relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 left-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+          
+          <div className="max-w-3xl mx-auto text-center relative z-10">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-purple-600 mb-8 shadow-2xl shadow-primary/50 animate-pulse">
+              <Mail className="h-10 w-10 text-white" />
             </div>
-            <h2 className="text-3xl font-bold mb-6">Ready to Make an Impact?</h2>
-            <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Ready to Make an Impact?
+            </h2>
+            <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
               Whether you see a role that fits or want to start a conversation about future opportunities, 
               we'd love to hear from you.
             </p>
-            <p className="text-base text-muted-foreground mb-8">
+            <p className="text-base text-muted-foreground mb-10 leading-relaxed">
               We're committed to building a diverse and inclusive team. If you're passionate about transforming 
               accounting with AI, we want to talk—regardless of your background or where you see yourself above.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="text-lg px-8">
+              <Button asChild size="lg" className="text-lg px-10 py-6 shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40">
                 <Link to="/contact">Apply Now</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="text-lg px-8">
+              <Button asChild size="lg" variant="outline" className="text-lg px-10 py-6 border-2 hover:bg-primary/10">
                 <Link to="/about-us">Learn More About Gaapio</Link>
               </Button>
             </div>
-            <p className="text-sm text-muted-foreground mt-8">
-              <strong>Equal Opportunity:</strong> Gaapio is an equal opportunity employer. We celebrate diversity 
+            <p className="text-sm text-muted-foreground mt-10 px-4">
+              <strong className="text-foreground">Equal Opportunity:</strong> Gaapio is an equal opportunity employer. We celebrate diversity 
               and are committed to creating an inclusive environment for all employees.
             </p>
           </div>
