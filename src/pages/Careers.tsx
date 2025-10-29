@@ -238,7 +238,7 @@ const Careers = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative min-h-[70vh] flex items-center pt-32 pb-20 overflow-hidden">
+        <section className="relative min-h-[46vh] flex items-center pt-20 pb-12 overflow-hidden">
           {/* Gradient Background */}
           <GradientBackground />
           
