@@ -34,19 +34,6 @@ export function ProductHighlightsSection() {
 
   const products = [
     {
-      id: "research-gpt",
-      label: "Accounting Research",
-      title: "Your Firm's AI Research Assistant",
-      bulletPoints: [
-        "Search your firm's internal knowledge base with natural language",
-        "Get instant answers from your documents and resources",
-        "Contextual responses tailored to your firm's expertise"
-      ],
-      href: "/research-gpt",
-      icon: Brain,
-      iconColor: "#339CFF"
-    },
-    {
       id: "memos",
       label: "MEMOS",
       title: "Better Memos, Faster.",
@@ -83,6 +70,19 @@ export function ProductHighlightsSection() {
       ],
       href: "/contract-analysis",
       icon: FileSearch,
+      iconColor: "#339CFF"
+    },
+    {
+      id: "research-gpt",
+      label: "Accounting Research",
+      title: "Your Firm's AI Research Assistant",
+      bulletPoints: [
+        "Search your firm's internal knowledge base with natural language",
+        "Get instant answers from your documents and resources",
+        "Contextual responses tailored to your firm's expertise"
+      ],
+      href: "/research-gpt",
+      icon: Brain,
       iconColor: "#339CFF"
     },
     {
@@ -142,7 +142,7 @@ export function ProductHighlightsSection() {
               : "opacity-0 translate-y-[30px]"
           )}
         >
-          <Tabs defaultValue="research-gpt" className="w-full">
+          <Tabs defaultValue="memos" className="w-full">
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Left side - Tab buttons */}
               <div className="lg:w-1/3">
