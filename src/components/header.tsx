@@ -149,44 +149,94 @@ export function Header() {
                 </NavigationMenuTrigger>
                   <NavigationMenuContent className="!w-screen z-[100]">
                     <div className="w-full px-4 py-6">
-                      <div className="max-w-5xl mx-auto">
-                         <div className="rounded-xl border border-blue-200 dark:border-blue-700 shadow-2xl bg-gradient-to-br from-gray-100 via-blue-50 to-gray-100 dark:from-gray-800 dark:via-blue-900/20 dark:to-gray-800 overflow-hidden">
-                            <div className="p-8">
-                              <h3 className="text-xs font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider flex items-center gap-2">
-                                <div className="h-1 w-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
-                                Our Products
-                              </h3>
-                              
-                              {/* Two Column Grid - 3 products each side */}
-                              <div className="grid grid-cols-2 gap-6">
-                                {products.map((product) => (
-                                  <NavigationMenuLink key={product.name} asChild>
-                                    <Link
-                                      to={product.href}
-                                      className={cn(
-                                        "flex items-start gap-4 p-4 rounded-xl transition-all group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm",
-                                        "hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100/50 dark:hover:from-blue-900/30 dark:hover:to-blue-800/20",
-                                        "hover:shadow-lg hover:shadow-[#339CFF]/20 hover:border-[#339CFF]/30 dark:hover:border-[#339CFF]/50",
-                                        "border border-gray-200 dark:border-gray-700"
-                                      )}
-                                    >
-                                      <div className="p-2.5 rounded-xl bg-[#339CFF] shadow-md group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#339CFF]/50 transition-all">
-                                        <product.icon className="h-5 w-5 text-white" />
-                                      </div>
-                                      <div className="flex-1 min-w-0">
-                                        <div className="font-semibold text-gray-900 dark:text-white transition-colors mb-1 leading-tight">
+                      <div className="max-w-6xl mx-auto">
+                         <div className="rounded-2xl shadow-2xl bg-white dark:bg-gray-900 overflow-hidden border border-gray-200 dark:border-gray-800">
+                            <div className="grid grid-cols-[400px_1fr] gap-0">
+                              {/* Left Column - Product List */}
+                              <div className="bg-gray-50 dark:bg-gray-800/50 p-6 border-r border-gray-200 dark:border-gray-700">
+                                <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wider px-3">
+                                  Our Products
+                                </h3>
+                                <div className="space-y-1">
+                                  {products.map((product) => (
+                                    <NavigationMenuLink key={product.name} asChild>
+                                      <Link
+                                        to={product.href}
+                                        onMouseEnter={() => setHoveredProduct(product)}
+                                        className={cn(
+                                          "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
+                                          hoveredProduct.name === product.name 
+                                            ? "bg-blue-100 dark:bg-blue-900/30" 
+                                            : "hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                                        )}
+                                      >
+                                        <div className={cn(
+                                          "p-1.5 rounded-md transition-colors flex-shrink-0",
+                                          hoveredProduct.name === product.name
+                                            ? "bg-[#339CFF] text-white"
+                                            : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                                        )}>
+                                          <product.icon className="h-4 w-4" />
+                                        </div>
+                                        <span className={cn(
+                                          "font-medium text-sm transition-colors",
+                                          hoveredProduct.name === product.name
+                                            ? "text-gray-900 dark:text-white"
+                                            : "text-gray-700 dark:text-gray-300"
+                                        )}>
                                           {product.name}
-                                        </div>
-                                        <div className="text-xs text-gray-600 dark:text-gray-400 leading-snug">
-                                          {product.description}
-                                        </div>
-                                      </div>
-                                      <ChevronRight className="h-4 w-4 text-[#339CFF] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all flex-shrink-0" />
-                                    </Link>
-                                  </NavigationMenuLink>
-                                ))}
+                                        </span>
+                                        <ChevronRight className={cn(
+                                          "h-4 w-4 ml-auto transition-all",
+                                          hoveredProduct.name === product.name
+                                            ? "text-[#339CFF] opacity-100"
+                                            : "text-gray-400 opacity-0 group-hover:opacity-100"
+                                        )} />
+                                      </Link>
+                                    </NavigationMenuLink>
+                                  ))}
+                                </div>
                               </div>
-                          </div>
+
+                              {/* Right Column - Product Details */}
+                              <div className="p-8 bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-900/10 dark:to-transparent">
+                                <div className="flex items-start gap-4 mb-6">
+                                  <div className="p-3 rounded-xl bg-[#339CFF] shadow-lg">
+                                    <hoveredProduct.icon className="h-7 w-7 text-white" />
+                                  </div>
+                                  <div>
+                                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                                      {hoveredProduct.name}
+                                    </h3>
+                                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                      {hoveredProduct.description}
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div className="space-y-3 mb-6">
+                                  <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                    Key Features
+                                  </h4>
+                                  {hoveredProduct.features.map((feature, idx) => (
+                                    <div key={idx} className="flex items-start gap-3">
+                                      <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#339CFF] flex-shrink-0" />
+                                      <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                        {feature}
+                                      </span>
+                                    </div>
+                                  ))}
+                                </div>
+
+                                <Link
+                                  to={hoveredProduct.href}
+                                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#339CFF] hover:gap-3 transition-all group"
+                                >
+                                  Learn more
+                                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                              </div>
+                            </div>
                         </div>
                       </div>
                     </div>
@@ -201,69 +251,108 @@ export function Header() {
                   <NavigationMenuContent className="!w-screen z-[100]">
                     <div className="w-full px-4 py-6">
                       <div className="max-w-5xl mx-auto">
-                        <div className="rounded-xl border border-blue-200 dark:border-blue-700 shadow-2xl bg-gradient-to-br from-gray-100 via-blue-50 to-gray-100 dark:from-gray-800 dark:via-blue-900/20 dark:to-gray-800 overflow-hidden">
-                          <div className="p-8">
-                            <h3 className="text-xs font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider flex items-center gap-2">
-                              <div className="h-1 w-10 bg-gradient-to-r from-[#339CFF] to-blue-600 rounded-full"></div>
-                              Company
-                            </h3>
-                            
-                            {/* Two Column Grid - 2 items on each side */}
-                            <div className="grid grid-cols-2 gap-6">
-                              {companyPages.map((page) => (
-                                page.external ? (
-                                  <a
-                                    key={page.name}
-                                    href={page.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={cn(
-                                      "flex items-start gap-4 p-4 rounded-xl transition-all group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm",
-                                      "hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100/50 dark:hover:from-blue-900/30 dark:hover:to-blue-800/20",
-                                      "hover:shadow-lg hover:shadow-[#339CFF]/20 hover:border-[#339CFF]/30 dark:hover:border-[#339CFF]/50",
-                                      "border border-gray-200 dark:border-gray-700"
-                                    )}
-                                  >
-                                    <div className="p-2.5 rounded-xl bg-[#339CFF] shadow-md group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#339CFF]/50 transition-all">
-                                      <page.icon className="h-5 w-5 text-white" />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                      <div className="font-semibold text-gray-900 dark:text-white transition-colors mb-1 leading-tight">
-                                        {page.name}
-                                      </div>
-                                      <div className="text-xs text-gray-600 dark:text-gray-400 leading-snug">
-                                        {page.description}
-                                      </div>
-                                    </div>
-                                    <ChevronRight className="h-4 w-4 text-[#339CFF] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all flex-shrink-0" />
-                                  </a>
-                                ) : (
-                                  <NavigationMenuLink key={page.name} asChild>
-                                    <Link
-                                      to={page.href}
+                        <div className="rounded-2xl shadow-2xl bg-white dark:bg-gray-900 overflow-hidden border border-gray-200 dark:border-gray-800">
+                          <div className="grid grid-cols-[320px_1fr] gap-0">
+                            {/* Left Column - Company Pages */}
+                            <div className="bg-gray-50 dark:bg-gray-800/50 p-6 border-r border-gray-200 dark:border-gray-700">
+                              <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wider px-3">
+                                Company
+                              </h3>
+                              <div className="space-y-1">
+                                {companyPages.map((page) => (
+                                  page.external ? (
+                                    <a
+                                      key={page.name}
+                                      href={page.href}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      onMouseEnter={() => setHoveredCompanyPage(page)}
                                       className={cn(
-                                        "flex items-start gap-4 p-4 rounded-xl transition-all group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm",
-                                        "hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100/50 dark:hover:from-blue-900/30 dark:hover:to-blue-800/20",
-                                        "hover:shadow-lg hover:shadow-[#339CFF]/20 hover:border-[#339CFF]/30 dark:hover:border-[#339CFF]/50",
-                                        "border border-gray-200 dark:border-gray-700"
+                                        "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
+                                        hoveredCompanyPage.name === page.name 
+                                          ? "bg-blue-100 dark:bg-blue-900/30" 
+                                          : "hover:bg-gray-100 dark:hover:bg-gray-700/50"
                                       )}
                                     >
-                                      <div className="p-2.5 rounded-xl bg-[#339CFF] shadow-md group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#339CFF]/50 transition-all">
-                                        <page.icon className="h-5 w-5 text-white" />
+                                      <div className={cn(
+                                        "p-1.5 rounded-md transition-colors flex-shrink-0",
+                                        hoveredCompanyPage.name === page.name
+                                          ? "bg-[#339CFF] text-white"
+                                          : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                                      )}>
+                                        <page.icon className="h-4 w-4" />
                                       </div>
-                                      <div className="flex-1 min-w-0">
-                                        <div className="font-semibold text-gray-900 dark:text-white transition-colors mb-1 leading-tight">
+                                      <span className={cn(
+                                        "font-medium text-sm transition-colors",
+                                        hoveredCompanyPage.name === page.name
+                                          ? "text-gray-900 dark:text-white"
+                                          : "text-gray-700 dark:text-gray-300"
+                                      )}>
+                                        {page.name}
+                                      </span>
+                                      <ChevronRight className={cn(
+                                        "h-4 w-4 ml-auto transition-all",
+                                        hoveredCompanyPage.name === page.name
+                                          ? "text-[#339CFF] opacity-100"
+                                          : "text-gray-400 opacity-0 group-hover:opacity-100"
+                                      )} />
+                                    </a>
+                                  ) : (
+                                    <NavigationMenuLink key={page.name} asChild>
+                                      <Link
+                                        to={page.href}
+                                        onMouseEnter={() => setHoveredCompanyPage(page)}
+                                        className={cn(
+                                          "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
+                                          hoveredCompanyPage.name === page.name 
+                                            ? "bg-blue-100 dark:bg-blue-900/30" 
+                                            : "hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                                        )}
+                                      >
+                                        <div className={cn(
+                                          "p-1.5 rounded-md transition-colors flex-shrink-0",
+                                          hoveredCompanyPage.name === page.name
+                                            ? "bg-[#339CFF] text-white"
+                                            : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                                        )}>
+                                          <page.icon className="h-4 w-4" />
+                                        </div>
+                                        <span className={cn(
+                                          "font-medium text-sm transition-colors",
+                                          hoveredCompanyPage.name === page.name
+                                            ? "text-gray-900 dark:text-white"
+                                            : "text-gray-700 dark:text-gray-300"
+                                        )}>
                                           {page.name}
-                                        </div>
-                                        <div className="text-xs text-gray-600 dark:text-gray-400 leading-snug">
-                                          {page.description}
-                                        </div>
-                                      </div>
-                                      <ChevronRight className="h-4 w-4 text-[#339CFF] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all flex-shrink-0" />
-                                    </Link>
-                                  </NavigationMenuLink>
-                                )
-                              ))}
+                                        </span>
+                                        <ChevronRight className={cn(
+                                          "h-4 w-4 ml-auto transition-all",
+                                          hoveredCompanyPage.name === page.name
+                                            ? "text-[#339CFF] opacity-100"
+                                            : "text-gray-400 opacity-0 group-hover:opacity-100"
+                                        )} />
+                                      </Link>
+                                    </NavigationMenuLink>
+                                  )
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Right Column - Company Page Details */}
+                            <div className="p-8 bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-900/10 dark:to-transparent">
+                              <div className="flex items-start gap-4">
+                                <div className="p-3 rounded-xl bg-[#339CFF] shadow-lg">
+                                  <hoveredCompanyPage.icon className="h-7 w-7 text-white" />
+                                </div>
+                                <div>
+                                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                                    {hoveredCompanyPage.name}
+                                  </h3>
+                                  <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                    {hoveredCompanyPage.description}
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
