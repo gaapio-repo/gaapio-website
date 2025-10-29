@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
+import teamPhoto from "@/assets/team-photo.jpg";
 
 export default function AboutUs() {
   // Section refs for scroll animations
@@ -207,8 +208,8 @@ export default function AboutUs() {
                 >
                   <div className="relative">
                     <img 
-                      src="/lovable-uploads/e263b9d6-518b-411f-be9f-c36067fd9ad1.png" 
-                      alt="Two CPA accountants working together" 
+                      src={teamPhoto} 
+                      alt="Gaapio founders - two CPAs committed to improving accounting technology" 
                       className="rounded-lg shadow-lg max-w-full h-auto z-10 relative"
                       width="600"
                       height="400"
