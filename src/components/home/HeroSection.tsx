@@ -48,7 +48,7 @@ export const HeroSection = memo(function HeroSection({
   const secondPart = titleParts.slice(2).join(" "); // "Memos. Faster."
 
   return (
-    <section className="relative min-h-[90vh] md:min-h-[85vh] flex items-center pt-32 pb-16 overflow-hidden">
+    <section className="relative min-h-[90vh] md:min-h-[85vh] flex items-center pt-32 pb-16 overflow-x-hidden">
       {/* Gradient Background */}
       <GradientBackground />
       
