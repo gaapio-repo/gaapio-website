@@ -75,7 +75,7 @@ export function ProductHighlightsSection() {
     },
     {
       id: "research-gpt",
-      label: "Accounting Research",
+      label: "ACCOUNTING RESEARCH",
       title: "Your Firm's AI Research Assistant",
       bulletPoints: [
         "Search your firm's internal knowledge base with natural language",
