@@ -6,6 +6,7 @@ import { Briefcase, Users, Heart, Zap, TrendingUp, Coffee, Mail, Code, DollarSig
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { GradientBackground } from "@/components/home/GradientBackground";
 
 interface JobListing {
   id: string;
@@ -217,39 +218,57 @@ const JobCard = ({ job }: { job: JobListing }) => {
 
 const Careers = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/20">
+    <div className="min-h-screen flex flex-col">
       <Header />
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="py-20 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6 animate-fade-in">
-              <Rocket className="h-4 w-4" />
-              <span className="text-sm font-medium">We're Hiring!</span>
+        <section className="relative min-h-[70vh] flex items-center pt-32 pb-20 overflow-hidden">
+          {/* Gradient Background */}
+          <GradientBackground />
+          
+          {/* Content */}
+          <div className="container px-4 md:px-6 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-6 animate-fade-in">
+                <Rocket className="h-4 w-4" />
+                <span className="text-sm font-medium">We're Hiring!</span>
+              </div>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white animate-fade-in leading-[1.1]">
+                Build the Future of{" "}
+                <span className="block mt-2">Accounting with AI</span>
+              </h1>
+              <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed mb-8 animate-fade-in max-w-3xl mx-auto" style={{ animationDelay: "100ms" }}>
+                Join a team of accountants and engineers transforming a trillion-dollar industry. 
+                We're combining cutting-edge AI with deep accounting expertise to give professionals their time back.
+              </p>
+              
+              {/* Stats Bar */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12 max-w-xl mx-auto animate-fade-in" style={{ animationDelay: "200ms" }}>
+                <div className="text-center p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+                  <div className="text-3xl font-bold text-white mb-1">Remote-First</div>
+                  <div className="text-sm text-white/80">Work From Anywhere</div>
+                </div>
+                <div className="text-center p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+                  <div className="text-3xl font-bold text-white mb-1">AI-Powered</div>
+                  <div className="text-sm text-white/80">Latest Technology</div>
+                </div>
+              </div>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-fade-in">
-              Build the Future of Accounting with AI
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed mb-8 animate-fade-in">
-              Join a team of accountants and engineers transforming a trillion-dollar industry. 
-              We're combining cutting-edge AI with deep accounting expertise to give professionals their time back.
+          </div>
+        </section>
+        
+        {/* Open Positions Section - MOVED TO SECOND */}
+        <section className="py-16 px-4 bg-background">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-4">Open Positions</h2>
+            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+              We're actively hiring across engineering and sales. Join us in building the future of accounting.
             </p>
-            
-            {/* Stats Bar */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 max-w-2xl mx-auto animate-fade-in">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">50+</div>
-                <div className="text-sm text-muted-foreground">Companies Trust Us</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">Remote-First</div>
-                <div className="text-sm text-muted-foreground">Work From Anywhere</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">AI-Powered</div>
-                <div className="text-sm text-muted-foreground">Latest Technology</div>
-              </div>
+            <div className="space-y-4">
+              {jobListings.map((job) => (
+                <JobCard key={job.id} job={job} />
+              ))}
             </div>
           </div>
         </section>
@@ -524,20 +543,6 @@ const Careers = () => {
           </div>
         </section>
 
-        {/* Open Positions Section */}
-        <section className="py-16 px-4 bg-secondary/30">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">Open Positions</h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              We're actively hiring across engineering and sales. Join us in building the future of accounting.
-            </p>
-            <div className="space-y-4">
-              {jobListings.map((job) => (
-                <JobCard key={job.id} job={job} />
-              ))}
-            </div>
-          </div>
-        </section>
         
         {/* What to Expect Section */}
         <section className="py-16 px-4">
