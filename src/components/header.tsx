@@ -143,14 +143,13 @@ export function Header() {
               <NavigationMenuList className="flex items-center space-x-4">
                 {/* Products Mega Menu */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger
-                  className="text-gray-700 dark:text-gray-200 text-base font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white"
-                >
-                  Products
-                </NavigationMenuTrigger>
-                  <NavigationMenuContent className="!w-screen z-[100]">
-                    <div className="w-full px-4 py-6">
-                      <div className="max-w-6xl mx-auto">
+                  <NavigationMenuTrigger
+                    className="text-gray-700 dark:text-gray-200 text-base font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white"
+                  >
+                    Products
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="z-[100]">
+                    <div className="p-6">
                          <div className="rounded-2xl shadow-2xl bg-white dark:bg-gray-900 overflow-hidden border border-gray-200 dark:border-gray-800">
                             <div className="grid grid-cols-[400px_1fr] gap-0">
                               {/* Left Column - Product List */}
@@ -236,12 +235,11 @@ export function Header() {
                                   Learn more
                                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                                 </Link>
-                              </div>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </NavigationMenuContent>
+                               </div>
+                             </div>
+                         </div>
+                     </div>
+                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
                 {/* Company Mega Menu */}
@@ -250,8 +248,7 @@ export function Header() {
                     Company
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-[100]">
-                    <div className="w-full px-4 py-6">
-                      <div className="max-w-2xl mx-auto">
+                    <div className="p-6">
                         <div className="rounded-2xl shadow-2xl bg-gray-50 dark:bg-gray-800/50 overflow-hidden border border-gray-200 dark:border-gray-800 min-h-[400px]">
                           <div className="p-6">
                             <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-5 uppercase tracking-wider px-3">
@@ -326,12 +323,11 @@ export function Header() {
                                   </NavigationMenuLink>
                                 )
                               ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </NavigationMenuContent>
+                             </div>
+                           </div>
+                         </div>
+                     </div>
+                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
