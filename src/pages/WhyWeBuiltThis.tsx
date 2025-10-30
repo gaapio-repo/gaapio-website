@@ -33,13 +33,6 @@ const WhyWeBuiltThis = () => {
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                 Before AI, before software, there was the puzzle. Accounting has always been this beautiful mix of structure and judgment—the rules are clear, but the real skill lies in interpreting and applying them. We didn&apos;t get into accounting because it was easy; we got into it because it was complex. There&apos;s a quiet satisfaction in getting it right—not just balancing debits and credits, but understanding the reasoning behind the standard.
               </p>
-            </section>
-
-            {/* Navigating the Waves of Change */}
-            <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
-                Navigating the Waves of Change
-              </h2>
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                 Over the years, we worked through the release of multiple new accounting standards—ASC 815, ASC 606, and ASC 842. Each one reshaped the profession and left a lasting mark on how we think about financial reporting. We reviewed exposure drafts, tuned in to FASB board meetings, and spent months—sometimes years—navigating adoption projects. These standards demanded deep analysis, careful documentation, and relentless collaboration. The work was rigorous, rewarding, and exhausting. We helped hundreds of companies work through changes in hedge accounting and lease accounting. We saw firsthand how easy it was to get things wrong—even with an auditor&apos;s sign-off.
               </p>
