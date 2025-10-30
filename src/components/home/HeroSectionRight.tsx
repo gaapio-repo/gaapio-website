@@ -19,6 +19,10 @@ export const HeroSection = memo(function HeroSection({
   const isLargeScreen = useMediaQuery('lg');
   
   useEffect(() => {
+    console.log('Hero: isLargeScreen =', isLargeScreen, 'window.innerWidth =', window.innerWidth);
+  }, [isLargeScreen]);
+  
+  useEffect(() => {
     setIsClient(true);
     
     // Load the self-signup setting
