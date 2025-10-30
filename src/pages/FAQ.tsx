@@ -179,18 +179,22 @@ export default function FAQ() {
 </AccordionItem>
               </Accordion>
             </div>
-            
-            <div className="mt-12 text-center animate-fade-in">
-              <p className="text-gray-900 dark:text-white text-sm mb-4">
-                Still have questions? Contact us at info@gaapio.com or 
-              </p>
-              <Button asChild variant="blue" className="rounded-full">
-                <Link to="/request-demo">Request a Demo</Link>
-              </Button>
-            </div>
           </div>
         </section>
       </main>
+      
+      <section className="py-12 bg-white dark:bg-gray-900">
+        <div className="container px-4 md:px-6">
+          <div className="text-center animate-fade-in">
+            <p className="text-gray-900 dark:text-white text-sm mb-4">
+              Still have questions? Contact us at info@gaapio.com or 
+            </p>
+            <Button asChild variant="blue" className="rounded-full">
+              <Link to="/request-demo">Request a Demo</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
       
       <Footer />
     </div>
