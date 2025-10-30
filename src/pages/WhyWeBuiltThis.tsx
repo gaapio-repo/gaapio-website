@@ -6,11 +6,11 @@ import { GradientBackground } from "@/components/home/GradientBackground";
 
 const WhyWeBuiltThis = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-background relative">
-      <GradientBackground />
+    <div className="min-h-screen flex flex-col bg-white dark:bg-background">
       <Header />
       
       <main className="flex-grow relative z-10">
+        <GradientBackground />
         {/* Hero Section */}
         <section className="pt-20 pb-16 px-4">
           <div className="max-w-3xl mx-auto text-center">
