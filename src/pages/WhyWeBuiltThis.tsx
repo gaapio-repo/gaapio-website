@@ -17,8 +17,7 @@ const WhyWeBuiltThis = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
               Why We Built Gaapio
             </h1>
-            <div className="w-20 h-1 bg-[#339CFF] mx-auto"></div>
-          </div>
+           
         </section>
 
         {/* Article Content */}
