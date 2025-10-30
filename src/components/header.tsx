@@ -252,7 +252,7 @@ export function Header() {
                   <NavigationMenuContent className="z-[100]">
                     <div className="w-full px-4 py-6">
                       <div className="max-w-2xl mx-auto">
-                        <div className="rounded-2xl shadow-2xl bg-white dark:bg-gray-900 overflow-hidden border border-gray-200 dark:border-gray-800">
+                        <div className="rounded-2xl shadow-2xl bg-white dark:bg-gray-900 overflow-hidden border border-gray-200 dark:border-gray-800 min-h-[400px]">
                           <div className="bg-gray-50 dark:bg-gray-800/50 p-6">
                             <h3 className="text-xs font-bold text-gray-900 dark:text-white mb-5 uppercase tracking-wider px-3">
                               Company
