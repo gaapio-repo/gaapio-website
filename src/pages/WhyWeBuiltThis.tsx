@@ -75,9 +75,10 @@ const WhyWeBuiltThis = () => {
 
           </div>
         </article>
+      </main>
 
-        {/* Call to Action Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 relative z-10">
+      {/* Call to Action Section */}
+      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
               Join Us in Transforming Accounting
@@ -95,7 +96,6 @@ const WhyWeBuiltThis = () => {
             </div>
           </div>
         </section>
-      </main>
 
       <Footer />
     </div>
