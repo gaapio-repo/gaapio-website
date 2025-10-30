@@ -32,7 +32,7 @@ console.log("[Main] Starting app render...");
 createRoot(rootElement).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="system" storageKey="gaapio-theme">
+      <ThemeProvider defaultTheme="light" storageKey="gaapio-theme">
         <App />
       </ThemeProvider>
     </QueryClientProvider>
