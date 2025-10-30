@@ -368,16 +368,17 @@
 
   /* Responsive adjustments */
   @media (max-width: 767px) {
-    /* Mobile: Show smaller centered animation */
+    /* Mobile: Show larger animation with minimal side padding */
     .hero-memo-container {
       display: flex;
       justify-content: center;
-      max-width: 600px;
-      padding: 0 0.5rem;
+      max-width: 100%;
+      padding: 0 0.75rem;
     }
     
     .memo-animation-container {
-      padding: 0.5rem;
+      padding: 0;
+      max-width: 100%;
     }
     
     .memo-card,
