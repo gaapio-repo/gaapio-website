@@ -38,8 +38,8 @@ export const AnimatedMemoRight = () => {
   };
 
   const getTopPosition = () => {
-    if (width < 480) return "240px";
-    if (width < 768) return "180px";
+    if (width < 480) return "300px";
+    if (width < 768) return "240px";
     return "205px";
   };
 
