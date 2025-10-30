@@ -151,7 +151,7 @@ export function Header() {
                   <NavigationMenuContent className="z-[100]">
                     <div className="p-6">
                          <div className="rounded-2xl shadow-2xl bg-white dark:bg-gray-900 overflow-hidden border border-gray-200 dark:border-gray-800">
-                            <div className="grid grid-cols-[400px_1fr] gap-0">
+                            <div className="grid grid-cols-[400px_auto] gap-0">
                               {/* Left Column - Product List */}
                               <div className="bg-gray-50 dark:bg-gray-800/50 p-6 border-r border-gray-200 dark:border-gray-700">
                                 <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wider px-3">
