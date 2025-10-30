@@ -9,10 +9,10 @@ const WhyWeBuiltThis = () => {
     <div className="min-h-screen flex flex-col bg-white dark:bg-background">
       <Header />
       
-      <main className="flex-grow relative z-10">
+      <main className="flex-grow relative">
         <GradientBackground />
         {/* Hero Section */}
-        <section className="pt-20 pb-16 px-4">
+        <section className="pt-20 pb-16 px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 dark:text-white">
               Why We Built Gaapio
@@ -21,7 +21,7 @@ const WhyWeBuiltThis = () => {
         </section>
 
         {/* Article Content */}
-        <article className="pb-20 px-4">
+        <article className="pb-20 px-4 relative z-10">
           <div className="max-w-5xl mx-auto prose prose-lg dark:prose-invert bg-white dark:bg-gray-900 rounded-lg shadow-lg p-8 md:p-12">
             
             {/* A Love for Technical Accounting */}
@@ -77,7 +77,7 @@ const WhyWeBuiltThis = () => {
         </article>
 
         {/* Call to Action Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
+        <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
               Join Us in Transforming Accounting
