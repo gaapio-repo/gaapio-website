@@ -3,6 +3,7 @@ import { ArrowDownCircle } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatedMemoRight } from "./AnimatedMemoRight";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 interface HeroSectionProps {
   title?: string;
@@ -15,6 +16,7 @@ export const HeroSection = memo(function HeroSection({
 }: HeroSectionProps) {
   const [isClient, setIsClient] = useState(false);
   const [enableSelfSignup, setEnableSelfSignup] = useState(true);
+  const isLargeScreen = useMediaQuery('lg');
   
   useEffect(() => {
     setIsClient(true);
@@ -73,9 +75,11 @@ export const HeroSection = memo(function HeroSection({
         </div>
         
         {/* Constrained animated memo display with better mobile spacing */}
-        <div className="hero-memo-container mb-24 md:mb-16">
-          {isClient && <AnimatedMemoRight />}
-        </div>
+        {isLargeScreen && isClient && (
+          <div className="hero-memo-container mb-24 md:mb-16">
+            <AnimatedMemoRight />
+          </div>
+        )}
       </div>
       
       {/* Down arrow for scrolling to next section - now with proper spacing */}
