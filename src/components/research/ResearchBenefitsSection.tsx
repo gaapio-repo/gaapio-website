@@ -1,70 +1,86 @@
 import { memo } from "react";
-import { Shield, Brain, Users, FileText, Clock, Lock } from "lucide-react";
+import { Shield, FileText, Clock, CheckCircle, BookOpen, Users } from "lucide-react";
 
 export const ResearchBenefitsSection = memo(function ResearchBenefitsSection() {
   const benefits = [
     {
-      icon: Shield,
-      title: "Secure & Private",
-      description: "Your firm's data stays private and secure. Enterprise-grade encryption ensures your sensitive information never leaves your control."
+      icon: BookOpen,
+      title: "Comprehensive Coverage",
+      description: "Access FASB, GASB, AICPA, SEC, and PCAOB guidance all in one place."
     },
     {
-      icon: Brain,
-      title: "Context-Aware Responses",
-      description: "Get answers that understand your firm's unique context, terminology, and procedures. Not just generic responses."
+      icon: Shield,
+      title: "Reliable & Accurate",
+      description: "AI-powered search backed by authoritative accounting standards and professional literature."
     },
     {
       icon: FileText,
-      title: "Source Citations",
-      description: "Every answer includes references to the source documents, so you can verify and dive deeper when needed."
-    },
-    {
-      icon: Users,
-      title: "Team Collaboration",
-      description: "Share insights across your team. Make your firm's institutional knowledge accessible to everyone who needs it."
+      title: "Direct Citations",
+      description: "Every answer includes references to specific standards and sections for easy verification."
     },
     {
       icon: Clock,
-      title: "Save Time",
-      description: "Stop searching through endless files and folders. Get instant answers to your questions in seconds, not hours."
+      title: "Save Hours of Research",
+      description: "Get instant answers instead of manually searching through multiple codifications and databases."
     },
     {
-      icon: Lock,
-      title: "Access Control",
-      description: "Control who can access what information. Set permissions and maintain compliance with your firm's security policies."
+      icon: CheckCircle,
+      title: "Stay Current",
+      description: "Always access the latest guidance and updates to accounting standards."
+    },
+    {
+      icon: Users,
+      title: "Team Knowledge Sharing",
+      description: "Share research findings across your team to build institutional knowledge."
     }
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-[#f4faff] dark:from-[#1A1F2B] dark:to-[#1A1F2B]">
+    <section className="py-20 bg-white dark:bg-[#1A1F2B]">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-gray-900 dark:text-white">
             Why Choose Accounting Research?
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto dark:text-gray-300">
-            Everything you need for fast, accurate accounting research
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto dark:text-gray-300">
+            The fastest way to find reliable answers to your accounting and auditing questions
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {/* Two-column feature layout */}
+        <div className="max-w-6xl mx-auto space-y-6">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
+            const isEven = index % 2 === 0;
             return (
               <div
                 key={index}
-                className="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
+                className={`flex flex-col md:flex-row gap-6 items-start p-8 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 bg-gradient-to-br ${
+                  isEven 
+                    ? 'from-white to-blue-50/30 dark:from-gray-800 dark:to-blue-900/10' 
+                    : 'from-white to-purple-50/30 dark:from-gray-800 dark:to-purple-900/10'
+                }`}
               >
-                <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-500 transition-colors duration-300">
-                  <Icon className="w-7 h-7 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors duration-300" />
+                <div className={`flex-shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center ${
+                  isEven
+                    ? 'bg-blue-100 dark:bg-blue-900/30'
+                    : 'bg-purple-100 dark:bg-purple-900/30'
+                }`}>
+                  <Icon className={`w-8 h-8 ${
+                    isEven 
+                      ? 'text-blue-600 dark:text-blue-400' 
+                      : 'text-purple-600 dark:text-purple-400'
+                  }`} />
                 </div>
                 
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {benefit.description}
-                </p>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {benefit.description}
+                  </p>
+                </div>
               </div>
             );
           })}
