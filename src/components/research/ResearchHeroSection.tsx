@@ -27,11 +27,11 @@ export const ResearchHeroSection = memo(function ResearchHeroSection() {
         
         {/* Visual Element */}
         <div className="flex justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
-          <div className="relative w-full max-w-5xl">
+          <div className="max-w-5xl w-full">
             <img 
               src={researchImage} 
               alt="Gaapio Accounting Research Interface" 
-              className="w-full h-auto rounded-xl shadow-2xl border border-gray-200 dark:border-gray-800"
+              className="w-full rounded-xl shadow-2xl border border-gray-200 dark:border-gray-800"
             />
           </div>
         </div>
