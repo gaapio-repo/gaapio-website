@@ -78,9 +78,9 @@ export function ProductHighlightsSection() {
       label: "ACCOUNTING RESEARCH",
       title: "Your Firm's AI Research Assistant",
       bulletPoints: [
-        "Search your firm's internal knowledge base with natural language",
-        "Get instant answers from your documents and resources",
-        "Contextual responses tailored to your firm's expertise"
+        "Search Big 4 accounting guides and technical resources",
+        "Natural language queries across comprehensive knowledge base",
+        "Internal GPT (coming soon)"
       ],
       href: "/research-gpt",
       icon: Brain,
