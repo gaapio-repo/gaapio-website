@@ -23,7 +23,7 @@ const WhyWeBuiltThis = () => {
 
         {/* Article Content */}
         <article className="pb-20 px-4">
-          <div className="max-w-3xl mx-auto prose prose-lg dark:prose-invert">
+          <div className="max-w-3xl mx-auto prose prose-lg dark:prose-invert bg-white dark:bg-gray-900 rounded-lg shadow-lg p-8 md:p-12">
             
             {/* A Love for Technical Accounting */}
             <section className="mb-12">
