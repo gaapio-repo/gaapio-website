@@ -102,12 +102,8 @@ export function ProductHighlightsSection() {
     {
       id: "sox-controls",
       label: "SOX CONTROLS (COMING SOON)",
-      title: "Streamline SOX Compliance & Control Testing",
-      bulletPoints: [
-        "Automated control testing and documentation",
-        "Risk assessment and monitoring workflows",
-        "Audit-ready compliance reports"
-      ],
+      title: "Coming Soon",
+      bulletPoints: [],
       href: "/sox-controls",
       icon: Shield,
       iconColor: "#339CFF"
