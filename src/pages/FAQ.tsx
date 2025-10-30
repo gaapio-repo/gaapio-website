@@ -181,7 +181,7 @@ export default function FAQ() {
             </div>
             
             <div className="mt-12 text-center animate-fade-in">
-              <p className="text-muted-foreground text-sm mb-4">
+              <p className="text-gray-900 dark:text-white text-sm mb-4">
                 Still have questions? Contact us at info@gaapio.com or 
               </p>
               <Button asChild variant="blue" className="rounded-full">
