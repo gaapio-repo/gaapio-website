@@ -35,7 +35,7 @@ const products = [
     href: "/research-gpt",
     icon: Brain,
     description: "Your firm's AI-powered research assistant",
-    features: ["Internal knowledge base search", "Natural language queries", "Contextual answers from your firm's documents"],
+    features: ["Search Big 4 accounting guides and technical resources", "Natural language queries across comprehensive knowledge base", "Internal GPT (coming soon)"],
   },
   {
     name: "Guidance Updates",
@@ -48,8 +48,8 @@ const products = [
     name: "SOX Controls (Coming Soon)",
     href: "/sox-controls",
     icon: Shield,
-    description: "Streamline SOX compliance and control testing",
-    features: ["Automated control testing", "Risk assessment workflows", "Compliance documentation"],
+    description: "Coming Soon",
+    features: [],
   },
 ];
 
