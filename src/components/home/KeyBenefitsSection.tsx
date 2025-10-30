@@ -5,20 +5,43 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function KeyBenefitsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    // On mobile, show immediately without observer
+    if (isMobile) {
+      setIsVisible(true);
+      return;
+    }
+
+    // Feature detection for IntersectionObserver
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+
+    // Fallback timer in case observer doesn't fire
+    const fallbackTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 1200);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          clearTimeout(fallbackTimer);
           setIsVisible(true);
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0,
+        rootMargin: "0px 0px -35% 0px"
+      }
     );
 
     if (sectionRef.current) {
@@ -26,11 +49,12 @@ export function KeyBenefitsSection() {
     }
 
     return () => {
+      clearTimeout(fallbackTimer);
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, []);
+  }, [isMobile]);
 
   const benefits = [
     {
@@ -62,7 +86,7 @@ export function KeyBenefitsSection() {
   return (
     <section 
       ref={sectionRef}
-      className="py-20 md:py-32 bg-white dark:bg-background"
+      className="relative z-10 py-20 md:py-32 bg-white dark:bg-background"
     >
       <ResponsiveContainer>
         <div className="text-center mb-16">
