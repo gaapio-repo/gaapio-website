@@ -36,14 +36,14 @@ export const ResearchBenefitsSection = memo(function ResearchBenefitsSection() {
   ];
 
   return (
-    <section className="py-20">
+    <section className="py-20 bg-gradient-to-b from-white to-[#f4faff] dark:from-[#1A1F2B] dark:to-[#1A1F2B]">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-white">
-            Why Choose Research/Internal GPT?
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-gray-900 dark:text-white">
+            Why Choose Accounting Research?
           </h2>
-          <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            Everything you need to make your firm's knowledge instantly accessible
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto dark:text-gray-300">
+            Everything you need for fast, accurate accounting research
           </p>
         </div>
 
@@ -53,16 +53,16 @@ export const ResearchBenefitsSection = memo(function ResearchBenefitsSection() {
             return (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/20 transition-all duration-300 border border-white/20"
+                className="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
               >
-                <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-6">
-                  <Icon className="w-7 h-7 text-[#339CFF]" />
+                <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-500 transition-colors duration-300">
+                  <Icon className="w-7 h-7 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors duration-300" />
                 </div>
                 
-                <h3 className="text-xl font-semibold mb-4 text-white">
+                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
                   {benefit.title}
                 </h3>
-                <p className="text-blue-100 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                   {benefit.description}
                 </p>
               </div>

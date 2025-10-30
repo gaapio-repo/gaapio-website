@@ -25,10 +25,8 @@ export default function ResearchGPT() {
             <SocialProofSection />
           </div>
           
-          {/* Benefits Section - Blue Background */}
-          <div className="bg-[#339CFF] dark:bg-[#2563eb]">
-            <ResearchBenefitsSection />
-          </div>
+          {/* Benefits Section */}
+          <ResearchBenefitsSection />
         </div>
       </div>
       
