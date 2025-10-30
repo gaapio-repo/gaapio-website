@@ -34,13 +34,13 @@ export default function Index() {
       <ProductHighlightsSection />
 
       {/* Social Proof Section (Trusted by Companies) */}
-      <SocialProofSection />
+      {/* <SocialProofSection /> */}
 
       {/* Key Benefits Section */}
       <KeyBenefitsSection />
 
       {/* Testimonials Section */}
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
 
       {/* Final CTA Section */}
       <FinalCtaSection />
