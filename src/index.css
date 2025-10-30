@@ -370,15 +370,18 @@
   @media (max-width: 768px) {
     .hero-memo-container {
       padding: 0 0.5rem;
+      max-width: 100%;
     }
     
     .memo-animation-container {
       padding: 0.5rem;
+      max-width: 100%;
     }
     
     .memo-card,
     .memo-card-right {
-      min-height: clamp(300px, 60vw, 500px);
+      min-height: clamp(350px, 70vw, 600px);
+      max-width: 100%;
     }
   }
 

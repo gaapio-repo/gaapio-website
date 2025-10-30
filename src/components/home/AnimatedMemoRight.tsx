@@ -31,15 +31,15 @@ export const AnimatedMemoRight = () => {
   const [isDark, setIsDark] = useState(false);
 
   const getScale = () => {
-    if (width < 480) return 0.35;
-    if (width < 768) return 0.5;
-    if (width < 1024) return 0.6;
-    return 0.7;
+    if (width < 480) return 0.55;
+    if (width < 768) return 0.65;
+    if (width < 1024) return 0.7;
+    return 0.75;
   };
 
   const getTopPosition = () => {
-    if (width < 480) return "85px";
-    if (width < 768) return "110px";
+    if (width < 480) return "95px";
+    if (width < 768) return "120px";
     return "205px";
   };
 
@@ -50,14 +50,14 @@ export const AnimatedMemoRight = () => {
   };
 
   const getLeftPosition = () => {
-    if (width < 480) return "23%";
-    if (width < 768) return "23%";
+    if (width < 480) return "20%";
+    if (width < 768) return "21%";
     return "23%";
   };
 
   const getContainerHeight = () => {
-    if (width < 480) return "calc(220% - 170px)";
-    if (width < 768) return "calc(200% - 170px)";
+    if (width < 480) return "calc(200% - 150px)";
+    if (width < 768) return "calc(180% - 150px)";
     return "calc(140% - 170px)";
   };
 
@@ -141,7 +141,7 @@ export const AnimatedMemoRight = () => {
           boxShadow: isDark
             ? "0 0 15px rgba(255,255,255,0.05)"
             : "0 0 15px rgba(0,0,0,0.1)",
-          maxWidth: "850px",
+          maxWidth: width < 768 ? "100%" : "850px",
           width: "100%",
           border: "1px solid",
           borderRadius: "8px",
