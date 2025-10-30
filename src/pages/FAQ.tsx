@@ -33,7 +33,7 @@ export default function FAQ() {
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h1 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-6">Frequently Asked Questions</h1>
               <div className="h-px w-24 bg-gradient-to-r from-transparent via-border to-transparent mx-auto mb-6"></div>
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              <p className="text-xl text-gray-900 dark:text-white leading-relaxed">
                 Find answers to common questions about Gaapio.
               </p>
             </div>
