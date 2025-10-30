@@ -367,8 +367,12 @@
   }
 
   /* Responsive adjustments */
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
+    /* Mobile: Show smaller centered animation */
     .hero-memo-container {
+      display: flex;
+      justify-content: center;
+      max-width: 600px;
       padding: 0 0.5rem;
     }
     
@@ -379,6 +383,21 @@
     .memo-card,
     .memo-card-right {
       min-height: clamp(300px, 60vw, 500px);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1279px) {
+    /* Tablet: Hide animation completely */
+    .hero-memo-container {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    /* Desktop: Full layout */
+    .hero-memo-container {
+      display: flex;
+      max-width: 1400px;
     }
   }
 
