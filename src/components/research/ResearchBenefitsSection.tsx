@@ -51,26 +51,13 @@ export const ResearchBenefitsSection = memo(function ResearchBenefitsSection() {
         <div className="max-w-6xl mx-auto space-y-6">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
-            const isEven = index % 2 === 0;
             return (
               <div
                 key={index}
-                className={`flex flex-col md:flex-row gap-6 items-start p-8 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 bg-gradient-to-br ${
-                  isEven 
-                    ? 'from-white to-blue-50/30 dark:from-gray-800 dark:to-blue-900/10' 
-                    : 'from-white to-purple-50/30 dark:from-gray-800 dark:to-purple-900/10'
-                }`}
+                className="flex flex-col md:flex-row gap-6 items-start p-8 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 bg-gradient-to-br from-white to-blue-50/30 dark:from-gray-800 dark:to-blue-900/10"
               >
-                <div className={`flex-shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center ${
-                  isEven
-                    ? 'bg-blue-100 dark:bg-blue-900/30'
-                    : 'bg-purple-100 dark:bg-purple-900/30'
-                }`}>
-                  <Icon className={`w-8 h-8 ${
-                    isEven 
-                      ? 'text-blue-600 dark:text-blue-400' 
-                      : 'text-purple-600 dark:text-purple-400'
-                  }`} />
+                <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                  <Icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                 </div>
                 
                 <div className="flex-1">
