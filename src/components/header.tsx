@@ -149,9 +149,8 @@ export function Header() {
                     Products
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-[100]">
-                    <div className="p-6">
-                         <div className="rounded-2xl shadow-2xl bg-white dark:bg-gray-900 overflow-hidden border border-gray-200 dark:border-gray-800">
-                            <div className="grid grid-cols-[400px_auto] gap-0">
+                    <div className="rounded-2xl shadow-2xl bg-white dark:bg-gray-900 overflow-hidden border border-gray-200 dark:border-gray-800 w-[900px]">
+                      <div className="grid grid-cols-[400px_auto] gap-0">
                               {/* Left Column - Product List */}
                               <div className="bg-gray-50 dark:bg-gray-800/50 p-6 border-r border-gray-200 dark:border-gray-700">
                                 <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wider px-3">
@@ -236,10 +235,9 @@ export function Header() {
                                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                                </div>
-                             </div>
-                         </div>
-                     </div>
-                   </NavigationMenuContent>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
                 </NavigationMenuItem>
 
                 {/* Company Mega Menu */}
@@ -248,8 +246,7 @@ export function Header() {
                     Company
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-[100]">
-                    <div className="p-6">
-                        <div className="rounded-2xl shadow-2xl bg-gray-50 dark:bg-gray-800/50 overflow-hidden border border-gray-200 dark:border-gray-800 min-h-[400px]">
+                    <div className="rounded-2xl shadow-2xl bg-gray-50 dark:bg-gray-800/50 overflow-hidden border border-gray-200 dark:border-gray-800 min-h-[400px] w-[600px]">
                           <div className="p-6">
                             <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-5 uppercase tracking-wider px-3">
                               Company
@@ -326,8 +323,7 @@ export function Header() {
                              </div>
                            </div>
                          </div>
-                     </div>
-                   </NavigationMenuContent>
+                       </NavigationMenuContent>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
