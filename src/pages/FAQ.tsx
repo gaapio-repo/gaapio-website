@@ -38,7 +38,7 @@ export default function FAQ() {
               </p>
             </div>
 
-            <div className="max-w-3xl mx-auto glass-card p-8 rounded-2xl shadow-md hover:bg-secondary/30 transition-all duration-300">
+            <div className="max-w-3xl mx-auto bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-md border border-gray-200 dark:border-gray-800 transition-all duration-300">
               <Accordion type="single" collapsible className="w-full" value={openItem} onValueChange={setOpenItem}>
                 <AccordionItem value="item-1">
   <AccordionTrigger className="text-lg font-medium hover:text-primary transition-colors">
