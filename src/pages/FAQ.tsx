@@ -1,10 +1,10 @@
-
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { GradientBackground } from "@/components/home/GradientBackground";
 
 export default function FAQ() {
   const [searchParams] = useSearchParams();
@@ -26,8 +26,9 @@ export default function FAQ() {
         Skip to content
       </a>
       
-      <main className="flex-1 pt-28" id="faq-content">
-        <section className="py-16 md:py-24" aria-labelledby="faq-heading">
+      <main className="flex-1 pt-28 relative" id="faq-content">
+        <GradientBackground />
+        <section className="py-16 md:py-24 relative z-10" aria-labelledby="faq-heading">
           <div className="container px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h1 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-6">Frequently Asked Questions</h1>
