@@ -367,38 +367,18 @@
   }
 
   /* Responsive adjustments */
-  @media (max-width: 767px) {
-    /* Mobile: Show larger animation with minimal side padding */
+  @media (max-width: 768px) {
     .hero-memo-container {
-      display: flex;
-      justify-content: center;
-      max-width: 100%;
-      padding: 0 0.75rem;
+      padding: 0 0.5rem;
     }
     
     .memo-animation-container {
-      padding: 0;
-      max-width: 100%;
+      padding: 0.5rem;
     }
     
     .memo-card,
     .memo-card-right {
       min-height: clamp(300px, 60vw, 500px);
-    }
-  }
-
-  @media (min-width: 768px) and (max-width: 1279px) {
-    /* Tablet: Hide animation completely */
-    .hero-memo-container {
-      display: none;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    /* Desktop: Full layout */
-    .hero-memo-container {
-      display: flex;
-      max-width: 1400px;
     }
   }
 
