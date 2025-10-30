@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -14,21 +13,19 @@ import { KeyBenefitsSection } from "@/components/home/KeyBenefitsSection";
 import { WhatYoullLearnSection } from "@/components/home/WhatYoullLearnSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
-
 export default function Index() {
   console.log("[Index] Component rendering");
-  
+
   // Temporarily disable all localStorage/metrics logic to fix loading issue
 
-  return (
-    <div className="flex min-h-screen flex-col">
+  return <div className="flex min-h-screen flex-col">
       <Header />
       
       {/* Hero Section */}
       <HeroSection />
 
       {/* Metrics Bar */}
-      <MetricsBar />
+      
 
       {/* Product Highlights Section */}
       <ProductHighlightsSection />
@@ -46,6 +43,5 @@ export default function Index() {
       <FinalCtaSection />
       
       <Footer />
-    </div>
-  );
+    </div>;
 }
