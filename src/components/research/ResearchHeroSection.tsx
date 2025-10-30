@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { Brain } from "lucide-react";
 import researchImage from "@/assets/gaapio-research.png";
 
 export const ResearchHeroSection = memo(function ResearchHeroSection() {
@@ -14,7 +13,7 @@ export const ResearchHeroSection = memo(function ResearchHeroSection() {
             Accounting Research
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-10 animate-fade-up dark:text-gray-300" style={{ animationDelay: "100ms" }}>
-            AI-Powered. Knowledge at Your Fingertips.
+            CPA Asked. AI Answered.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
             <Button size="lg" variant="blue" asChild>
@@ -28,14 +27,12 @@ export const ResearchHeroSection = memo(function ResearchHeroSection() {
         
         {/* Visual Element */}
         <div className="flex justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
-          <div className="relative w-full max-w-5xl">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700">
-              <img 
-                src={researchImage} 
-                alt="Gaapio Accounting Research Interface" 
-                className="w-full h-auto"
-              />
-            </div>
+          <div className="relative w-full max-w-5xl shadow-2xl rounded-3xl overflow-hidden">
+            <img 
+              src={researchImage} 
+              alt="Gaapio Accounting Research Interface" 
+              className="w-full h-auto"
+            />
           </div>
         </div>
       </div>
