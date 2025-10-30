@@ -79,7 +79,7 @@ export const HeroSection = memo(function HeroSection({
         </div>
         
         {/* Constrained animated memo display with better mobile spacing */}
-        {isLargeScreen && isClient && (
+        {isClient && (
           <div className="hero-memo-container mb-24 md:mb-16">
             <AnimatedMemoRight />
           </div>
