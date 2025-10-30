@@ -2,13 +2,15 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { GradientBackground } from "@/components/home/GradientBackground";
 
 const WhyWeBuiltThis = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-background">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-background relative">
+      <GradientBackground />
       <Header />
       
-      <main className="flex-grow">
+      <main className="flex-grow relative z-10">
         {/* Hero Section */}
         <section className="pt-32 pb-16 px-4">
           <div className="max-w-3xl mx-auto text-center">
