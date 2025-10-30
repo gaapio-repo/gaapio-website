@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils";
 import { useActiveCustomerLogos } from "@/hooks/useCustomerLogos";
 
 export function TrustBarSection() {
+  // Temporarily hidden
+  return null;
+  
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isEnabled, setIsEnabled] = useState(true);

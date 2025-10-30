@@ -7,6 +7,9 @@ import { Quote } from "lucide-react";
 import { useActiveTestimonials } from "@/hooks/useCustomerTestimonials";
 
 export function TestimonialsSection() {
+  // Temporarily hidden
+  return null;
+  
   const [isVisible, setIsVisible] = useState(true);
   const [inView, setInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);

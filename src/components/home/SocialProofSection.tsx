@@ -4,6 +4,9 @@ import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { cn } from "@/lib/utils";
 
 export function SocialProofSection() {
+  // Temporarily hidden
+  return null;
+  
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
