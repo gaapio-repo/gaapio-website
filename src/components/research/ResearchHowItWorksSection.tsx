@@ -4,24 +4,24 @@ import { FileText, Search, Zap, CheckCircle } from "lucide-react";
 export const ResearchHowItWorksSection = memo(function ResearchHowItWorksSection() {
   const steps = [
     {
-      icon: FileText,
-      title: "Upload Your Knowledge",
-      description: "Securely upload your firm's documents, templates, guides, and reference materials to create your custom knowledge base."
-    },
-    {
       icon: Search,
-      title: "Ask Questions Naturally", 
-      description: "Use natural language to query your knowledge base. No complex search syntax required—just ask like you're talking to a colleague."
+      title: "Ask Your Question",
+      description: "Type your accounting or auditing question in plain language. No complex search syntax needed."
     },
     {
       icon: Zap,
-      title: "Get Instant Answers",
-      description: "Receive contextual, accurate answers with citations to source documents. Save hours of manual searching and reference checking."
+      title: "AI-Powered Research",
+      description: "Our AI searches authoritative sources including FASB, GASB, AICPA guidance, and technical accounting literature."
+    },
+    {
+      icon: FileText,
+      title: "Get Expert Answers",
+      description: "Receive clear, contextualized answers with direct citations to relevant standards and guidance."
     },
     {
       icon: CheckCircle,
-      title: "Verify & Share",
-      description: "Every answer includes references to the source documents. Share insights across your team and maintain institutional knowledge."
+      title: "Verify & Apply",
+      description: "Review source references and apply the guidance confidently to your specific situation."
     }
   ];
 
@@ -33,7 +33,7 @@ export const ResearchHowItWorksSection = memo(function ResearchHowItWorksSection
             How It Works
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto dark:text-gray-300">
-            Transform your firm's knowledge into actionable insights with AI
+            Get instant answers to your accounting and auditing questions
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export const ResearchHowItWorksSection = memo(function ResearchHowItWorksSection
           <div className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow-md border border-gray-100 dark:border-gray-700">
             <CheckCircle className="w-5 h-5 text-green-500" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Your firm's knowledge, instantly accessible
+              Authoritative answers with source citations
             </span>
           </div>
         </div>
