@@ -26,7 +26,10 @@ export default defineConfig({
     process.env.NODE_ENV === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
+    dedupe: ['react', 'react-dom'],
     alias: {
+      react: path.resolve(__dirname, 'node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
       "@": path.resolve(__dirname, "./src"),
     },
   },
