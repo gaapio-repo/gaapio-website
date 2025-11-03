@@ -1,10 +1,11 @@
 
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { componentTagger } from "lovable-tagger";
 
 export default defineConfig({
-  base: '/',
+  base: '/', // Ensure base URL is set to '/' for client-side routing
   server: {
     host: "::",
     port: 8080,
@@ -14,10 +15,13 @@ export default defineConfig({
       'Permissions-Policy': 'accelerometer=(), camera=(), geolocation=(), microphone=(), payment=()',
       'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
       'Referrer-Policy': 'strict-origin-when-cross-origin',
-      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      'Cache-Control': 'max-age=31536000, immutable',
     }
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    process.env.NODE_ENV === 'development' && componentTagger(),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
