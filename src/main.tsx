@@ -1,5 +1,5 @@
 
-import { StrictMode } from 'react'
+import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
@@ -27,6 +27,7 @@ if (!rootElement) {
 }
 
 // Create the root and render the app
+console.log("[Main] React version:", React.version);
 console.log("[Main] Starting app render...");
 
 createRoot(rootElement).render(

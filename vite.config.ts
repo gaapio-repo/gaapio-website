@@ -18,7 +18,7 @@ export default defineConfig({
       'Permissions-Policy': 'accelerometer=(), camera=(), geolocation=(), microphone=(), payment=()',
       'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
       'Referrer-Policy': 'strict-origin-when-cross-origin',
-      'Cache-Control': 'max-age=31536000, immutable',
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
     }
   },
   plugins: [
