@@ -1,14 +1,17 @@
 
 import { useState, memo } from "react";
+import { useTheme } from "./theme-toggle";
 
 // Import the logo files directly
 import darkLogo from "/public/assets/images/logo-dark.png";
 import lightLogo from "/public/assets/images/logo-light.png";
 
 // Ensures proper sizing, day/night mode support, optimized for header
-// Uses CSS-driven theme switching for instant, reliable logo swapping
 export const Logo = memo(({ className = "" }: { className?: string }) => {
+  const { theme } = useTheme();
   const [logoError, setLogoError] = useState(false);
+  
+  const isDark = theme === "dark";
 
   const handleImageError = () => {
     console.error("Logo image failed to load");
@@ -27,33 +30,20 @@ export const Logo = memo(({ className = "" }: { className?: string }) => {
     );
   }
 
-  const logoStyle = {
-    height: window.innerWidth <= 640 ? '72px' : '96px',
-    width: 'auto',
-    maxHeight: 'none',
-    maxWidth: 'none'
-  };
-
   return (
     <div className={`logo-container ${className}`}>
-      {/* Light logo - visible in light mode, hidden in dark mode */}
       <img
-        src={lightLogo}
+        src={isDark ? darkLogo : lightLogo}
         alt="Gaapio Logo - AI-Powered Accounting Memo Platform"
-        className="logo-image block dark:hidden"
-        style={logoStyle}
-        loading="eager"
-        decoding="async"
-        fetchPriority="high"
-        draggable={false}
-        onError={handleImageError}
-      />
-      {/* Dark logo - hidden in light mode, visible in dark mode */}
-      <img
-        src={darkLogo}
-        alt="Gaapio Logo - AI-Powered Accounting Memo Platform"
-        className="logo-image hidden dark:block"
-        style={logoStyle}
+
+        className="logo-image"
+        style={{
+          height: window.innerWidth <= 640 ? '72px' : '96px',
+          width: 'auto',
+          maxHeight: 'none',
+          maxWidth: 'none'
+        }}
+
         loading="eager"
         decoding="async"
         fetchPriority="high"
