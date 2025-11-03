@@ -7,8 +7,7 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig({
   base: '/', // Ensure base URL is set to '/' for client-side routing
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react/jsx-runtime'],
-    force: true
+    include: ['react', 'react-dom', 'react/jsx-runtime']
   },
   server: {
     host: "::",
