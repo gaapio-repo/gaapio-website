@@ -1,10 +1,9 @@
 
-import { StrictMode } from 'react'
+import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import './App.css'
-import { ThemeProvider } from './components/theme-toggle.tsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // Create a client
@@ -26,15 +25,15 @@ if (!rootElement) {
   throw new Error("Failed to find the root element");
 }
 
-// Create the root and render the app
-console.log("[Main] Starting app render...");
+// Diagnostics
+console.log("[Diag] React version:", React.version);
+console.log("[Diag] React identity:", React);
+console.log("[Diag] DevTools renderers:", (window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__?.renderers?.size);
 
 createRoot(rootElement).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="light" storageKey="gaapio-theme">
-        <App />
-      </ThemeProvider>
+      <App />
     </QueryClientProvider>
   </StrictMode>
 );
