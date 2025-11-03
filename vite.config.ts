@@ -5,6 +5,9 @@ import path from "path";
 
 export default defineConfig({
   base: '/',
+  optimizeDeps: {
+    force: true, // Force re-optimization to clear stale cache
+  },
   server: {
     host: "::",
     port: 8080,
