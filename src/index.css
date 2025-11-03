@@ -39,9 +39,9 @@
     --benefits-bg: #f4faff; /* light blue-tinted background */
     
     /* Hero gradient colors */
-    --hero-gradient-from: 207 90% 61%; /* #339CFF */
-    --hero-gradient-via: 195 85% 55%; /* Cyan-blue */
-    --hero-gradient-to: 187 84% 60%; /* Bright cyan */
+    --hero-gradient-from: 204 100% 50%; /* #0099FF */
+    --hero-gradient-via: 200 100% 55%; /* Cyan-blue */
+    --hero-gradient-to: 195 100% 60%; /* Bright cyan */
   }
 
   .dark {
@@ -77,9 +77,9 @@
     --benefits-bg: #1A1F2B; /* dark navy-gray background */
     
     /* Hero gradient colors - darker for dark mode */
-    --hero-gradient-from: 207 90% 54%; /* Darker blue */
-    --hero-gradient-via: 195 70% 45%; /* Darker cyan-blue */
-    --hero-gradient-to: 187 75% 50%; /* Darker cyan */
+    --hero-gradient-from: 204 100% 45%; /* Darker #0099FF */
+    --hero-gradient-via: 200 100% 50%; /* Darker cyan-blue */
+    --hero-gradient-to: 195 100% 55%; /* Darker cyan */
   }
 }
 
