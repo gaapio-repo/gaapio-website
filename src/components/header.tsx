@@ -261,7 +261,7 @@ export function Header() {
                                     rel="noopener noreferrer"
                                     onMouseEnter={() => setHoveredCompanyPage(page)}
                                     className={cn(
-                                      "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
+                                      "flex items-center gap-2 px-3 py-3 rounded-lg transition-all group",
                                       (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
                                         ? "bg-blue-100 dark:bg-blue-900/30"
                                         : "hover:bg-gray-100 dark:hover:bg-gray-700/50"
@@ -292,7 +292,7 @@ export function Header() {
                                       to={page.href}
                                       onMouseEnter={() => setHoveredCompanyPage(page)}
                                       className={cn(
-                                        "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
+                                        "flex items-center gap-2 px-3 py-3 rounded-lg transition-all group",
                                         (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
                                           ? "bg-blue-100 dark:bg-blue-900/30"
                                           : "hover:bg-gray-100 dark:hover:bg-gray-700/50"
