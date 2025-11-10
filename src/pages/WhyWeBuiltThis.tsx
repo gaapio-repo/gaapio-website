@@ -47,7 +47,7 @@ const WhyWeBuiltThis = () => {
                 <h2 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">
                   When Possibility Met Experience
                 </h2>
-                <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
                   <div className="order-2 md:order-1">
                     <img 
                       src={foundersPhoto} 
@@ -64,17 +64,16 @@ const WhyWeBuiltThis = () => {
                     </p>
                   </div>
                 </div>
+                
+                <div className="space-y-4">
+                  <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                    We started small—testing how AI could help draft policy memos, analyze proposed treatments, and summarize disclosures. Then we layered on structure: ASC topics, version histories, and detailed CPA review tools. The result is a workspace where human judgment stays in control. Every AI response is transparent, auditable, and built to be discussed, challenged, and improved.
+                  </p>
+                  <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                    Because the goal isn&apos;t to automate accounting—it&apos;s to empower accountants. To help them research faster, write clearer, and spend more time thinking critically instead of formatting documents. To make it easier to get it right.
+                  </p>
+                </div>
               </div>
-            </section>
-
-            {/* Continued Content */}
-            <section className="mb-12">
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                We started small—testing how AI could help draft policy memos, analyze proposed treatments, and summarize disclosures. Then we layered on structure: ASC topics, version histories, and detailed CPA review tools. The result is a workspace where human judgment stays in control. Every AI response is transparent, auditable, and built to be discussed, challenged, and improved.
-              </p>
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                Because the goal isn&apos;t to automate accounting—it&apos;s to empower accountants. To help them research faster, write clearer, and spend more time thinking critically instead of formatting documents. To make it easier to get it right.
-              </p>
             </section>
 
             {/* Our Mission */}
