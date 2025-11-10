@@ -41,29 +41,34 @@ const WhyWeBuiltThis = () => {
               </p>
             </section>
 
-            {/* Founders Photo */}
+            {/* When Possibility Met Experience - With Founders Photo */}
             <section className="mb-12 -mx-8 md:-mx-12">
-              <div className="overflow-hidden rounded-lg">
-                <img 
-                  src={foundersPhoto} 
-                  alt="Gaapio Founders" 
-                  className="w-full h-auto"
-                />
+              <div className="bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 p-8 md:p-12 rounded-lg">
+                <h2 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">
+                  When Possibility Met Experience
+                </h2>
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  <div className="order-2 md:order-1">
+                    <img 
+                      src={foundersPhoto} 
+                      alt="Gaapio Founders" 
+                      className="rounded-lg shadow-xl w-full h-auto"
+                    />
+                  </div>
+                  <div className="order-1 md:order-2">
+                    <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                      That realization changed everything. For the first time, we could imagine combining our accounting experience with this new technology to make something genuinely useful: a system that helps accountants get to the right answer faster and easier, without losing the rigor that good accounting demands.
+                    </p>
+                    <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                      We didn&apos;t want AI to replace judgment—we wanted it to amplify it. The smartest accountants already have the instincts and experience to make the right call. What they need is the right research, the right guidance, and a structured way to document their reasoning. That&apos;s what Gaapio is built to do.
+                    </p>
+                  </div>
+                </div>
               </div>
             </section>
 
-            {/* When Possibility Met Experience */}
+            {/* Continued Content */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
-                When Possibility Met Experience
-              </h2>
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                That realization changed everything. For the first time, we could imagine combining our accounting experience with this new technology to make something genuinely useful: a system that helps accountants get to the right answer faster and easier, without losing the rigor that good accounting demands.
-              </p>
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                We didn&apos;t want AI to replace judgment—we wanted it to amplify it. The smartest accountants already have the instincts and experience to make the right call. What they need is the right research, the right guidance, and a structured way to document their reasoning. That&apos;s what Gaapio is built to do.
-              </p>
-         
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                 We started small—testing how AI could help draft policy memos, analyze proposed treatments, and summarize disclosures. Then we layered on structure: ASC topics, version histories, and detailed CPA review tools. The result is a workspace where human judgment stays in control. Every AI response is transparent, auditable, and built to be discussed, challenged, and improved.
               </p>
