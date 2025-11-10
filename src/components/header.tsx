@@ -202,7 +202,7 @@ export function Header() {
                                     <hoveredProduct.icon className="h-7 w-7 text-white" />
                                   </div>
                                   <div>
-                                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 text-left">
                                       {hoveredProduct.name}
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
