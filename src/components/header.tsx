@@ -249,10 +249,10 @@ export function Header() {
                     <div className="rounded-2xl shadow-2xl bg-gray-50 dark:bg-gray-800/50 overflow-hidden border border-gray-200 dark:border-gray-800 w-[600px]">
                           <div className="p-6">
                             <div className="mb-5 px-3">
-                              <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-2">
+                              <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-2 text-center">
                                 Company
                               </h3>
-                              <div className="h-0.5 w-16 bg-gradient-to-r from-yellow-400 to-yellow-300 rounded-full"></div>
+                              <div className="h-0.5 w-32 bg-[#339CFF] rounded-full mx-auto"></div>
                             </div>
                             <div className="grid grid-cols-2 gap-2">
                               {companyPages.map((page, index) => (
