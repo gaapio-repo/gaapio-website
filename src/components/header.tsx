@@ -277,7 +277,7 @@ export function Header() {
                                     </div>
                                     <div className="flex-1 min-w-0">
                                       <span className={cn(
-                                        "font-medium text-sm transition-colors block truncate",
+                                        "font-medium text-sm transition-colors block truncate text-left",
                                         (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
                                           ? "text-gray-900 dark:text-white"
                                           : "text-gray-700 dark:text-gray-300"
@@ -308,7 +308,7 @@ export function Header() {
                                       </div>
                                       <div className="flex-1 min-w-0">
                                         <span className={cn(
-                                          "font-medium text-sm transition-colors block truncate",
+                                          "font-medium text-sm transition-colors block truncate text-left",
                                           (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
                                             ? "text-gray-900 dark:text-white"
                                             : "text-gray-700 dark:text-gray-300"
