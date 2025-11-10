@@ -37,7 +37,7 @@ export function FinalCtaSection() {
           <div className={cn("flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000", isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]")} style={{
           transitionDelay: "400ms"
         }}>
-            <Button size="lg" variant="blue" asChild>
+            <Button size="lg" variant="black" asChild>
               <Link to="/request-demo">Request a Demo</Link>
             </Button>
             <Button size="lg" variant="blueOutline" asChild>

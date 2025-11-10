@@ -21,7 +21,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         // New variants for consistent button styling using design system tokens
         blue: "bg-primary text-primary-foreground hover:bg-primary/90",
-        blueOutline: "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground"
+        blueOutline: "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground",
+        black: "bg-black text-white hover:bg-black/90"
       },
       size: {
         default: "h-10 px-4 py-2",

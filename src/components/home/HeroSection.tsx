@@ -72,7 +72,7 @@ export const HeroSection = memo(function HeroSection({
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-up" style={{ animationDelay: "200ms" }}>
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6 h-auto font-semibold" asChild>
+              <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold" asChild>
                 <Link to="/request-demo">Request a Demo</Link>
               </Button>
               <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary/10 text-base px-8 py-6 h-auto font-semibold" asChild>
