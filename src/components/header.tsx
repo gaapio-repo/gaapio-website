@@ -246,7 +246,7 @@ export function Header() {
                     Company
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-[100]">
-                    <div className="rounded-2xl shadow-2xl bg-gray-50 dark:bg-gray-800/50 overflow-hidden border border-gray-200 dark:border-gray-800 min-h-[400px] w-[600px]">
+                    <div className="rounded-2xl shadow-2xl bg-gray-50 dark:bg-gray-800/50 overflow-hidden border border-gray-200 dark:border-gray-800 w-[600px]">
                           <div className="p-6">
                             <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-5 uppercase tracking-wider px-3">
                               Company
