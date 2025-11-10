@@ -14,7 +14,7 @@ const products = [
     href: "/accounting-memos",
     icon: FileText,
     description: "Better memos, faster",
-    features: ["Version history, reviewer comments, and internal sign offs", "Guided prompts + AI follow up questions = accurate AI generated memos", "Exportable Audit package"],
+    features: ["Version history, reviewer comments, and internal sign offs", "Guided prompts + AI follow up questions", "Exportable Audit package"],
   },
   {
     name: "Footnote Disclosures",
