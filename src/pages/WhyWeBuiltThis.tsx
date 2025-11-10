@@ -3,6 +3,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { GradientBackground } from "@/components/home/GradientBackground";
+import foundersPhoto from "@/assets/founders-photo.jpg";
 
 const WhyWeBuiltThis = () => {
   return (
@@ -38,6 +39,29 @@ const WhyWeBuiltThis = () => {
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                 Back then, AI wasn&apos;t even on anyone&apos;s radar. The idea that software could actually understand accounting, let alone help with it, would have sounded absurd. But fast forward a few years, and the world changed. AI can now read, reason, and synthesize complex information—the very kind of thinking work accountants do every day.
               </p>
+            </section>
+
+            {/* Founders Section */}
+            <section className="mb-12 -mx-8 md:-mx-12">
+              <div className="bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 p-8 md:p-12 rounded-lg">
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  <div className="order-2 md:order-1">
+                    <img 
+                      src={foundersPhoto} 
+                      alt="Gaapio Founders" 
+                      className="rounded-lg shadow-xl w-full h-auto"
+                    />
+                  </div>
+                  <div className="order-1 md:order-2">
+                    <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                      Built by Accountants, for Accountants
+                    </h3>
+                    <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                      We're not outsiders trying to disrupt accounting—we're insiders who've lived it. From Big 4 experience to navigating complex standard adoptions, we understand the challenges because we've faced them ourselves. Now, we're combining that expertise with AI to create tools that actually make sense for how accountants work.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </section>
 
             {/* When Possibility Met Experience */}
