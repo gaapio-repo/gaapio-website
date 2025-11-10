@@ -252,7 +252,7 @@ export function Header() {
                               <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-2 text-center">
                                 Company
                               </h3>
-                              <div className="h-0.5 w-32 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto"></div>
+                              <div className="h-0.5 w-48 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto"></div>
                             </div>
                             <div className="grid grid-cols-2 gap-2">
                               {companyPages.map((page, index) => (

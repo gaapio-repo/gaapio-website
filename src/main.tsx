@@ -5,6 +5,7 @@ import App from './App.tsx'
 import './index.css'
 import './App.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ThemeProvider } from './components/theme-toggle'
 
 // Create a client
 const queryClient = new QueryClient({
@@ -32,8 +33,10 @@ console.log("[Diag] DevTools renderers:", (window as any).__REACT_DEVTOOLS_GLOBA
 
 createRoot(rootElement).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
+    <ThemeProvider defaultTheme="light" storageKey="ui-theme">
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </ThemeProvider>
   </StrictMode>
 );
