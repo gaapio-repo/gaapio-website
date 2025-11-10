@@ -75,7 +75,7 @@ export const HeroSection = memo(function HeroSection({
               <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold hover:bg-gray-800 hover:scale-105 transition-all" asChild>
                 <Link to="/request-demo">Request a Demo</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white text-white bg-white/10 hover:bg-white hover:text-black text-base px-8 py-6 h-auto font-semibold transition-all" asChild>
+              <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 text-base px-8 py-6 h-auto font-semibold transition-all" asChild>
                 <Link to="/contact">Ask a Question</Link>
               </Button>
             </div>
