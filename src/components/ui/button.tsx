@@ -22,7 +22,7 @@ const buttonVariants = cva(
         // New variants for consistent button styling using design system tokens
         blue: "bg-primary text-primary-foreground hover:bg-primary/90",
         blueOutline: "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground",
-        black: "bg-black text-white hover:bg-black/90"
+        black: "bg-black text-white hover:bg-gray-800 transition-all"
       },
       size: {
         default: "h-10 px-4 py-2",
