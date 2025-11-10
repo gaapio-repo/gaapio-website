@@ -5,6 +5,7 @@ import { Logo } from "@/components/logo";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain, Shield } from "lucide-react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 // Product order: Memos, Footnote Disclosures, Contract Analysis, Accounting Research, Guidance Updates, SOX Controls
@@ -209,6 +210,8 @@ export function Header() {
                                     </p>
                                   </div>
                                 </div>
+
+                                <Separator className="my-6 bg-gray-200 dark:bg-gray-700" />
 
                                 <div className="space-y-3 mb-6">
                                   <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
