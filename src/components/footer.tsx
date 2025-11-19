@@ -99,7 +99,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link 
-                    to="/dpa" 
+                    to="/privacy" 
                     className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Privacy
@@ -186,7 +186,7 @@ export function Footer() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2 md:gap-0 md:space-x-6">
             <Link 
-              to="/dpa" 
+              to="/privacy" 
               className="text-xs text-gray-400 hover:underline transition-colors"
             >
               Privacy Policy
