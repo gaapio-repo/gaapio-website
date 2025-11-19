@@ -33,6 +33,7 @@ import PolicyDetail from "./pages/PolicyDetail";
 import Status from "./pages/Status";
 import Privacy from "./pages/Privacy";
 import SSA from "./pages/SSA";
+import TermsOfService from "./pages/TermsOfService";
 
 function App() {
   console.log("[App] Starting...");
@@ -87,6 +88,7 @@ function App() {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/dpa" element={<Privacy />} />
             <Route path="/ssa" element={<SSA />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ProtectedLayout>
