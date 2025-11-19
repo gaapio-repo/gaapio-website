@@ -45,20 +45,22 @@ export default function TermsOfService() {
       <main className="flex-1 bg-background">
         <div className="container px-4 md:px-6 max-w-5xl mx-auto py-20">
           <div className="mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-              Gaapio, Inc. — Terms of Service
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground text-center">
+              Terms of Service
             </h1>
-            <p className="text-lg text-muted-foreground mb-6">
+            <p className="text-lg text-muted-foreground mb-6 text-center">
               Effective Date: September 5, 2025
             </p>
 
-            <Button
-              variant="outline"
-              onClick={() => setShowTableOfContents(!showTableOfContents)}
-              className="mb-6"
-            >
-              {showTableOfContents ? "Hide" : "Show"} Table of Contents
-            </Button>
+            <div className="flex justify-center">
+              <Button
+                variant="outline"
+                onClick={() => setShowTableOfContents(!showTableOfContents)}
+                className="mb-6"
+              >
+                {showTableOfContents ? "Hide" : "Show"} Table of Contents
+              </Button>
+            </div>
 
             {showTableOfContents && (
               <div className="bg-muted/50 rounded-lg p-6 mb-8">
@@ -78,7 +80,7 @@ export default function TermsOfService() {
             )}
           </div>
 
-          <div className="prose prose-lg dark:prose-invert max-w-none space-y-12">
+          <div className="space-y-12 text-left">
             <section id="agreement">
               <h2 className="text-3xl font-bold mb-4 text-foreground">1. AGREEMENT TO TERMS</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
