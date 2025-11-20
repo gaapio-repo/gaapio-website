@@ -30,6 +30,7 @@ export function useDemoRequests() {
         id: row.id,
         firstName: row.first_name,
         lastName: row.last_name,
+        company: row.company || "",
         email: row.email,
         phone: row.phone,
         notes: row.notes || "",

@@ -13,6 +13,7 @@ export function useDemoRequestForm(onSuccess?: () => void) {
     defaultValues: {
       firstName: "",
       lastName: "",
+      company: "",
       email: "",
       phone: "",
       notes: "",
@@ -29,6 +30,7 @@ export function useDemoRequestForm(onSuccess?: () => void) {
       // Add form fields
       formData.append('firstName', data.firstName);
       formData.append('lastName', data.lastName);
+      formData.append('company', data.company || '');
       formData.append('email', data.email);
       formData.append('phone', data.phone || '');
       formData.append('notes', data.notes || '');
@@ -90,6 +92,7 @@ export function useDemoRequestForm(onSuccess?: () => void) {
         .insert({
           first_name: data.firstName,
           last_name: data.lastName,
+          company: data.company,
           email: data.email,
           phone: data.phone,
           notes: data.notes,
@@ -110,6 +113,7 @@ export function useDemoRequestForm(onSuccess?: () => void) {
           body: {
             first_name: data.firstName,
             last_name: data.lastName,
+            company: data.company,
             email: data.email,
             phone: data.phone,
             notes: data.notes,

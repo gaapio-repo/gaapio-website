@@ -244,6 +244,7 @@ export type Database = {
       }
       demo_requests: {
         Row: {
+          company: string | null
           created_at: string
           email: string
           first_name: string
@@ -254,6 +255,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          company?: string | null
           created_at?: string
           email: string
           first_name: string
@@ -264,6 +266,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          company?: string | null
           created_at?: string
           email?: string
           first_name?: string
