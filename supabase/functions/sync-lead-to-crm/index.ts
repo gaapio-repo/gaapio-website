@@ -22,6 +22,21 @@ Deno.serve(async (req) => {
       );
     }
 
+    // Transform data to match CRM webhook expected format
+    const crmPayload = {
+      company_name: leadData.company,
+      domain: null,
+      website: null,
+      first_name: leadData.first_name || leadData.firstName,
+      last_name: leadData.last_name || leadData.lastName,
+      email: leadData.email,
+      phone: leadData.phone,
+      notes: leadData.notes,
+      source: leadData.source || 'website'
+    };
+
+    console.log('Sending to CRM:', { ...crmPayload, email: crmPayload.email?.substring(0, 3) + '***' });
+
     // Forward to CRM webhook
     const response = await fetch(CRM_WEBHOOK_URL, {
       method: 'POST',
@@ -29,7 +44,7 @@ Deno.serve(async (req) => {
         'Content-Type': 'application/json',
         'x-api-key': apiKey
       },
-      body: JSON.stringify(leadData)
+      body: JSON.stringify(crmPayload)
     });
 
     const responseText = await response.text();
