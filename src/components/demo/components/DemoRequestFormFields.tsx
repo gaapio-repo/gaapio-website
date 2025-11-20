@@ -50,6 +50,20 @@ export function DemoRequestFormFields({ form }: DemoRequestFormFieldsProps) {
 
       <FormField
         control={form.control}
+        name="company"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Company</FormLabel>
+            <FormControl>
+              <Input required {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
         name="email"
         render={({ field }) => (
           <FormItem>
