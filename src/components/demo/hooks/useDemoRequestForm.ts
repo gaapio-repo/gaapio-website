@@ -104,29 +104,23 @@ export function useDemoRequestForm(onSuccess?: () => void) {
       console.log("Database save successful, now sending Formsubmit email...");
       await sendFormsubmitEmail(data);
 
-      // Sync to CRM
+      // Sync to CRM via secure edge function
       try {
-        const response = await fetch('https://mfsfgmhfavwwqfmtcckb.supabase.co/functions/v1/website-lead-webhook', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': 'wl_live_k9mX2pQn7vR4sT8wY3jL6hN5bM9dF1cA0eG4uZ2xV7qW8iO3pK6sJ9nH2mL5tR4'
-          },
-          body: JSON.stringify({
+        const { data: crmResult, error: crmError } = await supabase.functions.invoke('sync-lead-to-crm', {
+          body: {
             first_name: data.firstName,
             last_name: data.lastName,
             email: data.email,
             phone: data.phone,
             notes: data.notes,
             source: 'Demo Request'
-          })
+          }
         });
 
-        if (response.ok) {
-          const result = await response.json();
-          console.log('Lead synced to CRM:', result);
+        if (crmError) {
+          console.error('Failed to sync to CRM:', crmError);
         } else {
-          console.error('Failed to sync to CRM:', await response.text());
+          console.log('Lead synced to CRM:', crmResult);
         }
       } catch (error) {
         console.error('CRM sync error:', error);
