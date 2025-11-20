@@ -68,6 +68,37 @@ export const WaitlistForm = memo(function WaitlistForm() {
         // Don't block the form submission if the webhook fails
       });
 
+      // Sync to CRM
+      try {
+        const domain = trimmedCompany ? trimmedCompany.replace(/^(https?:\/\/)?(www\.)?/, '').split('/')[0] : '';
+        const response = await fetch('https://mfsfgmhfavwwqfmtcckb.supabase.co/functions/v1/website-lead-webhook', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': 'wl_live_k9mX2pQn7vR4sT8wY3jL6hN5bM9dF1cA0eG4uZ2xV7qW8iO3pK6sJ9nH2mL5tR4'
+          },
+          body: JSON.stringify({
+            company_name: trimmedCompany,
+            domain: domain,
+            website: trimmedCompany,
+            first_name: trimmedName.split(' ')[0],
+            last_name: trimmedName.split(' ').slice(1).join(' ') || trimmedName.split(' ')[0],
+            email: trimmedEmail,
+            notes: 'Waitlist signup',
+            source: 'Waitlist'
+          })
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Lead synced to CRM:', result);
+        } else {
+          console.error('Failed to sync to CRM:', await response.text());
+        }
+      } catch (error) {
+        console.error('CRM sync error:', error);
+      }
+
       toast({
         title: "You're on the list!",
         description: "Thanks for joining our waitlist. We'll be in touch soon.",
