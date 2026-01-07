@@ -13,7 +13,7 @@ export default function SSA() {
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <h1 className="text-3xl font-bold mb-8 text-center">GAAPIO SUBSCRIPTION SERVICES AGREEMENT</h1>
               
-              <p className="text-center mb-8 text-muted-foreground">As of September 5, 2025</p>
+              <p className="text-center mb-8 text-muted-foreground">As of January 7, 2026</p>
               
               <p className="mb-8">
                 This Subscription Services Agreement ("Agreement") is entered into by and between Gaapio, Inc., 
