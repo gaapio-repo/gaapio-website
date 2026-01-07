@@ -17,7 +17,7 @@ export function DemoRequestSuccess() {
       <h1 className="text-3xl font-bold mb-4">Thank You for Your Request!</h1>
       
       <p className="text-muted-foreground max-w-md mx-auto mb-6">
-        We've received your demo request. Schedule a time below, or our team will be in touch shortly.
+        We've received your demo request. Schedule a time below, and our team will be in touch shortly.
       </p>
       
       <div className="mb-8">
