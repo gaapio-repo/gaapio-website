@@ -37,13 +37,13 @@ export const AnimatedMemo = () => {
   // regardless of screen size
   
   // Top position: where the memo content starts (percentage of image height)
-  const getTopPosition = () => "33%";
+  const getTopPosition = () => "28%";
   
   // Left position: where the main content column starts in the image
   const getLeftPosition = () => "25%";
   
   // Right position: right edge of the memo content area
-  const getRightPosition = () => "1%";
+  const getRightPosition = () => "-2%";
   
   // Height of the text area (percentage of remaining space)
   const getTextAreaHeight = () => "68%";
@@ -191,7 +191,7 @@ export const AnimatedMemo = () => {
             borderRadius: '4px',
             width: '300%',
             fontSize: '12px',
-            transform: 'scale(0.42)',
+            transform: 'scale(0.52)',
             transformOrigin: 'top left',
             whiteSpace: 'pre-wrap',
             overflow: 'hidden'
