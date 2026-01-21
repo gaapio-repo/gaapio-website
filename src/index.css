@@ -388,24 +388,32 @@
   @media (min-width: 769px) and (max-width: 1023px) {
     .memo-card,
     .memo-card-right {
-      min-height: clamp(400px, 55vw, 550px);
-      max-width: min(90vw, 700px);
+      min-height: 55vw;
+      max-width: 55vw;
     }
   }
 
-  @media (min-width: 1024px) and (max-width: 1399px) {
+  @media (min-width: 1024px) and (max-width: 1199px) {
     .memo-card,
     .memo-card-right {
-      min-height: clamp(450px, 50vh, 650px);
-      max-width: min(88vw, 950px);
+      min-height: 42vw;
+      max-width: 58vw;
     }
   }
 
-  @media (min-width: 1400px) {
+  @media (min-width: 1200px) and (max-width: 1599px) {
     .memo-card,
     .memo-card-right {
-      max-width: min(85vw, 1100px);
-      min-height: clamp(500px, 50vh, 750px);
+      min-height: 38vw;
+      max-width: 55vw;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .memo-card,
+    .memo-card-right {
+      max-width: min(55vw, 1100px);
+      min-height: min(38vw, 750px);
     }
   }
 }
