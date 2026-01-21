@@ -338,7 +338,7 @@
     transition: opacity 0.5s ease;
     overflow: hidden;
     max-width: 100%;
-    min-height: clamp(400px, 50vw, 800px);
+    min-height: clamp(350px, 45vh, 700px);
   }
 
   .memo-background-image {
@@ -380,15 +380,32 @@
     
     .memo-card,
     .memo-card-right {
-      min-height: clamp(450px, 80vw, 700px);
+      min-height: clamp(400px, 70vw, 600px);
       max-width: 100%;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    .memo-card,
+    .memo-card-right {
+      min-height: clamp(400px, 55vw, 550px);
+      max-width: min(90vw, 700px);
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1399px) {
+    .memo-card,
+    .memo-card-right {
+      min-height: clamp(450px, 50vh, 650px);
+      max-width: min(88vw, 950px);
     }
   }
 
   @media (min-width: 1400px) {
     .memo-card,
     .memo-card-right {
-      max-width: 1200px;
+      max-width: min(85vw, 1100px);
+      min-height: clamp(500px, 50vh, 750px);
     }
   }
 }

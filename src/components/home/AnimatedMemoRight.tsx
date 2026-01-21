@@ -34,13 +34,16 @@ export const AnimatedMemoRight = () => {
     if (width < 480) return 0.55;
     if (width < 768) return 0.65;
     if (width < 1024) return 0.7;
-    return 0.75;
+    if (width < 1400) return 0.75;
+    return 0.8;
   };
 
   const getTopPosition = () => {
     if (width < 480) return "420px";
     if (width < 768) return "240px";
-    return "205px";
+    if (width < 1024) return "205px";
+    if (width < 1400) return "210px";
+    return "220px";
   };
 
   const getContainerWidth = () => {
@@ -59,6 +62,13 @@ export const AnimatedMemoRight = () => {
     if (width < 480) return "calc(200% - 150px)";
     if (width < 768) return "calc(180% - 150px)";
     return "calc(140% - 170px)";
+  };
+
+  const getMaxWidth = () => {
+    if (width < 768) return "100%";
+    if (width < 1024) return "min(90vw, 700px)";
+    if (width < 1400) return "min(88vw, 950px)";
+    return "min(85vw, 1100px)";
   };
 
   const applyThemeStyles = () => {
@@ -141,7 +151,7 @@ export const AnimatedMemoRight = () => {
           boxShadow: isDark
             ? "0 0 15px rgba(255,255,255,0.05)"
             : "0 0 15px rgba(0,0,0,0.1)",
-          maxWidth: width < 768 ? "100%" : "850px",
+          maxWidth: getMaxWidth(),
           width: "100%",
           border: "1px solid",
           borderRadius: "8px",
