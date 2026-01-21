@@ -46,19 +46,30 @@ export function TrustBarSection() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.1 } // Lower threshold to trigger sooner
     );
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
+    // Fallback: if element is already in viewport on mount, make visible
+    const timeout = setTimeout(() => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          setIsVisible(true);
+        }
+      }
+    }, 100);
+
     return () => {
+      clearTimeout(timeout);
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, []);
+  }, [logos]); // Re-run when logos load
 
   // Don't render if feature is disabled
   if (!isEnabled) {
