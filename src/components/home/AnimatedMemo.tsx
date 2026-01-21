@@ -30,42 +30,23 @@ export const AnimatedMemo = () => {
   const [loaded, setLoaded] = useState(false);
   const [isDark, setIsDark] = useState(false);
   
-  // Adjust scale and positioning based on screen width
-  const getScale = () => {
-    if (width < 480) return 0.35;   // Mobile phones
-    if (width < 768) return 0.5;    // Tablets
-    if (width < 1024) return 0.58;  // Small laptops
-    if (width < 1280) return 0.62;  // Medium laptops (critical range)
-    return 0.7;                     // Larger screens
-  };
+  // Text sizing now handled via clamp() in CSS, no scale transform needed
 
-  // Get container position based on screen width
-  const getTopPosition = () => {
-    if (width < 480) return "220px";  // Adjusted higher on mobile
-    if (width < 768) return "240px";
-    return "205px";
-  };
-
-  // Get container width based on screen width
-  const getContainerWidth = () => {
-    if (width < 480) return "175%";  // Extra wide on mobile for proper scaling
-    if (width < 768) return "150%";
-    return "175%";
-  };
-
-  // Get left position based on screen width
-  const getLeftPosition = () => {
-    if (width < 480) return "23%";   // Much more to the right on mobile
-    if (width < 768) return "23%";
-    return "23%";
-  };
-
-  // Get container height based on screen width
-  const getContainerHeight = () => {
-    if (width < 480) return "calc(220% - 170px)";  // Taller on mobile
-    if (width < 768) return "calc(200% - 170px)";
-    return "calc(140% - 170px)";
-  };
+  // All positioning is relative to the background image (percentages)
+  // This ensures the text animation aligns with the memo content area
+  // regardless of screen size
+  
+  // Top position: where the memo content starts (percentage of image height)
+  const getTopPosition = () => "27%";
+  
+  // Left position: where the main content column starts in the image
+  const getLeftPosition = () => "49%";
+  
+  // Right position: right edge of the memo content area
+  const getRightPosition = () => "2%";
+  
+  // Height of the text area (percentage of remaining space)
+  const getTextAreaHeight = () => "68%";
 
   // Get max width based on screen width - responsive sizing
   const getMaxWidth = () => {
@@ -190,14 +171,14 @@ export const AnimatedMemo = () => {
             position: "absolute",
             top: getTopPosition(),
             left: getLeftPosition(),
-            right: "2.5%",
+            right: getRightPosition(),
             textAlign: "left",
             lineHeight: "1.2",
             zIndex: 10,
-            height: getContainerHeight(),
+            height: getTextAreaHeight(),
             display: "flex",
             alignItems: "flex-start",
-            width: getContainerWidth()
+            overflow: "hidden"
           }}
         >
           <div 
@@ -209,11 +190,9 @@ export const AnimatedMemo = () => {
               padding: '4px',
               borderRadius: '4px',
               width: '100%',
-              fontSize: '12px',
-              transform: `scale(${getScale()})`,
+              fontSize: `clamp(6px, 1.2vw, 12px)`,
               transformOrigin: 'top left',
               whiteSpace: 'pre-wrap',
-              maxHeight: `${100 / getScale()}%`,
               overflow: 'hidden'
             }}
           ></div>
