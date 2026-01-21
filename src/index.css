@@ -349,22 +349,7 @@
     object-fit: fill;
   }
 
-  .memo-text-overlay {
-    position: absolute;
-    top: clamp(60px, 15%, 220px);
-    left: clamp(60px, 15%, 220px);
-    right: 5px;
-    bottom: 5px;
-    padding: clamp(8px, 2vw, 16px);
-    font-size: clamp(6px, 1.2vw, 10px);
-    line-height: 1.2;
-    font-family: system-ui, -apple-system, sans-serif;
-    transform: rotate(-0.5deg) scale(clamp(0.4, 1.2vw, 0.9));
-    transform-origin: top left;
-    max-height: 100%;
-    overflow-y: hidden;
-    max-width: clamp(800px, 80%, 1600px);
-  }
+  /* memo-text-overlay styles now handled inline in AnimatedMemo.tsx */
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
