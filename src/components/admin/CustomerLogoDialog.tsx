@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useUploadCustomerLogo, useUpdateCustomerLogo, CustomerLogo } from "@/hooks/useCustomerLogos";
-import { Upload, X } from "lucide-react";
+import { useUploadCustomerLogo, useUpdateCustomerLogo, useReplaceCustomerLogoImage, CustomerLogo } from "@/hooks/useCustomerLogos";
+import { Upload, X, ImagePlus } from "lucide-react";
 
 interface CustomerLogoDialogProps {
   open: boolean;
@@ -14,14 +14,26 @@ interface CustomerLogoDialogProps {
 }
 
 export function CustomerLogoDialog({ open, onOpenChange, logo }: CustomerLogoDialogProps) {
-  const [companyName, setCompanyName] = useState(logo?.company_name || "");
-  const [displayOrder, setDisplayOrder] = useState(logo?.display_order?.toString() || "0");
-  const [isActive, setIsActive] = useState(logo?.is_active ?? true);
+  const [companyName, setCompanyName] = useState("");
+  const [displayOrder, setDisplayOrder] = useState("0");
+  const [isActive, setIsActive] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(logo?.logo_url || null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const uploadMutation = useUploadCustomerLogo();
   const updateMutation = useUpdateCustomerLogo();
+  const replaceMutation = useReplaceCustomerLogoImage();
+
+  // Reset form when dialog opens with a logo
+  useEffect(() => {
+    if (open) {
+      setCompanyName(logo?.company_name || "");
+      setDisplayOrder(logo?.display_order?.toString() || "0");
+      setIsActive(logo?.is_active ?? true);
+      setSelectedFile(null);
+      setPreviewUrl(logo?.logo_url || null);
+    }
+  }, [open, logo]);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -52,6 +64,7 @@ export function CustomerLogoDialog({ open, onOpenChange, logo }: CustomerLogoDia
 
     if (logo) {
       // Update existing logo
+      // First update metadata
       await updateMutation.mutateAsync({
         id: logo.id,
         updates: {
@@ -60,6 +73,14 @@ export function CustomerLogoDialog({ open, onOpenChange, logo }: CustomerLogoDia
           is_active: isActive,
         },
       });
+
+      // If a new file was selected, replace the image
+      if (selectedFile) {
+        await replaceMutation.mutateAsync({
+          logo,
+          newFile: selectedFile,
+        });
+      }
     } else {
       // Create new logo
       if (!selectedFile) {
@@ -92,6 +113,8 @@ export function CustomerLogoDialog({ open, onOpenChange, logo }: CustomerLogoDia
     resetForm();
   };
 
+  const isPending = uploadMutation.isPending || updateMutation.isPending || replaceMutation.isPending;
+
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[500px]">
@@ -121,40 +144,43 @@ export function CustomerLogoDialog({ open, onOpenChange, logo }: CustomerLogoDia
             />
           </div>
 
-          {!logo && (
-            <div className="space-y-2">
-              <Label htmlFor="logo-file">Logo Image *</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="logo-file"
-                  type="file"
-                  accept=".png,.jpg,.jpeg,.svg,.webp"
-                  onChange={handleFileSelect}
-                  className="flex-1"
-                />
-                {selectedFile && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => {
-                      setSelectedFile(null);
-                      setPreviewUrl(null);
-                    }}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                )}
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Accepts PNG, JPG, SVG, WebP. Max 2MB.
-              </p>
+          <div className="space-y-2">
+            <Label htmlFor="logo-file">
+              {logo ? "Replace Logo Image" : "Logo Image *"}
+            </Label>
+            <div className="flex items-center gap-2">
+              <Input
+                id="logo-file"
+                type="file"
+                accept=".png,.jpg,.jpeg,.svg,.webp"
+                onChange={handleFileSelect}
+                className="flex-1"
+              />
+              {selectedFile && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => {
+                    setSelectedFile(null);
+                    setPreviewUrl(logo?.logo_url || null);
+                  }}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
             </div>
-          )}
+            <p className="text-xs text-muted-foreground">
+              Accepts PNG, JPG, SVG, WebP. Max 2MB.
+              {logo && " Leave empty to keep current image."}
+            </p>
+          </div>
 
           {previewUrl && (
             <div className="space-y-2">
-              <Label>Preview</Label>
+              <Label>
+                {selectedFile ? "New Image Preview" : "Current Image"}
+              </Label>
               <div className="border rounded-lg p-4 bg-muted/50 flex items-center justify-center">
                 <img
                   src={previewUrl}
@@ -181,12 +207,15 @@ export function CustomerLogoDialog({ open, onOpenChange, logo }: CustomerLogoDia
           </Button>
           <Button
             onClick={handleSubmit}
-            disabled={uploadMutation.isPending || updateMutation.isPending}
+            disabled={isPending}
           >
-            {uploadMutation.isPending || updateMutation.isPending ? (
+            {isPending ? (
               "Saving..."
             ) : logo ? (
-              "Update Logo"
+              <>
+                <ImagePlus className="h-4 w-4 mr-2" />
+                Update Logo
+              </>
             ) : (
               <>
                 <Upload className="h-4 w-4 mr-2" />

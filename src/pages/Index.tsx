@@ -25,14 +25,11 @@ export default function Index() {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Metrics Bar */}
-      
+      {/* Customer Logos / Trust Bar Section */}
+      <TrustBarSection />
 
       {/* Product Highlights Section */}
       <ProductHighlightsSection />
-
-      {/* Customer Logos / Trust Bar Section */}
-      <TrustBarSection />
 
       {/* Key Benefits Section */}
       <KeyBenefitsSection />

@@ -3,7 +3,7 @@ import { Footer } from "@/components/footer";
 import { ResearchHeroSection } from "@/components/research/ResearchHeroSection";
 import { ResearchHowItWorksSection } from "@/components/research/ResearchHowItWorksSection";
 import { ResearchBenefitsSection } from "@/components/research/ResearchBenefitsSection";
-import { SocialProofSection } from "@/components/home/SocialProofSection";
+import { TrustBarSection } from "@/components/home/TrustBarSection";
 
 export default function ResearchGPT() {
   return (
@@ -16,14 +16,12 @@ export default function ResearchGPT() {
           <div className="bg-white dark:bg-background">
             <ResearchHeroSection />
           </div>
+
+          {/* Customer Logos / Trust Bar Section */}
+          <TrustBarSection />
           
           {/* How It Works Section - Gradient Background */}
           <ResearchHowItWorksSection />
-          
-          {/* Social Proof Section - White Background */}
-          <div className="bg-white dark:bg-background">
-            <SocialProofSection />
-          </div>
           
           {/* Benefits Section */}
           <ResearchBenefitsSection />
