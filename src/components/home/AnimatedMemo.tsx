@@ -43,7 +43,7 @@ export const AnimatedMemo = () => {
   const getLeftPosition = () => "25%";
   
   // Right position: right edge of the memo content area
-  const getRightPosition = () => "-5%";
+  const getRightPosition = () => "-10%";
   
   // Height of the text area (percentage of remaining space)
   const getTextAreaHeight = () => "68%";
