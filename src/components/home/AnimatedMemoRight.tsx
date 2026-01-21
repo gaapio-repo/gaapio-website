@@ -66,9 +66,10 @@ export const AnimatedMemoRight = () => {
 
   const getMaxWidth = () => {
     if (width < 768) return "100%";
-    if (width < 1024) return "min(90vw, 700px)";
-    if (width < 1400) return "min(88vw, 950px)";
-    return "min(85vw, 1100px)";
+    if (width < 1024) return "55vw";
+    if (width < 1200) return "58vw";
+    if (width < 1600) return "55vw";
+    return "min(55vw, 1100px)";
   };
 
   const applyThemeStyles = () => {
