@@ -40,10 +40,10 @@ export const AnimatedMemo = () => {
   const getTopPosition = () => "33%";
   
   // Left position: where the main content column starts in the image
-  const getLeftPosition = () => "32%";
+  const getLeftPosition = () => "28%";
   
   // Right position: right edge of the memo content area
-  const getRightPosition = () => "4%";
+  const getRightPosition = () => "2%";
   
   // Height of the text area (percentage of remaining space)
   const getTextAreaHeight = () => "68%";
@@ -181,21 +181,22 @@ export const AnimatedMemo = () => {
             overflow: "hidden"
           }}
         >
-          <div 
-            ref={typedElementRef}
-            className="memo-text"
-            style={{
-              color: isDark ? '#FFFFFF' : '#333',
-              backgroundColor: isDark ? 'transparent' : 'rgba(255, 255, 255, 0.95)',
-              padding: '4px',
-              borderRadius: '4px',
-              width: '100%',
-              fontSize: `clamp(3px, 0.35vw, 5px)`,
-              transformOrigin: 'top left',
-              whiteSpace: 'pre-wrap',
-              overflow: 'hidden'
-            }}
-          ></div>
+        <div 
+          ref={typedElementRef}
+          className="memo-text"
+          style={{
+            color: isDark ? '#FFFFFF' : '#333',
+            backgroundColor: isDark ? 'transparent' : 'rgba(255, 255, 255, 0.95)',
+            padding: '4px',
+            borderRadius: '4px',
+            width: '300%',
+            fontSize: '12px',
+            transform: 'scale(0.35)',
+            transformOrigin: 'top left',
+            whiteSpace: 'pre-wrap',
+            overflow: 'hidden'
+          }}
+        ></div>
         </div>
       </div>
     </div>
