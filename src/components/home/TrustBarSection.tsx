@@ -105,10 +105,10 @@ export function TrustBarSection() {
                   transitionDelay: `${index * 100}ms`,
                 }}
               >
-                <img
+              <img
                   src={logo.logo_url}
                   alt={logo.company_name}
-                  className="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  className="h-8 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
                   title={logo.company_name}
                 />
               </div>
