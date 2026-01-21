@@ -1,12 +1,11 @@
-
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { GuidanceHeroSection } from "@/components/guidance/GuidanceHeroSection";
 import { GuidanceHowItWorksSection } from "@/components/guidance/GuidanceHowItWorksSection";
-import { SocialProofSection } from "@/components/home/SocialProofSection";
 import { NeverMissUpdateSection } from "@/components/guidance/NeverMissUpdateSection";
 import { GuidanceMakesSenseSection } from "@/components/guidance/GuidanceMakesSenseSection";
 import { FinalCtaBanner } from "@/components/guidance/FinalCtaBanner";
+import { TrustBarSection } from "@/components/home/TrustBarSection";
 
 export default function GuidanceUpdates() {
   return (
@@ -20,12 +19,12 @@ export default function GuidanceUpdates() {
             title="Stay Current with Guidance Updates" 
             subtitle="AI-Powered. Always Updated."
           />
+
+          {/* Customer Logos / Trust Bar Section */}
+          <TrustBarSection />
           
           {/* How It Works Section - Light Gradient Background */}
           <GuidanceHowItWorksSection />
-          
-          {/* Social Proof Section - White Background */}
-          <SocialProofSection />
           
           {/* Never Miss Update Section - Blue Solid Background */}
           <NeverMissUpdateSection />

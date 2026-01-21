@@ -1,4 +1,3 @@
-
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -74,37 +73,33 @@ export function TrustBarSection() {
   return (
     <section 
       ref={sectionRef}
-      className="py-16 bg-white dark:bg-background border-t border-gray-100 dark:border-gray-800"
+      className="py-8 bg-white dark:bg-background border-t border-gray-100 dark:border-gray-800"
     >
       <ResponsiveContainer>
-        <div className="text-center mb-12">
-          <h3 className="text-lg font-medium text-muted-foreground mb-8">
+        <div className="text-center">
+          <h3 className="text-sm font-medium text-muted-foreground mb-6 uppercase tracking-wider">
             Trusted by Leading Organizations
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             {logos.map((logo, index) => (
               <div 
                 key={logo.id}
                 className={cn(
-                  "flex items-center justify-center p-4 transition-all duration-1000",
+                  "flex items-center justify-center transition-all duration-700",
                   isVisible 
-                    ? "opacity-70 translate-y-0" 
-                    : "opacity-0 translate-y-[20px]"
+                    ? "opacity-70 translate-y-0 hover:opacity-100" 
+                    : "opacity-0 translate-y-[10px]"
                 )}
                 style={{ 
                   transitionDelay: `${index * 100}ms`,
                 }}
               >
-                <div className="text-center">
-                  <div className="w-32 h-16 bg-muted/50 rounded-lg border border-border flex items-center justify-center hover:scale-105 transition-transform duration-300 p-2">
-                    <img
-                      src={logo.logo_url}
-                      alt={logo.company_name}
-                      className="max-w-full max-h-full object-contain"
-                      title={logo.company_name}
-                    />
-                  </div>
-                </div>
+                <img
+                  src={logo.logo_url}
+                  alt={logo.company_name}
+                  className="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  title={logo.company_name}
+                />
               </div>
             ))}
           </div>
