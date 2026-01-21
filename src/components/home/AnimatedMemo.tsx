@@ -67,6 +67,15 @@ export const AnimatedMemo = () => {
     return "calc(140% - 170px)";
   };
 
+  // Get max width based on screen width - responsive sizing
+  const getMaxWidth = () => {
+    if (width < 768) return "100%";
+    if (width < 1024) return "min(95vw, 600px)";
+    if (width < 1280) return "min(50vw, 650px)";
+    if (width < 1600) return "min(48vw, 800px)";
+    return "min(45vw, 900px)";
+  };
+
   // Apply theme styles directly using JavaScript
   const applyThemeStyles = () => {
     const isDarkMode = document.documentElement.classList.contains("dark");
@@ -153,7 +162,7 @@ export const AnimatedMemo = () => {
           boxShadow: isDark 
             ? "0 0 15px rgba(255,255,255,0.05)" 
             : "0 0 15px rgba(0,0,0,0.1)",
-          maxWidth: "850px",
+          maxWidth: getMaxWidth(),
           width: "100%",
           border: "1px solid",
           borderRadius: "8px",
