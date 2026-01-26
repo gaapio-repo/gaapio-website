@@ -32,23 +32,23 @@ export function FinalCtaSection() {
       ref={sectionRef} 
       className="relative py-24 md:py-32 overflow-hidden"
     >
-      {/* Dark navy/charcoal gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950" />
+      {/* Gaapio blue gradient background - matches hero */}
+      <div className="absolute inset-0 hero-gradient-bg" />
       
       {/* Subtle dot grid texture */}
       <div 
-        className="absolute inset-0 opacity-[0.05]"
+        className="absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 1px)`,
           backgroundSize: '24px 24px'
         }}
       />
       
-      {/* Gaapio blue accent glow - center */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-br from-primary/15 via-primary/5 to-transparent blur-3xl pointer-events-none rounded-full" />
+      {/* Subtle white glow for depth */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-br from-white/10 via-white/5 to-transparent blur-3xl pointer-events-none rounded-full" />
       
       {/* Footer transition gradient */}
-      <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-b from-transparent to-black/50" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
 
       <ResponsiveContainer className="relative z-10">
         <div className="text-center max-w-3xl mx-auto">
@@ -62,7 +62,7 @@ export function FinalCtaSection() {
           </h2>
           <p 
             className={cn(
-              "text-lg md:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed transition-all duration-1000",
+              "text-lg md:text-xl text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed transition-all duration-1000",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
             )} 
             style={{ transitionDelay: "200ms" }}
@@ -79,16 +79,16 @@ export function FinalCtaSection() {
           >
             <Button 
               size="lg" 
-              variant="blue" 
-              className="px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
+              variant="black" 
+              className="px-8 hover:bg-gray-800 hover:scale-105 transition-all"
               asChild
             >
               <Link to="/request-demo">Request a Demo</Link>
             </Button>
             <Button 
               size="lg" 
-              variant="ghost" 
-              className="px-8 text-white border border-white/20 hover:bg-white/10 hover:border-white/40 transition-all"
+              variant="outline" 
+              className="px-8 border-2 border-white text-white bg-transparent hover:bg-white/10 transition-all"
               asChild
             >
               <Link to="/contact">Ask a Question</Link>
