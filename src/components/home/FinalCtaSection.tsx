@@ -32,29 +32,26 @@ export function FinalCtaSection() {
       ref={sectionRef} 
       className="relative py-24 md:py-32 overflow-hidden"
     >
-      {/* Medium dark gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-750 to-slate-800" />
+      {/* Light gradient background with subtle blue tint */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5" />
       
       {/* Subtle dot grid texture */}
       <div 
-        className="absolute inset-0 opacity-[0.05]"
+        className="absolute inset-0 opacity-[0.4]"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary) / 0.15) 1px, transparent 1px)`,
           backgroundSize: '24px 24px'
         }}
       />
       
-      {/* Gaapio blue accent glow - top center */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-primary/25 via-primary/10 to-transparent blur-3xl pointer-events-none" />
-      
-      {/* Secondary glow - bottom for footer transition */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-t from-slate-900/80 to-transparent pointer-events-none" />
+      {/* Gaapio blue accent glow - center */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-br from-primary/10 via-primary/5 to-transparent blur-3xl pointer-events-none rounded-full" />
 
       <ResponsiveContainer className="relative z-10">
         <div className="text-center max-w-3xl mx-auto">
           <h2 
             className={cn(
-              "text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight transition-all duration-1000",
+              "text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 tracking-tight transition-all duration-1000",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
             )}
           >
@@ -62,7 +59,7 @@ export function FinalCtaSection() {
           </h2>
           <p 
             className={cn(
-              "text-lg md:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed transition-all duration-1000",
+              "text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed transition-all duration-1000",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
             )} 
             style={{ transitionDelay: "200ms" }}
@@ -87,8 +84,8 @@ export function FinalCtaSection() {
             </Button>
             <Button 
               size="lg" 
-              variant="ghost" 
-              className="border border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white hover:border-slate-500 transition-all"
+              variant="outline" 
+              className="px-8 border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/50 transition-all"
               asChild
             >
               <Link to="/contact">Ask a Question</Link>
