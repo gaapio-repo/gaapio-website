@@ -39,10 +39,10 @@ function FeatureCard({ benefit }: { benefit: BenefitCard }) {
     <div 
       className={cn(
         "group relative rounded-2xl p-6 md:p-8",
-        // Card background - light with subtle gradient
-        "bg-gradient-to-br from-white via-white to-muted/30",
+        // Card background - light with subtle gradient in light mode, dark solid in dark mode
+        "bg-gradient-to-br from-white via-white to-muted/30 dark:from-slate-700 dark:via-slate-700 dark:to-slate-700/80",
         // Border with subtle shadow
-        "border border-border/60",
+        "border border-border/60 dark:border-slate-600",
         "shadow-sm",
         // Hover effects
         "hover:border-primary/30 hover:-translate-y-1",
@@ -60,13 +60,13 @@ function FeatureCard({ benefit }: { benefit: BenefitCard }) {
           <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center border border-primary/20">
             <Icon className="w-5 h-5 text-primary" strokeWidth={1.75} />
           </div>
-          <h3 className="text-lg font-semibold text-foreground tracking-tight">
+          <h3 className="text-lg font-semibold text-foreground dark:text-white tracking-tight">
             {benefit.title}
           </h3>
         </div>
         
         {/* Description paragraph */}
-        <p className="text-muted-foreground text-[15px] leading-relaxed">
+        <p className="text-muted-foreground dark:text-slate-300 text-[15px] leading-relaxed">
           {benefit.description}
         </p>
       </div>
