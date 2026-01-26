@@ -77,12 +77,12 @@ function FeatureCard({ benefit }: { benefit: BenefitCard }) {
 export function KeyBenefitsSection() {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
-      {/* Light gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/20 to-background -z-10" />
+      {/* Light blue-gray gradient band - light mode */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-800/60 dark:via-slate-800/60 dark:to-slate-800/60 -z-10" />
       
       {/* Subtle accent overlays */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_hsl(var(--primary)/0.06)_0%,_transparent_50%)] -z-10" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_hsl(var(--primary)/0.04)_0%,_transparent_50%)] -z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_hsl(var(--primary)/0.04)_0%,_transparent_50%)] -z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_hsl(var(--primary)/0.03)_0%,_transparent_50%)] -z-10" />
       
       <ResponsiveContainer>
         {/* Top Hero Row - Split Layout */}

@@ -114,13 +114,13 @@ export function ProductHighlightsSection() {
     <section 
       id="product-highlights" 
       ref={sectionRef}
-      className="py-20 md:py-32 bg-gradient-to-b from-[#f4faff] to-white dark:from-[#1A1F2B] dark:to-[#1A1F2B] relative overflow-hidden"
+      className="py-20 md:py-32 bg-white dark:bg-slate-900 relative overflow-hidden"
     >
-      {/* Background decorative elements */}
+      {/* Background decorative elements - subtle */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-[#339CFF]/5 rounded-full blur-xl"></div>
-        <div className="absolute bottom-20 right-20 w-24 h-24 bg-[#339CFF]/5 rounded-full blur-lg"></div>
-        <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-[#339CFF]/10 rounded-full blur-lg"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-primary/3 rounded-full blur-xl"></div>
+        <div className="absolute bottom-20 right-20 w-24 h-24 bg-primary/3 rounded-full blur-lg"></div>
+        <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-primary/5 rounded-full blur-lg"></div>
       </div>
 
       <ResponsiveContainer>
