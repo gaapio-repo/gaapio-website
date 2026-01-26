@@ -37,7 +37,11 @@ export const AnimatedMemo = () => {
   // regardless of screen size
   
   // Top position: where the memo content starts (percentage of image height)
-  const getTopPosition = () => "24%";
+  const getTopPosition = () => {
+    if (width < 768) return "24%"; // mobile - perfect, don't change
+    if (width < 1280) return "28%"; // medium screens - push down
+    return "24%"; // large screens - perfect, don't change
+  };
   
   // Left position: where the main content column starts in the image
   const getLeftPosition = () => "25%";
