@@ -84,11 +84,11 @@ export function TrustBarSection() {
   return (
     <section 
       ref={sectionRef}
-      className="py-8 bg-slate-50 dark:bg-slate-300 border-b border-gray-100 dark:border-slate-400"
+      className="py-8 bg-slate-50 dark:bg-slate-200 border-b border-gray-100 dark:border-slate-300"
     >
       <ResponsiveContainer>
         <div className="text-center">
-          <h3 className="text-sm font-medium text-muted-foreground mb-6 uppercase tracking-wider">
+          <h3 className="text-sm font-medium text-muted-foreground dark:text-black mb-6 uppercase tracking-wider">
             Trusted by Leading Organizations
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
