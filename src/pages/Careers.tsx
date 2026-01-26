@@ -295,13 +295,13 @@ const Careers = () => {
               
               {/* Stats Bar */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12 max-w-xl mx-auto animate-fade-in" style={{ animationDelay: "200ms" }}>
-                <div className="text-center p-4 rounded-xl bg-white/90 backdrop-blur-sm border border-white shadow-lg">
-                  <div className="text-3xl font-bold text-black mb-1">Remote-First</div>
-                  <div className="text-sm text-gray-600">Work From Anywhere</div>
+                <div className="text-center p-4 rounded-xl bg-white/30 backdrop-blur-sm border border-white/40">
+                  <div className="text-3xl font-bold text-white mb-1">Remote-First</div>
+                  <div className="text-sm text-white/90">Work From Anywhere</div>
                 </div>
-                <div className="text-center p-4 rounded-xl bg-white/90 backdrop-blur-sm border border-white shadow-lg">
-                  <div className="text-3xl font-bold text-black mb-1">AI-Powered</div>
-                  <div className="text-sm text-gray-600">Latest Technology</div>
+                <div className="text-center p-4 rounded-xl bg-white/30 backdrop-blur-sm border border-white/40">
+                  <div className="text-3xl font-bold text-white mb-1">AI-Powered</div>
+                  <div className="text-sm text-white/90">Latest Technology</div>
                 </div>
               </div>
             </div>
