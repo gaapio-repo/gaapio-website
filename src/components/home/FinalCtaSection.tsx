@@ -32,8 +32,8 @@ export function FinalCtaSection() {
       ref={sectionRef} 
       className="relative py-24 md:py-32 overflow-hidden"
     >
-      {/* Gaapio blue gradient background - matches hero */}
-      <div className="absolute inset-0 hero-gradient-bg" />
+      {/* Light Gaapio blue gradient background */}
+      <div className="absolute inset-0 cta-gradient-bg" />
       
       {/* Subtle dot grid texture */}
       <div 

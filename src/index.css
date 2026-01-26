@@ -187,6 +187,15 @@
     );
   }
   
+  /* CTA gradient background - lighter, more transparent version */
+  .cta-gradient-bg {
+    background: linear-gradient(135deg, 
+      hsl(200 85% 75% / 0.85) 0%, 
+      hsl(198 90% 72% / 0.8) 50%, 
+      hsl(195 95% 70% / 0.75) 100%
+    );
+  }
+  
   /* Floating animation */
   @keyframes float {
     0%, 100% { 
