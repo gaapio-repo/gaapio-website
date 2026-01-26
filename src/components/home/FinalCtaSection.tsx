@@ -32,12 +32,12 @@ export function FinalCtaSection() {
       ref={sectionRef} 
       className="relative py-24 md:py-32 overflow-hidden"
     >
-      {/* Dark gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950" />
+      {/* Medium dark gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-750 to-slate-800" />
       
       {/* Subtle dot grid texture */}
       <div 
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 1px)`,
           backgroundSize: '24px 24px'
@@ -45,10 +45,10 @@ export function FinalCtaSection() {
       />
       
       {/* Gaapio blue accent glow - top center */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-primary/25 via-primary/10 to-transparent blur-3xl pointer-events-none" />
       
       {/* Secondary glow - bottom for footer transition */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-t from-slate-900/80 to-transparent pointer-events-none" />
 
       <ResponsiveContainer className="relative z-10">
         <div className="text-center max-w-3xl mx-auto">
