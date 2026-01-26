@@ -1,4 +1,4 @@
-import { FileCheck, BadgeCheck, BookCheck, Shield } from "lucide-react";
+import { FileCheck, BadgeCheck, BookCheck, Shield, Check } from "lucide-react";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -11,13 +11,13 @@ interface Benefit {
   title: string;
   punchline: string;
   bullets: string[];
-  proofChips: string[];
+  chips: string[];
   delay: number;
 }
 
-function ProofChip({ label }: { label: string }) {
+function FeatureChip({ label }: { label: string }) {
   return (
-    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#339CFF]/10 text-[#339CFF] border border-[#339CFF]/20">
+    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium text-[#339CFF] border border-[#339CFF]/25 bg-transparent whitespace-nowrap">
       {label}
     </span>
   );
@@ -78,7 +78,7 @@ export function KeyBenefitsSection() {
         "Built end-to-end so teams stop digging through scattered files and outdated templates.",
         "Deliverables stay consistent, clear, and partner-ready."
       ],
-      proofChips: ["Centralized workspace", "CPA-built workflows"],
+      chips: ["Centralized workspace", "CPA-built workflows"],
       delay: 0
     },
     {
@@ -89,8 +89,8 @@ export function KeyBenefitsSection() {
         "Every input, revision, and approval is automatically captured for a clean audit trail.",
         "Export a complete audit package without chasing comments or history."
       ],
-      proofChips: ["Version history", "Sign-offs", "Audit export"],
-      delay: 200
+      chips: ["Version history", "Sign-offs", "Audit export"],
+      delay: 100
     },
     {
       icon: Shield,
@@ -100,8 +100,8 @@ export function KeyBenefitsSection() {
         "Your data stays private to your organization—never used to train public models.",
         "Encryption + access controls built in, with SOC 2 in progress."
       ],
-      proofChips: ["Encryption", "Access controls", "SOC 2 readiness"],
-      delay: 400
+      chips: ["Encryption", "Access controls", "SOC 2 readiness"],
+      delay: 200
     },
     {
       icon: BadgeCheck,
@@ -111,71 +111,84 @@ export function KeyBenefitsSection() {
         "Not generic 'chat' — models tuned for technical accounting workflows and documentation.",
         "More structured inputs → more precise, reliable deliverables."
       ],
-      proofChips: ["Technical-accounting tuned", "Consistent formatting"],
-      delay: 600
+      chips: ["Technical-accounting tuned", "Consistent formatting"],
+      delay: 300
     }
   ];
 
   return (
     <section 
       ref={sectionRef}
-      className="relative z-10 py-20 md:py-32 bg-white dark:bg-background"
+      className="relative z-10 py-24 md:py-32 bg-gradient-to-b from-[#f8fafc] to-white dark:from-gray-900/50 dark:to-background"
     >
+      {/* Subtle top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent" />
+      
       <ResponsiveContainer>
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Gaapio?</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-14 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">Why Gaapio?</h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto">
             See why accounting teams are making the switch to AI-powered documentation.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+        {/* 2x2 Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 max-w-5xl mx-auto mb-14">
           {benefits.map((benefit) => (
             <div 
               key={benefit.title}
               className={cn(
-                "p-8 md:p-10 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-lg hover:shadow-xl transition-all duration-500 flex flex-col",
+                "group relative p-6 md:p-8 rounded-2xl border border-gray-200/80 dark:border-gray-700/50",
+                "bg-gradient-to-br from-white via-white to-gray-50/50 dark:from-gray-800/80 dark:via-gray-800/60 dark:to-gray-900/40",
+                "shadow-sm hover:shadow-lg hover:shadow-[#339CFF]/5",
+                "hover:-translate-y-1 transition-all duration-300 ease-out",
+                "overflow-hidden",
                 isVisible 
                   ? "opacity-100 translate-y-0" 
-                  : "opacity-0 translate-y-[30px]"
+                  : "opacity-0 translate-y-[20px]"
               )}
               style={{ 
                 transitionDelay: `${benefit.delay}ms`,
               }}
             >
-              {/* Icon Badge - Larger with soft background */}
-              <div className="mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#339CFF]/15 to-[#339CFF]/5 rounded-2xl flex items-center justify-center shadow-sm border border-[#339CFF]/10">
-                  <benefit.icon className="h-8 w-8 text-[#339CFF]" strokeWidth={1.5} />
-                </div>
+              {/* Hover accent glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#339CFF]/40 to-transparent" />
               </div>
 
-              {/* Title */}
-              <h3 className="text-xl font-bold mb-3 text-left text-foreground">
-                {benefit.title}
-              </h3>
+              {/* Top Row: Icon + Title */}
+              <div className="flex items-center gap-4 mb-5">
+                <div className="flex-shrink-0 w-11 h-11 bg-[#339CFF]/10 rounded-xl flex items-center justify-center">
+                  <benefit.icon className="h-5 w-5 text-[#339CFF]" strokeWidth={2} />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {benefit.title}
+                </h3>
+              </div>
 
-              {/* Punchline - Bold and prominent */}
-              <p className="text-lg font-semibold text-foreground/90 mb-4 leading-relaxed">
+              {/* Punchline */}
+              <p className="text-base md:text-[17px] font-medium text-foreground/90 mb-4 leading-snug">
                 {benefit.punchline}
               </p>
 
-              {/* Micro Bullets */}
-              <ul className="space-y-3 mb-6 flex-grow">
+              {/* Bullets with checkmarks */}
+              <ul className="space-y-2.5 mb-6">
                 {benefit.bullets.map((bullet, idx) => (
                   <li 
                     key={idx} 
-                    className="text-muted-foreground text-sm leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-[#339CFF]/40 before:rounded-full"
+                    className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed"
                   >
-                    {bullet}
+                    <Check className="h-4 w-4 text-[#339CFF]/60 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <span>{bullet}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* Proof Chip Row */}
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100 dark:border-gray-700/50">
-                {benefit.proofChips.map((chip) => (
-                  <ProofChip key={chip} label={chip} />
+              {/* Feature Chips Row */}
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100 dark:border-gray-700/40">
+                {benefit.chips.map((chip) => (
+                  <FeatureChip key={chip} label={chip} />
                 ))}
               </div>
             </div>
@@ -186,12 +199,12 @@ export function KeyBenefitsSection() {
         <div className="text-center">
           <div 
             className={cn(
-              "transition-all duration-1000",
+              "transition-all duration-700",
               isVisible 
                 ? "opacity-100 translate-y-0" 
-                : "opacity-0 translate-y-[30px]"
+                : "opacity-0 translate-y-[20px]"
             )}
-            style={{ transitionDelay: "1200ms" }}
+            style={{ transitionDelay: "500ms" }}
           >
             <Button size="lg" variant="blueOutline" asChild>
               <Link to="/faq?open=chatgpt">How is this different than ChatGPT?</Link>
