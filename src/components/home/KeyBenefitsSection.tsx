@@ -12,13 +12,14 @@ interface Benefit {
   title: string;
   punchline: string;
   bullets: string[];
+  proofLine: string;
   chips: string[];
   delay: number;
 }
 
-function MetadataPill({ label }: { label: string }) {
+function MetadataTag({ label }: { label: string }) {
   return (
-    <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium text-muted-foreground bg-muted/50 dark:bg-muted/30 whitespace-nowrap">
+    <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-medium text-muted-foreground/80 bg-muted/40 dark:bg-muted/20 border border-border/40 whitespace-nowrap">
       {label}
     </span>
   );
@@ -30,70 +31,85 @@ function BenefitCard({ benefit, isVisible }: { benefit: Benefit; isVisible: bool
   return (
     <div 
       className={cn(
-        "group relative rounded-2xl border border-gray-200 dark:border-gray-700/60",
-        "bg-white dark:bg-gray-800/90",
-        "shadow-md shadow-gray-200/50 dark:shadow-none",
-        "hover:shadow-xl hover:shadow-[#339CFF]/10 hover:border-[#339CFF]/30",
-        "hover:-translate-y-1 transition-all duration-300 ease-out",
-        "overflow-hidden",
+        "group relative rounded-2xl overflow-hidden",
+        // Top accent line
+        "before:absolute before:top-0 before:left-0 before:right-0 before:h-[3px]",
+        "before:bg-gradient-to-r before:from-[#339CFF] before:via-[#339CFF]/80 before:to-[#339CFF]/40",
+        // Card background with subtle gradient
+        "bg-gradient-to-br from-white via-white to-[#f8fbff] dark:from-gray-800 dark:via-gray-800/95 dark:to-gray-800/90",
+        // Border
+        "border border-gray-200/80 dark:border-gray-700/50",
+        // Shadow - stronger depth
+        "shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08),0_8px_32px_-8px_rgba(51,156,255,0.06)]",
+        "dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)]",
+        // Hover effects
+        "hover:shadow-[0_8px_30px_-6px_rgba(0,0,0,0.12),0_16px_40px_-12px_rgba(51,156,255,0.15)]",
+        "hover:border-[#339CFF]/40",
+        "hover:-translate-y-1.5",
+        "transition-all duration-300 ease-out",
+        // Animation
         isVisible 
           ? "opacity-100 translate-y-0" 
-          : "opacity-0 translate-y-[20px]"
+          : "opacity-0 translate-y-6"
       )}
       style={{ 
         transitionDelay: `${benefit.delay}ms`,
         transitionProperty: "opacity, transform, box-shadow, border-color"
       }}
     >
-      {/* Watermark decoration */}
-      <div className="absolute -right-6 -bottom-6 pointer-events-none opacity-[0.04] dark:opacity-[0.06]">
-        <WatermarkIcon className="w-32 h-32 text-[#339CFF]" strokeWidth={1} />
+      {/* Watermark decoration - positioned bottom right */}
+      <div className="absolute -right-4 -bottom-4 pointer-events-none opacity-[0.035] dark:opacity-[0.05]">
+        <WatermarkIcon className="w-28 h-28 text-[#339CFF]" strokeWidth={0.75} />
       </div>
       
-      {/* Header strip with gradient */}
-      <div className="relative px-5 py-4 bg-gradient-to-r from-[#339CFF]/[0.04] via-[#339CFF]/[0.02] to-transparent dark:from-[#339CFF]/[0.08] dark:via-[#339CFF]/[0.04] dark:to-transparent border-b border-gray-100 dark:border-gray-700/40">
-        <div className="flex items-center gap-3.5">
-          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-[#339CFF]/15 to-[#339CFF]/5 dark:from-[#339CFF]/20 dark:to-[#339CFF]/10 rounded-xl flex items-center justify-center shadow-sm">
-            <benefit.icon className="h-6 w-6 text-[#339CFF]" strokeWidth={1.75} />
+      {/* Corner glow effect on hover */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#339CFF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+      {/* Card content - all left aligned */}
+      <div className="relative p-5 md:p-6">
+        {/* Top row: Icon + Title */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex-shrink-0 w-11 h-11 bg-gradient-to-br from-[#339CFF]/15 via-[#339CFF]/10 to-[#339CFF]/5 dark:from-[#339CFF]/25 dark:to-[#339CFF]/10 rounded-xl flex items-center justify-center shadow-sm border border-[#339CFF]/10">
+            <benefit.icon className="h-5 w-5 text-[#339CFF]" strokeWidth={1.75} />
           </div>
-          <h3 className="text-base font-semibold text-foreground tracking-tight">
+          <h3 className="text-sm font-semibold text-foreground/90 tracking-tight uppercase">
             {benefit.title}
           </h3>
         </div>
-      </div>
 
-      {/* Main body content */}
-      <div className="px-5 py-5">
-        {/* Punchline - hero text */}
-        <p className="text-xl md:text-[22px] font-semibold text-foreground mb-4 leading-tight tracking-tight">
+        {/* Punchline - large and bold */}
+        <p className="text-xl md:text-2xl font-bold text-foreground mb-4 leading-snug tracking-tight">
           {benefit.punchline}
         </p>
 
-        {/* Bullets with check icons */}
-        <ul className="space-y-2 mb-5">
+        {/* Supporting bullets - short and muted */}
+        <ul className="space-y-2 mb-3">
           {benefit.bullets.map((bullet, idx) => (
             <li 
               key={idx} 
-              className="flex items-start gap-2 text-[13px] text-muted-foreground leading-relaxed"
+              className="flex items-start gap-2.5 text-[13px] text-muted-foreground/90 leading-relaxed"
             >
-              <Check className="h-3.5 w-3.5 text-[#339CFF]/70 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+              <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#339CFF]/50 mt-[7px]" />
               <span>{bullet}</span>
             </li>
           ))}
         </ul>
 
-        {/* Footer divider + chips */}
-        <div className="pt-4 border-t border-gray-100 dark:border-gray-700/30">
-          <div className="flex flex-wrap gap-1.5">
-            {benefit.chips.map((chip) => (
-              <MetadataPill key={chip} label={chip} />
-            ))}
-          </div>
+        {/* Proof line - small muted text */}
+        <p className="text-[11px] text-muted-foreground/60 mb-4 italic">
+          {benefit.proofLine}
+        </p>
+
+        {/* Footer: metadata tags */}
+        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-gray-100 dark:border-gray-700/30">
+          {benefit.chips.map((chip) => (
+            <MetadataTag key={chip} label={chip} />
+          ))}
         </div>
       </div>
       
-      {/* Hover glow accent */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl ring-1 ring-inset ring-[#339CFF]/20" />
+      {/* Hover ring glow */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl ring-1 ring-inset ring-[#339CFF]/25" />
     </div>
   );
 }
@@ -154,6 +170,7 @@ export function KeyBenefitsSection() {
         "Built end-to-end so teams stop digging through scattered files and outdated templates.",
         "Deliverables stay consistent, clear, and partner-ready."
       ],
+      proofLine: "Built for: centralized workspaces, consistent deliverables",
       chips: ["Centralized workspace", "CPA-built workflows"],
       delay: 0
     },
@@ -166,6 +183,7 @@ export function KeyBenefitsSection() {
         "Every input, revision, and approval is automatically captured for a clean audit trail.",
         "Export a complete audit package without chasing comments or history."
       ],
+      proofLine: "Built for: audit trails, sign-offs, exports",
       chips: ["Version history", "Sign-offs", "Audit export"],
       delay: 100
     },
@@ -178,6 +196,7 @@ export function KeyBenefitsSection() {
         "Your data stays private to your organization—never used to train public models.",
         "Encryption + access controls built in, with SOC 2 in progress."
       ],
+      proofLine: "Built for: privacy-first teams, compliance requirements",
       chips: ["Encryption", "Access controls", "SOC 2 readiness"],
       delay: 200
     },
@@ -190,6 +209,7 @@ export function KeyBenefitsSection() {
         "Not generic 'chat' — models tuned for technical accounting workflows and documentation.",
         "More structured inputs → more precise, reliable deliverables."
       ],
+      proofLine: "Built for: technical precision, consistent formatting",
       chips: ["Technical-accounting tuned", "Consistent formatting"],
       delay: 300
     }
