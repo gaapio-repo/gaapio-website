@@ -22,6 +22,38 @@ interface JobListing {
 
 const jobListings: JobListing[] = [
   {
+    id: "head-of-growth",
+    title: "Head of Growth & Marketing Operations",
+    department: "Growth",
+    location: "Remote",
+    type: "Full-time",
+    description: "We're hiring an accountant who can run point on marketing execution, lead generation, and managing our AI agents that support outbound + marketing workflows. You'll sit at the center of growth operations: running campaigns, coordinating events, testing outbound approaches, managing CRM hygiene, and improving processes using AI and automation.",
+    responsibilities: [
+      "Own day-to-day execution of lead generation campaigns (email, LinkedIn, events, partner outreach)",
+      "Build and manage prospect lists (ICP targeting, firm/company filtering, contact enrichment)",
+      "Maintain clean workflows in our CRM (lead stages, routing, follow-ups, reporting)",
+      "Track conversion metrics: meetings booked, response rates, pipeline created, event ROI",
+      "Manage and improve our AI SDR agents and automation tools used in outbound workflows",
+      "Test messaging variations and prompts to increase replies + booked meetings",
+      "Set up workflows between tools (CRM + email platform + enrichment + scheduling)",
+      "Own execution of industry events and local meetups: planning, logistics, booth setup, and attendee follow-up",
+      "Help build marketing assets: one-pagers, event flyers, LinkedIn posts, customer proof points",
+      "Coordinate website updates or landing page experiments with the team"
+    ],
+    qualifications: [
+      "Accounting background (degree in accounting/finance OR relevant work experience)",
+      "Interest in AI workflows, prompt iteration, automation",
+      "Comfortable in ambiguous, fast-moving startup environments",
+      "Strong writing skills (you'll be involved in outbound messaging + positioning)",
+      "High ownership and follow-through (you're the type who finishes the job)",
+      "Organized and systems-oriented (you like workflows, dashboards, and clean data)",
+      "Nice-to-have: Experience with marketing execution, events, or outbound sales support",
+      "Nice-to-have: Familiarity with CRMs and outbound platforms",
+      "Nice-to-have: Experience at a CPA firm, advisory, or working with controllers/CFOs"
+    ],
+    icon: TrendingUp
+  },
+  {
     id: "dev-manager",
     title: "Development Manager",
     department: "Engineering",
@@ -94,7 +126,7 @@ const jobListings: JobListing[] = [
       "Consultative approach with ability to understand complex business needs",
       "Self-starter who thrives in a fast-paced startup environment"
     ],
-    icon: TrendingUp
+    icon: DollarSign
   },
   {
     id: "account-executive",
