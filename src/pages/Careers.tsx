@@ -283,24 +283,25 @@ const Careers = () => {
                 <Rocket className="h-4 w-4" />
                 <span className="text-sm font-medium">We're Hiring!</span>
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white animate-fade-in leading-[1.1]">
-                Build the Future of{" "}
-                <span className="block mt-2">Accounting with AI</span>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in leading-[1.1]">
+                <span className="text-black">Build</span>{" "}
+                <span className="text-white">the Future of</span>
+                <span className="block mt-2 text-white">Accounting with AI</span>
               </h1>
-              <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed mb-8 animate-fade-in max-w-3xl mx-auto" style={{ animationDelay: "100ms" }}>
+              <p className="text-lg md:text-xl lg:text-2xl text-white leading-relaxed mb-8 animate-fade-in max-w-3xl mx-auto" style={{ animationDelay: "100ms" }}>
                 Join a team of accountants and engineers transforming a trillion-dollar industry. 
                 We're combining cutting-edge AI with deep accounting expertise to give professionals their time back.
               </p>
               
               {/* Stats Bar */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12 max-w-xl mx-auto animate-fade-in" style={{ animationDelay: "200ms" }}>
-                <div className="text-center p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
-                  <div className="text-3xl font-bold text-white mb-1">Remote-First</div>
-                  <div className="text-sm text-white/80">Work From Anywhere</div>
+                <div className="text-center p-4 rounded-xl bg-white/90 backdrop-blur-sm border border-white shadow-lg">
+                  <div className="text-3xl font-bold text-black mb-1">Remote-First</div>
+                  <div className="text-sm text-gray-600">Work From Anywhere</div>
                 </div>
-                <div className="text-center p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
-                  <div className="text-3xl font-bold text-white mb-1">AI-Powered</div>
-                  <div className="text-sm text-white/80">Latest Technology</div>
+                <div className="text-center p-4 rounded-xl bg-white/90 backdrop-blur-sm border border-white shadow-lg">
+                  <div className="text-3xl font-bold text-black mb-1">AI-Powered</div>
+                  <div className="text-sm text-gray-600">Latest Technology</div>
                 </div>
               </div>
             </div>
