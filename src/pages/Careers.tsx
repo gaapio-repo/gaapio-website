@@ -24,7 +24,7 @@ const jobListings: JobListing[] = [
   {
     id: "head-of-growth",
     title: "Head of Growth & Marketing Operations",
-    department: "Growth",
+    department: "Marketing",
     location: "Remote",
     type: "Full-time",
     description: "We're hiring an accountant who can run point on marketing execution, lead generation, and managing our AI agents that support outbound + marketing workflows. You'll sit at the center of growth operations: running campaigns, coordinating events, testing outbound approaches, managing CRM hygiene, and improving processes using AI and automation.",
