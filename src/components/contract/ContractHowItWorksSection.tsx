@@ -27,7 +27,7 @@ export const ContractHowItWorksSection = memo(function ContractHowItWorksSection
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-gray-50 dark:bg-gray-900">
+    <section className="py-20 md:py-32 bg-white dark:bg-[#1A1F2B]">
       <ResponsiveContainer>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">

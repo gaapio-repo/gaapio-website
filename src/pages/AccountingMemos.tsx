@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/home/HeroSectionRight";
 import { HowItWorksSection } from "@/components/home/HowItWorksSection";
 import { BenefitsSection } from "@/components/home/BenefitsSection";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
+import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 
 export default function AccountingMemos() {
   return (
@@ -16,6 +17,7 @@ export default function AccountingMemos() {
           <TrustBarSection />
           <HowItWorksSection />
           <BenefitsSection />
+          <FinalCtaSection />
         </div>
       </div>
       

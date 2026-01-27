@@ -68,27 +68,8 @@ export function BenefitsSection() {
     <section 
       id="benefits" 
       ref={sectionRef}
-      className="py-20 md:py-32 relative"
-      style={{
-        background: "var(--benefits-bg)",
-        color: "var(--benefits-text)"
-      }}
+      className="py-20 md:py-32 relative bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-800/60 dark:via-slate-800/60 dark:to-slate-800/60"
     >
-      <style>
-        {`
-          :root {
-            --benefits-bg: #f4faff;
-            --benefits-text: inherit;
-            --benefits-divider: #e0e0e0;
-          }
-          
-          .dark {
-            --benefits-bg: #1A1F2B;
-            --benefits-text: #ffffff;
-            --benefits-divider: #2a2f36;
-          }
-        `}
-      </style>
       
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-10 gap-12 md:gap-8 lg:gap-16 items-start">
@@ -113,7 +94,7 @@ export function BenefitsSection() {
           
           {/* Vertical Divider (visible on md screens and up) */}
           <div className="hidden md:block absolute left-[40%] top-20 bottom-20">
-            <Separator orientation="vertical" className="h-full" style={{ backgroundColor: "var(--benefits-divider)" }} />
+            <Separator orientation="vertical" className="h-full bg-gray-200 dark:bg-gray-700" />
           </div>
           
           {/* Right column - Benefits list (60% width) */}
