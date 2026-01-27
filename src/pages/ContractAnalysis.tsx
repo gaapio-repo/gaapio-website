@@ -4,6 +4,7 @@ import { ContractHeroSection } from "@/components/contract/ContractHeroSection";
 import { ContractHowItWorksSection } from "@/components/contract/ContractHowItWorksSection";
 import { BenefitsSection } from "@/components/home/BenefitsSection";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
+import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 
 export default function ContractAnalysis() {
   return (
@@ -16,6 +17,7 @@ export default function ContractAnalysis() {
           <TrustBarSection />
           <ContractHowItWorksSection />
           <BenefitsSection />
+          <FinalCtaSection />
         </div>
       </div>
       

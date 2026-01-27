@@ -26,7 +26,7 @@ export function GuidanceHowItWorksSection() {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-[#f4faff] to-white dark:from-[#1A1F2B] dark:to-[#1A1F2B]">
+    <section className="py-20 bg-white dark:bg-[#1A1F2B]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">

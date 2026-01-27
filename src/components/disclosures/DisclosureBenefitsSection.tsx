@@ -36,7 +36,7 @@ export const DisclosureBenefitsSection = memo(function DisclosureBenefitsSection
   ];
 
   return (
-    <section className="py-20 md:py-32" style={{ backgroundColor: 'var(--benefits-bg)' }}>
+    <section className="py-20 md:py-32 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-800/60 dark:via-slate-800/60 dark:to-slate-800/60">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Key Benefits</h2>

@@ -4,7 +4,7 @@ import { GuidanceHeroSection } from "@/components/guidance/GuidanceHeroSection";
 import { GuidanceHowItWorksSection } from "@/components/guidance/GuidanceHowItWorksSection";
 import { NeverMissUpdateSection } from "@/components/guidance/NeverMissUpdateSection";
 import { GuidanceMakesSenseSection } from "@/components/guidance/GuidanceMakesSenseSection";
-import { FinalCtaBanner } from "@/components/guidance/FinalCtaBanner";
+import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
 
 export default function GuidanceUpdates() {
@@ -32,8 +32,8 @@ export default function GuidanceUpdates() {
           {/* Guidance Makes Sense Section - White Background */}
           <GuidanceMakesSenseSection />
           
-          {/* Final CTA Banner - White Background */}
-          <FinalCtaBanner />
+          {/* Final CTA Section - Blue Gradient */}
+          <FinalCtaSection />
         </div>
       </div>
       

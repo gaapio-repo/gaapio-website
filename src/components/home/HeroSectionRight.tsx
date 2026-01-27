@@ -4,6 +4,7 @@ import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatedMemoRight } from "./AnimatedMemoRight";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { GradientBackground } from "./GradientBackground";
 
 interface HeroSectionProps {
   title?: string;
@@ -57,22 +58,25 @@ export const HeroSection = memo(function HeroSection({
   };
 
   return (
-    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 bg-white dark:bg-background overflow-hidden">
+    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 overflow-hidden">
+      {/* Blue gradient background */}
+      <GradientBackground />
+      
       {/* Hero content with improved spacing */}
       <div className="container px-4 md:px-6 flex flex-col items-center relative z-10">
         {/* Text content centered */}
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-8 md:mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up dark:text-white">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up text-gray-900 dark:text-white">
             {title}
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 animate-fade-up dark:text-gray-300" style={{ animationDelay: "100ms" }}>
+          <p className="text-xl md:text-2xl text-gray-800 dark:text-white/90 mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
             {subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
-            <Button size="lg" variant="blue" asChild>
+            <Button size="lg" variant="black" asChild>
               <Link to="/request-demo">Request a Demo</Link>
             </Button>
-            <Button size="lg" variant="blueOutline" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100" asChild>
               <Link to="/contact">Ask a Question</Link>
             </Button>
           </div>

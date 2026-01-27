@@ -4,6 +4,7 @@ import { ResearchHeroSection } from "@/components/research/ResearchHeroSection";
 import { ResearchHowItWorksSection } from "@/components/research/ResearchHowItWorksSection";
 import { ResearchBenefitsSection } from "@/components/research/ResearchBenefitsSection";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
+import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 
 export default function ResearchGPT() {
   return (
@@ -12,19 +13,20 @@ export default function ResearchGPT() {
       
       <div className="relative overflow-hidden">
         <div className="relative z-10">
-          {/* Hero Section - White Background */}
-          <div className="bg-white dark:bg-background">
-            <ResearchHeroSection />
-          </div>
+          {/* Hero Section - Blue Gradient */}
+          <ResearchHeroSection />
 
           {/* Customer Logos / Trust Bar Section */}
           <TrustBarSection />
           
-          {/* How It Works Section - Gradient Background */}
+          {/* How It Works Section - White Background */}
           <ResearchHowItWorksSection />
           
-          {/* Benefits Section */}
+          {/* Benefits Section - Light Blue-Gray Gradient */}
           <ResearchBenefitsSection />
+          
+          {/* Final CTA Section - Blue Gradient */}
+          <FinalCtaSection />
         </div>
       </div>
       

@@ -2,31 +2,35 @@ import { Button } from "@/components/ui/button";
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { Shield, CheckCircle } from "lucide-react";
+import { GradientBackground } from "@/components/home/GradientBackground";
 
 export const SOXHeroSection = memo(function SOXHeroSection() {
   return (
-    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 bg-white dark:bg-background overflow-hidden">
+    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 overflow-hidden">
+      {/* Blue gradient background */}
+      <GradientBackground />
+      
       <div className="container px-4 md:px-6 text-center relative z-10">
         {/* Text content centered */}
         <div className="max-w-4xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 dark:bg-green-900/30 rounded-full mb-6 animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 dark:bg-white/10 rounded-full mb-6 animate-fade-up">
             <Shield className="h-5 w-5 text-green-600 dark:text-green-400" />
             <span className="text-sm font-semibold text-green-600 dark:text-green-400">Coming Soon</span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up dark:text-white" style={{ animationDelay: "100ms" }}>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up text-gray-900 dark:text-white" style={{ animationDelay: "100ms" }}>
             SOX Controls Management
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 animate-fade-up dark:text-gray-300" style={{ animationDelay: "200ms" }}>
+          <p className="text-xl md:text-2xl text-gray-800 dark:text-white/90 mb-10 animate-fade-up" style={{ animationDelay: "200ms" }}>
             Streamline SOX compliance with AI-powered control testing and documentation
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 animate-fade-up" style={{ animationDelay: "300ms" }}>
-            <Button size="lg" variant="blue" asChild>
+            <Button size="lg" variant="black" asChild>
               <Link to="/request-demo">Request Early Access</Link>
             </Button>
-            <Button size="lg" variant="blueOutline" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100" asChild>
               <Link to="/contact">Learn More</Link>
             </Button>
           </div>

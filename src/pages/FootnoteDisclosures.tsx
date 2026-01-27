@@ -4,6 +4,7 @@ import { DisclosureHeroSection } from "@/components/disclosures/DisclosureHeroSe
 import { DisclosureHowItWorksSection } from "@/components/disclosures/DisclosureHowItWorksSection";
 import { DisclosureBenefitsSection } from "@/components/disclosures/DisclosureBenefitsSection";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
+import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 
 export default function FootnoteDisclosures() {
   return (
@@ -12,24 +13,23 @@ export default function FootnoteDisclosures() {
       
       <div className="relative overflow-hidden">
         <div className="relative z-10">
-          {/* Hero Section - White Background with Animated Disclosure */}
-          <div className="bg-white dark:bg-background">
-            <DisclosureHeroSection 
-              title="Comprehensive Footnote Disclosures" 
-              subtitle="AI-Powered. Compliance-Ready."
-            />
-          </div>
+          {/* Hero Section - Blue Gradient with Animated Disclosure */}
+          <DisclosureHeroSection 
+            title="Comprehensive Footnote Disclosures" 
+            subtitle="AI-Powered. Compliance-Ready."
+          />
 
           {/* Customer Logos / Trust Bar Section */}
           <TrustBarSection />
           
-          {/* How It Works Section - Custom Disclosure Version - Gradient Background */}
+          {/* How It Works Section - White Background */}
           <DisclosureHowItWorksSection />
           
-          {/* Benefits Section - Blue Background */}
-          <div className="bg-[#339CFF] dark:bg-[#2563eb]">
-            <DisclosureBenefitsSection />
-          </div>
+          {/* Benefits Section - Light Blue-Gray Gradient */}
+          <DisclosureBenefitsSection />
+          
+          {/* Final CTA Section - Blue Gradient */}
+          <FinalCtaSection />
         </div>
       </div>
       
