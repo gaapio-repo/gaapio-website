@@ -44,7 +44,7 @@ export const CompanyTypeSelector = memo(function CompanyTypeSelector() {
               key={entry.id}
               to={entry.href}
               className={cn(
-                "group flex items-center gap-4 p-4 md:p-5",
+                "group flex items-center gap-4 p-5 md:p-7",
                 "bg-white dark:bg-gray-900",
                 "border border-gray-200 dark:border-gray-700",
                 "rounded-xl shadow-sm",
