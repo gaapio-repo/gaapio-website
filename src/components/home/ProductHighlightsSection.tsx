@@ -5,7 +5,11 @@ import { cn } from "@/lib/utils";
 import { FileText, FileCheck, Bell, FileSearch, Brain, Shield } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 export function ProductHighlightsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -45,6 +49,7 @@ export function ProductHighlightsSection() {
         { title: "Revenue contract analysis (ASC 606)", description: "Automated abstraction and evaluation support for performance obligations, contract terms, etc." },
         { title: "Lease abstraction & evaluation (ASC 842)", description: "Identify embedded leases, extract key data, and support classification and accounting conclusions." }
       ],
+      hasHoverDescriptions: true,
       href: "/contract-analysis",
       icon: FileSearch,
       iconColor: "#339CFF"
@@ -54,9 +59,9 @@ export function ProductHighlightsSection() {
       label: "MEMOS",
       title: "Better Memos, Faster.",
       bulletPoints: [
-        { title: "Version history, reviewer comments, and internal sign offs", description: "" },
-        { title: "Guided prompts + AI follow up questions = accurate AI generated memos", description: "" },
-        { title: "Exportable Audit package", description: "" }
+        "Version history, reviewer comments, and internal sign offs",
+        "Guided prompts + AI follow up questions = accurate AI generated memos",
+        "Exportable Audit package"
       ],
       href: "/accounting-memos",
       icon: FileText,
@@ -67,9 +72,9 @@ export function ProductHighlightsSection() {
       label: "FOOTNOTE DISCLOSURES", 
       title: "Benchmark & AI completed Checklists",
       bulletPoints: [
-        { title: "AI trained benchmarking", description: "" },
-        { title: "Footnote requirement checklists", description: "" },
-        { title: "CPA approved, industry leading formatting", description: "" }
+        "AI trained benchmarking",
+        "Footnote requirement checklists",
+        "CPA approved, industry leading formatting"
       ],
       href: "/footnote-disclosures",
       icon: FileCheck,
@@ -80,9 +85,9 @@ export function ProductHighlightsSection() {
       label: "ACCOUNTING RESEARCH",
       title: "Your Firm's AI Research Assistant",
       bulletPoints: [
-        { title: "Search Big 4 accounting guides and technical resources", description: "" },
-        { title: "Natural language queries across comprehensive knowledge base", description: "" },
-        { title: "Internal GPT (coming soon)", description: "" }
+        "Search Big 4 accounting guides and technical resources",
+        "Natural language queries across comprehensive knowledge base",
+        "Internal GPT (coming soon)"
       ],
       href: "/research-gpt",
       icon: Brain,
@@ -93,9 +98,9 @@ export function ProductHighlightsSection() {
       label: "GUIDANCE UPDATES",      
       title: "Apply New Guidance to Your Situation",
       bulletPoints: [
-        { title: "Instant alerts for new standards", description: "" },
-        { title: "Actionable implementation guidance", description: "" },
-        { title: "Turn new guidance into a memo", description: "" }
+        "Instant alerts for new standards",
+        "Actionable implementation guidance",
+        "Turn new guidance into a memo"
       ],
       href: "/guidance-updates",
       icon: Bell,
@@ -185,21 +190,34 @@ export function ProductHighlightsSection() {
 
                         {/* Bullet points */}
                         <ul className="space-y-4 mb-8 flex-grow">
-                          {product.bulletPoints.map((point, pointIndex) => (
-                            <li key={pointIndex} className="flex items-start">
-                              <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#339CFF] mt-2 mr-3"></div>
-                              <div>
-                                <span className="font-semibold text-gray-900 dark:text-white">
-                                  {point.title}
-                                </span>
-                                {point.description && (
-                                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                                    {point.description}
-                                  </p>
+                          {product.bulletPoints.map((point, pointIndex) => {
+                            const isObjectPoint = typeof point === 'object' && point !== null;
+                            const title = isObjectPoint ? point.title : point;
+                            const description = isObjectPoint ? point.description : null;
+                            const hasHover = product.hasHoverDescriptions && description;
+
+                            return (
+                              <li key={pointIndex} className="flex items-start">
+                                <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#339CFF] mt-2 mr-3"></div>
+                                {hasHover ? (
+                                  <HoverCard openDelay={100} closeDelay={100}>
+                                    <HoverCardTrigger asChild>
+                                      <span className="font-semibold text-gray-900 dark:text-white cursor-help underline decoration-dotted underline-offset-4 decoration-gray-400">
+                                        {title}
+                                      </span>
+                                    </HoverCardTrigger>
+                                    <HoverCardContent className="w-80 text-sm" side="top">
+                                      <p className="text-muted-foreground">{description}</p>
+                                    </HoverCardContent>
+                                  </HoverCard>
+                                ) : (
+                                  <span className="font-semibold text-gray-900 dark:text-white">
+                                    {title}
+                                  </span>
                                 )}
-                              </div>
-                            </li>
-                          ))}
+                              </li>
+                            );
+                          })}
                         </ul>
 
                         <Button asChild variant="blue" className="w-auto mt-auto">
