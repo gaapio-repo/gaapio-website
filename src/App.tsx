@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 // Pages
 import Index from "./pages/Index";
+import IndexAlt from "./pages/IndexAlt";
 import AccountingMemos from "./pages/AccountingMemos";
 import FootnoteDisclosures from "./pages/FootnoteDisclosures";
 import ContractAnalysis from "./pages/ContractAnalysis";
@@ -34,6 +35,9 @@ import Status from "./pages/Status";
 import Privacy from "./pages/Privacy";
 import SSA from "./pages/SSA";
 import TermsOfService from "./pages/TermsOfService";
+import PrivateCompany from "./pages/solutions/PrivateCompany";
+import PublicCompany from "./pages/solutions/PublicCompany";
+import AccountingFirm from "./pages/solutions/AccountingFirm";
 
 function App() {
   console.log("[App] Starting...");
@@ -63,6 +67,10 @@ function App() {
         <ProtectedLayout>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/home-alt" element={<IndexAlt />} />
+            <Route path="/solutions/private" element={<PrivateCompany />} />
+            <Route path="/solutions/public" element={<PublicCompany />} />
+            <Route path="/solutions/firm" element={<AccountingFirm />} />
             <Route path="/accounting-memos" element={<AccountingMemos />} />
             <Route path="/footnote-disclosures" element={<FootnoteDisclosures />} />
             <Route path="/contract-analysis" element={<ContractAnalysis />} />
