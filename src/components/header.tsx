@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Logo } from "@/components/logo";
 import { Link } from "react-router-dom";
-import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain, Shield } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain, Shield, Building, Building2 } from "lucide-react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
@@ -82,13 +82,36 @@ const companyPages = [
   }
 ];
 
+const solutionPages = [
+  {
+    name: "Private Company",
+    href: "/solutions/private",
+    icon: Building,
+    description: "Solutions for private companies"
+  },
+  {
+    name: "Public Company",
+    href: "/solutions/public",
+    icon: Building2,
+    description: "Solutions for SEC filers"
+  },
+  {
+    name: "Accounting Firm",
+    href: "/solutions/firm",
+    icon: Briefcase,
+    description: "Solutions for CPA firms"
+  }
+];
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isCompanyOpen, setIsCompanyOpen] = useState(false);
+  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [enableSelfSignup, setEnableSelfSignup] = useState(true);
   const [hoveredProduct, setHoveredProduct] = useState(products[0]);
   const [hoveredCompanyPage, setHoveredCompanyPage] = useState(companyPages[0]);
+  const [hoveredSolutionPage, setHoveredSolutionPage] = useState(solutionPages[0]);
 
   useEffect(() => {
     const savedSetting = localStorage.getItem("enableSelfSignup");
@@ -114,6 +137,11 @@ export function Header() {
   const closeMenu = () => {
     setIsMenuOpen(false);
     setIsProductsOpen(false);
+    setIsSolutionsOpen(false);
+  };
+
+  const toggleSolutions = () => {
+    setIsSolutionsOpen(!isSolutionsOpen);
   };
 
   const toggleProducts = () => {
@@ -139,6 +167,63 @@ export function Header() {
           <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
             <NavigationMenu>
               <NavigationMenuList className="flex items-center space-x-4">
+                {/* Solutions Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-700 dark:text-gray-200 text-base font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white">
+                    Solutions
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="z-[100]">
+                    <div className="rounded-2xl shadow-2xl bg-gray-50 dark:bg-gray-800/50 overflow-hidden border border-gray-200 dark:border-gray-800 w-[400px]">
+                      <div className="p-6">
+                        <div className="mb-5 px-3">
+                          <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-2 text-center">
+                            Solutions
+                          </h3>
+                          <div className="h-0.5 w-32 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto"></div>
+                        </div>
+                        <div className="space-y-2">
+                          {solutionPages.map((page, index) => (
+                            <NavigationMenuLink key={page.name} asChild>
+                              <Link
+                                to={page.href}
+                                onMouseEnter={() => setHoveredSolutionPage(page)}
+                                className={cn(
+                                  "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
+                                  hoveredSolutionPage.name === page.name
+                                    ? "bg-blue-100 dark:bg-blue-900/30"
+                                    : "hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                                )}
+                              >
+                                <div className={cn(
+                                  "p-1.5 rounded-md transition-colors flex-shrink-0",
+                                  hoveredSolutionPage.name === page.name
+                                    ? "bg-[#339CFF] text-white"
+                                    : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                                )}>
+                                  <page.icon className="h-4 w-4" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <span className={cn(
+                                    "font-medium text-sm transition-colors block text-left",
+                                    hoveredSolutionPage.name === page.name
+                                      ? "text-gray-900 dark:text-white"
+                                      : "text-gray-700 dark:text-gray-300"
+                                  )}>
+                                    {page.name}
+                                  </span>
+                                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                                    {page.description}
+                                  </span>
+                                </div>
+                              </Link>
+                            </NavigationMenuLink>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
                 {/* Products Mega Menu */}
               <NavigationMenuItem>
                   <NavigationMenuTrigger
@@ -389,6 +474,37 @@ export function Header() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
               
+              {/* Solutions Section */}
+              <div>
+                <button
+                  onClick={toggleSolutions}
+                  className="w-full flex items-center justify-center px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <span>Solutions</span>
+                  {isSolutionsOpen ? (
+                    <ChevronDown className="h-4 w-4 ml-2" />
+                  ) : (
+                    <ChevronRight className="h-4 w-4 ml-2" />
+                  )}
+                </button>
+                
+                {/* Solutions Submenu */}
+                {isSolutionsOpen && (
+                  <div className="pl-4 space-y-1 mt-1">
+                    {solutionPages.map((page) => (
+                      <Link
+                        key={page.name}
+                        to={page.href}
+                        className="block px-3 py-2 rounded-md text-sm font-medium transition-colors text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
+                        onClick={closeMenu}
+                      >
+                        {page.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {/* Products Section */}
               <div>
                 <button
