@@ -42,7 +42,8 @@ export const AnimatedMemoRight = () => {
     if (width < 480) return "420px";
     if (width < 768) return "240px";
     if (width < 1024) return "205px";
-    if (width < 1400) return "210px";
+    if (width < 1200) return "195px";
+    if (width < 1400) return "200px";
     if (width < 1800) return "255px";
     return "290px";
   };
@@ -50,13 +51,15 @@ export const AnimatedMemoRight = () => {
   const getContainerWidth = () => {
     if (width < 480) return "175%";
     if (width < 768) return "150%";
-    if (width < 1400) return "175%";
+    if (width < 1200) return "160%";
+    if (width < 1400) return "145%";
     // For wide screens, don't use width - use right constraint instead
     return "auto";
   };
 
   const getRightPosition = () => {
-    if (width < 1400) return "2.5%";
+    if (width < 1200) return "5%";
+    if (width < 1400) return "6%";
     if (width < 1800) return "8%";
     return "10%";
   };
