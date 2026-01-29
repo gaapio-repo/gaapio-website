@@ -87,19 +87,22 @@ const solutionPages = [
     name: "Private Companies",
     href: "/solutions/private",
     icon: Building,
-    description: "Audit-ready memos & technical accounting"
+    description: "Audit-ready memos & technical accounting",
+    features: ["Streamlined memo creation for audit prep", "Technical accounting guidance on demand", "CPA-approved documentation workflows"],
   },
   {
     name: "Public Companies",
     href: "/solutions/public",
     icon: Building2,
-    description: "SEC & SOX compliance workflows"
+    description: "SEC & SOX compliance workflows",
+    features: ["SOX control documentation and testing", "SEC reporting and disclosure management", "Integrated compliance tracking"],
   },
   {
     name: "Accounting Firms",
     href: "/solutions/firm",
     icon: Briefcase,
-    description: "Multi-client efficiency & advisory prep"
+    description: "Multi-client efficiency & advisory prep",
+    features: ["Multi-client dashboard and workflows", "Advisory prep and audit efficiency", "Scalable review and sign-off processes"],
   }
 ];
 
@@ -167,57 +170,99 @@ export function Header() {
           <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
             <NavigationMenu>
               <NavigationMenuList className="flex items-center space-x-4">
-                {/* Solutions Dropdown */}
+                {/* Solutions Mega Menu - matching Products structure */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-gray-700 dark:text-gray-200 text-base font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white">
                     Solutions
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-[100]">
-                    <div className="rounded-2xl shadow-2xl bg-gray-50 dark:bg-gray-800/50 overflow-hidden border border-gray-200 dark:border-gray-800 w-[400px]">
-                      <div className="p-6">
-                        <div className="mb-5 px-3">
-                          <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-2 text-center">
-                            Solutions
+                    <div className="rounded-2xl shadow-2xl bg-white dark:bg-gray-900 overflow-hidden border border-gray-200 dark:border-gray-800 w-[750px]">
+                      <div className="grid grid-cols-[300px_auto] gap-0">
+                        {/* Left Column - Solution List */}
+                        <div className="bg-gray-50 dark:bg-gray-800/50 p-6 border-r border-gray-200 dark:border-gray-700">
+                          <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wider px-3">
+                            Our Solutions
                           </h3>
-                          <div className="h-0.5 w-32 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto"></div>
-                        </div>
-                        <div className="space-y-2">
-                          {solutionPages.map((page, index) => (
-                            <NavigationMenuLink key={page.name} asChild>
-                              <Link
-                                to={page.href}
-                                onMouseEnter={() => setHoveredSolutionPage(page)}
-                                className={cn(
-                                  "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
-                                  hoveredSolutionPage.name === page.name
-                                    ? "bg-blue-100 dark:bg-blue-900/30"
-                                    : "hover:bg-gray-100 dark:hover:bg-gray-700/50"
-                                )}
-                              >
-                                <div className={cn(
-                                  "p-1.5 rounded-md transition-colors flex-shrink-0",
-                                  hoveredSolutionPage.name === page.name
-                                    ? "bg-[#339CFF] text-white"
-                                    : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
-                                )}>
-                                  <page.icon className="h-4 w-4" />
-                                </div>
-                                <div className="flex-1 min-w-0">
+                          <div className="space-y-1">
+                            {solutionPages.map((solution) => (
+                              <NavigationMenuLink key={solution.name} asChild>
+                                <Link
+                                  to={solution.href}
+                                  onMouseEnter={() => setHoveredSolutionPage(solution)}
+                                  className={cn(
+                                    "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
+                                    hoveredSolutionPage.name === solution.name 
+                                      ? "bg-blue-100 dark:bg-blue-900/30" 
+                                      : "hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                                  )}
+                                >
+                                  <div className={cn(
+                                    "p-1.5 rounded-md transition-colors flex-shrink-0",
+                                    hoveredSolutionPage.name === solution.name
+                                      ? "bg-[#339CFF] text-white"
+                                      : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                                  )}>
+                                    <solution.icon className="h-4 w-4" />
+                                  </div>
                                   <span className={cn(
-                                    "font-medium text-sm transition-colors block text-left",
-                                    hoveredSolutionPage.name === page.name
+                                    "font-medium text-sm transition-colors",
+                                    hoveredSolutionPage.name === solution.name
                                       ? "text-gray-900 dark:text-white"
                                       : "text-gray-700 dark:text-gray-300"
                                   )}>
-                                    {page.name}
+                                    {solution.name}
                                   </span>
-                                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                                    {page.description}
-                                  </span>
-                                </div>
-                              </Link>
-                            </NavigationMenuLink>
-                          ))}
+                                  <ChevronRight className={cn(
+                                    "h-4 w-4 ml-auto transition-all",
+                                    hoveredSolutionPage.name === solution.name
+                                      ? "text-[#339CFF] opacity-100"
+                                      : "text-gray-400 opacity-0 group-hover:opacity-100"
+                                  )} />
+                                </Link>
+                              </NavigationMenuLink>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Right Column - Solution Details */}
+                        <div className="p-8 bg-gradient-to-br from-blue-50 to-blue-100/30 dark:from-blue-950/50 dark:to-blue-900/20">
+                          <div className="flex items-start gap-4 mb-6">
+                            <div className="p-3 rounded-xl bg-[#339CFF] shadow-lg">
+                              <hoveredSolutionPage.icon className="h-7 w-7 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 text-left">
+                                {hoveredSolutionPage.name}
+                              </h3>
+                              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                {hoveredSolutionPage.description}
+                              </p>
+                            </div>
+                          </div>
+
+                          <Separator className="my-6 bg-gray-200 dark:bg-gray-700" />
+
+                          <div className="space-y-3 mb-6">
+                            <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                              Key Benefits
+                            </h4>
+                            {hoveredSolutionPage.features.map((feature, idx) => (
+                              <div key={idx} className="flex items-start gap-3">
+                                <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#339CFF] flex-shrink-0" />
+                                <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                  {feature}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+
+                          <Link
+                            to={hoveredSolutionPage.href}
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-[#339CFF] hover:gap-3 transition-all group"
+                          >
+                            Learn more
+                            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                          </Link>
                         </div>
                       </div>
                     </div>
