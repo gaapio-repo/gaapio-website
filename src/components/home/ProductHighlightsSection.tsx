@@ -203,7 +203,7 @@ export function ProductHighlightsSection() {
                                 {hasHover ? (
                                   <HoverCard openDelay={100} closeDelay={100}>
                                     <HoverCardTrigger asChild>
-                                      <span className="font-semibold text-gray-900 dark:text-white cursor-help underline decoration-dotted underline-offset-4 decoration-gray-400">
+                                      <span className="text-gray-700 dark:text-gray-300 cursor-help underline decoration-dotted underline-offset-4 decoration-gray-400">
                                         {title}
                                       </span>
                                     </HoverCardTrigger>
@@ -212,7 +212,7 @@ export function ProductHighlightsSection() {
                                     </HoverCardContent>
                                   </HoverCard>
                                 ) : (
-                                  <span className="font-semibold text-gray-900 dark:text-white">
+                                  <span className="text-gray-700 dark:text-gray-300">
                                     {title}
                                   </span>
                                 )}
