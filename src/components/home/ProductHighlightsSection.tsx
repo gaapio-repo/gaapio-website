@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { FileText, FileCheck, Bell, FileSearch, Brain, Shield } from "lucide-react";
+import { FileText, FileCheck, Bell, FileSearch, Brain, Shield, Info } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import {
@@ -203,8 +203,9 @@ export function ProductHighlightsSection() {
                                 {hasHover ? (
                                   <HoverCard openDelay={100} closeDelay={100}>
                                     <HoverCardTrigger asChild>
-                                      <span className="text-gray-700 dark:text-gray-300 cursor-help underline decoration-dotted underline-offset-4 decoration-gray-400">
+                                      <span className="text-gray-700 dark:text-gray-300 cursor-help inline-flex items-center gap-1.5">
                                         {title}
+                                        <Info className="w-3.5 h-3.5 text-[#339CFF] opacity-60 hover:opacity-100 transition-opacity" />
                                       </span>
                                     </HoverCardTrigger>
                                     <HoverCardContent className="w-80 text-sm" side="top">
