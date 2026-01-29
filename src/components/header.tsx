@@ -84,22 +84,22 @@ const companyPages = [
 
 const solutionPages = [
   {
-    name: "Private Company",
+    name: "Private Companies",
     href: "/solutions/private",
     icon: Building,
-    description: "Solutions for private companies"
+    description: "Audit-ready memos & technical accounting"
   },
   {
-    name: "Public Company",
+    name: "Public Companies",
     href: "/solutions/public",
     icon: Building2,
-    description: "Solutions for SEC filers"
+    description: "SEC & SOX compliance workflows"
   },
   {
-    name: "Accounting Firm",
+    name: "Accounting Firms",
     href: "/solutions/firm",
     icon: Briefcase,
-    description: "Solutions for CPA firms"
+    description: "Multi-client efficiency & advisory prep"
   }
 ];
 
