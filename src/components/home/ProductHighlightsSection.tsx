@@ -2,18 +2,14 @@ import { Link } from "react-router-dom";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { FileText, FileCheck, Bell, FileSearch, Brain, Shield, Info } from "lucide-react";
+import { FileText, FileCheck, Bell, FileSearch, Brain, Shield, ChevronDown } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
 
 export function ProductHighlightsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [expandedBullet, setExpandedBullet] = useState<string | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -190,32 +186,68 @@ export function ProductHighlightsSection() {
                         </h3>
 
                         {/* Bullet points */}
-                        <ul className="space-y-4 mb-8 flex-grow">
+                        <ul className="space-y-2 mb-8 flex-grow">
                           {product.bulletPoints.map((point, pointIndex) => {
                             const isObjectPoint = typeof point === 'object' && point !== null;
                             const title = isObjectPoint ? point.title : point;
                             const description = isObjectPoint ? point.description : null;
-                            const hasHover = product.hasHoverDescriptions && description;
+                            const hasExpandableContent = product.hasHoverDescriptions && description;
+                            const bulletKey = `${product.id}-${pointIndex}`;
+                            const isExpanded = expandedBullet === bulletKey;
+
+                            const handleToggle = () => {
+                              if (hasExpandableContent) {
+                                setExpandedBullet(isExpanded ? null : bulletKey);
+                              }
+                            };
 
                             return (
-                              <li key={pointIndex} className="flex items-start">
-                                <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#339CFF] mt-2 mr-3"></div>
-                                {hasHover ? (
-                                  <HoverCard openDelay={100} closeDelay={100}>
-                                    <HoverCardTrigger asChild>
-                                      <span className="text-gray-700 dark:text-gray-300 cursor-help inline-flex items-center gap-1.5">
-                                        {title}
-                                        <Info className="w-3.5 h-3.5 text-[#339CFF] opacity-60 hover:opacity-100 transition-opacity" />
-                                      </span>
-                                    </HoverCardTrigger>
-                                    <HoverCardContent className="w-80 text-sm" side="top">
-                                      <p className="text-muted-foreground">{description}</p>
-                                    </HoverCardContent>
-                                  </HoverCard>
-                                ) : (
-                                  <span className="text-gray-700 dark:text-gray-300">
+                              <li key={pointIndex} className="flex flex-col">
+                                <button
+                                  type="button"
+                                  onClick={handleToggle}
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') {
+                                      e.preventDefault();
+                                      handleToggle();
+                                    }
+                                  }}
+                                  aria-expanded={hasExpandableContent ? isExpanded : undefined}
+                                  className={cn(
+                                    "flex items-start w-full text-left py-2 px-2 -mx-2 rounded-lg transition-colors duration-150",
+                                    hasExpandableContent && "cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50",
+                                    isExpanded && "bg-slate-50 dark:bg-slate-700/50"
+                                  )}
+                                  disabled={!hasExpandableContent}
+                                >
+                                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#339CFF] mt-2 mr-3"></div>
+                                  <span className="text-gray-700 dark:text-gray-300 flex-1">
                                     {title}
                                   </span>
+                                  {hasExpandableContent && (
+                                    <ChevronDown 
+                                      className={cn(
+                                        "w-4 h-4 text-gray-400 ml-2 mt-1 flex-shrink-0 transition-transform duration-200 ease-in-out",
+                                        isExpanded && "rotate-180"
+                                      )}
+                                    />
+                                  )}
+                                </button>
+                                
+                                {/* Expandable content */}
+                                {hasExpandableContent && (
+                                  <div
+                                    className={cn(
+                                      "overflow-hidden transition-all duration-200 ease-in-out",
+                                      isExpanded ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                                    )}
+                                  >
+                                    <div className="ml-5 pl-3 py-2 mt-1 mb-1 border-l-2 border-slate-200 dark:border-slate-600 bg-[#f7f9fc] dark:bg-slate-800/50 rounded-r-md">
+                                      <p className="text-sm text-muted-foreground leading-relaxed">
+                                        {description}
+                                      </p>
+                                    </div>
+                                  </div>
                                 )}
                               </li>
                             );
