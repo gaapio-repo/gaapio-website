@@ -43,7 +43,8 @@ export const AnimatedMemoRight = () => {
     if (width < 768) return "240px";
     if (width < 1024) return "205px";
     if (width < 1400) return "210px";
-    return "220px";
+    if (width < 1800) return "240px";
+    return "280px";
   };
 
   const getContainerWidth = () => {
