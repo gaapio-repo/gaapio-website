@@ -5,142 +5,112 @@ import { cn } from "@/lib/utils";
 const entryPoints = [
   {
     id: "private",
-    title: "Private Company",
+    title: "Private Companies",
     outcome: "Audit-ready memos",
     href: "/solutions/private",
-    size: "standard",
   },
   {
     id: "public",
-    title: "Public Company",
+    title: "Public Companies",
     outcome: "SEC & SOX workflows",
     href: "/solutions/public",
-    size: "prominent",
   },
   {
     id: "firm",
-    title: "Accounting Firm",
+    title: "Accounting Firms",
     outcome: "Multi-client efficiency",
     href: "/solutions/firm",
-    size: "standard",
   },
 ];
 
 export const CompanyTypeSelector = memo(function CompanyTypeSelector() {
   return (
-    <div className="w-full max-w-4xl mx-auto relative">
-      {/* Faint grid texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px',
-        }}
-      />
-      
+    <div className="w-full max-w-2xl mx-auto relative">
       {/* Section label */}
-      <p className="text-xs md:text-sm font-medium text-white/40 uppercase tracking-[0.2em] mb-10 text-center">
+      <p className="text-sm md:text-base font-semibold text-white/80 uppercase tracking-[0.25em] mb-8 text-center">
         Built for:
       </p>
       
-      {/* Entry modules container */}
-      <div className="flex items-end justify-center gap-6 md:gap-10 lg:gap-14">
-        {entryPoints.map((entry) => (
-          <Link
-            key={entry.id}
-            to={entry.href}
-            className={cn(
-              "group relative flex flex-col items-center",
-              "transition-all duration-500 ease-out",
-              // Asymmetric sizing
-              entry.size === "prominent" 
-                ? "flex-[1.3] max-w-[200px]" 
-                : "flex-1 max-w-[160px]",
-            )}
-          >
-            {/* Abstract glyph / node */}
-            <div className={cn(
-              "relative mb-6 transition-all duration-500 ease-out",
-              "group-hover:-translate-y-2",
-              entry.size === "prominent" ? "scale-110" : "scale-100"
-            )}>
-              {/* Outer ring */}
-              <div className={cn(
-                "absolute inset-0 rounded-full",
-                "border border-white/10",
-                "group-hover:border-white/25",
-                "group-hover:scale-150 group-hover:opacity-0",
-                "transition-all duration-700 ease-out",
-                entry.size === "prominent" ? "w-16 h-16" : "w-12 h-12"
-              )} />
-              
-              {/* Core node */}
-              <div className={cn(
-                "relative rounded-full",
-                "bg-white/[0.08]",
-                "group-hover:bg-white/[0.15]",
-                "transition-all duration-300",
-                entry.size === "prominent" ? "w-16 h-16" : "w-12 h-12",
-                "flex items-center justify-center"
-              )}>
-                {/* Inner dot */}
-                <div className={cn(
-                  "rounded-full bg-white/60",
-                  "group-hover:bg-white group-hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]",
-                  "transition-all duration-300",
-                  entry.size === "prominent" ? "w-2.5 h-2.5" : "w-2 h-2"
-                )} />
-              </div>
-              
-              {/* Connecting line down */}
-              <div className={cn(
-                "absolute left-1/2 -translate-x-1/2 w-px",
-                "bg-gradient-to-b from-white/20 to-transparent",
-                "transition-all duration-500",
-                "group-hover:from-white/40",
-                entry.size === "prominent" ? "top-16 h-8" : "top-12 h-6"
-              )} />
-            </div>
-            
-            {/* Title */}
-            <h3 className={cn(
-              "font-semibold text-white/90 text-center tracking-tight",
-              "group-hover:text-white",
-              "transition-colors duration-300",
-              entry.size === "prominent" 
-                ? "text-lg md:text-xl mb-2" 
-                : "text-base md:text-lg mb-1.5"
-            )}>
-              {entry.title}
-            </h3>
-            
-            {/* Outcome - short, confident */}
-            <p className={cn(
-              "text-white/40 text-center",
-              "group-hover:text-white/60",
-              "transition-colors duration-300",
-              entry.size === "prominent" ? "text-sm" : "text-xs"
-            )}>
-              {entry.outcome}
-            </p>
-            
-            {/* Subtle underline accent on hover */}
-            <div className={cn(
-              "absolute -bottom-4 left-1/2 -translate-x-1/2",
-              "h-px bg-gradient-to-r from-transparent via-white/30 to-transparent",
-              "opacity-0 group-hover:opacity-100",
-              "transition-all duration-500",
-              entry.size === "prominent" ? "w-24" : "w-16"
-            )} />
-          </Link>
-        ))}
+      {/* Tech container with glowing border */}
+      <div className="relative">
+        {/* Outer glow effect */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400/30 via-primary/40 to-cyan-400/30 rounded-2xl blur-lg opacity-60" />
+        
+        {/* Main container */}
+        <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/20">
+          {/* Circuit pattern overlay */}
+          <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+            <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 400 200">
+              <defs>
+                <pattern id="circuit" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                  <circle cx="25" cy="25" r="2" fill="white"/>
+                  <path d="M25 0 V20 M25 30 V50 M0 25 H20 M30 25 H50" stroke="white" strokeWidth="0.5" fill="none"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#circuit)"/>
+            </svg>
+          </div>
+          
+          {/* Entry points grid */}
+          <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+            {entryPoints.map((entry, index) => (
+              <Link
+                key={entry.id}
+                to={entry.href}
+                className={cn(
+                  "group relative flex flex-col items-center p-5 md:p-6 rounded-xl",
+                  "bg-white/5 hover:bg-white/15",
+                  "border border-white/10 hover:border-cyan-400/50",
+                  "transition-all duration-300 ease-out",
+                  "hover:shadow-[0_0_30px_rgba(34,211,238,0.3)]",
+                  "hover:-translate-y-1"
+                )}
+              >
+                {/* Animated corner accents */}
+                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-400/50 rounded-tl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyan-400/50 rounded-tr-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyan-400/50 rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyan-400/50 rounded-br-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Node indicator */}
+                <div className="relative mb-4">
+                  <div className={cn(
+                    "w-12 h-12 rounded-full flex items-center justify-center",
+                    "bg-gradient-to-br from-cyan-400/20 to-primary/20",
+                    "border border-cyan-400/30",
+                    "group-hover:border-cyan-400/60 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]",
+                    "transition-all duration-300"
+                  )}>
+                    <span className="text-xl font-bold text-white/90 group-hover:text-white transition-colors">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  {/* Pulse ring */}
+                  <div className="absolute inset-0 rounded-full border border-cyan-400/40 animate-ping opacity-0 group-hover:opacity-30" />
+                </div>
+                
+                {/* Title */}
+                <h3 className="text-lg md:text-xl font-bold text-white mb-1.5 text-center tracking-tight group-hover:text-cyan-100 transition-colors">
+                  {entry.title}
+                </h3>
+                
+                {/* Outcome */}
+                <p className="text-sm text-white/60 text-center group-hover:text-white/80 transition-colors">
+                  {entry.outcome}
+                </p>
+                
+                {/* Arrow indicator */}
+                <div className="mt-4 flex items-center gap-1 text-cyan-400/60 group-hover:text-cyan-400 transition-colors">
+                  <span className="text-xs font-medium uppercase tracking-wider">Enter</span>
+                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
-      
-      {/* Faint horizontal baseline */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
     </div>
   );
 });
