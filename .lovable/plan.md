@@ -1,174 +1,133 @@
 
 
-# Alternate Homepage with Company Type Selector
+# Hero Section Redesign: Company Type Selector
 
-## Overview
+## The Problem
 
-This plan creates an alternate homepage where the animated memo is replaced with a company type selector (Private Company, Public Company, Accounting Firm), along with three new landing pages for each type, and a new "Solutions" dropdown in the header navigation.
+The current selector is nearly invisible because:
+- Uses low-opacity white text/backgrounds (`white/10`, `white/20`, `white/80`)
+- These blend into the bright blue gradient background
+- Overly complex styling with too many subtle effects that don't render well
 
-## Architecture
+## The Solution
 
-### New Files to Create
-
-| File | Purpose |
-|------|---------|
-| `src/pages/IndexAlt.tsx` | Alternate homepage with company selector |
-| `src/components/home/CompanyTypeSelector.tsx` | The 3-box selector component |
-| `src/components/home/HeroSectionAlt.tsx` | Modified hero with selector instead of memo |
-| `src/pages/solutions/PrivateCompany.tsx` | Private Company landing page |
-| `src/pages/solutions/PublicCompany.tsx` | Public Company landing page |
-| `src/pages/solutions/AccountingFirm.tsx` | Accounting Firm landing page |
-
-### Files to Modify
-
-| File | Changes |
-|------|---------|
-| `src/App.tsx` | Add routes for alternate homepage and 3 solution pages |
-| `src/components/header.tsx` | Add "Solutions" dropdown to the left of "Products" |
+A complete redesign using **high-contrast, bold visuals** that stand out against the blue gradient.
 
 ---
 
-## Component Details
+## Design Direction: Dark Glass Panels
 
-### 1. Company Type Selector (`CompanyTypeSelector.tsx`)
-
-A centered component with three clickable cards:
+Instead of translucent white-on-blue, use **dark glass panels** with bright accents:
 
 ```text
-┌─────────────────────────────────────────────────────────┐
-│                  "Are you with a:"                       │
-├─────────────────┬─────────────────┬─────────────────────┤
-│  ┌───────────┐  │  ┌───────────┐  │  ┌───────────┐      │
-│  │  Building  │  │  │  Building  │  │  │  Briefcase │      │
-│  │   Icon    │  │  │   Icon    │  │  │    Icon    │      │
-│  │           │  │  │           │  │  │            │      │
-│  │  Private  │  │  │  Public   │  │  │ Accounting │      │
-│  │  Company  │  │  │  Company  │  │  │    Firm    │      │
-│  └───────────┘  │  └───────────┘  │  └───────────┘      │
-└─────────────────┴─────────────────┴─────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│                                                                 │
+│                        BUILT FOR:                               │
+│                                                                 │
+│   ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐  │
+│   │  ████████████   │ │  ████████████   │ │  ████████████   │  │
+│   │                 │ │                 │ │                 │  │
+│   │    PRIVATE      │ │     PUBLIC      │ │   ACCOUNTING    │  │
+│   │   COMPANIES     │ │   COMPANIES     │ │      FIRMS      │  │
+│   │                 │ │                 │ │                 │  │
+│   │  Audit-ready    │ │  SEC & SOX      │ │  Advisory prep  │  │
+│   │    memos        │ │  workflows      │ │  & audit flows  │  │
+│   │                 │ │                 │ │                 │  │
+│   │       →         │ │       →         │ │       →         │  │
+│   └─────────────────┘ └─────────────────┘ └─────────────────┘  │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
 ```
-
-- **Layout**: 3 cards in a row (responsive: stack on mobile)
-- **Styling**: White cards with subtle borders, hover effects with primary color accent
-- **Behavior**: Each card links to its respective solutions page
-- **Icons**: Building (private), Building2 (public), Briefcase (firm) from lucide-react
-
-### 2. Alternate Hero Section (`HeroSectionAlt.tsx`)
-
-Based on the existing `HeroSection.tsx` but replaces the right column (AnimatedMemo) with the CompanyTypeSelector:
-
-- **Left column**: Same title and subtitle text
-- **Right column**: CompanyTypeSelector instead of AnimatedMemo
-- **Background**: Same GradientBackground component
-- **CTA buttons**: Removed (selector becomes the CTA)
-
-### 3. Alternate Homepage (`IndexAlt.tsx`)
-
-Exact copy of `Index.tsx` but uses `HeroSectionAlt` instead of `HeroSection`:
-
-- Same sections: TrustBarSection, ProductHighlightsSection, KeyBenefitsSection, FinalCtaSection
-- Same header and footer
-- Only difference: hero section uses the selector
-
-### 4. Solution Landing Pages
-
-Each solution page follows the existing product page pattern (similar to `AccountingMemos.tsx`):
-
-**Structure for each:**
-- Header
-- Custom hero section with tailored messaging
-- TrustBarSection
-- Benefits/features section
-- FinalCtaSection
-- Footer
-
-**Page-specific content:**
-
-| Page | Target Audience | Key Messaging Focus |
-|------|-----------------|---------------------|
-| Private Company | CFOs, Controllers at private companies | Streamlined technical accounting, audit prep |
-| Public Company | SEC filers, public company accountants | SOX compliance, SEC reporting, disclosures |
-| Accounting Firm | CPA firms, audit teams | Multi-client efficiency, reviewer workflows |
 
 ---
 
-## Header Navigation Changes
+## Visual Specifications
 
-### New "Solutions" Dropdown
+### Panel Styling
+| Property | Value |
+|----------|-------|
+| Background | `bg-gray-900/90` (dark, nearly opaque) |
+| Border | `border border-white/20` |
+| Backdrop | `backdrop-blur-xl` |
+| Corner radius | `rounded-2xl` |
+| Shadow | `shadow-2xl` |
 
-Position: To the left of "Products"
+### Text Styling
+| Element | Style |
+|---------|-------|
+| "Built for:" label | White, uppercase, letter-spaced, outside panels |
+| Company type title | Bold white, large text (`text-xl md:text-2xl`) |
+| Outcome subtitle | Lighter gray (`text-gray-300`) |
 
-**Dropdown structure** (matching Company dropdown style):
+### Hover Effects
+- Panel lifts (`-translate-y-2`)
+- Border turns primary blue (`border-primary`)
+- Subtle glow appears (`shadow-[0_0_30px_rgba(0,153,255,0.4)]`)
+- Arrow slides right
+
+### Visual Accents
+- Top edge gradient line (primary blue to cyan)
+- Corner accent dots on hover
+- Smooth 300ms transitions
+
+---
+
+## Layout Structure
+
 ```text
-┌────────────────────────────────────────┐
-│              SOLUTIONS                  │
-│         ─────────────────────          │
-│  🏢  Private Company                    │
-│      Solutions for private companies    │
-│                                        │
-│  🏛️  Public Company                     │
-│      Solutions for SEC filers           │
-│                                        │
-│  💼  Accounting Firm                    │
-│      Solutions for CPA firms            │
-└────────────────────────────────────────┘
+Container (max-w-3xl, centered)
+├── Label: "BUILT FOR:" (white, centered, mb-6)
+└── Grid (3 columns on sm+, stacked on mobile)
+    ├── Panel 1: Private Companies
+    ├── Panel 2: Public Companies
+    └── Panel 3: Accounting Firms
 ```
-
-**Mobile menu**: Add collapsible "Solutions" section with the same three links
-
----
-
-## Routing
-
-New routes to add to `App.tsx`:
-
-```
-/home-alt              → IndexAlt (alternate homepage)
-/solutions/private     → PrivateCompany
-/solutions/public      → PublicCompany
-/solutions/firm        → AccountingFirm
-```
-
----
-
-## Technical Details
-
-### State Management
-- No global state needed
-- Each selector card is a simple `<Link>` component
-
-### Styling Approach
-- Reuse existing design tokens and Tailwind classes
-- Cards use `bg-white border rounded-2xl shadow-sm hover:shadow-lg` pattern
-- Consistent with enterprise SaaS aesthetic
-- Smooth hover transitions (200ms ease-in-out)
-
-### Accessibility
-- Cards are keyboard navigable (using Link component)
-- Proper focus states
-- Semantic HTML with appropriate headings
 
 ### Responsive Behavior
-- Desktop: 3 cards in a row
-- Tablet: 3 cards, slightly smaller
-- Mobile: Cards stack vertically
+- **Mobile**: Stacked vertically with full width
+- **Tablet+**: 3 equal columns with gap
 
 ---
 
-## Implementation Order
+## Technical Implementation
 
-1. **Create CompanyTypeSelector component** - The core 3-box selector
-2. **Create HeroSectionAlt component** - Hero with selector instead of memo
-3. **Create IndexAlt page** - Alternate homepage using new hero
-4. **Create solution pages** - PrivateCompany, PublicCompany, AccountingFirm
-5. **Update App.tsx** - Add all new routes
-6. **Update header.tsx** - Add Solutions dropdown (desktop + mobile)
+### File Changes
+
+**Modify**: `src/components/home/CompanyTypeSelector.tsx`
+
+Key changes:
+1. Replace translucent white backgrounds with dark opaque panels
+2. Use solid white text for maximum readability
+3. Add prominent hover states with blue glow
+4. Simplify structure - remove circuit patterns and complex overlays
+5. Add top gradient accent bar on each panel
+
+### Panel Component Structure
+
+```
+<Link> (the clickable panel)
+├── Top accent line (gradient bar)
+├── Title (bold, white)
+├── Outcome (gray-300)
+└── Arrow indicator (slides on hover)
+```
+
+---
+
+## Why This Works
+
+1. **High Contrast**: Dark panels on bright blue creates clear separation
+2. **Bold & Readable**: Solid colors instead of transparency effects
+3. **Enterprise Feel**: Dark glass aesthetic feels premium and tech-forward
+4. **Clear Hierarchy**: Title > subtitle > action indicator
+5. **Obvious Clickability**: Hover states make interaction clear
 
 ---
 
 ## Notes
 
-- The alternate homepage will be at `/home-alt` — you can later swap it with `/` if desired
-- Solution pages will have placeholder content initially that can be customized with specific messaging
-- All styling follows existing patterns and visual rhythm documented in project memories
+- Keeps all existing content (titles, outcomes, links)
+- No changes to HeroSectionAlt.tsx layout or positioning
+- No changes to routing or data structure
+- Pure visual redesign of the selector component
 
