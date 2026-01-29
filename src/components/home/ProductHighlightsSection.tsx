@@ -32,16 +32,31 @@ export function ProductHighlightsSection() {
     };
   }, []);
 
-  // Product order: Memos, Footnote Disclosures, Contract Analysis, Accounting Research, Guidance Updates, SOX Controls
+  // Product order: Contract Analysis, Memos, Footnote Disclosures, Accounting Research, Guidance Updates, SOX Controls
   const products = [
+    {
+      id: "contracts",
+      label: "CONTRACT ANALYSIS",
+      title: "AI-Powered Contract Analysis",
+      bulletPoints: [
+        { title: "Mass contract ingestion & analysis", description: "Analyze large populations of contracts together or individually — no manual sorting, no CSV gymnastics." },
+        { title: "Structured by contract type", description: "Revenue, leases, debt, stock compensation, business combinations, and more — each analyzed using purpose-built accounting logic." },
+        { title: "Accounting-ready structured outputs", description: "Clean, consistent data that flows directly into memos, disclosures, and downstream workflows — not legal summaries." },
+        { title: "Revenue contract analysis (ASC 606)", description: "Automated abstraction and evaluation support for performance obligations, contract terms, etc." },
+        { title: "Lease abstraction & evaluation (ASC 842)", description: "Identify embedded leases, extract key data, and support classification and accounting conclusions." }
+      ],
+      href: "/contract-analysis",
+      icon: FileSearch,
+      iconColor: "#339CFF"
+    },
     {
       id: "memos",
       label: "MEMOS",
       title: "Better Memos, Faster.",
       bulletPoints: [
-        "Version history, reviewer comments, and internal sign offs",
-        "Guided prompts + AI follow up questions = accurate AI generated memos",
-        "Exportable Audit package"
+        { title: "Version history, reviewer comments, and internal sign offs", description: "" },
+        { title: "Guided prompts + AI follow up questions = accurate AI generated memos", description: "" },
+        { title: "Exportable Audit package", description: "" }
       ],
       href: "/accounting-memos",
       icon: FileText,
@@ -52,25 +67,12 @@ export function ProductHighlightsSection() {
       label: "FOOTNOTE DISCLOSURES", 
       title: "Benchmark & AI completed Checklists",
       bulletPoints: [
-        "AI trained benchmarking",
-        "Footnote requirement checklists",
-        "CPA approved, industry leading formatting"
+        { title: "AI trained benchmarking", description: "" },
+        { title: "Footnote requirement checklists", description: "" },
+        { title: "CPA approved, industry leading formatting", description: "" }
       ],
       href: "/footnote-disclosures",
       icon: FileCheck,
-      iconColor: "#339CFF"
-    },
-    {
-      id: "contracts",
-      label: "CONTRACT ANALYSIS",
-      title: "AI-Powered Contract Analysis",
-      bulletPoints: [
-        "Lease abstraction",
-        "Revenue contract analysis and ASC 606 compliance",
-        "Embedded lease identification and evaluation"
-      ],
-      href: "/contract-analysis",
-      icon: FileSearch,
       iconColor: "#339CFF"
     },
     {
@@ -78,9 +80,9 @@ export function ProductHighlightsSection() {
       label: "ACCOUNTING RESEARCH",
       title: "Your Firm's AI Research Assistant",
       bulletPoints: [
-        "Search Big 4 accounting guides and technical resources",
-        "Natural language queries across comprehensive knowledge base",
-        "Internal GPT (coming soon)"
+        { title: "Search Big 4 accounting guides and technical resources", description: "" },
+        { title: "Natural language queries across comprehensive knowledge base", description: "" },
+        { title: "Internal GPT (coming soon)", description: "" }
       ],
       href: "/research-gpt",
       icon: Brain,
@@ -91,9 +93,9 @@ export function ProductHighlightsSection() {
       label: "GUIDANCE UPDATES",      
       title: "Apply New Guidance to Your Situation",
       bulletPoints: [
-        "Instant alerts for new standards",
-        "Actionable implementation guidance",
-        "Turn new guidance into a memo"
+        { title: "Instant alerts for new standards", description: "" },
+        { title: "Actionable implementation guidance", description: "" },
+        { title: "Turn new guidance into a memo", description: "" }
       ],
       href: "/guidance-updates",
       icon: Bell,
@@ -139,7 +141,7 @@ export function ProductHighlightsSection() {
               : "opacity-0 translate-y-[30px]"
           )}
         >
-          <Tabs defaultValue="memos" className="w-full">
+          <Tabs defaultValue="contracts" className="w-full">
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Left side - Tab buttons */}
               <div className="lg:w-1/3">
@@ -182,13 +184,20 @@ export function ProductHighlightsSection() {
                         </h3>
 
                         {/* Bullet points */}
-                        <ul className="space-y-3 mb-8 flex-grow">
+                        <ul className="space-y-4 mb-8 flex-grow">
                           {product.bulletPoints.map((point, pointIndex) => (
                             <li key={pointIndex} className="flex items-start">
                               <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#339CFF] mt-2 mr-3"></div>
-                              <span className="text-gray-600 dark:text-gray-400">
-                                {point}
-                              </span>
+                              <div>
+                                <span className="font-semibold text-gray-900 dark:text-white">
+                                  {point.title}
+                                </span>
+                                {point.description && (
+                                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                                    {point.description}
+                                  </p>
+                                )}
+                              </div>
                             </li>
                           ))}
                         </ul>
