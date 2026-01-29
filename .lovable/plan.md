@@ -1,204 +1,174 @@
 
 
-# Apply Homepage Styling to Product Pages
+# Alternate Homepage with Company Type Selector
 
 ## Overview
-This plan updates all 6 product pages to match the homepage's visual rhythm by applying the brand blue gradient hero, consistent section backgrounds, and the blue gradient Final CTA section to create cohesive visual "bookends".
 
----
+This plan creates an alternate homepage where the animated memo is replaced with a company type selector (Private Company, Public Company, Accounting Firm), along with three new landing pages for each type, and a new "Solutions" dropdown in the header navigation.
 
-## Current State vs Target State
+## Architecture
 
-```text
-HOMEPAGE (current - working well):
-┌─────────────────────────────────────────────┐
-│  HERO - Blue gradient with GradientBackground │
-├─────────────────────────────────────────────┤
-│  TRUST BAR - Light slate-50                   │
-├─────────────────────────────────────────────┤
-│  PRODUCT HIGHLIGHTS - White                   │
-├─────────────────────────────────────────────┤
-│  KEY BENEFITS - Light blue-gray gradient band │
-├─────────────────────────────────────────────┤
-│  FINAL CTA - Blue gradient (cta-gradient-bg)  │
-├─────────────────────────────────────────────┤
-│  FOOTER - Black                               │
-└─────────────────────────────────────────────┘
+### New Files to Create
 
-PRODUCT PAGES (current - plain/boring):
-┌─────────────────────────────────────────────┐
-│  HERO - Plain white bg                        │
-├─────────────────────────────────────────────┤
-│  TRUST BAR - Light slate-50                   │
-├─────────────────────────────────────────────┤
-│  HOW IT WORKS - Various backgrounds           │
-├─────────────────────────────────────────────┤
-│  BENEFITS - Various backgrounds               │
-├─────────────────────────────────────────────┤
-│  FOOTER - Black (abrupt transition)           │
-└─────────────────────────────────────────────┘
+| File | Purpose |
+|------|---------|
+| `src/pages/IndexAlt.tsx` | Alternate homepage with company selector |
+| `src/components/home/CompanyTypeSelector.tsx` | The 3-box selector component |
+| `src/components/home/HeroSectionAlt.tsx` | Modified hero with selector instead of memo |
+| `src/pages/solutions/PrivateCompany.tsx` | Private Company landing page |
+| `src/pages/solutions/PublicCompany.tsx` | Public Company landing page |
+| `src/pages/solutions/AccountingFirm.tsx` | Accounting Firm landing page |
 
-PRODUCT PAGES (target - matching homepage):
-┌─────────────────────────────────────────────┐
-│  HERO - Blue gradient with GradientBackground │
-├─────────────────────────────────────────────┤
-│  TRUST BAR - Light slate-50                   │
-├─────────────────────────────────────────────┤
-│  HOW IT WORKS - White                         │
-├─────────────────────────────────────────────┤
-│  BENEFITS - Light blue-gray gradient band     │
-├─────────────────────────────────────────────┤
-│  FINAL CTA - Blue gradient (cta-gradient-bg)  │
-├─────────────────────────────────────────────┤
-│  FOOTER - Black                               │
-└─────────────────────────────────────────────┘
-```
-
----
-
-## Pages to Update
-
-1. **Accounting Memos** (`/accounting-memos`)
-2. **Contract Analysis** (`/contract-analysis`)
-3. **Footnote Disclosures** (`/footnote-disclosures`)
-4. **Research GPT** (`/research`)
-5. **Guidance Updates** (`/guidance-updates`)
-6. **SOX Controls** (`/sox`) - Currently just "Coming Soon", will add full structure
-
----
-
-## Technical Changes
-
-### 1. Hero Section Updates
-
-Each product page hero component needs to add the `GradientBackground` component for the blue gradient effect. The text colors need adjustment to be readable on the blue background.
-
-**Components to update:**
-- `src/components/home/HeroSectionRight.tsx` (Accounting Memos)
-- `src/components/contract/ContractHeroSection.tsx`
-- `src/components/disclosures/DisclosureHeroSection.tsx`
-- `src/components/research/ResearchHeroSection.tsx`
-- `src/components/guidance/GuidanceHeroSection.tsx`
-- `src/components/sox/SOXHeroSection.tsx`
-
-**Key changes per hero:**
-- Import and add `GradientBackground` component
-- Remove `bg-white dark:bg-background` class
-- Update text colors: headlines to `text-gray-900 dark:text-white` or white depending on contrast
-- Update subtitle colors to work on blue background
-- Update buttons to match homepage style (`variant="black"` primary, white outline secondary)
-- Ensure mockup images/cards have proper contrast (white backgrounds, shadows)
-
-### 2. Benefits Section Background Updates
-
-Update benefits sections to use the same light blue-gray gradient band as the homepage's "Why Gaapio" section.
-
-**Sections to update:**
-- `src/components/home/BenefitsSection.tsx` (used by Accounting Memos)
-- `src/components/disclosures/DisclosureBenefitsSection.tsx`
-- `src/components/research/ResearchBenefitsSection.tsx`
-
-**Add background class:**
-```tsx
-className="bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-800/60 dark:via-slate-800/60 dark:to-slate-800/60"
-```
-
-### 3. How It Works Section Background Updates
-
-Standardize "How It Works" sections to use white backgrounds for contrast.
-
-**Sections to update:**
-- `src/components/home/HowItWorksSection.tsx`
-- `src/components/contract/ContractHowItWorksSection.tsx`
-- `src/components/disclosures/DisclosureHowItWorksSection.tsx`
-- `src/components/research/ResearchHowItWorksSection.tsx`
-- `src/components/guidance/GuidanceHowItWorksSection.tsx`
-
-### 4. Add FinalCtaSection to All Product Pages
-
-Import and add the `FinalCtaSection` component before the footer on each product page.
-
-**Pages to update:**
-- `src/pages/AccountingMemos.tsx`
-- `src/pages/ContractAnalysis.tsx`
-- `src/pages/FootnoteDisclosures.tsx`
-- `src/pages/ResearchGPT.tsx`
-- `src/pages/GuidanceUpdates.tsx` (replace existing `FinalCtaBanner`)
-- `src/pages/SOXControls.tsx`
-
-### 5. SOX Controls Page - Full Structure
-
-Currently this page is just a "Coming Soon" placeholder. Update to use the full product page structure with SOXHeroSection.
-
----
-
-## Detailed File Changes
-
-### Hero Components - Add Blue Gradient
-
-**Example pattern (to apply to each hero):**
-```tsx
-// Add import
-import { GradientBackground } from "@/components/home/GradientBackground";
-
-// Update section wrapper
-<section className="relative min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 overflow-hidden">
-  {/* Add gradient background */}
-  <GradientBackground />
-  
-  {/* Update text colors for blue background */}
-  <h1 className="... text-gray-900 dark:text-white">
-  <p className="... text-gray-800 dark:text-white/90">
-  
-  {/* Update buttons to match homepage */}
-  <Button variant="black" ...>Request a Demo</Button>
-  <Button variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100" ...>Ask a Question</Button>
-```
-
-### Product Page Structure - Add Final CTA
-
-**Example pattern (to apply to each page):**
-```tsx
-import { FinalCtaSection } from "@/components/home/FinalCtaSection";
-
-// In the JSX, before Footer:
-<FinalCtaSection />
-<Footer />
-```
-
----
-
-## Summary of Files to Modify
+### Files to Modify
 
 | File | Changes |
 |------|---------|
-| `src/components/home/HeroSectionRight.tsx` | Add GradientBackground, update text/button colors |
-| `src/components/contract/ContractHeroSection.tsx` | Add GradientBackground, update text/button colors |
-| `src/components/disclosures/DisclosureHeroSection.tsx` | Add GradientBackground, update text/button colors |
-| `src/components/research/ResearchHeroSection.tsx` | Add GradientBackground, update text/button colors |
-| `src/components/guidance/GuidanceHeroSection.tsx` | Add GradientBackground, update text/button colors |
-| `src/components/sox/SOXHeroSection.tsx` | Add GradientBackground, update text/button colors |
-| `src/components/home/BenefitsSection.tsx` | Add light blue-gray gradient background |
-| `src/components/disclosures/DisclosureBenefitsSection.tsx` | Update to use light blue-gray gradient background |
-| `src/components/research/ResearchBenefitsSection.tsx` | Add light blue-gray gradient background |
-| `src/pages/AccountingMemos.tsx` | Add FinalCtaSection import and component |
-| `src/pages/ContractAnalysis.tsx` | Add FinalCtaSection import and component |
-| `src/pages/FootnoteDisclosures.tsx` | Add FinalCtaSection, remove wrapper divs |
-| `src/pages/ResearchGPT.tsx` | Add FinalCtaSection import and component |
-| `src/pages/GuidanceUpdates.tsx` | Replace FinalCtaBanner with FinalCtaSection |
-| `src/pages/SOXControls.tsx` | Add full product page structure |
+| `src/App.tsx` | Add routes for alternate homepage and 3 solution pages |
+| `src/components/header.tsx` | Add "Solutions" dropdown to the left of "Products" |
 
 ---
 
-## Visual Consistency Achieved
+## Component Details
 
-After these changes, every product page will have:
-- Blue gradient hero matching the homepage
-- Consistent Trust Bar styling
-- White "How It Works" section
-- Light blue-gray gradient "Benefits" section
-- Blue gradient Final CTA section
-- Smooth transition to black footer
+### 1. Company Type Selector (`CompanyTypeSelector.tsx`)
 
-This creates a cohesive brand experience across the entire site.
+A centered component with three clickable cards:
+
+```text
+┌─────────────────────────────────────────────────────────┐
+│                  "Are you with a:"                       │
+├─────────────────┬─────────────────┬─────────────────────┤
+│  ┌───────────┐  │  ┌───────────┐  │  ┌───────────┐      │
+│  │  Building  │  │  │  Building  │  │  │  Briefcase │      │
+│  │   Icon    │  │  │   Icon    │  │  │    Icon    │      │
+│  │           │  │  │           │  │  │            │      │
+│  │  Private  │  │  │  Public   │  │  │ Accounting │      │
+│  │  Company  │  │  │  Company  │  │  │    Firm    │      │
+│  └───────────┘  │  └───────────┘  │  └───────────┘      │
+└─────────────────┴─────────────────┴─────────────────────┘
+```
+
+- **Layout**: 3 cards in a row (responsive: stack on mobile)
+- **Styling**: White cards with subtle borders, hover effects with primary color accent
+- **Behavior**: Each card links to its respective solutions page
+- **Icons**: Building (private), Building2 (public), Briefcase (firm) from lucide-react
+
+### 2. Alternate Hero Section (`HeroSectionAlt.tsx`)
+
+Based on the existing `HeroSection.tsx` but replaces the right column (AnimatedMemo) with the CompanyTypeSelector:
+
+- **Left column**: Same title and subtitle text
+- **Right column**: CompanyTypeSelector instead of AnimatedMemo
+- **Background**: Same GradientBackground component
+- **CTA buttons**: Removed (selector becomes the CTA)
+
+### 3. Alternate Homepage (`IndexAlt.tsx`)
+
+Exact copy of `Index.tsx` but uses `HeroSectionAlt` instead of `HeroSection`:
+
+- Same sections: TrustBarSection, ProductHighlightsSection, KeyBenefitsSection, FinalCtaSection
+- Same header and footer
+- Only difference: hero section uses the selector
+
+### 4. Solution Landing Pages
+
+Each solution page follows the existing product page pattern (similar to `AccountingMemos.tsx`):
+
+**Structure for each:**
+- Header
+- Custom hero section with tailored messaging
+- TrustBarSection
+- Benefits/features section
+- FinalCtaSection
+- Footer
+
+**Page-specific content:**
+
+| Page | Target Audience | Key Messaging Focus |
+|------|-----------------|---------------------|
+| Private Company | CFOs, Controllers at private companies | Streamlined technical accounting, audit prep |
+| Public Company | SEC filers, public company accountants | SOX compliance, SEC reporting, disclosures |
+| Accounting Firm | CPA firms, audit teams | Multi-client efficiency, reviewer workflows |
+
+---
+
+## Header Navigation Changes
+
+### New "Solutions" Dropdown
+
+Position: To the left of "Products"
+
+**Dropdown structure** (matching Company dropdown style):
+```text
+┌────────────────────────────────────────┐
+│              SOLUTIONS                  │
+│         ─────────────────────          │
+│  🏢  Private Company                    │
+│      Solutions for private companies    │
+│                                        │
+│  🏛️  Public Company                     │
+│      Solutions for SEC filers           │
+│                                        │
+│  💼  Accounting Firm                    │
+│      Solutions for CPA firms            │
+└────────────────────────────────────────┘
+```
+
+**Mobile menu**: Add collapsible "Solutions" section with the same three links
+
+---
+
+## Routing
+
+New routes to add to `App.tsx`:
+
+```
+/home-alt              → IndexAlt (alternate homepage)
+/solutions/private     → PrivateCompany
+/solutions/public      → PublicCompany
+/solutions/firm        → AccountingFirm
+```
+
+---
+
+## Technical Details
+
+### State Management
+- No global state needed
+- Each selector card is a simple `<Link>` component
+
+### Styling Approach
+- Reuse existing design tokens and Tailwind classes
+- Cards use `bg-white border rounded-2xl shadow-sm hover:shadow-lg` pattern
+- Consistent with enterprise SaaS aesthetic
+- Smooth hover transitions (200ms ease-in-out)
+
+### Accessibility
+- Cards are keyboard navigable (using Link component)
+- Proper focus states
+- Semantic HTML with appropriate headings
+
+### Responsive Behavior
+- Desktop: 3 cards in a row
+- Tablet: 3 cards, slightly smaller
+- Mobile: Cards stack vertically
+
+---
+
+## Implementation Order
+
+1. **Create CompanyTypeSelector component** - The core 3-box selector
+2. **Create HeroSectionAlt component** - Hero with selector instead of memo
+3. **Create IndexAlt page** - Alternate homepage using new hero
+4. **Create solution pages** - PrivateCompany, PublicCompany, AccountingFirm
+5. **Update App.tsx** - Add all new routes
+6. **Update header.tsx** - Add Solutions dropdown (desktop + mobile)
+
+---
+
+## Notes
+
+- The alternate homepage will be at `/home-alt` — you can later swap it with `/` if desired
+- Solution pages will have placeholder content initially that can be customized with specific messaging
+- All styling follows existing patterns and visual rhythm documented in project memories
 
