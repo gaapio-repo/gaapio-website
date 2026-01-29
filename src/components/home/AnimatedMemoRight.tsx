@@ -43,16 +43,22 @@ export const AnimatedMemoRight = () => {
     if (width < 768) return "240px";
     if (width < 1024) return "205px";
     if (width < 1400) return "210px";
-    if (width < 1800) return "245px";
-    return "280px";
+    if (width < 1800) return "255px";
+    return "290px";
   };
 
   const getContainerWidth = () => {
     if (width < 480) return "175%";
     if (width < 768) return "150%";
     if (width < 1400) return "175%";
-    if (width < 1800) return "120%";
-    return "105%";
+    // For wide screens, don't use width - use right constraint instead
+    return "auto";
+  };
+
+  const getRightPosition = () => {
+    if (width < 1400) return "2.5%";
+    if (width < 1800) return "8%";
+    return "10%";
   };
 
   const getLeftPosition = () => {
@@ -183,14 +189,15 @@ export const AnimatedMemoRight = () => {
             position: "absolute",
             top: getTopPosition(),
             left: getLeftPosition(),
-            right: "2.5%",
+            right: getRightPosition(),
             textAlign: "left",
             lineHeight: "1.2",
             zIndex: 10,
             height: getContainerHeight(),
             display: "flex",
             alignItems: "flex-start",
-            width: getContainerWidth()
+            width: getContainerWidth(),
+            overflow: "hidden"
           }}
         >
           <div
