@@ -1,88 +1,88 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { Building2, Building, Briefcase, ArrowRight } from "lucide-react";
 
 const entryPoints = [
   {
     id: "private",
     title: "Private Companies",
-    outcome: "Audit-ready memos",
+    outcome: "Audit-ready memos & technical accounting support",
     href: "/solutions/private",
+    icon: Building2,
   },
   {
     id: "public",
     title: "Public Companies",
-    outcome: "SEC & SOX workflows",
+    outcome: "SEC reporting, SOX compliance & disclosure management",
     href: "/solutions/public",
+    icon: Building,
   },
   {
     id: "firm",
     title: "Accounting Firms",
-    outcome: "Multi-client efficiency",
+    outcome: "Multi-client efficiency & advisory workflows",
     href: "/solutions/firm",
+    icon: Briefcase,
   },
 ];
 
 export const CompanyTypeSelector = memo(function CompanyTypeSelector() {
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-xl">
       {/* Section label */}
-      <p className="text-sm md:text-base font-semibold text-white uppercase tracking-[0.25em] mb-6 text-center">
+      <p className="text-sm font-semibold text-gray-800 dark:text-white uppercase tracking-[0.2em] mb-4">
         Built for:
       </p>
       
-      {/* Panels grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
-        {entryPoints.map((entry) => (
-          <Link
-            key={entry.id}
-            to={entry.href}
-            className={cn(
-              "group relative flex flex-col overflow-hidden",
-              "bg-gray-900/90 backdrop-blur-xl",
-              "border border-white/20 hover:border-primary",
-              "rounded-2xl shadow-2xl",
-              "transition-all duration-300 ease-out",
-              "hover:-translate-y-2",
-              "hover:shadow-[0_0_30px_rgba(0,153,255,0.4)]"
-            )}
-          >
-            {/* Top gradient accent bar */}
-            <div className="h-1 w-full bg-gradient-to-r from-primary to-cyan-400" />
-            
-            {/* Content */}
-            <div className="flex flex-col items-center p-6 md:p-8">
-              {/* Title */}
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-2 text-center">
-                {entry.title}
-              </h3>
-              
-              {/* Outcome */}
-              <p className="text-sm md:text-base text-gray-300 text-center mb-4">
-                {entry.outcome}
-              </p>
-              
-              {/* Arrow indicator */}
-              <div className="flex items-center gap-1.5 text-primary group-hover:text-cyan-400 transition-colors">
-                <span className="text-sm font-medium">Learn more</span>
-                <svg 
-                  className="w-4 h-4 group-hover:translate-x-1 transition-transform" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+      {/* Stacked cards */}
+      <div className="flex flex-col gap-3">
+        {entryPoints.map((entry) => {
+          const Icon = entry.icon;
+          return (
+            <Link
+              key={entry.id}
+              to={entry.href}
+              className={cn(
+                "group flex items-center gap-4 p-4 md:p-5",
+                "bg-white dark:bg-gray-900",
+                "border border-gray-200 dark:border-gray-700",
+                "rounded-xl shadow-sm",
+                "transition-all duration-200 ease-out",
+                "hover:shadow-lg hover:border-primary",
+                "hover:-translate-y-0.5"
+              )}
+            >
+              {/* Icon */}
+              <div className={cn(
+                "flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg",
+                "bg-primary/10 dark:bg-primary/20",
+                "flex items-center justify-center",
+                "group-hover:bg-primary group-hover:text-white",
+                "transition-colors duration-200"
+              )}>
+                <Icon className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-white transition-colors" />
               </div>
-            </div>
-            
-            {/* Corner accent dots on hover */}
-            <div className="absolute top-3 left-3 w-1.5 h-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute bottom-3 left-3 w-1.5 h-1.5 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </Link>
-        ))}
+              
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
+                  {entry.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
+                  {entry.outcome}
+                </p>
+              </div>
+              
+              {/* Arrow */}
+              <ArrowRight className={cn(
+                "flex-shrink-0 w-5 h-5 text-gray-400",
+                "group-hover:text-primary group-hover:translate-x-1",
+                "transition-all duration-200"
+              )} />
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
