@@ -8,13 +8,13 @@ const solutions = [
     icon: Building2,
     title: "Private Companies",
     description: "Audit-ready memos & technical accounting support",
-    href: "/solutions/private-company"
+    href: "/solutions/private"
   },
   {
     icon: Landmark,
     title: "Public Companies",
     description: "SEC reporting, SOX compliance & disclosure management",
-    href: "/solutions/public-company"
+    href: "/solutions/public"
   },
   {
     icon: Briefcase,
@@ -26,7 +26,7 @@ const solutions = [
 
 export function SolutionsSection() {
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-slate-900">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-800/60 dark:via-slate-800/40 dark:to-slate-800/60">
       <ResponsiveContainer>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
