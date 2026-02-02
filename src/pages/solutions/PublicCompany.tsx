@@ -93,17 +93,17 @@ const benefits = [
   {
     Mockup: DisclosureMockup,
     title: "Disclosure-Ready in Hours",
-    description: "Generate footnotes that meet SEC requirements and industry benchmarks.",
+    description: "Generate SEC-compliant footnotes with structured, reviewer-ready outputs.",
   },
   {
     Mockup: SOXMockup,
     title: "SOX Without the Spreadsheets",
-    description: "Maintain robust controls with AI-powered documentation.",
+    description: "AI-powered controls and narratives auditors can verify instantly.",
   },
   {
     Mockup: ReportingMockup,
-    title: "10-K & 10-Q Acceleration",
-    description: "Cut reporting cycles with automated technical accounting workflows.",
+    title: "Faster 10-Ks & 10-Qs",
+    description: "Automated workflows that cut reporting cycles.",
   },
   {
     Mockup: AuditMockup,
