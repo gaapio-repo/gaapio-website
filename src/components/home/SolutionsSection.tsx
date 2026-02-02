@@ -26,7 +26,7 @@ const solutions = [
 ];
 
 export function SolutionsSection() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(1); // Start with Public Companies (index 1) highlighted
 
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
@@ -85,7 +85,7 @@ export function SolutionsSection() {
                   isHovered ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
                 )}>
                   <span className="px-4 py-1 text-xs font-semibold bg-primary text-primary-foreground rounded-full shadow-lg shadow-primary/30 whitespace-nowrap">
-                    Your Organization Type
+                    Choose Your Organization Type
                   </span>
                 </div>
 
