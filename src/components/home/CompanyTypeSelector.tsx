@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Building2, Building, Briefcase, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const entryPoints = [
   {
@@ -9,21 +9,18 @@ const entryPoints = [
     title: "Private Companies",
     outcome: "Audit-ready memos & technical accounting support",
     href: "/solutions/private",
-    icon: Building2,
   },
   {
     id: "public",
     title: "Public Companies",
     outcome: "SEC reporting, SOX compliance & disclosure management",
     href: "/solutions/public",
-    icon: Building,
   },
   {
     id: "firm",
     title: "Accounting Firms",
     outcome: "Multi-client efficiency & advisory workflows",
     href: "/solutions/firm",
-    icon: Briefcase,
   },
 ];
 
@@ -31,58 +28,56 @@ export const CompanyTypeSelector = memo(function CompanyTypeSelector() {
   return (
     <div className="w-full max-w-xl">
       {/* Section label */}
-      <p className="text-sm font-semibold text-gray-800 dark:text-white uppercase tracking-[0.2em] mb-4">
+      <p className="text-sm font-semibold text-gray-800 dark:text-white uppercase tracking-[0.2em] mb-6">
         Built for:
       </p>
       
-      {/* Stacked cards */}
-      <div className="flex flex-col gap-3">
-        {entryPoints.map((entry) => {
-          const Icon = entry.icon;
-          return (
-            <Link
-              key={entry.id}
-              to={entry.href}
-              className={cn(
-                "group flex items-center gap-5 py-8 px-5 md:py-12 md:px-7",
-                "bg-white dark:bg-gray-900",
-                "border border-gray-200 dark:border-gray-700",
-                "rounded-xl shadow-sm",
-                "transition-all duration-200 ease-out",
-                "hover:shadow-lg hover:border-primary",
-                "hover:-translate-y-0.5"
-              )}
-            >
-              {/* Icon */}
-              <div className={cn(
-                "flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg",
-                "bg-primary/10 dark:bg-primary/20",
-                "flex items-center justify-center",
-                "group-hover:bg-primary group-hover:text-white",
-                "transition-colors duration-200"
-              )}>
-                <Icon className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-white transition-colors" />
-              </div>
-              
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
+      {/* Typography-forward links */}
+      <div className="flex flex-col space-y-6">
+        {entryPoints.map((entry) => (
+          <Link
+            key={entry.id}
+            to={entry.href}
+            className="group flex items-start justify-between gap-4"
+          >
+            {/* Text content */}
+            <div className="flex-1">
+              {/* Title with animated underline */}
+              <div className="relative inline-block">
+                <h3 className={cn(
+                  "text-xl md:text-2xl font-bold",
+                  "text-gray-900 dark:text-white",
+                  "group-hover:text-primary dark:group-hover:text-primary",
+                  "transition-colors duration-200"
+                )}>
                   {entry.title}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
-                  {entry.outcome}
-                </p>
+                {/* Animated gradient underline */}
+                <span className={cn(
+                  "absolute bottom-0 left-0 h-0.5",
+                  "bg-gradient-to-r from-primary to-cyan-400",
+                  "w-0 group-hover:w-full",
+                  "transition-all duration-300 ease-out"
+                )} />
               </div>
               
-              {/* Arrow */}
-              <ArrowRight className={cn(
-                "flex-shrink-0 w-5 h-5 text-gray-400",
-                "group-hover:text-primary group-hover:translate-x-1",
-                "transition-all duration-200"
-              )} />
-            </Link>
-          );
-        })}
+              {/* Subtitle */}
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                {entry.outcome}
+              </p>
+            </div>
+            
+            {/* Arrow - appears and slides on hover */}
+            <ArrowRight className={cn(
+              "flex-shrink-0 w-5 h-5 mt-1",
+              "text-gray-400 dark:text-gray-500",
+              "opacity-0 -translate-x-2",
+              "group-hover:opacity-100 group-hover:translate-x-0",
+              "group-hover:text-primary",
+              "transition-all duration-200"
+            )} />
+          </Link>
+        ))}
       </div>
     </div>
   );
