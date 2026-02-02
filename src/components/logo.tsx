@@ -39,7 +39,7 @@ export const Logo = memo(({ className = "" }: { className?: string }) => {
       {/* Light logo - visible in light mode, hidden in dark mode */}
       <img
         src={lightLogo}
-        alt="Gaapio Logo - AI-Powered Accounting Memo Platform"
+        alt="Gaapio Logo - AI-Powered Technical Accounting Platform"
         className="logo-image block dark:hidden"
         style={logoStyle}
         loading="eager"
@@ -51,7 +51,7 @@ export const Logo = memo(({ className = "" }: { className?: string }) => {
       {/* Dark logo - hidden in light mode, visible in dark mode */}
       <img
         src={darkLogo}
-        alt="Gaapio Logo - AI-Powered Accounting Memo Platform"
+        alt="Gaapio Logo - AI-Powered Technical Accounting Platform"
         className="logo-image hidden dark:block"
         style={logoStyle}
         loading="eager"
