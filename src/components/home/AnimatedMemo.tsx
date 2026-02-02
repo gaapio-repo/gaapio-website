@@ -42,8 +42,8 @@ export const AnimatedMemo = () => {
     if (width < 1024) return "33%"; // tablets (768-1023)
     if (width < 1280) return "34%"; // medium (1024-1279)
     if (width < 1400) return "35%"; // intermediate (1280-1399)
-    if (width < 1600) return "36%"; // large-ish (1400-1599)
-    return "24%"; // xl screens 1600+
+    if (width < 1600) return "32%"; // large-ish (1400-1599)
+    return "28%"; // xl screens 1600+
   };
   
   // Left position: where the main content column starts in the image
