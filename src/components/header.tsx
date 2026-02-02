@@ -88,21 +88,21 @@ const solutionPages = [
     href: "/solutions/private",
     icon: Building,
     description: "Audit-ready without Big 4 headcount",
-    features: ["Streamlined memo creation for audit prep", "Technical accounting guidance on demand", "CPA-approved documentation workflows"],
+    features: ["Audit-ready memos in minutes", "Built-in ASC guidance with citations", "Reviewer-ready deliverables every time"],
   },
   {
     name: "Public Companies",
     href: "/solutions/public",
     icon: Building2,
     description: "SEC & SOX reporting made easier",
-    features: ["SOX control documentation and testing", "SEC reporting and disclosure management", "Integrated compliance tracking"],
+    features: ["10-K & 10-Q disclosures, faster", "SOX documentation without spreadsheets", "Defensible outputs auditors trust"],
   },
   {
     name: "Accounting Firms",
     href: "/solutions/firm",
     icon: Briefcase,
     description: "Serve more clients with the same team",
-    features: ["Multi-client dashboard and workflows", "Advisory prep and audit efficiency", "Scalable review and sign-off processes"],
+    features: ["Serve more clients per staff", "Senior-level work from associates", "Standardized, client-ready deliverables"],
   }
 ];
 
