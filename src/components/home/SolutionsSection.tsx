@@ -42,22 +42,22 @@ const FirmPattern = () => (
 const solutions = [
   {
     title: "Private Companies",
-    tagline: "Built for growing teams that need enterprise-grade accounting without enterprise headcount.",
-    description: "Audit-ready memos, disclosures & contract workflows",
+    boldPart: "Audit-ready memos, disclosures & contract workflows",
+    regularPart: "for growing teams without Big 4 headcount.",
     href: "/solutions/private",
     Pattern: PrivatePattern,
   },
   {
     title: "Public Companies",
-    tagline: "Documentation your auditors love. Speed your team needs.",
-    description: "Automated research, contract abstraction, and disclosure support for 10-Ks, 10-Qs, and complex transactions.",
+    boldPart: "SEC, SOX & technical accounting documentation at scale",
+    regularPart: "— fast, defensible, auditor-ready.",
     href: "/solutions/public",
     Pattern: PublicPattern,
   },
   {
     title: "Accounting Firms",
-    tagline: "Multi-client efficiency for audit & advisory",
-    description: "Collaborative workflows, consistent deliverables, and faster turnaround across every engagement.",
+    boldPart: "Multi-client efficiency for audit & advisory",
+    regularPart: "with standardized research, memos & deliverables.",
     href: "/solutions/firm",
     Pattern: FirmPattern,
   }
@@ -77,7 +77,7 @@ export function SolutionsSection() {
       
       <ResponsiveContainer className="relative z-10">
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
             Gaapio's Solutions
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -135,18 +135,14 @@ export function SolutionsSection() {
                   </div>
                   
                   {/* Title - consistent sizing */}
-                  <h3 className="text-xl font-bold text-foreground mb-2">
+                  <h3 className="text-xl font-bold text-foreground mb-3">
                     {solution.title}
                   </h3>
                   
-                  {/* Tagline */}
-                  <p className="text-sm font-medium text-foreground/80 mb-3">
-                    {solution.tagline}
-                  </p>
-                  
-                  {/* Description */}
+                  {/* Description with bold + regular parts */}
                   <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-1">
-                    {solution.description}
+                    <span className="font-semibold text-foreground">{solution.boldPart}</span>{" "}
+                    {solution.regularPart}
                   </p>
                   
                   {/* CTA Link */}
