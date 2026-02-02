@@ -40,7 +40,7 @@ export const AnimatedMemo = () => {
   const getTopPosition = () => {
     if (width < 768) return "24%"; // mobile
     if (width < 1280) return "33%"; // medium screens (768-1279)
-    if (width < 1500) return "38%"; // intermediate large screens (1280-1499) - push down more
+    if (width < 1500) return "42%"; // intermediate large screens (1280-1499) - push down more
     return "24%"; // large screens 1500+
   };
   
