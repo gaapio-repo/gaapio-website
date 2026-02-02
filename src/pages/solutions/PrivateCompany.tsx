@@ -5,28 +5,100 @@ import { Link } from "react-router-dom";
 import { GradientBackground } from "@/components/home/GradientBackground";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
-import { Building, Zap, Users, BookOpen, RefreshCw } from "lucide-react";
+import { Building } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { ServiceSchema } from "@/components/StructuredData";
 
+// Mini UI mockup components - realistic product representations
+const MemoMockup = () => (
+  <div className="w-full h-20 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-3 flex flex-col gap-2 overflow-hidden shadow-sm">
+    <div className="flex items-center gap-2">
+      <div className="h-2.5 w-16 bg-primary/60 rounded-sm"></div>
+      <div className="h-2 w-8 bg-green-500/40 rounded-full ml-auto"></div>
+    </div>
+    <div className="flex flex-col gap-1.5">
+      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-4/5 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-3/5 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+    </div>
+  </div>
+);
+
+const TeamMockup = () => (
+  <div className="w-full h-20 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-3 overflow-hidden shadow-sm">
+    <div className="flex items-center gap-3">
+      <div className="flex -space-x-2">
+        <div className="w-6 h-6 rounded-full bg-primary/70"></div>
+        <div className="w-6 h-6 rounded-full bg-primary/50"></div>
+        <div className="w-6 h-6 rounded-full bg-primary/30"></div>
+      </div>
+      <div className="flex-1">
+        <div className="h-2 w-20 bg-slate-300 dark:bg-slate-600 rounded-full mb-1.5"></div>
+        <div className="h-1.5 w-14 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+      </div>
+    </div>
+    <div className="mt-3 flex gap-2">
+      <div className="h-4 flex-1 bg-primary/10 rounded flex items-center px-2">
+        <div className="h-1.5 w-full bg-primary/40 rounded-full"></div>
+      </div>
+    </div>
+  </div>
+);
+
+const ResearchMockup = () => (
+  <div className="w-full h-20 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-3 flex gap-2 overflow-hidden shadow-sm">
+    <div className="w-1/3 flex flex-col gap-1.5">
+      <div className="h-2 w-full bg-primary/40 rounded-sm"></div>
+      <div className="h-1.5 w-4/5 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-3/5 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-4/5 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+    </div>
+    <div className="flex-1 border-l border-slate-200 dark:border-slate-700 pl-2 flex flex-col gap-1.5">
+      <div className="h-2 w-1/2 bg-amber-400/60 rounded-sm"></div>
+      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+    </div>
+  </div>
+);
+
+const WorkflowMockup = () => (
+  <div className="w-full h-20 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-3 overflow-hidden shadow-sm">
+    <div className="flex items-center gap-2 mb-2">
+      {['Contract', 'Lease', 'Revenue'].map((label, i) => (
+        <div key={label} className="flex items-center gap-1">
+          <div className={`w-3 h-3 rounded-full ${i === 0 ? 'bg-green-500' : i === 1 ? 'bg-green-500' : 'bg-primary/60'}`}></div>
+          <div className="h-1.5 w-10 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
+        </div>
+      ))}
+    </div>
+    <div className="flex gap-1">
+      {[1, 2, 3, 4].map((i) => (
+        <div key={i} className="flex-1 h-6 bg-slate-100 dark:bg-slate-700 rounded flex items-center justify-center">
+          <div className="h-1.5 w-3/4 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
 const benefits = [
   {
-    icon: Zap,
+    Mockup: MemoMockup,
     title: "Audit-Ready in Days, Not Weeks",
     description: "Generate memos and disclosures your auditors accept the first time.",
   },
   {
-    icon: Users,
+    Mockup: TeamMockup,
     title: "Operate Like a Bigger Team",
     description: "AI assists junior staff so seniors focus on judgment.",
   },
   {
-    icon: BookOpen,
+    Mockup: ResearchMockup,
     title: "Big 4-Level Technical Depth",
     description: "Built-in guidance and citations without consultant fees.",
   },
   {
-    icon: RefreshCw,
+    Mockup: WorkflowMockup,
     title: "Standardized Workflows",
     description: "Contracts, leases, and revenue handled consistently every time.",
   },
@@ -84,40 +156,43 @@ export default function PrivateCompany() {
       {/* Trust Bar */}
       <TrustBarSection />
 
-      {/* Benefits Section - Enterprise Style */}
+      {/* Benefits Section - Typography-First Enterprise Style */}
       <section className="py-24 md:py-32 bg-white dark:bg-slate-900">
         <div className="container px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
               Why Private Companies Choose Gaapio
             </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Enterprise-grade technical accounting without the enterprise overhead.
+            <p className="text-lg text-muted-foreground max-w-lg mx-auto">
+              Enterprise-grade technical accounting without the overhead.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
-            {benefits.map((benefit, index) => (
-              <div 
-                key={index}
-                className="group relative p-8 lg:p-10 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-slate-900/50"
-              >
-                {/* Icon */}
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-6 transition-transform duration-300 group-hover:scale-110">
-                  <benefit.icon className="h-6 w-6" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto">
+            {benefits.map((benefit, index) => {
+              const Mockup = benefit.Mockup;
+              return (
+                <div 
+                  key={index}
+                  className="group p-10 lg:p-12 rounded-2xl bg-slate-50/80 dark:bg-slate-800/30 border border-slate-200/80 dark:border-slate-700/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60 dark:hover:shadow-slate-900/40 hover:border-slate-300 dark:hover:border-slate-600"
+                >
+                  {/* Mini UI Mockup */}
+                  <div className="mb-8">
+                    <Mockup />
+                  </div>
+                  
+                  {/* Title - Large */}
+                  <h3 className="text-2xl lg:text-[1.75rem] font-bold text-foreground mb-4 leading-tight">
+                    {benefit.title}
+                  </h3>
+                  
+                  {/* Description - Single sentence, muted */}
+                  <p className="text-base lg:text-lg text-muted-foreground">
+                    {benefit.description}
+                  </p>
                 </div>
-                
-                {/* Title */}
-                <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-3">
-                  {benefit.title}
-                </h3>
-                
-                {/* Description - single sentence */}
-                <p className="text-base text-muted-foreground leading-relaxed">
-                  {benefit.description}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
