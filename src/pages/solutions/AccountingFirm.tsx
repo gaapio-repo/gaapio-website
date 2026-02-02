@@ -6,11 +6,7 @@ import { GradientBackground } from "@/components/home/GradientBackground";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { FirmModulesSection } from "@/components/solutions/FirmModulesSection";
-import { 
-  Briefcase, 
-  Lock,
-  Shield
-} from "lucide-react";
+import { Briefcase } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { ServiceSchema } from "@/components/StructuredData";
 
@@ -76,22 +72,11 @@ const benefits = [
   },
 ];
 
-const securityFeatures = [
-  {
-    icon: Lock,
-    title: "Private by Design",
-    description: "Customer data does not train public AI."
-  },
-  {
-    icon: Shield,
-    title: "End-to-End Encrypted",
-    description: "Structured output ready for audit support."
-  },
-];
-
-const comingSoon = [
-  "SOX controls module (to support control documentation + evidence workflows)",
-  "Codification checker (we are in the process of licensing the codification)"
+const securityItems = [
+  "Customer data never trains public AI models",
+  "End-to-end encryption in transit and at rest",
+  "Role-based access controls and audit logs",
+  "SOC 2–aligned infrastructure and controls",
 ];
 
 export default function AccountingFirm() {
@@ -194,52 +179,31 @@ export default function AccountingFirm() {
       {/* Modules Section - Using the tabbed layout */}
       <FirmModulesSection />
 
-      {/* Security Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
+      {/* Security & Trust Section */}
+      <section className="py-20 md:py-24 bg-white dark:bg-slate-900">
         <div className="container px-4 md:px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                Security & AI Posture
-              </h2>
-            </div>
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Security & Trust
+            </h2>
+            <p className="text-lg text-muted-foreground mb-12">
+              Built for the security and compliance expectations of finance and audit teams.
+            </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              {securityFeatures.map((feature, index) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-5 text-left max-w-2xl mx-auto">
+              {securityItems.map((item, index) => (
                 <div 
                   key={index}
-                  className="flex items-center gap-4 p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+                  className="flex items-start gap-3"
                 >
-                  <div className="p-3 rounded-xl bg-primary text-white">
-                    <feature.icon className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      {feature.description}
-                    </p>
-                  </div>
+                  <svg className="w-5 h-5 text-green-600 dark:text-green-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-base text-foreground">
+                    {item}
+                  </span>
                 </div>
               ))}
-            </div>
-
-            {/* Coming Soon */}
-            <div className="p-6 rounded-2xl bg-gradient-to-r from-primary/5 to-cyan-500/5 border border-primary/20">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/10 text-primary">
-                  Coming Soon
-                </span>
-              </h3>
-              <ul className="space-y-2">
-                {comingSoon.map((item, index) => (
-                  <li key={index} className="flex items-start gap-2 text-gray-600 dark:text-gray-400">
-                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2"></div>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
