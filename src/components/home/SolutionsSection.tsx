@@ -7,71 +7,126 @@ const solutions = [
   {
     icon: Building2,
     title: "Private Companies",
-    description: "Audit-ready memos & technical accounting support",
-    href: "/solutions/private"
+    description: "Audit-ready memos & technical accounting support for growing businesses",
+    href: "/solutions/private",
+    featured: false
   },
   {
     icon: Landmark,
     title: "Public Companies",
-    description: "SEC reporting, SOX compliance & disclosure management",
-    href: "/solutions/public"
+    description: "SEC reporting, SOX compliance & disclosure management at scale",
+    href: "/solutions/public",
+    featured: true
   },
   {
     icon: Briefcase,
     title: "Accounting Firms",
-    description: "Multi-client efficiency & advisory workflows",
-    href: "/solutions/firm"
+    description: "Multi-client efficiency & advisory workflows that drive results",
+    href: "/solutions/firm",
+    featured: false
   }
 ];
 
 export function SolutionsSection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-800/60 dark:via-slate-800/40 dark:to-slate-800/60">
-      <ResponsiveContainer>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+    <section className="py-20 md:py-28 relative overflow-hidden">
+      {/* Premium gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/80 via-white to-white dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-900" />
+      
+      {/* Subtle decorative elements */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      
+      <ResponsiveContainer className="relative z-10">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
             Gaapio's Solutions
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Purpose-built workflows for your organization type
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {solutions.map((solution) => {
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-center">
+          {solutions.map((solution, index) => {
             const Icon = solution.icon;
+            const isFeatured = solution.featured;
+            
             return (
               <Link
                 key={solution.title}
                 to={solution.href}
                 className={cn(
-                  "group relative p-8 rounded-2xl",
-                  "bg-gradient-to-br from-white via-white to-muted/30 dark:from-slate-800 dark:via-slate-800 dark:to-slate-700/80",
-                  "border border-border/60 dark:border-slate-700",
-                  "shadow-sm hover:shadow-lg hover:shadow-primary/5",
-                  "hover:border-primary/30 hover:-translate-y-1",
-                  "transition-all duration-300 ease-out"
+                  "group relative rounded-2xl transition-all duration-300 ease-out",
+                  // Base card styling with glassmorphism
+                  "bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm",
+                  "border border-white/50 dark:border-slate-700/50",
+                  // Shadows
+                  "shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50",
+                  "hover:shadow-2xl hover:shadow-primary/20 dark:hover:shadow-primary/10",
+                  // Hover transforms
+                  "hover:-translate-y-2 hover:scale-[1.02]",
+                  // Featured card styling
+                  isFeatured ? [
+                    "md:-mt-4 md:mb-4",
+                    "p-8 md:p-10",
+                    "ring-2 ring-primary/20 dark:ring-primary/30",
+                    "bg-gradient-to-br from-white via-white to-blue-50/50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-700/50",
+                  ] : [
+                    "p-8",
+                  ]
                 )}
               >
-                {/* Subtle inner glow on hover */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Featured badge */}
+                {isFeatured && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="px-4 py-1 text-xs font-semibold bg-primary text-primary-foreground rounded-full shadow-lg shadow-primary/30">
+                      Most Popular
+                    </span>
+                  </div>
+                )}
+
+                {/* Hover glow effect */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 <div className="relative z-10 flex flex-col items-center text-center">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center border border-primary/20 mb-5">
-                    <Icon className="w-7 h-7 text-primary" strokeWidth={1.75} />
+                  {/* Icon with blue circle background */}
+                  <div className={cn(
+                    "flex items-center justify-center rounded-2xl mb-6 transition-all duration-300",
+                    "bg-gradient-to-br from-primary to-primary/80",
+                    "shadow-lg shadow-primary/30 group-hover:shadow-xl group-hover:shadow-primary/40",
+                    "group-hover:scale-110",
+                    isFeatured ? "w-16 h-16 md:w-20 md:h-20" : "w-14 h-14 md:w-16 md:h-16"
+                  )}>
+                    <Icon 
+                      className={cn(
+                        "text-white",
+                        isFeatured ? "w-8 h-8 md:w-10 md:h-10" : "w-7 h-7 md:w-8 md:h-8"
+                      )} 
+                      strokeWidth={1.75} 
+                    />
                   </div>
                   
-                  <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-200">
+                  {/* Title */}
+                  <h3 className={cn(
+                    "font-bold text-foreground mb-3 transition-colors duration-200",
+                    isFeatured ? "text-xl md:text-2xl" : "text-lg md:text-xl"
+                  )}>
                     {solution.title}
                   </h3>
                   
-                  <p className="text-muted-foreground text-sm mb-4">
+                  {/* Description */}
+                  <p className={cn(
+                    "text-muted-foreground mb-6 leading-relaxed",
+                    isFeatured ? "text-base" : "text-sm md:text-base"
+                  )}>
                     {solution.description}
                   </p>
                   
-                  <div className="flex items-center gap-1 text-primary text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-200">
-                    Learn more
-                    <ArrowRight className="w-4 h-4" />
+                  {/* CTA Link */}
+                  <div className="flex items-center gap-1.5 text-primary font-semibold text-sm group/cta">
+                    <span className="group-hover/cta:underline">Learn More</span>
+                    <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                   </div>
                 </div>
               </Link>
