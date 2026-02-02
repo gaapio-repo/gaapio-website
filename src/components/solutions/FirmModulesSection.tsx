@@ -37,7 +37,7 @@ export function FirmModulesSection() {
     {
       id: "contracts",
       label: "CONTRACT ANALYSIS",
-      tag: "Very Robust",
+      tag: "Full Coverage",
       title: "AI-Powered Contract Analysis",
       bulletPoints: [
         { title: "Mass contract analysis + summary for large sets of agreements", description: "Analyze large populations of contracts together or individually — no manual sorting, no CSV gymnastics." },
@@ -102,7 +102,6 @@ export function FirmModulesSection() {
     {
       id: "internal-ai",
       label: "INTERNAL AI ASSISTANT",
-      tag: "Coming Soon",
       title: "Your Firm's Private AI",
       bulletPoints: [
         "Internal GPT concept for the firm",
