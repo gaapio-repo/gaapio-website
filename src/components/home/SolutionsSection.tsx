@@ -4,62 +4,89 @@ import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Abstract pattern components for each card
-const PrivatePattern = () => (
-  <svg className="w-full h-24 opacity-[0.08]" viewBox="0 0 200 80" fill="none">
-    <circle cx="30" cy="40" r="25" stroke="currentColor" strokeWidth="1.5" />
-    <circle cx="70" cy="40" r="15" stroke="currentColor" strokeWidth="1.5" />
-    <circle cx="100" cy="40" r="20" stroke="currentColor" strokeWidth="1.5" />
-    <path d="M130 20 L170 40 L130 60" stroke="currentColor" strokeWidth="1.5" fill="none" />
-    <line x1="150" y1="30" x2="190" y2="30" stroke="currentColor" strokeWidth="1.5" />
-    <line x1="150" y1="50" x2="180" y2="50" stroke="currentColor" strokeWidth="1.5" />
-  </svg>
+// Mini UI mockup components for each card
+const PrivateMockup = () => (
+  <div className="w-full h-20 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2 flex gap-2 overflow-hidden">
+    <div className="w-1/3 bg-white dark:bg-slate-900 rounded shadow-sm p-1.5 flex flex-col gap-1">
+      <div className="h-1.5 w-3/4 bg-primary/30 rounded-full"></div>
+      <div className="h-1 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1 w-2/3 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+    </div>
+    <div className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-1.5 flex flex-col gap-1">
+      <div className="h-1.5 w-1/2 bg-primary/40 rounded-full"></div>
+      <div className="h-1 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1 w-3/4 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+    </div>
+  </div>
 );
 
-const PublicPattern = () => (
-  <svg className="w-full h-24 opacity-[0.08]" viewBox="0 0 200 80" fill="none">
-    <rect x="20" y="20" width="40" height="40" rx="4" stroke="currentColor" strokeWidth="1.5" />
-    <rect x="70" y="15" width="30" height="50" rx="4" stroke="currentColor" strokeWidth="1.5" />
-    <rect x="110" y="25" width="35" height="30" rx="4" stroke="currentColor" strokeWidth="1.5" />
-    <path d="M155 20 L155 60 L190 60" stroke="currentColor" strokeWidth="1.5" />
-    <circle cx="165" cy="35" r="4" fill="currentColor" />
-    <circle cx="180" cy="45" r="4" fill="currentColor" />
-  </svg>
+const PublicMockup = () => (
+  <div className="w-full h-20 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2 flex gap-2 overflow-hidden">
+    <div className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-1.5 flex flex-col justify-between">
+      <div className="flex gap-1">
+        <div className="h-2 w-2 rounded-full bg-green-400"></div>
+        <div className="h-2 w-2 rounded-full bg-blue-400"></div>
+        <div className="h-2 w-2 rounded-full bg-amber-400"></div>
+      </div>
+      <div className="flex items-end gap-0.5 h-8">
+        <div className="w-2 bg-primary/40 rounded-t" style={{height: '40%'}}></div>
+        <div className="w-2 bg-primary/50 rounded-t" style={{height: '65%'}}></div>
+        <div className="w-2 bg-primary/60 rounded-t" style={{height: '50%'}}></div>
+        <div className="w-2 bg-primary/70 rounded-t" style={{height: '80%'}}></div>
+        <div className="w-2 bg-primary rounded-t" style={{height: '100%'}}></div>
+      </div>
+    </div>
+    <div className="w-1/3 bg-white dark:bg-slate-900 rounded shadow-sm p-1.5 flex flex-col gap-1">
+      <div className="h-1.5 w-full bg-primary/30 rounded-full"></div>
+      <div className="h-1 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1 w-2/3 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-3 w-full bg-green-100 dark:bg-green-900/30 rounded mt-auto flex items-center justify-center">
+        <div className="h-1 w-1/2 bg-green-500 rounded-full"></div>
+      </div>
+    </div>
+  </div>
 );
 
-const FirmPattern = () => (
-  <svg className="w-full h-24 opacity-[0.08]" viewBox="0 0 200 80" fill="none">
-    <path d="M20 60 L40 20 L60 60" stroke="currentColor" strokeWidth="1.5" />
-    <path d="M70 60 L90 25 L110 60" stroke="currentColor" strokeWidth="1.5" />
-    <circle cx="140" cy="40" r="20" stroke="currentColor" strokeWidth="1.5" />
-    <circle cx="140" cy="40" r="10" stroke="currentColor" strokeWidth="1.5" />
-    <line x1="170" y1="25" x2="190" y2="25" stroke="currentColor" strokeWidth="1.5" />
-    <line x1="170" y1="40" x2="190" y2="40" stroke="currentColor" strokeWidth="1.5" />
-    <line x1="170" y1="55" x2="190" y2="55" stroke="currentColor" strokeWidth="1.5" />
-  </svg>
+const FirmMockup = () => (
+  <div className="w-full h-20 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2 flex gap-1.5 overflow-hidden">
+    {[1, 2, 3].map((i) => (
+      <div key={i} className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-1.5 flex flex-col gap-1">
+        <div className="h-1.5 w-2/3 bg-primary/30 rounded-full"></div>
+        <div className="h-1 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+        <div className="h-1 w-3/4 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+        <div className="mt-auto h-2 w-full bg-primary/10 rounded flex items-center px-1">
+          <div className="h-1 w-1/2 bg-primary/40 rounded-full"></div>
+        </div>
+      </div>
+    ))}
+  </div>
 );
 
 const solutions = [
   {
     title: "Private Companies",
-    boldPart: "Audit-ready memos, disclosures & contract workflows",
-    regularPart: "for growing teams without Big 4 headcount.",
+    beforeBold: "Audit-ready memos, disclosures & contract workflows for ",
+    boldPart: "growing teams",
+    afterBold: " without Big 4 headcount.",
     href: "/solutions/private",
-    Pattern: PrivatePattern,
+    Mockup: PrivateMockup,
   },
   {
     title: "Public Companies",
-    boldPart: "SEC, SOX & technical accounting documentation at scale",
-    regularPart: "— fast, defensible, auditor-ready.",
+    beforeBold: "SEC, SOX & technical accounting ",
+    boldPart: "documentation at scale",
+    afterBold: " — fast, defensible, auditor-ready.",
     href: "/solutions/public",
-    Pattern: PublicPattern,
+    Mockup: PublicMockup,
   },
   {
     title: "Accounting Firms",
-    boldPart: "Multi-client efficiency for audit & advisory",
-    regularPart: "with standardized research, memos & deliverables.",
+    beforeBold: "Multi-client efficiency for ",
+    boldPart: "audit & advisory",
+    afterBold: " with standardized research, memos & deliverables.",
     href: "/solutions/firm",
-    Pattern: FirmPattern,
+    Mockup: FirmMockup,
   }
 ];
 
@@ -88,7 +115,7 @@ export function SolutionsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-stretch">
           {solutions.map((solution, index) => {
             const isHovered = hoveredIndex === index;
-            const Pattern = solution.Pattern;
+            const Mockup = solution.Mockup;
             
             return (
               <Link
@@ -129,9 +156,9 @@ export function SolutionsSection() {
                 )} />
                 
                 <div className="relative z-10 flex flex-col items-center text-center flex-1">
-                  {/* Abstract pattern instead of icon */}
-                  <div className="w-full mb-4 text-primary">
-                    <Pattern />
+                  {/* Mini UI mockup */}
+                  <div className="w-full mb-4">
+                    <Mockup />
                   </div>
                   
                   {/* Title - consistent sizing */}
@@ -139,10 +166,11 @@ export function SolutionsSection() {
                     {solution.title}
                   </h3>
                   
-                  {/* Description with bold + regular parts */}
+                  {/* Description with specific bold part */}
                   <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-1">
-                    <span className="font-semibold text-foreground">{solution.boldPart}</span>{" "}
-                    {solution.regularPart}
+                    {solution.beforeBold}
+                    <span className="font-semibold text-foreground">{solution.boldPart}</span>
+                    {solution.afterBold}
                   </p>
                   
                   {/* CTA Link */}
