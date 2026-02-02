@@ -130,7 +130,7 @@ export function ProductHighlightsSection() {
       <ResponsiveContainer>
         <div className="text-center mb-16 relative z-10">
 
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Modules</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Gaapio's Modules</h2>
 
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             We built a platform for a reason, need something that isn't on here? Let us know!
