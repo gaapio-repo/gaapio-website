@@ -1,32 +1,70 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
-import { Building2, Landmark, Briefcase, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+// Abstract pattern components for each card
+const PrivatePattern = () => (
+  <svg className="w-full h-24 opacity-[0.08]" viewBox="0 0 200 80" fill="none">
+    <circle cx="30" cy="40" r="25" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="70" cy="40" r="15" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="100" cy="40" r="20" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M130 20 L170 40 L130 60" stroke="currentColor" strokeWidth="1.5" fill="none" />
+    <line x1="150" y1="30" x2="190" y2="30" stroke="currentColor" strokeWidth="1.5" />
+    <line x1="150" y1="50" x2="180" y2="50" stroke="currentColor" strokeWidth="1.5" />
+  </svg>
+);
+
+const PublicPattern = () => (
+  <svg className="w-full h-24 opacity-[0.08]" viewBox="0 0 200 80" fill="none">
+    <rect x="20" y="20" width="40" height="40" rx="4" stroke="currentColor" strokeWidth="1.5" />
+    <rect x="70" y="15" width="30" height="50" rx="4" stroke="currentColor" strokeWidth="1.5" />
+    <rect x="110" y="25" width="35" height="30" rx="4" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M155 20 L155 60 L190 60" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="165" cy="35" r="4" fill="currentColor" />
+    <circle cx="180" cy="45" r="4" fill="currentColor" />
+  </svg>
+);
+
+const FirmPattern = () => (
+  <svg className="w-full h-24 opacity-[0.08]" viewBox="0 0 200 80" fill="none">
+    <path d="M20 60 L40 20 L60 60" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M70 60 L90 25 L110 60" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="140" cy="40" r="20" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="140" cy="40" r="10" stroke="currentColor" strokeWidth="1.5" />
+    <line x1="170" y1="25" x2="190" y2="25" stroke="currentColor" strokeWidth="1.5" />
+    <line x1="170" y1="40" x2="190" y2="40" stroke="currentColor" strokeWidth="1.5" />
+    <line x1="170" y1="55" x2="190" y2="55" stroke="currentColor" strokeWidth="1.5" />
+  </svg>
+);
 
 const solutions = [
   {
-    icon: Building2,
     title: "Private Companies",
-    description: "Audit-ready memos & technical accounting support for growing businesses",
+    tagline: "Built for growing teams that need enterprise-grade accounting without enterprise headcount.",
+    description: "Audit-ready memos, disclosures & contract workflows",
     href: "/solutions/private",
+    Pattern: PrivatePattern,
   },
   {
-    icon: Landmark,
     title: "Public Companies",
-    description: "SEC reporting, SOX compliance & disclosure management at scale",
+    tagline: "Documentation your auditors love. Speed your team needs.",
+    description: "Automated research, contract abstraction, and disclosure support for 10-Ks, 10-Qs, and complex transactions.",
     href: "/solutions/public",
+    Pattern: PublicPattern,
   },
   {
-    icon: Briefcase,
     title: "Accounting Firms",
-    description: "Multi-client efficiency & advisory workflows that drive results",
+    tagline: "Multi-client efficiency for audit & advisory",
+    description: "Collaborative workflows, consistent deliverables, and faster turnaround across every engagement.",
     href: "/solutions/firm",
+    Pattern: FirmPattern,
   }
 ];
 
 export function SolutionsSection() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(1); // Start with Public Companies (index 1) highlighted
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(1);
 
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
@@ -47,10 +85,10 @@ export function SolutionsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-stretch">
           {solutions.map((solution, index) => {
-            const Icon = solution.icon;
             const isHovered = hoveredIndex === index;
+            const Pattern = solution.Pattern;
             
             return (
               <Link
@@ -59,17 +97,12 @@ export function SolutionsSection() {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 className={cn(
-                  "group relative rounded-2xl transition-all duration-300 ease-out p-8",
-                  // Base card styling with glassmorphism
+                  "group relative rounded-2xl transition-all duration-300 ease-out p-6 lg:p-8 flex flex-col",
                   "bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm",
                   "border border-white/50 dark:border-slate-700/50",
-                  // Shadows
                   "shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50",
-                  // Default hover transforms
                   "hover:-translate-y-2",
-                  // Featured state when hovered
                   isHovered ? [
-                    "md:-mt-4 md:mb-4 md:p-10",
                     "shadow-2xl shadow-primary/20 dark:shadow-primary/10",
                     "scale-[1.02]",
                     "ring-2 ring-primary/20 dark:ring-primary/30",
@@ -95,43 +128,29 @@ export function SolutionsSection() {
                   isHovered ? "opacity-100" : "opacity-0"
                 )} />
                 
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  {/* Icon with blue circle background */}
-                  <div className={cn(
-                    "flex items-center justify-center rounded-2xl mb-6 transition-all duration-300",
-                    "bg-gradient-to-br from-primary to-primary/80",
-                    "shadow-lg shadow-primary/30",
-                    isHovered 
-                      ? "w-16 h-16 md:w-20 md:h-20 shadow-xl shadow-primary/40 scale-110" 
-                      : "w-14 h-14 md:w-16 md:h-16 group-hover:shadow-xl group-hover:shadow-primary/40"
-                  )}>
-                    <Icon 
-                      className={cn(
-                        "text-white transition-all duration-300",
-                        isHovered ? "w-8 h-8 md:w-10 md:h-10" : "w-7 h-7 md:w-8 md:h-8"
-                      )} 
-                      strokeWidth={1.75} 
-                    />
+                <div className="relative z-10 flex flex-col items-center text-center flex-1">
+                  {/* Abstract pattern instead of icon */}
+                  <div className="w-full mb-4 text-primary">
+                    <Pattern />
                   </div>
                   
-                  {/* Title */}
-                  <h3 className={cn(
-                    "font-bold text-foreground mb-3 transition-all duration-300",
-                    isHovered ? "text-xl md:text-2xl" : "text-lg md:text-xl"
-                  )}>
+                  {/* Title - consistent sizing */}
+                  <h3 className="text-xl font-bold text-foreground mb-2">
                     {solution.title}
                   </h3>
                   
+                  {/* Tagline */}
+                  <p className="text-sm font-medium text-foreground/80 mb-3">
+                    {solution.tagline}
+                  </p>
+                  
                   {/* Description */}
-                  <p className={cn(
-                    "text-muted-foreground mb-6 leading-relaxed transition-all duration-300",
-                    isHovered ? "text-base" : "text-sm md:text-base"
-                  )}>
+                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-1">
                     {solution.description}
                   </p>
                   
                   {/* CTA Link */}
-                  <div className="flex items-center gap-1.5 text-primary font-semibold text-sm group/cta">
+                  <div className="flex items-center gap-1.5 text-primary font-semibold text-sm group/cta mt-auto">
                     <span className="group-hover/cta:underline">Learn More</span>
                     <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                   </div>
