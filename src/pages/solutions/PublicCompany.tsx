@@ -107,8 +107,8 @@ const benefits = [
   },
   {
     Mockup: AuditMockup,
-    title: "Audit-Ready Documentation",
-    description: "Create comprehensive packages that satisfy external auditors.",
+    title: "Documentation Auditors Trust",
+    description: "Standardized memos and workpapers accepted the first time.",
   },
 ];
 
