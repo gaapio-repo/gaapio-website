@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { GradientBackground } from "@/components/home/GradientBackground";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
+import { ProductHighlightsSection } from "@/components/home/ProductHighlightsSection";
 import { Building } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { ServiceSchema } from "@/components/StructuredData";
@@ -104,6 +105,62 @@ const benefits = [
   },
 ];
 
+// Hero Product Screenshot Mockup
+const HeroScreenshotMockup = () => (
+  <div className="w-full max-w-lg mx-auto">
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden">
+      {/* Window chrome */}
+      <div className="bg-slate-100 dark:bg-slate-700 px-4 py-2.5 flex items-center gap-2 border-b border-slate-200 dark:border-slate-600">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-400"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+          <div className="w-3 h-3 rounded-full bg-green-400"></div>
+        </div>
+        <div className="flex-1 flex justify-center">
+          <div className="h-5 w-32 bg-slate-200 dark:bg-slate-600 rounded-md"></div>
+        </div>
+      </div>
+      
+      {/* App content */}
+      <div className="p-4 flex gap-3">
+        {/* Sidebar */}
+        <div className="w-1/4 space-y-2">
+          <div className="h-6 w-full bg-primary/20 rounded-md"></div>
+          <div className="h-4 w-4/5 bg-slate-200 dark:bg-slate-600 rounded"></div>
+          <div className="h-4 w-3/5 bg-slate-200 dark:bg-slate-600 rounded"></div>
+          <div className="h-4 w-4/5 bg-primary/30 rounded"></div>
+          <div className="h-4 w-2/3 bg-slate-200 dark:bg-slate-600 rounded"></div>
+        </div>
+        
+        {/* Main content */}
+        <div className="flex-1 space-y-3">
+          {/* Header with tabs */}
+          <div className="flex gap-2 pb-2 border-b border-slate-200 dark:border-slate-600">
+            <div className="h-5 w-16 bg-primary/40 rounded"></div>
+            <div className="h-5 w-16 bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="h-5 w-16 bg-slate-200 dark:bg-slate-600 rounded"></div>
+          </div>
+          
+          {/* Memo content */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <div className="h-5 w-40 bg-amber-400/60 rounded"></div>
+              <div className="h-4 w-16 bg-green-500/40 rounded-full ml-auto"></div>
+            </div>
+            <div className="h-3 w-full bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="h-3 w-11/12 bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="h-3 w-4/5 bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="mt-4 h-4 w-32 bg-primary/30 rounded"></div>
+            <div className="h-3 w-full bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="h-3 w-10/12 bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="h-3 w-9/12 bg-slate-200 dark:bg-slate-600 rounded"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 export default function PrivateCompany() {
   return (
     <div className="flex min-h-screen flex-col">
@@ -121,33 +178,41 @@ export default function PrivateCompany() {
       />
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center pt-24 pb-12 overflow-hidden">
+      {/* Hero Section - Split Layout */}
+      <section className="relative min-h-[70vh] flex items-center pt-24 pb-16 overflow-hidden">
         <GradientBackground />
         
         <div className="container px-4 md:px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-              <Building className="h-5 w-5 text-gray-800 dark:text-white" />
-              <span className="text-sm font-medium text-gray-800 dark:text-white">Private Company Solutions</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left - Text Content */}
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
+                <Building className="h-5 w-5 text-gray-800 dark:text-white" />
+                <span className="text-sm font-medium text-gray-800 dark:text-white">Private Company Solutions</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
+                <span className="text-gray-900 dark:text-white">Technical Accounting</span>{" "}
+                <span className="text-white">Without Big 4 Headcount</span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-gray-800 dark:text-white/90 max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0">
+                Move faster through audits with AI-generated memos, disclosures, and contract workflows.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold" asChild>
+                  <Link to="/request-demo">Request a Demo</Link>
+                </Button>
+                <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 text-base px-8 py-6 h-auto font-semibold" asChild>
+                  <Link to="/contact">Contact Sales</Link>
+                </Button>
+              </div>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-              <span className="text-gray-900 dark:text-white">Technical Accounting</span>{" "}
-              <span className="text-white">Made Simple</span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-gray-800 dark:text-white/90 max-w-2xl mx-auto mb-8 leading-relaxed">
-              Purpose-built for CFOs and Controllers at private companies. Streamline your technical accounting, prepare for audits faster, and maintain compliance with confidence.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold" asChild>
-                <Link to="/request-demo">Request a Demo</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 text-base px-8 py-6 h-auto font-semibold" asChild>
-                <Link to="/contact">Contact Sales</Link>
-              </Button>
+            {/* Right - Product Screenshot */}
+            <div className="hidden lg:block">
+              <HeroScreenshotMockup />
             </div>
           </div>
         </div>
@@ -156,9 +221,16 @@ export default function PrivateCompany() {
       {/* Trust Bar */}
       <TrustBarSection />
 
-      {/* Benefits Section - Typography-First Enterprise Style */}
-      <section className="py-24 md:py-32 bg-white dark:bg-slate-900">
-        <div className="container px-4 md:px-6">
+      {/* Benefits Section - With Gradient Background */}
+      <section className="py-24 md:py-32 relative overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900" />
+        
+        {/* Decorative blurs */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        
+        <div className="container px-4 md:px-6 relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
               Why Private Companies Choose Gaapio
@@ -174,7 +246,7 @@ export default function PrivateCompany() {
               return (
                 <div 
                   key={index}
-                  className="group p-10 lg:p-12 rounded-2xl bg-slate-50/80 dark:bg-slate-800/30 border border-slate-200/80 dark:border-slate-700/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60 dark:hover:shadow-slate-900/40 hover:border-slate-300 dark:hover:border-slate-600"
+                  className="group p-10 lg:p-12 rounded-2xl bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/80 dark:border-slate-700/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60 dark:hover:shadow-slate-900/40 hover:border-slate-300 dark:hover:border-slate-600"
                 >
                   {/* Mini UI Mockup */}
                   <div className="mb-8">
@@ -196,6 +268,9 @@ export default function PrivateCompany() {
           </div>
         </div>
       </section>
+
+      {/* Modules Section */}
+      <ProductHighlightsSection />
 
       {/* CTA Section */}
       <FinalCtaSection />
