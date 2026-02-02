@@ -173,15 +173,10 @@ export function FirmModulesSection() {
                       className="mt-0 h-full data-[state=active]:animate-in data-[state=active]:fade-in-50 data-[state=active]:slide-in-from-right-2"
                     >
                       <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 h-full flex flex-col">
-                        <div className="mb-6 flex items-center gap-3">
+                        <div className="mb-6">
                           <span className="text-sm font-bold text-[#339CFF] tracking-wider">
                             {module.label}
                           </span>
-                          {module.tag && (
-                            <span className="text-xs font-medium px-2 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                              {module.tag}
-                            </span>
-                          )}
                         </div>
 
                         <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">

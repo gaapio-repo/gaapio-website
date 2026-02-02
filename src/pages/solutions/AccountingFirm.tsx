@@ -180,8 +180,15 @@ export default function AccountingFirm() {
       <FirmModulesSection />
 
       {/* Security & Trust Section */}
-      <section className="py-20 md:py-24 bg-white dark:bg-slate-900">
-        <div className="container px-4 md:px-6">
+      <section className="py-20 md:py-24 relative overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900" />
+        
+        {/* Decorative blurs */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        
+        <div className="container px-4 md:px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Security & Trust
