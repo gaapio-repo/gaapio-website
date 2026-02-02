@@ -16,6 +16,57 @@ import {
 import { SEO } from "@/components/SEO";
 import { ServiceSchema } from "@/components/StructuredData";
 
+// Hero Product Screenshot Mockup - Memo workflow view
+const HeroScreenshotMockup = () => (
+  <div className="w-full max-w-lg mx-auto">
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden">
+      {/* Window chrome */}
+      <div className="bg-slate-100 dark:bg-slate-700 px-4 py-2.5 flex items-center gap-2 border-b border-slate-200 dark:border-slate-600">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-400"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+          <div className="w-3 h-3 rounded-full bg-green-400"></div>
+        </div>
+        <div className="flex-1 flex justify-center">
+          <div className="h-5 w-32 bg-slate-200 dark:bg-slate-600 rounded-md"></div>
+        </div>
+      </div>
+      
+      {/* App content - Memo workflow */}
+      <div className="p-4 flex gap-3">
+        {/* Sidebar - Client list */}
+        <div className="w-1/4 space-y-2">
+          <div className="h-6 w-full bg-primary/20 rounded-md"></div>
+          <div className="h-4 w-4/5 bg-primary/30 rounded"></div>
+          <div className="h-4 w-3/5 bg-slate-200 dark:bg-slate-600 rounded"></div>
+          <div className="h-4 w-4/5 bg-slate-200 dark:bg-slate-600 rounded"></div>
+          <div className="h-4 w-2/3 bg-slate-200 dark:bg-slate-600 rounded"></div>
+        </div>
+        
+        {/* Main content - Memo view */}
+        <div className="flex-1 space-y-3">
+          {/* Header with client badge */}
+          <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-600">
+            <div className="h-5 w-28 bg-primary/40 rounded"></div>
+            <div className="h-4 w-20 bg-green-500/30 rounded-full"></div>
+          </div>
+          
+          {/* Memo content */}
+          <div className="space-y-2">
+            <div className="h-4 w-20 bg-amber-400/60 rounded"></div>
+            <div className="h-3 w-full bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="h-3 w-11/12 bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="h-3 w-4/5 bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="mt-3 h-4 w-24 bg-primary/30 rounded"></div>
+            <div className="h-3 w-full bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="h-3 w-10/12 bg-slate-200 dark:bg-slate-600 rounded"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const coreValues = [
   {
     icon: TrendingUp,
@@ -64,36 +115,41 @@ export default function AccountingFirm() {
       />
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center pt-24 pb-12 overflow-hidden">
+      {/* Hero Section - Split Layout */}
+      <section className="relative min-h-[70vh] flex items-center pt-24 pb-16 overflow-hidden">
         <GradientBackground />
         
         <div className="container px-4 md:px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-              <Briefcase className="h-5 w-5 text-gray-800 dark:text-white" />
-              <span className="text-sm font-medium text-gray-800 dark:text-white">Accounting Firm Solutions</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left - Text Content */}
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
+                <Briefcase className="h-5 w-5 text-gray-800 dark:text-white" />
+                <span className="text-sm font-medium text-gray-800 dark:text-white">Accounting Firm Solutions</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
+                <span className="text-gray-900 dark:text-white">Multiply Your</span>{" "}
+                <span className="text-white">Firm's Capacity</span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-gray-800 dark:text-white/90 max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0">
+                Standardize research, memos, and deliverables so every associate performs like a senior — without adding headcount.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold" asChild>
+                  <Link to="/request-demo">Request a Demo</Link>
+                </Button>
+                <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 text-base px-8 py-6 h-auto font-semibold" asChild>
+                  <Link to="/contact">Contact Sales</Link>
+                </Button>
+              </div>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-gray-900 dark:text-white">
-              AI-Powered Technical Accounting for CPA Firms
-            </h1>
-            
-            <p className="text-lg md:text-xl text-gray-800 dark:text-white/90 max-w-3xl mx-auto mb-4 leading-relaxed">
-              Built by CPAs to modernize how firms handle research, documentation, and client deliverables.
-            </p>
-            
-            <p className="text-base md:text-lg text-gray-700 dark:text-white/80 max-w-2xl mx-auto mb-8 leading-relaxed">
-              Move faster without sacrificing accuracy—while keeping the CPA's judgment at the center.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold" asChild>
-                <Link to="/request-demo">Request a Demo</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 text-base px-8 py-6 h-auto font-semibold" asChild>
-                <Link to="/contact">Contact Sales</Link>
-              </Button>
+            {/* Right - Product Screenshot */}
+            <div className="hidden lg:block">
+              <HeroScreenshotMockup />
             </div>
           </div>
         </div>
