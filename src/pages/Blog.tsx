@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
+import { SEO } from "@/components/SEO";
 
 const samplePosts = [
   {
@@ -64,6 +65,12 @@ export default function Blog() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO
+        title="Gaapio Blog - Technical Accounting Insights & Best Practices"
+        description="Expert perspectives on technical accounting, compliance, and technology from the Gaapio team. Learn about ASC 606, ASC 842, AI in accounting, and more."
+        canonical="/blog"
+        keywords={['accounting blog', 'technical accounting insights', 'CPA resources', 'accounting best practices']}
+      />
       <Header />
       
       {/* Skip to content link for keyboard users */}

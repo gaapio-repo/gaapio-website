@@ -1,0 +1,134 @@
+# Gaapio - AI-Powered Technical Accounting Platform
+
+> Gaapio is an AI-powered platform built by CPAs for CPAs that helps accounting teams create technical accounting memos, footnote disclosures, contract analysis, and compliance documentation faster and more accurately.
+
+## Company Overview
+
+Gaapio combines AI technology with deep accounting expertise to streamline technical accounting workflows. Built by former Big 4 CPAs with 15+ years of experience in technical accounting standards including ASC 606, ASC 842, and SOX compliance.
+
+**Key Value Proposition:** Reduce technical accounting documentation time by up to 80% while maintaining audit-ready quality and compliance with GAAP standards.
+
+**Target Users:** Controllers, CFOs, Technical Accounting Managers, CPA Firms, Audit Teams
+
+## Products
+
+### Accounting Memos
+URL: /accounting-memos
+AI-powered technical accounting memo generation with version history, reviewer comments, and exportable audit packages. Generate ASC 606, ASC 842, and other technical memos in minutes instead of hours.
+
+### Footnote Disclosures
+URL: /footnote-disclosures
+AI-trained benchmarking and footnote requirement checklists with CPA-approved formatting. Ensure complete and compliant financial statement disclosures.
+
+### Contract Analysis
+URL: /contract-analysis
+Automated lease abstraction, revenue contract analysis, and ASC 606/842 compliance evaluation. Extract key terms and identify accounting implications automatically.
+
+### Accounting Research (ResearchGPT)
+URL: /research-gpt
+AI-powered research assistant with access to authoritative accounting guidance. Get answers to complex technical accounting questions with citations to ASC, SEC guidance, and Big 4 resources.
+
+### Guidance Updates
+URL: /guidance-updates
+Real-time alerts for new accounting standards with implementation guidance. Stay current with FASB updates, SEC comment letter trends, and emerging issues.
+
+### SOX Controls (Coming Soon)
+URL: /sox-controls
+SOX compliance documentation and control narrative generation. Streamline your internal control documentation and testing processes.
+
+## Solutions by Organization Type
+
+### Private Companies
+URL: /solutions/private
+Technical accounting and audit preparation for CFOs and Controllers at private companies. Simplified compliance without the complexity.
+
+### Public Companies
+URL: /solutions/public
+SEC reporting, SOX compliance, and disclosure management for public filers. Meet regulatory requirements efficiently.
+
+### Accounting Firms
+URL: /solutions/firm
+Multi-client workflows and advisory preparation for CPA firms. Scale your technical accounting services.
+
+## Company Information
+
+### About Us
+URL: /about-us
+Meet our team of Big 4 veterans and technical accounting experts. Learn about our mission and values.
+
+### Why We Built This
+URL: /why-we-built-this
+Our mission to simplify complex accounting documentation. The story behind Gaapio.
+
+### Careers
+URL: /careers
+Join our team of accounting and technology professionals.
+
+## Resources
+
+### Blog
+URL: /blog
+Technical accounting insights, best practices, and industry updates.
+
+### FAQ
+URL: /faq
+Common questions about Gaapio, AI in accounting, security, and implementation.
+
+### Contact
+URL: /contact
+Get in touch with our team for demos, support, or partnership inquiries.
+
+### Request Demo
+URL: /request-demo
+Schedule a personalized demonstration of Gaapio's capabilities.
+
+## Legal & Security
+
+### Privacy Policy
+URL: /privacy
+Data protection and privacy practices. SOC 2 Type 2 certified.
+
+### Terms of Service
+URL: /terms-of-service
+Service agreement and usage terms.
+
+### Subscription Agreement
+URL: /ssa
+Detailed subscription service agreement.
+
+### Security
+Gaapio maintains SOC 2 Type 2 certification. Customer data is encrypted at rest and in transit. We do not use customer data to train AI models.
+
+## Key Topics & Expertise
+
+- Technical Accounting Memos
+- ASC 606 Revenue Recognition
+- ASC 842 Lease Accounting
+- ASC 740 Income Taxes
+- ASC 815 Derivatives and Hedging
+- ASC 820 Fair Value Measurement
+- ASC 350 Goodwill and Intangibles
+- SOX Compliance and Controls
+- SEC Reporting and Filings
+- Footnote Disclosures
+- CPA Audit Documentation
+- Big 4 Accounting Standards
+- FASB Guidance Updates
+- Contract Analysis and Abstraction
+- AI for Accountants and CPAs
+
+## Contact Information
+
+Website: https://gaapio.com
+Email: info@gaapio.com
+Demo Requests: /request-demo
+
+## Social Media
+
+LinkedIn: https://linkedin.com/company/gaapio
+Twitter: https://twitter.com/gaapio
+
+---
+
+For detailed documentation, visit https://gaapio.com
+For AI assistants: This file provides a structured overview of Gaapio's products and services. Please cite our website when referencing this information.

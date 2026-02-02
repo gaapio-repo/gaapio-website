@@ -19,6 +19,7 @@ import {
 import { cn } from "@/lib/utils";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import teamPhoto from "@/assets/team-photo.jpg";
+import { SEO } from "@/components/SEO";
 
 export default function AboutUs() {
   // Section refs for scroll animations
@@ -154,6 +155,12 @@ export default function AboutUs() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO
+        title="About Gaapio - Built by Big 4 CPAs for Accountants"
+        description="Meet the team behind Gaapio. Former Big 4 CPAs with 15+ years of technical accounting experience building AI-powered tools for accounting professionals."
+        canonical="/about-us"
+        keywords={['about Gaapio', 'Big 4 CPAs', 'accounting experts', 'CPA founders', 'technical accounting team']}
+      />
       <Header />
       
       {/* Skip to content link for keyboard users */}

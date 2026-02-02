@@ -6,10 +6,25 @@ import { NeverMissUpdateSection } from "@/components/guidance/NeverMissUpdateSec
 import { GuidanceMakesSenseSection } from "@/components/guidance/GuidanceMakesSenseSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
+import { SEO } from "@/components/SEO";
+import { ProductSchema } from "@/components/StructuredData";
 
 export default function GuidanceUpdates() {
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO
+        title="Accounting Guidance Updates - Stay Current with FASB Standards"
+        description="Real-time alerts for new accounting standards with implementation guidance. Stay current with FASB updates, SEC comment letter trends, and emerging issues."
+        canonical="/guidance-updates"
+        type="product"
+        keywords={['accounting guidance', 'FASB updates', 'accounting standards', 'SEC guidance', 'ASU updates']}
+      />
+      <ProductSchema
+        name="Gaapio Guidance Updates"
+        description="Real-time alerts for new accounting standards with implementation guidance."
+        url="/guidance-updates"
+        features={['Real-time alerts', 'FASB updates', 'SEC guidance', 'Implementation support']}
+      />
       <Header />
       
       <div className="relative overflow-hidden">

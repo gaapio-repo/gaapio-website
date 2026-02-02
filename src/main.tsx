@@ -1,12 +1,11 @@
-
 import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { HelmetProvider } from 'react-helmet-async'
 import App from './App.tsx'
 import './index.css'
 import './App.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from './components/theme-toggle'
-
 // Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,10 +32,12 @@ console.log("[Diag] DevTools renderers:", (window as any).__REACT_DEVTOOLS_GLOBA
 
 createRoot(rootElement).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="light" storageKey="ui-theme">
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider defaultTheme="light" storageKey="ui-theme">
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   </StrictMode>
 );
