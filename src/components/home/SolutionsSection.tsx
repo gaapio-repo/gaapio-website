@@ -6,57 +6,57 @@ import { cn } from "@/lib/utils";
 
 // Mini UI mockup components for each card
 const PrivateMockup = () => (
-  <div className="w-full h-20 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2 flex gap-2 overflow-hidden">
-    <div className="w-1/3 bg-white dark:bg-slate-900 rounded shadow-sm p-1.5 flex flex-col gap-1">
-      <div className="h-1.5 w-3/4 bg-primary/30 rounded-full"></div>
-      <div className="h-1 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-      <div className="h-1 w-2/3 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+  <div className="w-full h-24 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2.5 flex gap-2 overflow-hidden">
+    <div className="w-1/3 bg-white dark:bg-slate-900 rounded shadow-sm p-2 flex flex-col gap-1.5">
+      <div className="h-2 w-3/4 bg-primary/30 rounded-full"></div>
+      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-2/3 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
     </div>
-    <div className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-1.5 flex flex-col gap-1">
-      <div className="h-1.5 w-1/2 bg-primary/40 rounded-full"></div>
-      <div className="h-1 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-      <div className="h-1 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-      <div className="h-1 w-3/4 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+    <div className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-2 flex flex-col gap-1.5">
+      <div className="h-2 w-1/2 bg-primary/40 rounded-full"></div>
+      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-3/4 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
     </div>
   </div>
 );
 
 const PublicMockup = () => (
-  <div className="w-full h-20 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2 flex gap-2 overflow-hidden">
-    <div className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-1.5 flex flex-col justify-between">
-      <div className="flex gap-1">
-        <div className="h-2 w-2 rounded-full bg-green-400"></div>
-        <div className="h-2 w-2 rounded-full bg-blue-400"></div>
-        <div className="h-2 w-2 rounded-full bg-amber-400"></div>
+  <div className="w-full h-24 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2.5 flex gap-2 overflow-hidden">
+    <div className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-2 flex flex-col justify-between">
+      <div className="flex gap-1.5">
+        <div className="h-2.5 w-2.5 rounded-full bg-green-400"></div>
+        <div className="h-2.5 w-2.5 rounded-full bg-blue-400"></div>
+        <div className="h-2.5 w-2.5 rounded-full bg-amber-400"></div>
       </div>
-      <div className="flex items-end gap-0.5 h-8">
-        <div className="w-2 bg-primary/40 rounded-t" style={{height: '40%'}}></div>
-        <div className="w-2 bg-primary/50 rounded-t" style={{height: '65%'}}></div>
-        <div className="w-2 bg-primary/60 rounded-t" style={{height: '50%'}}></div>
-        <div className="w-2 bg-primary/70 rounded-t" style={{height: '80%'}}></div>
-        <div className="w-2 bg-primary rounded-t" style={{height: '100%'}}></div>
+      <div className="flex items-end gap-1 h-10">
+        <div className="w-2.5 bg-primary/40 rounded-t" style={{height: '40%'}}></div>
+        <div className="w-2.5 bg-primary/50 rounded-t" style={{height: '65%'}}></div>
+        <div className="w-2.5 bg-primary/60 rounded-t" style={{height: '50%'}}></div>
+        <div className="w-2.5 bg-primary/70 rounded-t" style={{height: '80%'}}></div>
+        <div className="w-2.5 bg-primary rounded-t" style={{height: '100%'}}></div>
       </div>
     </div>
-    <div className="w-1/3 bg-white dark:bg-slate-900 rounded shadow-sm p-1.5 flex flex-col gap-1">
-      <div className="h-1.5 w-full bg-primary/30 rounded-full"></div>
-      <div className="h-1 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-      <div className="h-1 w-2/3 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-      <div className="h-3 w-full bg-green-100 dark:bg-green-900/30 rounded mt-auto flex items-center justify-center">
-        <div className="h-1 w-1/2 bg-green-500 rounded-full"></div>
+    <div className="w-1/3 bg-white dark:bg-slate-900 rounded shadow-sm p-2 flex flex-col gap-1.5">
+      <div className="h-2 w-full bg-primary/30 rounded-full"></div>
+      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-2/3 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-4 w-full bg-green-100 dark:bg-green-900/30 rounded mt-auto flex items-center justify-center">
+        <div className="h-1.5 w-1/2 bg-green-500 rounded-full"></div>
       </div>
     </div>
   </div>
 );
 
 const FirmMockup = () => (
-  <div className="w-full h-20 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2 flex gap-1.5 overflow-hidden">
+  <div className="w-full h-24 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2.5 flex gap-2 overflow-hidden">
     {[1, 2, 3].map((i) => (
-      <div key={i} className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-1.5 flex flex-col gap-1">
-        <div className="h-1.5 w-2/3 bg-primary/30 rounded-full"></div>
-        <div className="h-1 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-        <div className="h-1 w-3/4 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-        <div className="mt-auto h-2 w-full bg-primary/10 rounded flex items-center px-1">
-          <div className="h-1 w-1/2 bg-primary/40 rounded-full"></div>
+      <div key={i} className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-2 flex flex-col gap-1.5">
+        <div className="h-2 w-2/3 bg-primary/30 rounded-full"></div>
+        <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+        <div className="h-1.5 w-3/4 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+        <div className="mt-auto h-3 w-full bg-primary/10 rounded flex items-center px-1.5">
+          <div className="h-1.5 w-1/2 bg-primary/40 rounded-full"></div>
         </div>
       </div>
     ))}
@@ -68,7 +68,7 @@ const solutions = [
     title: "Private Companies",
     beforeBold: "Audit-ready memos, disclosures & contract workflows for ",
     boldPart: "growing teams",
-    afterBold: " without Big 4 headcount.",
+    afterBold: " — no Big 4 required.",
     href: "/solutions/private",
     Mockup: PrivateMockup,
   },
@@ -76,7 +76,7 @@ const solutions = [
     title: "Public Companies",
     beforeBold: "SEC, SOX & technical accounting ",
     boldPart: "documentation at scale",
-    afterBold: " — fast, defensible, auditor-ready.",
+    afterBold: " — fast and auditor-ready.",
     href: "/solutions/public",
     Mockup: PublicMockup,
   },
@@ -84,7 +84,7 @@ const solutions = [
     title: "Accounting Firms",
     beforeBold: "Multi-client efficiency for ",
     boldPart: "audit & advisory",
-    afterBold: " with standardized research, memos & deliverables.",
+    afterBold: " with standardized, repeatable deliverables.",
     href: "/solutions/firm",
     Mockup: FirmMockup,
   }
@@ -108,7 +108,7 @@ export function SolutionsSection() {
             Gaapio's Solutions
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Purpose-built workflows for your organization type
+            Solutions for every stage of accounting maturity
           </p>
         </div>
 
@@ -124,7 +124,7 @@ export function SolutionsSection() {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 className={cn(
-                  "group relative rounded-2xl transition-all duration-300 ease-out p-6 lg:p-8 flex flex-col",
+                  "group relative rounded-2xl transition-all duration-300 ease-out p-8 lg:p-10 flex flex-col",
                   "bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm",
                   "border border-white/50 dark:border-slate-700/50",
                   "shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50",
@@ -157,17 +157,17 @@ export function SolutionsSection() {
                 
                 <div className="relative z-10 flex flex-col items-center text-center flex-1">
                   {/* Mini UI mockup */}
-                  <div className="w-full mb-4">
+                  <div className="w-full mb-6">
                     <Mockup />
                   </div>
                   
-                  {/* Title - consistent sizing */}
-                  <h3 className="text-xl font-bold text-foreground mb-3">
+                  {/* Title - larger */}
+                  <h3 className="text-2xl font-bold text-foreground mb-4">
                     {solution.title}
                   </h3>
                   
-                  {/* Description with specific bold part */}
-                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-1">
+                  {/* Description - lighter color, constrained width */}
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-8 leading-relaxed flex-1 max-w-[220px]">
                     {solution.beforeBold}
                     <span className="font-semibold text-foreground">{solution.boldPart}</span>
                     {solution.afterBold}
