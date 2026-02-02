@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Mail, LifeBuoy, DollarSign } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ContactFormSuccess } from "@/components/contact/ContactFormSuccess";
+import { SEO } from "@/components/SEO";
 
 export default function Contact() {
   // Reference for scroll animation
@@ -52,6 +53,12 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white dark:from-background dark:to-background/95">
+      <SEO
+        title="Contact Gaapio - Get in Touch with Our Team"
+        description="Have questions about Gaapio? Contact our team for demos, support, or partnership inquiries. We're here to help with your technical accounting needs."
+        canonical="/contact"
+        keywords={['contact Gaapio', 'accounting software support', 'CPA tools contact', 'technical accounting help']}
+      />
       <Header />
       <main className="flex-1 pt-32 pb-16">
         <ResponsiveContainer className="max-w-5xl">

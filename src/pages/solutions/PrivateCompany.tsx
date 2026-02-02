@@ -6,6 +6,8 @@ import { GradientBackground } from "@/components/home/GradientBackground";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { Building, FileText, Clock, Shield, CheckCircle, ArrowRight } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import { ServiceSchema } from "@/components/StructuredData";
 
 const benefits = [
   {
@@ -33,6 +35,18 @@ const benefits = [
 export default function PrivateCompany() {
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO
+        title="Private Company Accounting Solutions - Gaapio"
+        description="Technical accounting solutions for private companies. Streamline audit preparation, generate technical memos, and maintain compliance with AI-powered tools built for CFOs and Controllers."
+        canonical="/solutions/private"
+        keywords={['private company accounting', 'CFO tools', 'controller software', 'audit preparation', 'technical accounting']}
+      />
+      <ServiceSchema
+        name="Gaapio for Private Companies"
+        description="Technical accounting and audit preparation solutions for CFOs and Controllers at private companies."
+        url="/solutions/private"
+        audience="CFOs, Controllers, Private Company Accounting Teams"
+      />
       <Header />
       
       {/* Hero Section */}

@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GradientBackground } from "@/components/home/GradientBackground";
+import { SEO } from "@/components/SEO";
+import { FAQSchema } from "@/components/StructuredData";
 
 export default function FAQ() {
   const [searchParams] = useSearchParams();
@@ -17,8 +19,27 @@ export default function FAQ() {
     }
   }, [searchParams]);
 
+  // FAQ data for structured data
+  const faqData = [
+    { question: "What is Gaapio and how does it work?", answer: "Gaapio leverages the latest large language models and the vast database of public filings to deliver industry leading results to technical accounting questions in seconds. Answers are backed by relevant source documents empowering accountants to perform exceptional analysis and deliver results faster than ever." },
+    { question: "Can I customize the memo and disclosure formats?", answer: "Yes, Gaapio offers extensive customization options. You can adjust the structure, formatting, and level of detail to match your organization's requirements. You can also save templates for future use, ensuring consistency across your documentation." },
+    { question: "What data is Gaapio trained on?", answer: "Gaapio is predominantly trained on the Accounting Standards Codification, Big 4 guidance, SEC comment letters, and other relevant commentary to ensure the coverage and quality." },
+    { question: "How recent is your data?", answer: "Our database of primary sources is current and updated daily." },
+    { question: "How does Gaapio guard against hallucinations?", answer: "We use specific prompts and process design along with the latest models to reduce hallucinations as much as possible. If you ever second guess a Gaapio output, you can ask the Gaapio AI assistant which uses a different model to research and confirm or deny." },
+    { question: "Does Gaapio use information submitted by users to improve its system?", answer: "Gaapio does not read, share, or learn from any information input by our users without explicit permission. Customer questions are stored in a secure, encrypted database." },
+    { question: "Is it safe to upload confidential financial data?", answer: "Security and trust are fundamental to our services. Customer questions are stored in a secure, encrypted database. We work with an independent auditor to maintain SOC 2 compliance." },
+    { question: "How is this different from ChatGPT, Gemini, or other models?", answer: "While ChatGPT can help generate ideas, Gaapio is purpose-built to produce accounting memos and disclosures that meet real-world audit, SEC, and internal control standards with built-in guardrails, accounting-specific training, and enterprise-grade security." },
+  ];
+
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO
+        title="FAQ - Common Questions About Gaapio & AI Accounting"
+        description="Find answers to frequently asked questions about Gaapio, AI-powered technical accounting, data security, customization options, and how we differ from ChatGPT."
+        canonical="/faq"
+        keywords={['Gaapio FAQ', 'AI accounting questions', 'technical accounting software FAQ', 'accounting AI security']}
+      />
+      <FAQSchema faqs={faqData} />
       <Header />
       
       {/* Skip to content link for keyboard users */}

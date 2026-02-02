@@ -5,6 +5,7 @@ import { DemoRequestForm } from "@/components/demo/DemoRequestForm";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useState } from "react";
 import { DemoRequestSuccess } from "@/components/demo/DemoRequestSuccess";
+import { SEO } from "@/components/SEO";
 
 export default function RequestDemo() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -16,6 +17,12 @@ export default function RequestDemo() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO
+        title="Request a Gaapio Demo - See AI Accounting in Action"
+        description="Schedule a personalized demonstration of Gaapio's AI-powered technical accounting platform. See how to create memos, disclosures, and compliance documentation faster."
+        canonical="/request-demo"
+        keywords={['Gaapio demo', 'accounting software demo', 'AI accounting demo', 'technical accounting demo']}
+      />
       <Header />
       
       <main className="flex-1 pt-28">

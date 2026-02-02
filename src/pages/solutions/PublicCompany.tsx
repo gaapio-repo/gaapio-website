@@ -6,6 +6,8 @@ import { GradientBackground } from "@/components/home/GradientBackground";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { Building2, Shield, FileCheck, Bell, Scale, ArrowRight } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import { ServiceSchema } from "@/components/StructuredData";
 
 const benefits = [
   {
@@ -33,6 +35,18 @@ const benefits = [
 export default function PublicCompany() {
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO
+        title="Public Company Accounting Solutions - SEC & SOX Compliance"
+        description="Enterprise-grade compliance solutions for SEC filers. Streamline SOX documentation, accelerate 10-K reporting, and maintain disclosure excellence with AI-powered automation."
+        canonical="/solutions/public"
+        keywords={['public company accounting', 'SEC reporting', 'SOX compliance', '10-K disclosures', 'SEC filer tools']}
+      />
+      <ServiceSchema
+        name="Gaapio for Public Companies"
+        description="SEC reporting, SOX compliance, and disclosure management solutions for public companies and SEC filers."
+        url="/solutions/public"
+        audience="SEC Filers, Public Company Controllers, Technical Accounting Managers"
+      />
       <Header />
       
       {/* Hero Section */}

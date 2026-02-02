@@ -13,6 +13,8 @@ import {
   Lock,
   Shield
 } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import { ServiceSchema } from "@/components/StructuredData";
 
 const coreValues = [
   {
@@ -48,6 +50,18 @@ const comingSoon = [
 export default function AccountingFirm() {
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO
+        title="CPA Firm Solutions - AI Technical Accounting for Firms"
+        description="AI-powered technical accounting platform for CPA firms. Upskill staff, increase leverage, and deliver higher-quality client work faster with multi-client workflows."
+        canonical="/solutions/firm"
+        keywords={['CPA firm software', 'accounting firm tools', 'multi-client accounting', 'CPA practice management', 'firm leverage']}
+      />
+      <ServiceSchema
+        name="Gaapio for Accounting Firms"
+        description="Multi-client workflows and advisory preparation tools for CPA firms to scale technical accounting services."
+        url="/solutions/firm"
+        audience="CPA Firms, Accounting Partners, Technical Accounting Consultants"
+      />
       <Header />
       
       {/* Hero Section */}
