@@ -169,7 +169,7 @@ export function SolutionsSection() {
                   {/* Description - lighter color, constrained width */}
                   <p className="text-sm text-gray-500 dark:text-gray-400 mb-8 leading-relaxed flex-1 max-w-[220px]">
                     {solution.beforeBold}
-                    <span className="font-semibold text-foreground">{solution.boldPart}</span>
+                    <span className="font-medium text-foreground">{solution.boldPart}</span>
                     {solution.afterBold}
                   </p>
                   
