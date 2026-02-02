@@ -42,7 +42,7 @@ export const AnimatedMemo = () => {
     if (width < 1024) return "33%"; // tablets (768-1023)
     if (width < 1280) return "34%"; // medium (1024-1279)
     if (width < 1400) return "38%"; // intermediate (1280-1399) - pushed down more
-    if (width < 1600) return "30%"; // large-ish (1400-1599)
+    if (width < 1600) return "34%"; // large-ish (1400-1599) - pushed down
     return "24%"; // xl screens 1600+
   };
   
