@@ -8,8 +8,6 @@ import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { FirmModulesSection } from "@/components/solutions/FirmModulesSection";
 import { 
   Briefcase, 
-  TrendingUp, 
-  Clock, 
   Lock,
   Shield
 } from "lucide-react";
@@ -67,16 +65,14 @@ const HeroScreenshotMockup = () => (
   </div>
 );
 
-const coreValues = [
+const benefits = [
   {
-    icon: TrendingUp,
-    title: "Upskills Staff + Increases Leverage",
-    description: "Gaapio helps less-experienced team members produce higher-quality work faster—research → memo → reviewer-ready output.",
+    title: "Multiply Staff Leverage",
+    description: "Associates produce senior-level research and memos in minutes.",
   },
   {
-    icon: Clock,
-    title: "Focus on What Matters",
-    description: "Cuts time spent on minutia so staff focus on judgment + client-facing value.",
+    title: "Increase Margins per Engagement",
+    description: "Standardized workflows cut prep time and deliver consistent output.",
   },
 ];
 
@@ -158,32 +154,37 @@ export default function AccountingFirm() {
       {/* Trust Bar */}
       <TrustBarSection />
 
-      {/* Core Value Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
-        <div className="container px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Core Value to Your Firm
+      {/* Why Firms Section - With Gradient Background */}
+      <section className="py-24 md:py-32 relative overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900" />
+        
+        {/* Decorative blurs */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        
+        <div className="container px-4 md:px-6 relative z-10">
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
+              Why Firms Run on Gaapio
             </h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {coreValues.map((value, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-4xl mx-auto">
+            {benefits.map((benefit, index) => (
               <div 
                 key={index}
-                className="flex gap-4 p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+                className="group p-10 lg:p-12 rounded-2xl bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/80 dark:border-slate-700/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60 dark:hover:shadow-slate-900/40 hover:border-slate-300 dark:hover:border-slate-600"
               >
-                <div className="flex-shrink-0 p-3 rounded-xl bg-primary text-white">
-                  <value.icon className="h-6 w-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {value.description}
-                  </p>
-                </div>
+                {/* Title - Large */}
+                <h3 className="text-2xl lg:text-[1.75rem] font-bold text-foreground mb-4 leading-tight">
+                  {benefit.title}
+                </h3>
+                
+                {/* Description - Single sentence, muted */}
+                <p className="text-base lg:text-lg text-muted-foreground">
+                  {benefit.description}
+                </p>
               </div>
             ))}
           </div>
