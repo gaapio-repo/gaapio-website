@@ -5,30 +5,30 @@ import { Link } from "react-router-dom";
 import { GradientBackground } from "@/components/home/GradientBackground";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
-import { Building, FileText, Clock, Shield, CheckCircle, ArrowRight } from "lucide-react";
+import { Building, Zap, Users, BookOpen, RefreshCw } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { ServiceSchema } from "@/components/StructuredData";
 
 const benefits = [
   {
-    icon: FileText,
-    title: "Streamlined Technical Accounting",
-    description: "Generate audit-ready memos in minutes, not hours. Our AI understands private company accounting standards.",
+    icon: Zap,
+    title: "Audit-Ready in Days, Not Weeks",
+    description: "Generate memos and disclosures your auditors accept the first time.",
   },
   {
-    icon: Clock,
-    title: "Faster Audit Prep",
-    description: "Organize your documentation and create comprehensive audit packages that satisfy auditor requirements.",
+    icon: Users,
+    title: "Operate Like a Bigger Team",
+    description: "AI assists junior staff so seniors focus on judgment.",
   },
   {
-    icon: Shield,
-    title: "CPA-Approved Quality",
-    description: "Every memo and disclosure follows professional standards, reviewed by CPAs with Big 4 experience.",
+    icon: BookOpen,
+    title: "Big 4-Level Technical Depth",
+    description: "Built-in guidance and citations without consultant fees.",
   },
   {
-    icon: CheckCircle,
-    title: "Simplified Compliance",
-    description: "Stay current with guidance updates and implement new standards with confidence.",
+    icon: RefreshCw,
+    title: "Standardized Workflows",
+    description: "Contracts, leases, and revenue handled consistently every time.",
   },
 ];
 
@@ -84,35 +84,38 @@ export default function PrivateCompany() {
       {/* Trust Bar */}
       <TrustBarSection />
 
-      {/* Benefits Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
+      {/* Benefits Section - Enterprise Style */}
+      <section className="py-24 md:py-32 bg-white dark:bg-slate-900">
         <div className="container px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Built for Private Company Needs
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Why Private Companies Choose Gaapio
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              From lease accounting to revenue recognition, we help you tackle complex accounting challenges efficiently.
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+              Enterprise-grade technical accounting without the enterprise overhead.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
             {benefits.map((benefit, index) => (
               <div 
                 key={index}
-                className="flex gap-4 p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+                className="group relative p-8 lg:p-10 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-slate-900/50"
               >
-                <div className="flex-shrink-0 p-3 rounded-xl bg-[#339CFF] text-white">
+                {/* Icon */}
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-6 transition-transform duration-300 group-hover:scale-110">
                   <benefit.icon className="h-6 w-6" />
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {benefit.description}
-                  </p>
-                </div>
+                
+                {/* Title */}
+                <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-3">
+                  {benefit.title}
+                </h3>
+                
+                {/* Description - single sentence */}
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  {benefit.description}
+                </p>
               </div>
             ))}
           </div>
