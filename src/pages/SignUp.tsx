@@ -116,7 +116,7 @@ export default function SignUp() {
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
               <span className="text-gray-900">Simplify</span> Your Technical Accounting Journey
             </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-900 max-w-2xl mx-auto">
               Choose the plan that fits your team. Built by Big 4 CPAs for modern accounting workflows.
             </p>
           </div>
