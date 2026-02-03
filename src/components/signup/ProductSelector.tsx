@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 export const STRIPE_PRODUCTS = {
   pro: {
     id: "pro",
-    name: "Gaapio Pro",
+    name: "Pro",
     price: 3600,
     priceId: "price_1Swn5jErMdi9YyI1bOirPgfH",
     productId: "prod_TucKE8DFzL07Ud",
@@ -23,7 +23,7 @@ export const STRIPE_PRODUCTS = {
   },
   core: {
     id: "core",
-    name: "Gaapio Core",
+    name: "Core",
     price: 3000,
     priceId: "price_1Swn4DErMdi9YyI1fcLKGw2D",
     productId: "prod_TucIJkgqpx1dZr",
@@ -37,7 +37,7 @@ export const STRIPE_PRODUCTS = {
   },
   research: {
     id: "research",
-    name: "Gaapio Research",
+    name: "Research",
     price: 1500,
     priceId: "price_1Swn0EErMdi9YyI17uhbXifO",
     productId: "prod_TucESMuhI341UH",
@@ -116,15 +116,16 @@ export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSel
               style={{ animationDelay: `${0.1 * index}s` }}
               onClick={() => onSelectProduct(product.id)}
             >
-              {/* Card Background with Glassmorphism */}
+              {/* Card Background */}
               <div className={cn(
-                "absolute inset-0 rounded-2xl",
-                isPopular
-                  ? "bg-gradient-to-br from-primary/10 via-primary/5 to-transparent dark:from-primary/20 dark:via-primary/10"
-                  : "bg-white/80 dark:bg-slate-800/80",
-                "backdrop-blur-sm border",
+                "absolute inset-0 rounded-2xl overflow-hidden",
+                "bg-white dark:bg-slate-800",
+                "border",
                 isPopular ? "border-primary/30" : "border-border/50"
-              )} />
+              )}>
+                {/* Blue header band */}
+                <div className="h-16 bg-gradient-to-r from-[#0099FF] to-[#33ADFF] dark:from-[#0088EE] dark:to-[#0099FF]" />
+              </div>
 
               {/* Popular Badge */}
               {isPopular && (
@@ -136,10 +137,10 @@ export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSel
               )}
               
               {/* Card Content */}
-              <div className="relative p-6 flex flex-col h-full">
-                {/* Header */}
-                <div className="mb-4 text-center">
-                  <h3 className="text-xl font-bold text-foreground">{product.name}</h3>
+              <div className="relative p-6 pt-4 flex flex-col h-full">
+                {/* Header - positioned over blue band */}
+                <div className="mb-4 text-center -mt-2">
+                  <h3 className="text-xl font-bold text-white">{product.name}</h3>
                 </div>
 
                 {/* Pricing - Fixed height for alignment */}
