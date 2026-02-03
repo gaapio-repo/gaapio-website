@@ -303,7 +303,7 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
                       }}
                       disabled={isLoading}
                       className={cn(
-                        "mt-0.5",
+                        "mt-0.5 h-5 w-5 rounded border-2 border-muted-foreground/50 data-[state=checked]:border-primary",
                         errors.termsAccepted && "border-destructive"
                       )}
                     />
@@ -373,7 +373,7 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
               <div className="p-4 bg-muted/50 rounded-xl">
                 <div className="flex items-center gap-3 mb-3">
                   <div>
-                    <h4 className="font-semibold text-foreground">{product?.name}</h4>
+                    <h4 className="font-semibold text-primary text-lg">{product?.name}</h4>
                     <p className="text-sm text-muted-foreground">{product?.description}</p>
                   </div>
                 </div>
@@ -398,12 +398,12 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
 
               {/* Features Preview */}
               <div className="pt-4 border-t border-border">
-                <h5 className="text-sm font-medium text-foreground mb-3">What's included:</h5>
-                <ul className="space-y-2">
+                <h5 className="text-sm font-medium text-foreground mb-3 text-left">What's included:</h5>
+                <ul className="space-y-2 text-left">
                   {product?.features.slice(0, 4).map((feature, index) => (
-                    <li key={index} className="flex items-start text-sm">
+                    <li key={index} className="flex items-start text-sm text-left">
                       <Check className="h-4 w-4 text-primary mr-2 shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{feature}</span>
+                      <span className="text-muted-foreground text-left">{feature}</span>
                     </li>
                   ))}
                 </ul>
