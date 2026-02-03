@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { STRIPE_PRODUCTS } from "./ProductSelector";
-import { ArrowLeft, Loader2, Users } from "lucide-react";
+import { ArrowLeft, Loader2, Users, Check, Shield, Lock } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface SignupInfoFormProps {
   selectedProduct: string;
@@ -100,8 +101,44 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
     ...Array.from({ length: 20 }, (_, i) => i + 1),
   ];
 
+  const steps = [
+    { label: "Plan", completed: true },
+    { label: "Details", completed: false, active: true },
+    { label: "Payment", completed: false },
+  ];
+
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-5xl mx-auto">
+      {/* Progress Steps */}
+      <div className="flex items-center justify-center mb-8">
+        {steps.map((step, index) => (
+          <div key={step.label} className="flex items-center">
+            <div className={cn(
+              "flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-all",
+              step.completed 
+                ? "bg-primary text-primary-foreground" 
+                : step.active 
+                  ? "bg-primary text-primary-foreground ring-4 ring-primary/20" 
+                  : "bg-muted text-muted-foreground"
+            )}>
+              {step.completed ? <Check className="h-4 w-4" /> : index + 1}
+            </div>
+            <span className={cn(
+              "ml-2 text-sm font-medium",
+              step.active ? "text-foreground" : "text-muted-foreground"
+            )}>
+              {step.label}
+            </span>
+            {index < steps.length - 1 && (
+              <div className={cn(
+                "w-12 h-0.5 mx-4",
+                step.completed ? "bg-primary" : "bg-border"
+              )} />
+            )}
+          </div>
+        ))}
+      </div>
+
       <Button 
         variant="ghost" 
         onClick={onBack} 
@@ -112,153 +149,226 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
         Back to Plans
       </Button>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Complete Your Signup</CardTitle>
-          <CardDescription>
-            You selected <strong>{product?.name}</strong> at <strong>{formatPrice(product?.price ?? null)}</strong> per user/year
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* User Count Selection */}
-            <div className="p-4 bg-muted/50 rounded-lg border space-y-3">
-              <div className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-primary" />
-                <Label htmlFor="userCount" className="text-base font-medium">Number of Users *</Label>
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* Form Section */}
+        <div className="lg:col-span-2">
+          <Card className="shadow-xl border-border/50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-2xl">Complete Your Signup</CardTitle>
+              <p className="text-muted-foreground">
+                Enter your details to continue to payment
+              </p>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* User Count Selection */}
+                <div className="p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <div className="p-2 bg-primary/10 rounded-lg">
+                      <Users className="h-5 w-5 text-primary" />
+                    </div>
+                    <Label htmlFor="userCount" className="text-base font-semibold">Number of Users</Label>
+                  </div>
+                  <Select 
+                    value={formData.userCount.toString()} 
+                    onValueChange={handleUserCountChange}
+                    disabled={isLoading}
+                  >
+                    <SelectTrigger className="w-full bg-background">
+                      <SelectValue placeholder="Select number of users" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {userCountOptions.map((count) => (
+                        <SelectItem key={count} value={count.toString()}>
+                          {count} {count === 1 ? "user" : "users"}
+                        </SelectItem>
+                      ))}
+                      <SelectItem value="25">25 users</SelectItem>
+                      <SelectItem value="30">30 users</SelectItem>
+                      <SelectItem value="40">40 users</SelectItem>
+                      <SelectItem value="50">50 users</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {errors.userCount && (
+                    <p className="text-sm text-destructive">{errors.userCount}</p>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name *</Label>
+                    <Input
+                      id="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange("firstName")}
+                      placeholder="John"
+                      disabled={isLoading}
+                      className={cn(
+                        "bg-background",
+                        errors.firstName && "border-destructive focus-visible:ring-destructive"
+                      )}
+                    />
+                    {errors.firstName && (
+                      <p className="text-sm text-destructive">{errors.firstName}</p>
+                    )}
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name *</Label>
+                    <Input
+                      id="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange("lastName")}
+                      placeholder="Doe"
+                      disabled={isLoading}
+                      className={cn(
+                        "bg-background",
+                        errors.lastName && "border-destructive focus-visible:ring-destructive"
+                      )}
+                    />
+                    {errors.lastName && (
+                      <p className="text-sm text-destructive">{errors.lastName}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="company">Company *</Label>
+                  <Input
+                    id="company"
+                    value={formData.company}
+                    onChange={handleChange("company")}
+                    placeholder="Acme Inc."
+                    disabled={isLoading}
+                    className={cn(
+                      "bg-background",
+                      errors.company && "border-destructive focus-visible:ring-destructive"
+                    )}
+                  />
+                  {errors.company && (
+                    <p className="text-sm text-destructive">{errors.company}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="email">Work Email *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange("email")}
+                    placeholder="john@company.com"
+                    disabled={isLoading}
+                    className={cn(
+                      "bg-background",
+                      errors.email && "border-destructive focus-visible:ring-destructive"
+                    )}
+                  />
+                  {errors.email && (
+                    <p className="text-sm text-destructive">{errors.email}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="phone">Phone (Optional)</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleChange("phone")}
+                    placeholder="(555) 123-4567"
+                    disabled={isLoading}
+                    className="bg-background"
+                  />
+                </div>
+
+                <Button 
+                  type="submit" 
+                  className="w-full mt-6 h-12 text-base font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all" 
+                  size="lg"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    <>Continue to Payment — {calculateTotal()}</>
+                  )}
+                </Button>
+
+                {/* Trust Elements */}
+                <div className="flex items-center justify-center gap-6 pt-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1.5">
+                    <Shield className="h-4 w-4 text-primary" />
+                    <span>Secure checkout</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Lock className="h-4 w-4 text-primary" />
+                    <span>Powered by Stripe</span>
+                  </div>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Order Summary Sidebar */}
+        <div className="lg:col-span-1">
+          <Card className="shadow-xl border-border/50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm sticky top-24">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-lg">Order Summary</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Product Info */}
+              <div className="p-4 bg-muted/50 rounded-xl">
+                <div className="flex items-center gap-3 mb-3">
+                  {product?.icon && (
+                    <div className="p-2 bg-primary/10 rounded-lg">
+                      <product.icon className="h-5 w-5 text-primary" />
+                    </div>
+                  )}
+                  <div>
+                    <h4 className="font-semibold text-foreground">{product?.name}</h4>
+                    <p className="text-sm text-muted-foreground">{product?.description}</p>
+                  </div>
+                </div>
               </div>
-              <Select 
-                value={formData.userCount.toString()} 
-                onValueChange={handleUserCountChange}
-                disabled={isLoading}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select number of users" />
-                </SelectTrigger>
-                <SelectContent>
-                  {userCountOptions.map((count) => (
-                    <SelectItem key={count} value={count.toString()}>
-                      {count} {count === 1 ? "user" : "users"}
-                    </SelectItem>
+
+              {/* Pricing Breakdown */}
+              <div className="space-y-3 pt-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Price per user</span>
+                  <span className="text-foreground">{formatPrice(product?.price ?? null)}/year</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Users</span>
+                  <span className="text-foreground">× {formData.userCount}</span>
+                </div>
+                <div className="h-px bg-border" />
+                <div className="flex justify-between">
+                  <span className="font-semibold text-foreground">Total</span>
+                  <span className="text-xl font-bold text-primary">{calculateTotal()}</span>
+                </div>
+              </div>
+
+              {/* Features Preview */}
+              <div className="pt-4 border-t border-border">
+                <h5 className="text-sm font-medium text-foreground mb-3">What's included:</h5>
+                <ul className="space-y-2">
+                  {product?.features.slice(0, 4).map((feature, index) => (
+                    <li key={index} className="flex items-start text-sm">
+                      <Check className="h-4 w-4 text-primary mr-2 shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
                   ))}
-                  <SelectItem value="25">25 users</SelectItem>
-                  <SelectItem value="30">30 users</SelectItem>
-                  <SelectItem value="40">40 users</SelectItem>
-                  <SelectItem value="50">50 users</SelectItem>
-                </SelectContent>
-              </Select>
-              {errors.userCount && (
-                <p className="text-sm text-destructive">{errors.userCount}</p>
-              )}
-              
-              {/* Price Summary */}
-              <div className="flex justify-between items-center pt-2 border-t">
-                <span className="text-sm text-muted-foreground">
-                  {formData.userCount} {formData.userCount === 1 ? "user" : "users"} × {formatPrice(product?.price ?? null)}
-                </span>
-                <span className="text-lg font-bold text-primary">
-                  {calculateTotal()}
-                </span>
+                </ul>
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="firstName">First Name *</Label>
-                <Input
-                  id="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange("firstName")}
-                  placeholder="John"
-                  disabled={isLoading}
-                  className={errors.firstName ? "border-destructive" : ""}
-                />
-                {errors.firstName && (
-                  <p className="text-sm text-destructive">{errors.firstName}</p>
-                )}
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name *</Label>
-                <Input
-                  id="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange("lastName")}
-                  placeholder="Doe"
-                  disabled={isLoading}
-                  className={errors.lastName ? "border-destructive" : ""}
-                />
-                {errors.lastName && (
-                  <p className="text-sm text-destructive">{errors.lastName}</p>
-                )}
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="company">Company *</Label>
-              <Input
-                id="company"
-                value={formData.company}
-                onChange={handleChange("company")}
-                placeholder="Acme Inc."
-                disabled={isLoading}
-                className={errors.company ? "border-destructive" : ""}
-              />
-              {errors.company && (
-                <p className="text-sm text-destructive">{errors.company}</p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="email">Work Email *</Label>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange("email")}
-                placeholder="john@company.com"
-                disabled={isLoading}
-                className={errors.email ? "border-destructive" : ""}
-              />
-              {errors.email && (
-                <p className="text-sm text-destructive">{errors.email}</p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="phone">Phone (Optional)</Label>
-              <Input
-                id="phone"
-                type="tel"
-                value={formData.phone}
-                onChange={handleChange("phone")}
-                placeholder="(555) 123-4567"
-                disabled={isLoading}
-              />
-            </div>
-
-            <Button 
-              type="submit" 
-              className="w-full mt-6" 
-              size="lg"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                <>Continue to Payment — {calculateTotal()}</>
-              )}
-            </Button>
-
-            <p className="text-xs text-muted-foreground text-center mt-4">
-              You'll be redirected to Stripe to complete your payment securely.
-            </p>
-          </form>
-        </CardContent>
-      </Card>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

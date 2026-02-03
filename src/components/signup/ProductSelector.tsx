@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Check, Star, Zap, Search, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -89,81 +88,108 @@ export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSel
   ];
 
   const formatPrice = (price: number | null) => {
-    if (price === null) return "Contact Sales";
-    return `$${price.toLocaleString()}/year`;
+    if (price === null) return "Custom";
+    return `$${price.toLocaleString()}`;
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-2xl font-semibold mb-2">Choose Your Plan</h2>
-        <p className="text-muted-foreground">Select the plan that best fits your needs</p>
+        <h2 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">Choose Your Plan</h2>
+        <p className="text-muted-foreground max-w-xl mx-auto">
+          All plans include unlimited AI-generated outputs. Scale your team with per-user pricing.
+        </p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => {
+        {products.map((product, index) => {
           const Icon = product.icon;
           const isSelected = selectedProduct === product.id;
+          const isPopular = product.popular;
           
           return (
-            <Card 
-              key={product.id} 
+            <div 
+              key={product.id}
               className={cn(
-                "cursor-pointer transition-all h-full flex flex-col relative",
-                isSelected 
-                  ? "border-primary shadow-lg ring-2 ring-primary/20" 
-                  : "hover:border-primary/50 hover:shadow-md",
-                product.popular && "border-primary/50"
+                "relative group rounded-2xl transition-all duration-300 cursor-pointer",
+                "hover:-translate-y-2 hover:shadow-2xl",
+                isPopular 
+                  ? "ring-2 ring-primary shadow-xl shadow-primary/10" 
+                  : "shadow-lg hover:shadow-xl",
+                isSelected && !isPopular && "ring-2 ring-primary",
               )}
+              style={{ animationDelay: `${0.1 * index}s` }}
               onClick={() => onSelectProduct(product.id)}
             >
-              {product.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
+              {/* Card Background with Glassmorphism */}
+              <div className={cn(
+                "absolute inset-0 rounded-2xl",
+                isPopular
+                  ? "bg-gradient-to-br from-primary/10 via-primary/5 to-transparent dark:from-primary/20 dark:via-primary/10"
+                  : "bg-white/80 dark:bg-slate-800/80",
+                "backdrop-blur-sm border",
+                isPopular ? "border-primary/30" : "border-border/50"
+              )} />
+
+              {/* Popular Badge */}
+              {isPopular && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg">
                     Most Popular
                   </span>
                 </div>
               )}
               
-              <CardHeader className="pb-4">
-                <div className="flex items-center gap-3 mb-2">
+              {/* Card Content */}
+              <div className="relative p-6 flex flex-col h-full">
+                {/* Header */}
+                <div className="mb-4">
                   <div className={cn(
-                    "p-2 rounded-full",
-                    isSelected 
-                      ? "bg-primary text-primary-foreground" 
-                      : "bg-muted"
+                    "inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4",
+                    isPopular 
+                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30" 
+                      : "bg-primary/10 dark:bg-primary/20 text-primary"
                   )}>
-                    <Icon className="h-5 w-5" />
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <CardTitle className="text-lg">{product.name}</CardTitle>
+                  
+                  <h3 className="text-xl font-bold text-foreground mb-1">{product.name}</h3>
+                  <p className="text-sm text-muted-foreground">{product.description}</p>
+                </div>
+
+                {/* Pricing */}
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-bold text-foreground">
+                      {formatPrice(product.price)}
+                    </span>
+                    {product.price !== null && (
+                      <span className="text-muted-foreground text-sm">/user/year</span>
+                    )}
+                  </div>
                 </div>
                 
-                <div className="mt-2">
-                  <span className="text-2xl font-bold">
-                    {formatPrice(product.price)}
-                  </span>
-                </div>
-                
-                <p className="text-sm text-muted-foreground mt-2">
-                  {product.description}
-                </p>
-              </CardHeader>
-              
-              <CardContent className="flex-grow pt-0">
-                <ul className="space-y-2">
-                  {product.features.map((feature, index) => (
-                    <li key={index} className="flex items-start text-sm">
-                      <Check className="h-4 w-4 text-primary mr-2 shrink-0 mt-0.5" />
-                      <span className="text-left">{feature}</span>
+                {/* Features */}
+                <ul className="space-y-3 flex-grow mb-6">
+                  {product.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start text-sm">
+                      <Check className={cn(
+                        "h-4 w-4 mr-2.5 shrink-0 mt-0.5",
+                        isPopular ? "text-primary" : "text-primary/80"
+                      )} />
+                      <span className="text-foreground/90">{feature}</span>
                     </li>
                   ))}
                 </ul>
-              </CardContent>
-              
-              <CardFooter className="mt-auto pt-4">
+                
+                {/* CTA Button */}
                 <Button 
-                  variant={isSelected ? "default" : "outline"} 
-                  className="w-full"
+                  variant={isPopular ? "default" : isSelected ? "default" : "outline"} 
+                  className={cn(
+                    "w-full mt-auto font-semibold transition-all",
+                    isPopular && "shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40",
+                    !isPopular && !isSelected && "hover:bg-primary hover:text-primary-foreground"
+                  )}
                   onClick={(e) => {
                     e.stopPropagation();
                     onSelectProduct(product.id);
@@ -173,11 +199,11 @@ export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSel
                     ? "Contact Sales" 
                     : isSelected 
                       ? "Selected" 
-                      : "Select Plan"
+                      : "Get Started"
                   }
                 </Button>
-              </CardFooter>
-            </Card>
+              </div>
+            </div>
           );
         })}
       </div>

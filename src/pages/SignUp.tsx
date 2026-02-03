@@ -9,6 +9,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Shield, Lock, Clock, CheckCircle } from "lucide-react";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -94,42 +95,91 @@ export default function SignUp() {
     setSelectedProduct("");
   };
 
+  const trustBadges = [
+    { icon: Shield, label: "Enterprise-Grade Security" },
+    { icon: Lock, label: "256-bit Encryption" },
+    { icon: Clock, label: "30-Day Money-Back Guarantee" },
+    { icon: CheckCircle, label: "SOC 2 Type II Ready" },
+  ];
+
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <Header />
-      <main className="flex-1 pt-32 pb-16">
-        <ResponsiveContainer>
-          <div className="mb-8 text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Sign Up for Gaapio</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Get started with AI-powered technical accounting.
+      
+      {/* Hero Section with Brand Gradient */}
+      <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 hero-gradient-bg overflow-hidden">
+        {/* Decorative blur orbs */}
+        <div className="absolute top-0 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" />
+        <div className="absolute bottom-0 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" style={{ animationDelay: "1.5s" }} />
+        
+        <ResponsiveContainer className="relative z-10">
+          <div className="text-center animate-fade-in">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              Start Your Technical Accounting Journey
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+              Choose the plan that fits your team. Built by Big 4 CPAs for modern accounting workflows.
             </p>
           </div>
-
-          <div className="mx-auto max-w-6xl">
-            <ErrorBoundary fallback={
-              <div className="p-4 border border-red-300 bg-red-50 dark:bg-red-900/20 dark:border-red-800 rounded-md my-4">
-                <p className="text-red-500 dark:text-red-400">An error occurred loading this section. Please try refreshing the page or contact support.</p>
-                <Button onClick={() => window.location.reload()} variant="outline" className="mt-2">Refresh Page</Button>
-              </div>
-            }>
-              {currentStep === "select" ? (
-                <ProductSelector
-                  selectedProduct={selectedProduct}
-                  onSelectProduct={handleProductSelect}
-                />
-              ) : (
-                <SignupInfoForm
-                  selectedProduct={selectedProduct}
-                  onBack={handleBack}
-                  onSubmit={handleFormSubmit}
-                  isLoading={isLoading}
-                />
-              )}
-            </ErrorBoundary>
-          </div>
         </ResponsiveContainer>
+      </section>
+
+      {/* Main Content Section with Light Blue-Gray Gradient */}
+      <main className="flex-1 relative">
+        {/* Gradient background for pricing section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900 pointer-events-none" />
+        
+        <div className="relative z-10 py-12 md:py-16">
+          <ResponsiveContainer>
+            <div className="mx-auto max-w-6xl">
+              <ErrorBoundary fallback={
+                <div className="p-4 border border-red-300 bg-red-50 dark:bg-red-900/20 dark:border-red-800 rounded-md my-4">
+                  <p className="text-red-500 dark:text-red-400">An error occurred loading this section. Please try refreshing the page or contact support.</p>
+                  <Button onClick={() => window.location.reload()} variant="outline" className="mt-2">Refresh Page</Button>
+                </div>
+              }>
+                {currentStep === "select" ? (
+                  <ProductSelector
+                    selectedProduct={selectedProduct}
+                    onSelectProduct={handleProductSelect}
+                  />
+                ) : (
+                  <SignupInfoForm
+                    selectedProduct={selectedProduct}
+                    onBack={handleBack}
+                    onSubmit={handleFormSubmit}
+                    isLoading={isLoading}
+                  />
+                )}
+              </ErrorBoundary>
+            </div>
+
+            {/* Trust Bar - Only show on selection step */}
+            {currentStep === "select" && (
+              <div className="mt-16 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+                <div className="text-center mb-8">
+                  <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                    Trusted by CPAs at 50+ Companies
+                  </p>
+                </div>
+                <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+                  {trustBadges.map((badge, index) => (
+                    <div 
+                      key={badge.label}
+                      className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-border/50 shadow-sm"
+                      style={{ animationDelay: `${0.1 * index}s` }}
+                    >
+                      <badge.icon className="h-4 w-4 text-primary" />
+                      <span className="text-sm font-medium text-foreground">{badge.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </ResponsiveContainer>
+        </div>
       </main>
+
       <Footer />
     </div>
   );
