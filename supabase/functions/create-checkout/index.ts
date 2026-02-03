@@ -1,165 +1,163 @@
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import Stripe from "https://esm.sh/stripe@18.5.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 
-import { serve } from "https://deno.land/std@0.177.0/http/server.ts"
-import { stripe } from "../_shared/stripe.ts"
-import { corsHeaders } from "../_shared/cors.ts"
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.7.1"
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+};
 
-const supabaseUrl = Deno.env.get('SUPABASE_URL') || ''
-const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || ''
+// Helper logging function
+const logStep = (step: string, details?: any) => {
+  const detailsStr = details ? ` - ${JSON.stringify(details)}` : '';
+  console.log(`[CREATE-CHECKOUT] ${step}${detailsStr}`);
+};
 
 serve(async (req: Request) => {
-  // Handle CORS
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
+  // Handle CORS preflight
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    // Get the request body
+    logStep("Function started");
+
+    // Validate Stripe key
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    if (!stripeKey) {
+      throw new Error("STRIPE_SECRET_KEY is not configured");
+    }
+    logStep("Stripe key verified");
+
+    // Initialize Stripe
+    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+
+    // Get request body
     const { 
       priceIds, 
       successUrl, 
       cancelUrl, 
       userEmail,
+      firstName,
+      lastName,
+      company,
+      phone,
       userId,
       companyId
-    } = await req.json()
+    } = await req.json();
 
-    // Log request parameters for debugging
-    console.log('Creating checkout session with price IDs:', priceIds);
-    console.log('User data:', { userEmail, userId, companyId });
-    console.log('Success URL:', successUrl);
-    console.log('Cancel URL:', cancelUrl);
+    logStep("Request received", { 
+      priceIds, 
+      userEmail, 
+      firstName, 
+      lastName, 
+      company,
+      successUrl, 
+      cancelUrl 
+    });
 
-    // Validate the request
+    // Validate required fields
     if (!priceIds || !Array.isArray(priceIds) || priceIds.length === 0) {
-      return new Response(
-        JSON.stringify({ error: 'Invalid request: priceIds must be a non-empty array' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      )
+      throw new Error("Invalid request: priceIds must be a non-empty array");
     }
 
     if (!successUrl || !cancelUrl) {
-      return new Response(
-        JSON.stringify({ error: 'Invalid request: successUrl and cancelUrl are required' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      )
+      throw new Error("Invalid request: successUrl and cancelUrl are required");
     }
 
-    // Create a supabase client
-    const supabase = createClient(supabaseUrl, supabaseKey, {
-      auth: { persistSession: false }
-    })
+    // Create line items
+    const lineItems = priceIds.map((priceId: string) => ({
+      price: priceId,
+      quantity: 1,
+    }));
+    logStep("Line items created", { lineItems });
 
-    // Set up line items with actual Stripe price IDs
-    // These are placeholder price IDs - in production, you would use real Stripe price IDs
-    const priceLookup = {
-      // Base products
-      "price_memos_emerging": "price_1PJHJyFy2MioU7rZIBXF226c", 
-      "price_memos_midmarket": "price_1PJHIyFy2MioU7rZYRezDq49",
-      "price_memos_enterprise": "price_1PJHJ3Fy2MioU7rZk0CZiWeG",
-      "price_disclosures_emerging": "price_1PJHJbFy2MioU7rZy3KidZIb",
-      "price_disclosures_midmarket": "price_1PJHJmFy2MioU7rZjC3TnNJs",
-      "price_disclosures_enterprise": "price_1PJHJvFy2MioU7rZ5UpS5noA",
-      "price_bundle_emerging": "price_1PJHK9Fy2MioU7rZst27ktF4",
-      "price_bundle_midmarket": "price_1PJHKGFy2MioU7rZn5eVjcAO",
-      "price_bundle_enterprise": "price_1PJHKOFy2MioU7rZG101HaXy",
-      // Add-ons
-      "price_addon_disclosures_emerging": "price_1PJHKXFy2MioU7rZb68k4NCE",
-      "price_addon_disclosures_midmarket": "price_1PJHKfFy2MioU7rZYnKDaHzO",
-      "price_addon_disclosures_enterprise": "price_1PJHKoFy2MioU7rZWymF6Fm1",
-      "price_addon_cpareview": "price_1PJHKxFy2MioU7rZIHROyjiL"
-    };
+    // Check for existing Stripe customer or create new one
+    let customerId: string | undefined;
     
-    // Map the requested price IDs to actual Stripe price IDs and log for debugging
-    const lineItems = [];
-    
-    for (const priceId of priceIds) {
-      const actualPriceId = priceLookup[priceId as keyof typeof priceLookup] || priceId;
-      
-      lineItems.push({
-        price: actualPriceId,
-        quantity: 1,
-      });
-      
-      console.log(`Mapped price ID ${priceId} to ${actualPriceId}`);
-    }
-
-    if (lineItems.length === 0) {
-      return new Response(
-        JSON.stringify({ error: 'No valid price IDs provided' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      )
-    }
-
-    // Create or get Stripe customer if email is provided
-    let customerId: string | undefined = undefined;
     if (userEmail) {
       try {
         const customers = await stripe.customers.list({ email: userEmail, limit: 1 });
+        
         if (customers.data.length > 0) {
           customerId = customers.data[0].id;
-          console.log(`Found existing Stripe customer: ${customerId}`);
+          logStep("Found existing customer", { customerId });
+          
+          // Update customer metadata
+          await stripe.customers.update(customerId, {
+            metadata: {
+              firstName: firstName || '',
+              lastName: lastName || '',
+              company: company || '',
+              phone: phone || '',
+              userId: userId || '',
+              companyId: companyId || ''
+            }
+          });
         } else {
-          // Create a new customer
+          // Create new customer
           const newCustomer = await stripe.customers.create({
             email: userEmail,
+            name: `${firstName || ''} ${lastName || ''}`.trim() || undefined,
             metadata: {
+              firstName: firstName || '',
+              lastName: lastName || '',
+              company: company || '',
+              phone: phone || '',
               userId: userId || '',
               companyId: companyId || ''
             }
           });
           customerId = newCustomer.id;
-          console.log(`Created new Stripe customer: ${customerId}`);
-          
-          // Update company record with Stripe customer ID
-          if (companyId) {
-            await supabase
-              .from('companies')
-              .update({ stripe_customer_id: customerId })
-              .eq('id', companyId);
-          }
+          logStep("Created new customer", { customerId });
         }
-      } catch (stripeError) {
-        console.error('Error managing Stripe customer:', stripeError);
-        // Continue without customer ID if there's an error
+      } catch (customerError) {
+        logStep("Warning: Error managing customer", { error: String(customerError) });
+        // Continue without customer ID
       }
     }
 
-    // Create a Checkout Session
-    console.log('Creating checkout session with params:', {
+    // Create Checkout Session
+    const sessionParams: Stripe.Checkout.SessionCreateParams = {
       customer: customerId,
       customer_email: !customerId && userEmail ? userEmail : undefined,
       line_items: lineItems,
-      success_url: `${successUrl}?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: cancelUrl
-    });
-
-    const session = await stripe.checkout.sessions.create({
-      customer: customerId,
-      customer_email: !customerId && userEmail ? userEmail : undefined,
-      line_items: lineItems,
-      mode: 'subscription',
+      mode: "subscription",
       success_url: `${successUrl}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: cancelUrl,
-      billing_address_collection: 'required',
+      billing_address_collection: "required",
+      customer_creation: customerId ? undefined : "always",
       metadata: {
+        firstName: firstName || '',
+        lastName: lastName || '',
+        company: company || '',
+        phone: phone || '',
         userId: userId || '',
         companyId: companyId || ''
       }
-    });
+    };
 
-    console.log('Successfully created checkout session:', session.id);
+    logStep("Creating checkout session", { mode: "subscription" });
+    const session = await stripe.checkout.sessions.create(sessionParams);
+    logStep("Checkout session created", { sessionId: session.id, url: session.url });
 
-    // Return the checkout URL
     return new Response(
       JSON.stringify({ checkoutUrl: session.url }),
-      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    )
-  } catch (error: any) {
-    console.error('Error creating checkout session:', error);
+      { 
+        status: 200, 
+        headers: { ...corsHeaders, "Content-Type": "application/json" } 
+      }
+    );
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    logStep("ERROR", { message: errorMessage });
+    
     return new Response(
-      JSON.stringify({ error: error.message || 'Internal server error' }),
-      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    )
+      JSON.stringify({ error: errorMessage }),
+      { 
+        status: 500, 
+        headers: { ...corsHeaders, "Content-Type": "application/json" } 
+      }
+    );
   }
 });
