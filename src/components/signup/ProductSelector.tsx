@@ -89,7 +89,7 @@ export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSel
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="text-center">
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">Choose Your Plan</h2>
         <p className="text-muted-foreground max-w-xl mx-auto">

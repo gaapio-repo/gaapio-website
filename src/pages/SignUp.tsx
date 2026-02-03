@@ -106,7 +106,7 @@ export default function SignUp() {
       <Header />
       
       {/* Hero Section with Brand Gradient */}
-      <section className="relative pt-28 pb-8 md:pt-32 md:pb-10 hero-gradient-bg overflow-hidden">
+      <section className="relative pt-28 pb-6 md:pt-32 md:pb-8 hero-gradient-bg overflow-hidden">
         {/* Decorative blur orbs */}
         <div className="absolute top-0 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" />
         <div className="absolute bottom-0 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" style={{ animationDelay: "1.5s" }} />
@@ -128,7 +128,7 @@ export default function SignUp() {
         {/* Gradient background for pricing section */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900 pointer-events-none" />
         
-        <div className="relative z-10 pt-4 pb-8 md:pt-6 md:pb-10">
+        <div className="relative z-10 pt-2 pb-8 md:pt-4 md:pb-10">
           <ResponsiveContainer>
             <div className="mx-auto max-w-6xl">
               <ErrorBoundary fallback={
