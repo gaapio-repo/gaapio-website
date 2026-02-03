@@ -4,9 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { STRIPE_PRODUCTS } from "./ProductSelector";
 import { ArrowLeft, Loader2, Users, Check, Shield, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 interface SignupInfoFormProps {
   selectedProduct: string;
@@ -22,6 +24,7 @@ export interface SignupFormData {
   company: string;
   phone: string;
   userCount: number;
+  termsAccepted: boolean;
 }
 
 export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }: SignupInfoFormProps) {
@@ -31,7 +34,8 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
     email: "",
     company: "",
     phone: "",
-    userCount: 1
+    userCount: 1,
+    termsAccepted: false
   });
   const [errors, setErrors] = useState<Partial<Record<keyof SignupFormData, string>>>({});
 
@@ -56,6 +60,9 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
     }
     if (formData.userCount < 1) {
       newErrors.userCount = "At least 1 user is required";
+    }
+    if (!formData.termsAccepted) {
+      newErrors.termsAccepted = "You must accept the terms to continue";
     }
 
     setErrors(newErrors);
@@ -282,11 +289,52 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
                   />
                 </div>
 
+                {/* Terms Acceptance Checkbox */}
+                <div className="space-y-2 pt-2">
+                  <div className="flex items-start space-x-3">
+                    <Checkbox
+                      id="termsAccepted"
+                      checked={formData.termsAccepted}
+                      onCheckedChange={(checked) => {
+                        setFormData((prev) => ({ ...prev, termsAccepted: checked === true }));
+                        if (errors.termsAccepted) {
+                          setErrors((prev) => ({ ...prev, termsAccepted: undefined }));
+                        }
+                      }}
+                      disabled={isLoading}
+                      className={cn(
+                        "mt-0.5",
+                        errors.termsAccepted && "border-destructive"
+                      )}
+                    />
+                    <Label 
+                      htmlFor="termsAccepted" 
+                      className={cn(
+                        "text-sm font-normal leading-relaxed cursor-pointer",
+                        errors.termsAccepted && "text-destructive"
+                      )}
+                    >
+                      I have read and agree to the{" "}
+                      <Link 
+                        to="/ssa" 
+                        target="_blank"
+                        className="text-primary underline hover:text-primary/80 font-medium"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Subscription Service Agreement
+                      </Link>
+                    </Label>
+                  </div>
+                  {errors.termsAccepted && (
+                    <p className="text-sm text-destructive pl-6">{errors.termsAccepted}</p>
+                  )}
+                </div>
+
                 <Button 
                   type="submit" 
-                  className="w-full mt-6 h-12 text-base font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all" 
+                  className="w-full mt-4 h-12 text-base font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all" 
                   size="lg"
-                  disabled={isLoading}
+                  disabled={isLoading || !formData.termsAccepted}
                 >
                   {isLoading ? (
                     <>
