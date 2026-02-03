@@ -83,7 +83,7 @@ export function FinalCtaSection() {
               className="px-8 hover:bg-gray-800 hover:scale-105 transition-all"
               asChild
             >
-              <Link to="/sign-up">Sign Up Now</Link>
+              <Link to="/signup">Sign Up Now</Link>
             </Button>
             <Button 
               size="lg" 
