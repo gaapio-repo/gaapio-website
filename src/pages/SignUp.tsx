@@ -1,101 +1,93 @@
-
 import { useState } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useToast } from "@/components/ui/use-toast";
-import { ClientTypeSelector } from "@/components/signup/ClientTypeSelector";
-import { TierSelector } from "@/components/signup/TierSelector";
-import { Button } from "@/components/ui/button";
+import { ProductSelector, STRIPE_PRODUCTS } from "@/components/signup/ProductSelector";
+import { SignupInfoForm, SignupFormData } from "@/components/signup/SignupInfoForm";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(0);
-  const [selectedClientType, setSelectedClientType] = useState("company");
-  const [selectedTier, setSelectedTier] = useState("");
+  const [currentStep, setCurrentStep] = useState<"select" | "info">("select");
+  const [selectedProduct, setSelectedProduct] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  // Handle client type selection
-  const handleClientTypeSelect = (type: string) => {
-    setSelectedClientType(type);
+  // Handle product selection
+  const handleProductSelect = (productId: string) => {
+    setSelectedProduct(productId);
     
-    // If firm is selected, navigate to firm signup page
-    if (type === "firm") {
-      navigate("/firm-signup");
-    } else {
-      // Otherwise, go to the next step (tier selection)
-      setCurrentStep(1);
+    // If "Contact Sales" is selected, redirect to contact page
+    if (productId === "contact") {
+      navigate("/contact");
+      return;
     }
+    
+    // Otherwise, move to the info form step
+    setCurrentStep("info");
   };
 
-  // Handle tier selection
-  const handleTierSelect = (tier: string) => {
-    setSelectedTier(tier);
-    // Move to pricing table step
-    setCurrentStep(2);
-  };
+  // Handle form submission and Stripe checkout
+  const handleFormSubmit = async (formData: SignupFormData) => {
+    setIsLoading(true);
 
-  // Go back to previous step
-  const handleBack = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-      // Clear tier selection when going back to client type
-      if (currentStep === 1) {
-        setSelectedTier("");
+    try {
+      const product = STRIPE_PRODUCTS[selectedProduct as keyof typeof STRIPE_PRODUCTS];
+      
+      if (!product || !product.priceId) {
+        throw new Error("Invalid product selected");
       }
+
+      console.log("Creating checkout session for:", product.name);
+      console.log("Price ID:", product.priceId);
+      console.log("User data:", formData);
+
+      // Call the create-checkout edge function
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: {
+          priceIds: [product.priceId],
+          successUrl: `${window.location.origin}/success`,
+          cancelUrl: `${window.location.origin}/cancel`,
+          userEmail: formData.email,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          company: formData.company,
+          phone: formData.phone
+        }
+      });
+
+      if (error) {
+        console.error("Edge function error:", error);
+        throw new Error(error.message || "Failed to create checkout session");
+      }
+
+      if (data?.checkoutUrl) {
+        console.log("Redirecting to Stripe checkout:", data.checkoutUrl);
+        window.location.href = data.checkoutUrl;
+      } else {
+        console.error("No checkout URL returned:", data);
+        throw new Error("No checkout URL returned from server");
+      }
+    } catch (error: any) {
+      console.error("Error creating checkout:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to start checkout. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Get pricing table ID based on selected tier
-  const getPricingTableId = () => {
-    switch (selectedTier) {
-      case "emerging":
-        return "prctbl_1RO18aQx8kjcVg7rA1h0xchx";
-      case "mid":
-        return "prctbl_1RO17DQx8kjcVg7rFCsfnRYl";
-      case "enterprise":
-        return "prctbl_1RO14oQx8kjcVg7rXTf0NaGq";
-      default:
-        return "";
-    }
-  };
-
-  // Render current step content
-  const renderStepContent = () => {
-    switch (currentStep) {
-      case 0:
-        return (
-          <ClientTypeSelector
-            selectedType={selectedClientType}
-            onSelectType={handleClientTypeSelect}
-          />
-        );
-      case 1:
-        return (
-          <TierSelector
-            selectedTier={selectedTier}
-            onSelectTier={handleTierSelect}
-          />
-        );
-      case 2:
-        return (
-          <div className="space-y-6 w-full text-center py-12">
-            <h2 className="text-2xl font-semibold">Select a Plan</h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Pricing details coming soon. Please contact us for more information.
-            </p>
-            <Button onClick={() => navigate("/contact")} size="lg">
-              Contact Sales
-            </Button>
-          </div>
-        );
-      default:
-        return null;
-    }
+  // Go back to product selection
+  const handleBack = () => {
+    setCurrentStep("select");
+    setSelectedProduct("");
   };
 
   return (
@@ -106,25 +98,29 @@ export default function SignUp() {
           <div className="mb-8 text-center">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">Sign Up for Gaapio</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Get started with AI-powered accounting.
+              Get started with AI-powered technical accounting.
             </p>
           </div>
 
-          <div className={`mx-auto ${currentStep === 2 ? 'w-full max-w-full' : 'max-w-4xl'}`}>
+          <div className="mx-auto max-w-6xl">
             <ErrorBoundary fallback={
               <div className="p-4 border border-red-300 bg-red-50 dark:bg-red-900/20 dark:border-red-800 rounded-md my-4">
                 <p className="text-red-500 dark:text-red-400">An error occurred loading this section. Please try refreshing the page or contact support.</p>
                 <Button onClick={() => window.location.reload()} variant="outline" className="mt-2">Refresh Page</Button>
               </div>
             }>
-              {renderStepContent()}
-
-              {currentStep > 0 && (
-                <div className="mt-8">
-                  <Button variant="outline" onClick={handleBack}>
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Back
-                  </Button>
-                </div>
+              {currentStep === "select" ? (
+                <ProductSelector
+                  selectedProduct={selectedProduct}
+                  onSelectProduct={handleProductSelect}
+                />
+              ) : (
+                <SignupInfoForm
+                  selectedProduct={selectedProduct}
+                  onBack={handleBack}
+                  onSubmit={handleFormSubmit}
+                  isLoading={isLoading}
+                />
               )}
             </ErrorBoundary>
           </div>
