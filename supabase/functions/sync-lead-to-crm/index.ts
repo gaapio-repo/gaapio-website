@@ -10,7 +10,11 @@ Deno.serve(async (req) => {
 
   try {
     const leadData = await req.json();
-    console.log('Received lead data:', { ...leadData, email: leadData.email?.substring(0, 3) + '***' });
+    console.log('Received lead data:', { 
+      ...leadData, 
+      email: leadData.email?.substring(0, 3) + '***',
+      status: leadData.status 
+    });
 
     // Get the API key from environment variables
     const apiKey = Deno.env.get('WEBSITE_LEAD_API_KEY');
@@ -23,7 +27,8 @@ Deno.serve(async (req) => {
     }
 
     // Transform data to match CRM webhook expected format
-    const crmPayload = {
+    // Extended payload now includes checkout status, Stripe IDs, and UTM data
+    const crmPayload: Record<string, any> = {
       company_name: leadData.company,
       domain: null,
       website: null,
@@ -32,10 +37,31 @@ Deno.serve(async (req) => {
       email: leadData.email,
       phone: leadData.phone,
       notes: leadData.notes,
-      source: leadData.source || 'website'
+      source: leadData.source || 'website',
+      // New fields for checkout flow
+      status: leadData.status || null, // 'Checkout Started', 'Paid', 'Cancelled'
+      plan: leadData.plan || null,
+      seats: leadData.seats || null,
+      stripe_customer_id: leadData.stripe_customer_id || null,
+      stripe_subscription_id: leadData.stripe_subscription_id || null,
+      // UTM tracking
+      utm_source: leadData.utm_source || null,
+      utm_medium: leadData.utm_medium || null,
+      utm_campaign: leadData.utm_campaign || null,
+      page_url: leadData.page_url || null
     };
 
-    console.log('Sending to CRM:', { ...crmPayload, email: crmPayload.email?.substring(0, 3) + '***' });
+    // Remove null values to keep payload clean
+    Object.keys(crmPayload).forEach(key => {
+      if (crmPayload[key] === null) {
+        delete crmPayload[key];
+      }
+    });
+
+    console.log('Sending to CRM:', { 
+      ...crmPayload, 
+      email: crmPayload.email?.substring(0, 3) + '***' 
+    });
 
     // Forward to CRM webhook
     const response = await fetch(CRM_WEBHOOK_URL, {

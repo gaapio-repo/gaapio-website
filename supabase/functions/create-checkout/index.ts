@@ -24,13 +24,19 @@ serve(async (req: Request) => {
 
     // Validate Stripe key
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    
     if (!stripeKey) {
       throw new Error("STRIPE_SECRET_KEY is not configured");
     }
     logStep("Stripe key verified");
 
-    // Initialize Stripe
+    // Initialize clients
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    const supabase = createClient(supabaseUrl || '', supabaseServiceKey || '', {
+      auth: { persistSession: false }
+    });
 
     // Get request body
     const { 
@@ -45,7 +51,13 @@ serve(async (req: Request) => {
       phone,
       userCount,
       userId,
-      companyId
+      companyId,
+      plan,
+      // New UTM parameters
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      page_url
     } = await req.json();
 
     const userQuantity = userCount || quantity || 1;
@@ -56,6 +68,11 @@ serve(async (req: Request) => {
       firstName, 
       lastName, 
       company,
+      plan,
+      seats: userQuantity,
+      utm_source,
+      utm_medium,
+      utm_campaign,
       successUrl, 
       cancelUrl 
     });
@@ -137,7 +154,9 @@ serve(async (req: Request) => {
         company: company || '',
         phone: phone || '',
         userId: userId || '',
-        companyId: companyId || ''
+        companyId: companyId || '',
+        plan: plan || '',
+        seats: String(userQuantity)
       }
     };
 
@@ -145,8 +164,71 @@ serve(async (req: Request) => {
     const session = await stripe.checkout.sessions.create(sessionParams);
     logStep("Checkout session created", { sessionId: session.id, url: session.url });
 
+    // Record checkout intent in database
+    try {
+      const { error: intentError } = await supabase.from('checkout_intents').insert({
+        stripe_session_id: session.id,
+        email: userEmail,
+        first_name: firstName || null,
+        last_name: lastName || null,
+        company: company || null,
+        phone: phone || null,
+        plan: plan || 'unknown',
+        seats: userQuantity,
+        utm_source: utm_source || null,
+        utm_medium: utm_medium || null,
+        utm_campaign: utm_campaign || null,
+        page_url: page_url || null,
+        status: 'intent'
+      });
+
+      if (intentError) {
+        logStep("Warning: Failed to record checkout intent", { error: intentError.message });
+      } else {
+        logStep("Checkout intent recorded");
+      }
+    } catch (dbError) {
+      logStep("Warning: Database error recording intent", { error: String(dbError) });
+    }
+
+    // Sync to CRM with "Checkout Started" status
+    try {
+      const crmPayload = {
+        company: company,
+        first_name: firstName,
+        last_name: lastName,
+        email: userEmail,
+        phone: phone,
+        source: 'website',
+        status: 'Checkout Started',
+        plan: plan,
+        seats: userQuantity,
+        utm_source: utm_source || null,
+        utm_medium: utm_medium || null,
+        utm_campaign: utm_campaign || null,
+        page_url: page_url || null
+      };
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/sync-lead-to-crm`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Deno.env.get("SUPABASE_ANON_KEY")}`
+        },
+        body: JSON.stringify(crmPayload)
+      });
+
+      if (response.ok) {
+        logStep("CRM notified of checkout intent");
+      } else {
+        logStep("CRM notification failed", { status: response.status });
+      }
+    } catch (crmError) {
+      logStep("Warning: Error notifying CRM", { error: String(crmError) });
+    }
+
     return new Response(
-      JSON.stringify({ checkoutUrl: session.url }),
+      JSON.stringify({ checkoutUrl: session.url, sessionId: session.id }),
       { 
         status: 200, 
         headers: { ...corsHeaders, "Content-Type": "application/json" } 

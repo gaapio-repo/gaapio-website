@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
@@ -12,12 +12,34 @@ import { Button } from "@/components/ui/button";
 import { Shield, CheckCircle } from "lucide-react";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
 
+// Interface for UTM parameters
+interface UTMParams {
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+}
+
 export default function SignUp() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState<"select" | "info">("select");
   const [selectedProduct, setSelectedProduct] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [utmParams, setUtmParams] = useState<UTMParams>({
+    utm_source: null,
+    utm_medium: null,
+    utm_campaign: null
+  });
   const { toast } = useToast();
+
+  // Capture UTM parameters from URL on page load
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    setUtmParams({
+      utm_source: searchParams.get('utm_source'),
+      utm_medium: searchParams.get('utm_medium'),
+      utm_campaign: searchParams.get('utm_campaign')
+    });
+  }, []);
 
   // Handle product selection
   const handleProductSelect = (productId: string) => {
@@ -47,8 +69,9 @@ export default function SignUp() {
       console.log("Creating checkout session for:", product.name);
       console.log("Price ID:", product.priceId);
       console.log("User data:", formData);
+      console.log("UTM params:", utmParams);
 
-      // Call the create-checkout edge function
+      // Call the create-checkout edge function with UTM parameters
       const { data, error } = await supabase.functions.invoke("create-checkout", {
         body: {
           priceIds: [product.priceId],
@@ -60,7 +83,13 @@ export default function SignUp() {
           lastName: formData.lastName,
           company: formData.company,
           phone: formData.phone,
-          userCount: formData.userCount
+          userCount: formData.userCount,
+          plan: product.id,
+          // Pass UTM parameters and page URL
+          utm_source: utmParams.utm_source,
+          utm_medium: utmParams.utm_medium,
+          utm_campaign: utmParams.utm_campaign,
+          page_url: window.location.href
         }
       });
 
@@ -79,17 +108,17 @@ export default function SignUp() {
         console.error("No checkout URL returned:", data);
         throw new Error("No checkout URL returned from server");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Failed to start checkout. Please try again.";
       console.error("Error creating checkout:", error);
       toast({
         title: "Error",
-        description: error.message || "Failed to start checkout. Please try again.",
+        description: errorMessage,
         variant: "destructive"
       });
-      setIsLoading(false); // Only reset on error
+      setIsLoading(false);
     }
   };
-
   // Go back to product selection
   const handleBack = () => {
     setCurrentStep("select");
