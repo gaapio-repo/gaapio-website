@@ -83,7 +83,7 @@ export function FinalCtaSection() {
               className="px-8 hover:bg-gray-800 hover:scale-105 transition-all"
               asChild
             >
-              <Link to="/request-demo">Request a Demo</Link>
+              <Link to="/sign-up">Sign Up Now</Link>
             </Button>
             <Button 
               size="lg" 
@@ -91,7 +91,7 @@ export function FinalCtaSection() {
               className="px-8 border-2 border-white text-white bg-transparent hover:bg-white/10 transition-all"
               asChild
             >
-              <Link to="/contact">Ask a Question</Link>
+              <Link to="/request-demo">Request a Demo</Link>
             </Button>
           </div>
         </div>

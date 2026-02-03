@@ -74,10 +74,10 @@ export const HeroSection = memo(function HeroSection({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
             <Button size="lg" variant="black" asChild>
-              <Link to="/request-demo">Request a Demo</Link>
+              <Link to="/sign-up">Sign Up Now</Link>
             </Button>
             <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100" asChild>
-              <Link to="/contact">Ask a Question</Link>
+              <Link to="/request-demo">Request a Demo</Link>
             </Button>
           </div>
         </div>
