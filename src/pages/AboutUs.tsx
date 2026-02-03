@@ -51,7 +51,7 @@ export default function AboutUs() {
             observer.unobserve(entry.target);
           }
         },
-        { threshold: 0.6 } // Trigger when 60% of section is visible
+        { threshold: 0.1 } // Lower threshold for mobile compatibility
       );
 
       if (ref.current) {
@@ -68,8 +68,19 @@ export default function AboutUs() {
     const valuesObserver = createObserver(valuesRef, setValuesVisible);
     const ctaObserver = createObserver(ctaRef, setCtaVisible);
 
+    // Fallback: if intro section is already in viewport on mount, make visible immediately
+    const timeout = setTimeout(() => {
+      if (introRef.current) {
+        const rect = introRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          setIntroVisible(true);
+        }
+      }
+    }, 100);
+
     // Cleanup observers
     return () => {
+      clearTimeout(timeout);
       if (introRef.current) introObserver.unobserve(introRef.current);
       if (expertiseRef.current) expertiseObserver.unobserve(expertiseRef.current);
       if (philosophyRef.current) philosophyObserver.unobserve(philosophyRef.current);
