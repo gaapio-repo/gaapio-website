@@ -114,7 +114,7 @@ export default function SignUp() {
         <ResponsiveContainer className="relative z-10">
           <div className="text-center animate-fade-in">
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-              Start Your Technical Accounting Journey
+              Simplify Your Technical Accounting Journey
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
               Choose the plan that fits your team. Built by Big 4 CPAs for modern accounting workflows.
