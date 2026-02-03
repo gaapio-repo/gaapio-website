@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Check, Star, Zap, Search, Phone } from "lucide-react";
+import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Stripe product configuration
@@ -19,7 +19,6 @@ export const STRIPE_PRODUCTS = {
       "Full Research suite (general search, internal GPT, public filings, Big 4 guides)",
       "SSO included (minimum 5 users)"
     ],
-    icon: Star,
     popular: true
   },
   core: {
@@ -34,7 +33,6 @@ export const STRIPE_PRODUCTS = {
       "Accounting analysis & Memo writer",
       "Full Research suite (general search, internal GPT, public filings, Big 4 guides)"
     ],
-    icon: Zap,
     popular: false
   },
   research: {
@@ -50,7 +48,6 @@ export const STRIPE_PRODUCTS = {
       "Public filings search",
       "Big 4 guides search"
     ],
-    icon: Search,
     popular: false
   },
   contact: {
@@ -66,7 +63,6 @@ export const STRIPE_PRODUCTS = {
       "Dedicated support",
       "Custom integrations"
     ],
-    icon: Phone,
     popular: false
   }
 };
@@ -103,7 +99,6 @@ export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSel
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product, index) => {
-          const Icon = product.icon;
           const isSelected = selectedProduct === product.id;
           const isPopular = product.popular;
           
@@ -143,23 +138,14 @@ export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSel
               {/* Card Content */}
               <div className="relative p-6 flex flex-col h-full">
                 {/* Header */}
-                <div className="mb-4">
-                  <div className={cn(
-                    "inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4",
-                    isPopular 
-                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30" 
-                      : "bg-primary/10 dark:bg-primary/20 text-primary"
-                  )}>
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  
+                <div className="mb-4 text-center">
                   <h3 className="text-xl font-bold text-foreground mb-1">{product.name}</h3>
-                  <p className="text-sm text-muted-foreground">{product.description}</p>
+                  <p className="text-sm text-muted-foreground h-10">{product.description}</p>
                 </div>
 
-                {/* Pricing */}
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-1">
+                {/* Pricing - Fixed height for alignment */}
+                <div className="mb-6 text-center h-14 flex flex-col justify-center">
+                  <div className="flex items-baseline gap-1 justify-center">
                     <span className="text-3xl font-bold text-foreground">
                       {formatPrice(product.price)}
                     </span>
@@ -169,10 +155,10 @@ export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSel
                   </div>
                 </div>
                 
-                {/* Features */}
+                {/* Features - Left aligned */}
                 <ul className="space-y-3 flex-grow mb-6">
                   {product.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start text-sm">
+                    <li key={featureIndex} className="flex items-start text-sm text-left">
                       <Check className={cn(
                         "h-4 w-4 mr-2.5 shrink-0 mt-0.5",
                         isPopular ? "text-primary" : "text-primary/80"
