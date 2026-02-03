@@ -106,7 +106,7 @@ export default function SignUp() {
       <Header />
       
       {/* Hero Section with Brand Gradient */}
-      <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 hero-gradient-bg overflow-hidden">
+      <section className="relative pt-28 pb-8 md:pt-32 md:pb-10 hero-gradient-bg overflow-hidden">
         {/* Decorative blur orbs */}
         <div className="absolute top-0 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" />
         <div className="absolute bottom-0 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" style={{ animationDelay: "1.5s" }} />
