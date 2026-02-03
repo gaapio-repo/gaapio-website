@@ -53,11 +53,14 @@ serve(async (req: Request) => {
       userId,
       companyId,
       plan,
-      // New UTM parameters
+      // UTM parameters
       utm_source,
       utm_medium,
       utm_campaign,
-      page_url
+      page_url,
+      // Terms acceptance
+      terms_accepted,
+      terms_accepted_at
     } = await req.json();
 
     const userQuantity = userCount || quantity || 1;
@@ -179,7 +182,10 @@ serve(async (req: Request) => {
         utm_medium: utm_medium || null,
         utm_campaign: utm_campaign || null,
         page_url: page_url || null,
-        status: 'intent'
+        status: 'intent',
+        terms_accepted: terms_accepted || false,
+        terms_accepted_at: terms_accepted ? (terms_accepted_at || new Date().toISOString()) : null,
+        terms_version: '1.0'
       });
 
       if (intentError) {

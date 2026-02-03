@@ -71,7 +71,7 @@ export default function SignUp() {
       console.log("User data:", formData);
       console.log("UTM params:", utmParams);
 
-      // Call the create-checkout edge function with UTM parameters
+      // Call the create-checkout edge function with UTM parameters and terms acceptance
       const { data, error } = await supabase.functions.invoke("create-checkout", {
         body: {
           priceIds: [product.priceId],
@@ -89,7 +89,10 @@ export default function SignUp() {
           utm_source: utmParams.utm_source,
           utm_medium: utmParams.utm_medium,
           utm_campaign: utmParams.utm_campaign,
-          page_url: window.location.href
+          page_url: window.location.href,
+          // Terms acceptance
+          terms_accepted: formData.termsAccepted,
+          terms_accepted_at: new Date().toISOString()
         }
       });
 
