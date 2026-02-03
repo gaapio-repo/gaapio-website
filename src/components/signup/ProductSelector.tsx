@@ -121,28 +121,25 @@ export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSel
                 "absolute inset-0 rounded-2xl overflow-hidden",
                 "bg-white dark:bg-slate-800",
                 "border",
-                isPopular ? "border-primary/30" : "border-border/50"
+                isPopular ? "border-gray-900" : "border-border/50"
               )}>
                 {/* Blue header band */}
-                <div className="h-16 bg-gradient-to-r from-[#0099FF] to-[#33ADFF] dark:from-[#0088EE] dark:to-[#0099FF]" />
+                <div className="h-14 bg-gradient-to-r from-[#0099FF] to-[#33ADFF] dark:from-[#0088EE] dark:to-[#0099FF] flex items-center justify-center">
+                  <h3 className="text-xl font-bold text-white">{product.name}</h3>
+                </div>
               </div>
 
               {/* Popular Badge */}
               {isPopular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg">
+                  <span className="bg-gray-900 text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg">
                     Most Popular
                   </span>
                 </div>
               )}
               
               {/* Card Content */}
-              <div className="relative p-6 pt-4 flex flex-col h-full">
-                {/* Header - positioned over blue band */}
-                <div className="mb-4 text-center -mt-2">
-                  <h3 className="text-xl font-bold text-white">{product.name}</h3>
-                </div>
-
+              <div className="relative p-6 pt-20 flex flex-col h-full">
                 {/* Pricing - Fixed height for alignment */}
                 <div className="mb-6 text-center h-14 flex flex-col justify-center">
                   <div className="flex items-baseline gap-1 justify-center">
