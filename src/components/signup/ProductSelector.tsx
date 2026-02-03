@@ -80,7 +80,13 @@ interface ProductSelectorProps {
 }
 
 export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSelectorProps) {
-  const products = Object.values(STRIPE_PRODUCTS);
+  // Order: Research, Core, Pro, Enterprise
+  const products = [
+    STRIPE_PRODUCTS.research,
+    STRIPE_PRODUCTS.core,
+    STRIPE_PRODUCTS.pro,
+    STRIPE_PRODUCTS.contact
+  ];
 
   const formatPrice = (price: number | null) => {
     if (price === null) return "Contact Sales";
