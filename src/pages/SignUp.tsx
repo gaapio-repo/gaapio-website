@@ -128,7 +128,7 @@ export default function SignUp() {
         {/* Gradient background for pricing section */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900 pointer-events-none" />
         
-        <div className="relative z-10 py-8 md:py-10">
+        <div className="relative z-10 pt-4 pb-8 md:pt-6 md:pb-10">
           <ResponsiveContainer>
             <div className="mx-auto max-w-6xl">
               <ErrorBoundary fallback={
