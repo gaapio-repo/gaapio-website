@@ -97,6 +97,17 @@ serve(async (req: Request) => {
         await handleCheckoutCompleted(supabase, stripe, session);
         break;
       }
+      case 'checkout.session.async_payment_succeeded': {
+        // Handle delayed payment methods (e.g., bank transfers) that complete later
+        const session = event.data.object as Stripe.Checkout.Session;
+        await handleCheckoutCompleted(supabase, stripe, session);
+        break;
+      }
+      case 'customer.subscription.created': {
+        const subscription = event.data.object as Stripe.Subscription;
+        await handleSubscriptionCreated(supabase, subscription);
+        break;
+      }
       case 'customer.subscription.updated': {
         const subscription = event.data.object as Stripe.Subscription;
         await handleSubscriptionUpdated(supabase, subscription);
@@ -105,6 +116,11 @@ serve(async (req: Request) => {
       case 'customer.subscription.deleted': {
         const subscription = event.data.object as Stripe.Subscription;
         await handleSubscriptionDeleted(supabase, subscription);
+        break;
+      }
+      case 'invoice.paid': {
+        const invoice = event.data.object as Stripe.Invoice;
+        await handleInvoicePaid(supabase, invoice);
         break;
       }
       default:
@@ -315,6 +331,41 @@ async function handleCheckoutCompleted(
 }
 
 // deno-lint-ignore no-explicit-any
+async function handleSubscriptionCreated(
+  supabase: any,
+  subscription: Stripe.Subscription
+) {
+  logStep("Processing subscription created", { subscriptionId: subscription.id });
+
+  const customerId = subscription.customer as string;
+  const status = subscription.status;
+  const priceId = subscription.items.data[0]?.price.id;
+  const plan = PRICE_TO_PLAN[priceId] || 'core';
+
+  // Check if company exists and update
+  const { data: existingCompany } = await supabase
+    .from('companies')
+    .select('id')
+    .eq('stripe_customer_id', customerId)
+    .single();
+
+  if (existingCompany) {
+    await supabase
+      .from('companies')
+      .update({ 
+        status: status === 'active' ? 'active' : 'pending',
+        plan: plan,
+        stripe_subscription_id: subscription.id,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', existingCompany.id);
+    logStep("Updated company with subscription", { companyId: existingCompany.id, plan });
+  } else {
+    logStep("No company found for customer", { customerId });
+  }
+}
+
+// deno-lint-ignore no-explicit-any
 async function handleSubscriptionUpdated(
   supabase: any,
   subscription: Stripe.Subscription
@@ -359,4 +410,40 @@ async function handleSubscriptionDeleted(
     .eq('stripe_customer_id', customerId);
 
   logStep("Marked company as cancelled", { customerId });
+}
+
+// deno-lint-ignore no-explicit-any
+async function handleInvoicePaid(
+  supabase: any,
+  invoice: Stripe.Invoice
+) {
+  logStep("Processing invoice paid", { invoiceId: invoice.id });
+
+  const customerId = invoice.customer as string;
+  const subscriptionId = invoice.subscription as string;
+
+  // Update company to ensure active status on successful payment
+  const { data: company } = await supabase
+    .from('companies')
+    .select('id, status')
+    .eq('stripe_customer_id', customerId)
+    .single();
+
+  if (company) {
+    // Only update if not already active (handles reactivation after past_due)
+    if (company.status !== 'active') {
+      await supabase
+        .from('companies')
+        .update({ 
+          status: 'active',
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', company.id);
+      logStep("Reactivated company after invoice payment", { companyId: company.id });
+    } else {
+      logStep("Company already active", { companyId: company.id });
+    }
+  } else {
+    logStep("No company found for invoice customer", { customerId });
+  }
 }
