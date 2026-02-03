@@ -303,7 +303,7 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
                       }}
                       disabled={isLoading}
                       className={cn(
-                        "h-[18px] w-[18px] shrink-0 rounded-[3px]",
+                        "!h-[18px] !w-[18px] !min-h-[18px] !min-w-[18px] shrink-0 aspect-square rounded-[3px]",
                         errors.termsAccepted && "border-destructive"
                       )}
                     />
