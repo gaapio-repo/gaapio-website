@@ -139,15 +139,14 @@ export function ProductSelector({ selectedProduct, onSelectProduct }: ProductSel
               <div className="relative p-6 flex flex-col h-full">
                 {/* Header */}
                 <div className="mb-4 text-center">
-                  <h3 className="text-xl font-bold text-foreground mb-1">{product.name}</h3>
-                  <p className="text-sm text-muted-foreground h-10">{product.description}</p>
+                  <h3 className="text-xl font-bold text-foreground">{product.name}</h3>
                 </div>
 
                 {/* Pricing - Fixed height for alignment */}
                 <div className="mb-6 text-center h-14 flex flex-col justify-center">
                   <div className="flex items-baseline gap-1 justify-center">
                     <span className="text-3xl font-bold text-foreground">
-                      {formatPrice(product.price)}
+                      {product.price === null ? "Contact Sales" : formatPrice(product.price)}
                     </span>
                     {product.price !== null && (
                       <span className="text-muted-foreground text-sm">/user/year</span>
