@@ -291,7 +291,7 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
 
                 {/* Terms Acceptance Checkbox */}
                 <div className="space-y-2 pt-2">
-                  <div className="flex items-start space-x-3">
+                  <div className="flex items-center space-x-3">
                     <Checkbox
                       id="termsAccepted"
                       checked={formData.termsAccepted}
@@ -303,7 +303,7 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
                       }}
                       disabled={isLoading}
                       className={cn(
-                        "mt-0.5 h-4 w-4 shrink-0 rounded-sm border-2 border-muted-foreground/50 data-[state=checked]:border-primary",
+                        "h-[18px] w-[18px] shrink-0 rounded-[3px]",
                         errors.termsAccepted && "border-destructive"
                       )}
                     />
@@ -315,18 +315,19 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
                       )}
                     >
                       I have read and agree to the{" "}
-                      <Link 
-                        to="/ssa" 
+                      <a 
+                        href="https://gaapio.com/ssa" 
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="text-primary underline hover:text-primary/80 font-medium"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Subscription Service Agreement
-                      </Link>
+                      </a>
                     </Label>
                   </div>
                   {errors.termsAccepted && (
-                    <p className="text-sm text-destructive pl-6">{errors.termsAccepted}</p>
+                    <p className="text-sm text-destructive pl-7">{errors.termsAccepted}</p>
                   )}
                 </div>
 
