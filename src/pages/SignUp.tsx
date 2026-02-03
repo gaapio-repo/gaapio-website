@@ -69,9 +69,10 @@ export default function SignUp() {
 
       if (data?.checkoutUrl) {
         console.log("Redirecting to Stripe checkout:", data.checkoutUrl);
-        // Don't reset loading state - redirect will navigate away
-        window.location.href = data.checkoutUrl;
-        return; // Exit early, don't reset loading
+        // Open in new tab to avoid iframe navigation issues
+        window.open(data.checkoutUrl, "_blank");
+        setIsLoading(false);
+        return;
       } else {
         console.error("No checkout URL returned:", data);
         throw new Error("No checkout URL returned from server");
