@@ -52,7 +52,7 @@ export const STRIPE_PRODUCTS = {
   },
   contact: {
     id: "contact",
-    name: "Enterprise / High Volume",
+    name: "Enterprise",
     price: null,
     priceId: null,
     productId: null,
