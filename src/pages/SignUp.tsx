@@ -50,13 +50,15 @@ export default function SignUp() {
       const { data, error } = await supabase.functions.invoke("create-checkout", {
         body: {
           priceIds: [product.priceId],
+          quantity: formData.userCount,
           successUrl: `${window.location.origin}/success`,
           cancelUrl: `${window.location.origin}/cancel`,
           userEmail: formData.email,
           firstName: formData.firstName,
           lastName: formData.lastName,
           company: formData.company,
-          phone: formData.phone
+          phone: formData.phone,
+          userCount: formData.userCount
         }
       });
 

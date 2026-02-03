@@ -21,7 +21,7 @@ export const ResearchHeroSection = memo(function ResearchHeroSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
             <Button size="lg" variant="black" asChild>
-              <Link to="/sign-up">Sign Up Now</Link>
+              <Link to="/signup">Sign Up Now</Link>
             </Button>
             <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100" asChild>
               <Link to="/request-demo">Request a Demo</Link>

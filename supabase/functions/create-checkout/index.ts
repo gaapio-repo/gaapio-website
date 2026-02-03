@@ -35,6 +35,7 @@ serve(async (req: Request) => {
     // Get request body
     const { 
       priceIds, 
+      quantity = 1,
       successUrl, 
       cancelUrl, 
       userEmail,
@@ -42,9 +43,12 @@ serve(async (req: Request) => {
       lastName,
       company,
       phone,
+      userCount,
       userId,
       companyId
     } = await req.json();
+
+    const userQuantity = userCount || quantity || 1;
 
     logStep("Request received", { 
       priceIds, 
@@ -65,12 +69,12 @@ serve(async (req: Request) => {
       throw new Error("Invalid request: successUrl and cancelUrl are required");
     }
 
-    // Create line items
+    // Create line items with user quantity
     const lineItems = priceIds.map((priceId: string) => ({
       price: priceId,
-      quantity: 1,
+      quantity: userQuantity,
     }));
-    logStep("Line items created", { lineItems });
+    logStep("Line items created", { lineItems, userQuantity });
 
     // Check for existing Stripe customer or create new one
     let customerId: string | undefined;
