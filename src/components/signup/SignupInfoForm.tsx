@@ -303,7 +303,7 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
                       }}
                       disabled={isLoading}
                       className={cn(
-                        "mt-0.5 h-5 w-5 rounded border-2 border-muted-foreground/50 data-[state=checked]:border-primary",
+                        "mt-0.5 h-4 w-4 shrink-0 rounded-sm border-2 border-muted-foreground/50 data-[state=checked]:border-primary",
                         errors.termsAccepted && "border-destructive"
                       )}
                     />
