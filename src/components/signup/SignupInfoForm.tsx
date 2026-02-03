@@ -324,11 +324,6 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
               {/* Product Info */}
               <div className="p-4 bg-muted/50 rounded-xl">
                 <div className="flex items-center gap-3 mb-3">
-                  {product?.icon && (
-                    <div className="p-2 bg-primary/10 rounded-lg">
-                      <product.icon className="h-5 w-5 text-primary" />
-                    </div>
-                  )}
                   <div>
                     <h4 className="font-semibold text-foreground">{product?.name}</h4>
                     <p className="text-sm text-muted-foreground">{product?.description}</p>

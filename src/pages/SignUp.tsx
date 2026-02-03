@@ -9,7 +9,8 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Shield, Lock, Clock, CheckCircle } from "lucide-react";
+import { Shield, CheckCircle } from "lucide-react";
+import { TrustBarSection } from "@/components/home/TrustBarSection";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -97,8 +98,6 @@ export default function SignUp() {
 
   const trustBadges = [
     { icon: Shield, label: "Enterprise-Grade Security" },
-    { icon: Lock, label: "256-bit Encryption" },
-    { icon: Clock, label: "30-Day Money-Back Guarantee" },
     { icon: CheckCircle, label: "SOC 2 Type II Ready" },
   ];
 
@@ -157,11 +156,6 @@ export default function SignUp() {
             {/* Trust Bar - Only show on selection step */}
             {currentStep === "select" && (
               <div className="mt-16 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                <div className="text-center mb-8">
-                  <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                    Trusted by CPAs at 50+ Companies
-                  </p>
-                </div>
                 <div className="flex flex-wrap justify-center gap-6 md:gap-10">
                   {trustBadges.map((badge, index) => (
                     <div 
@@ -179,6 +173,9 @@ export default function SignUp() {
           </ResponsiveContainer>
         </div>
       </main>
+
+      {/* Customer Logos Section */}
+      <TrustBarSection />
 
       <Footer />
     </div>
