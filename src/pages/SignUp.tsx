@@ -69,7 +69,9 @@ export default function SignUp() {
 
       if (data?.checkoutUrl) {
         console.log("Redirecting to Stripe checkout:", data.checkoutUrl);
+        // Don't reset loading state - redirect will navigate away
         window.location.href = data.checkoutUrl;
+        return; // Exit early, don't reset loading
       } else {
         console.error("No checkout URL returned:", data);
         throw new Error("No checkout URL returned from server");
@@ -81,8 +83,7 @@ export default function SignUp() {
         description: error.message || "Failed to start checkout. Please try again.",
         variant: "destructive"
       });
-    } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Only reset on error
     }
   };
 
