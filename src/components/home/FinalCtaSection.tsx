@@ -30,7 +30,7 @@ export function FinalCtaSection() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden -mb-px"
     >
       {/* Light Gaapio blue gradient background */}
       <div className="absolute inset-0 cta-gradient-bg" />
@@ -48,7 +48,7 @@ export function FinalCtaSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-br from-white/10 via-white/5 to-transparent blur-3xl pointer-events-none rounded-full" />
       
       {/* Footer transition gradient - seamless to black footer */}
-      <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-b from-transparent to-black" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent via-black/50 to-black" />
 
       <ResponsiveContainer className="relative z-10">
         <div className="text-center max-w-3xl mx-auto">
