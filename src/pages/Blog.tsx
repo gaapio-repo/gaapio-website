@@ -3,6 +3,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
+import { GradientBackground } from "@/components/home/GradientBackground";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
@@ -128,20 +129,8 @@ export default function Blog() {
       <main className="flex-1" id="blog-content">
         {/* Hero Section - Brand Blue Gradient */}
         <section className="relative pt-28 pb-20 md:pt-32 md:pb-28 overflow-hidden">
-          {/* Brand blue gradient background */}
-          <div className="absolute inset-0 hero-gradient-bg" />
-          
-          {/* Subtle dot grid texture */}
-          <div 
-            className="absolute inset-0 opacity-[0.08]"
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 1px)`,
-              backgroundSize: '24px 24px'
-            }}
-          />
-          
-          {/* Subtle white glow for depth */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-br from-white/10 via-white/5 to-transparent blur-3xl pointer-events-none rounded-full" />
+          {/* Shared gradient background component */}
+          <GradientBackground />
 
           <ResponsiveContainer className="relative z-10">
             <div className="max-w-3xl mx-auto text-center">
