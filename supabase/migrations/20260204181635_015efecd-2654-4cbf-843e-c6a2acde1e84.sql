@@ -1,0 +1,80 @@
+-- Seed initial blog posts from existing sample data
+INSERT INTO public.blog_posts (title, slug, excerpt, content, featured_image, category, author, reading_time, is_published, is_featured, published_at) VALUES
+(
+  'Why Technical Accounting Memos Matter',
+  'why-technical-accounting-memos-matter',
+  'Discover why thorough documentation is essential for audit readiness and regulatory compliance. Learn how structured technical memos can save your team countless hours during the audit process.',
+  '<h2>The Importance of Technical Accounting Memos</h2><p>In today''s complex regulatory environment, technical accounting memos serve as the backbone of audit-ready documentation. They provide a clear trail of your accounting decisions and the reasoning behind them.</p><h3>Key Benefits</h3><ul><li>Audit readiness and regulatory compliance</li><li>Knowledge retention across team changes</li><li>Consistent application of accounting standards</li><li>Reduced review notes from auditors</li></ul><p>A well-structured technical memo should clearly articulate the accounting issue, relevant guidance, analysis, and conclusion. This systematic approach ensures that anyone reviewing the memo can understand the rationale behind your accounting treatment.</p>',
+  '/lovable-uploads/01273276-ea88-43e0-9d91-0cb238f997be.png',
+  'Best Practices',
+  'Zack Larsen, CPA',
+  '6 min read',
+  true,
+  true,
+  NOW()
+),
+(
+  '5 Common ASC 606 Pitfalls',
+  '5-common-asc-606-pitfalls',
+  'Navigate the complexities of revenue recognition and avoid these frequent mistakes in your accounting memos. From contract identification to variable consideration, we cover what matters most.',
+  '<h2>Avoiding Common ASC 606 Mistakes</h2><p>Revenue recognition under ASC 606 continues to challenge accounting teams. Here are the five most common pitfalls we see:</p><h3>1. Contract Identification Issues</h3><p>Not properly identifying contracts or failing to combine contracts that should be treated as one.</p><h3>2. Performance Obligation Errors</h3><p>Incorrectly identifying distinct performance obligations within a contract.</p><h3>3. Variable Consideration Misapplication</h3><p>Failing to properly estimate and constrain variable consideration.</p><h3>4. Allocation Methodology Mistakes</h3><p>Using incorrect methods to allocate transaction price to performance obligations.</p><h3>5. Timing Recognition Issues</h3><p>Recognizing revenue at the wrong point in time or over the wrong period.</p>',
+  '/lovable-uploads/76a4d290-2102-4790-88a8-8783b2d8ae44.png',
+  'Accounting Standards',
+  'Zack Larsen, CPA',
+  '8 min read',
+  true,
+  false,
+  NOW()
+),
+(
+  'How AI Is Changing the Accounting Landscape',
+  'how-ai-is-changing-accounting',
+  'Explore the impact of artificial intelligence on accounting workflows and documentation processes. See how modern tools are helping CPAs focus on high-value advisory work.',
+  '<h2>AI in Accounting: A New Era</h2><p>Artificial intelligence is revolutionizing how accountants work, enabling them to focus on higher-value activities while automating routine tasks.</p><h3>Key Areas of Impact</h3><ul><li>Automated data entry and reconciliation</li><li>Intelligent document processing</li><li>Real-time anomaly detection</li><li>Predictive analytics for forecasting</li></ul><p>At Gaapio, we''re at the forefront of this transformation, using AI to help CPAs create better technical memos in a fraction of the time.</p>',
+  '/lovable-uploads/0ca75d1e-cef9-48b9-b1fa-91dca93bbddc.png',
+  'Technology',
+  'Zack Larsen, CPA',
+  '5 min read',
+  true,
+  false,
+  NOW()
+),
+(
+  'Understanding ASC 842 Lease Modifications',
+  'understanding-asc-842-lease-modifications',
+  'A deep dive into lease modification accounting under ASC 842. Learn when to reassess versus when to treat as a new lease, with practical examples.',
+  '<h2>Navigating Lease Modifications</h2><p>Lease modifications under ASC 842 require careful analysis to determine the appropriate accounting treatment.</p><h3>Key Considerations</h3><ul><li>Does the modification grant an additional right of use?</li><li>Is the increase in scope priced at standalone price?</li><li>What is the effective date of the modification?</li></ul><p>Understanding these factors is critical for proper lease modification accounting.</p>',
+  '/lovable-uploads/3a657ff4-6c15-4cac-9ca2-12382772e241.png',
+  'Accounting Standards',
+  'Zack Larsen, CPA',
+  '7 min read',
+  true,
+  false,
+  NOW()
+),
+(
+  'Building an Audit-Ready Documentation Process',
+  'building-audit-ready-documentation-process',
+  'Step-by-step guide to creating documentation that auditors love. Reduce review notes and build confidence in your technical accounting positions.',
+  '<h2>Creating Audit-Ready Documentation</h2><p>A robust documentation process is essential for smooth audits and confident accounting positions.</p><h3>Best Practices</h3><ul><li>Establish consistent memo templates</li><li>Document as you go, not after the fact</li><li>Include relevant authoritative guidance</li><li>Maintain version control</li></ul>',
+  '/lovable-uploads/d383cacb-035f-4ca1-9c54-7013f8acf023.png',
+  'Best Practices',
+  'Zack Larsen, CPA',
+  '6 min read',
+  true,
+  false,
+  NOW()
+),
+(
+  'The Future of Technical Accounting Teams',
+  'future-of-technical-accounting-teams',
+  'How leading companies are restructuring their accounting teams to leverage AI and automation while maintaining technical excellence and audit quality.',
+  '<h2>The Evolving Role of Technical Accounting</h2><p>The future of technical accounting teams lies in combining human expertise with AI-powered tools.</p><h3>Key Trends</h3><ul><li>Shift from data entry to strategic advisory</li><li>Integration of AI-assisted research and drafting</li><li>Focus on complex judgment areas</li><li>Cross-functional collaboration</li></ul>',
+  '/lovable-uploads/e13abd02-7766-469a-af2d-18a152812501.png',
+  'Industry Insights',
+  'Zack Larsen, CPA',
+  '5 min read',
+  true,
+  false,
+  NOW()
+);
