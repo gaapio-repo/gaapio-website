@@ -78,7 +78,7 @@ function App() {
             <Route path="/research-gpt" element={<ResearchGPT />} />
             <Route path="/sox-controls" element={<SOXControls />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/post" element={<BlogPost />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/why-we-built-this" element={<WhyWeBuiltThis />} />

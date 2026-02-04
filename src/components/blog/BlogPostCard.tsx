@@ -6,8 +6,9 @@ import { memo } from "react";
 import { Link } from "react-router-dom";
 
 interface BlogPost {
-  id: number;
+  id: string | number;
   title: string;
+  slug?: string;
   excerpt: string;
   date: string;
   author: string;
@@ -22,7 +23,7 @@ interface BlogPostCardProps {
 }
 
 export const BlogPostCard = memo(function BlogPostCard({ post, featured = false }: BlogPostCardProps) {
-  const postSlug = post.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const postSlug = post.slug || post.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   const readingTime = post.readingTime || "5 min read";
   
   if (featured) {
