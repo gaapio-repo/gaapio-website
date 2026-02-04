@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Shield, CheckCircle } from "lucide-react";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
+import { SEO } from "@/components/SEO";
 
 // Interface for UTM parameters
 interface UTMParams {
@@ -135,6 +136,12 @@ export default function SignUp() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <SEO 
+        title="Sign Up for Gaapio - AI Technical Accounting Platform"
+        description="Choose your Gaapio plan and start creating AI-powered accounting memos, disclosures, and compliance documentation today."
+        canonical="/signup"
+        keywords={['Gaapio pricing', 'accounting software pricing', 'AI accounting subscription']}
+      />
       <Header />
       
       {/* Hero Section with Brand Gradient */}

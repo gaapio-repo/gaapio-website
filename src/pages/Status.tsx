@@ -1,8 +1,8 @@
-
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { CheckCircle2, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
+import { SEO } from "@/components/SEO";
 
 export default function Status() {
   const [lastChecked, setLastChecked] = useState<string>("Loading...");
@@ -24,6 +24,12 @@ export default function Status() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO 
+        title="System Status - Gaapio Service Health"
+        description="Check the current operational status of Gaapio services including API, web application, authentication, and database systems."
+        canonical="/status"
+        keywords={['system status', 'service health', 'uptime']}
+      />
       <Header />
       
       <main className="flex-1 pt-24 pb-16"> {/* Adjusted padding for new header height */}

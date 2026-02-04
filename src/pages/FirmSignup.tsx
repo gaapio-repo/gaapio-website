@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -9,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { SignupSuccess } from "@/components/signup/SignupSuccess";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 export default function FirmSignup() {
   const { toast } = useToast();
@@ -36,6 +36,12 @@ export default function FirmSignup() {
   
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO 
+        title="CPA Firm Signup - Gaapio for Accounting Firms"
+        description="Get special pricing for your CPA firm. Contact our team to learn about multi-user discounts and enterprise features."
+        canonical="/firm-signup"
+        keywords={['CPA firm pricing', 'accounting firm software', 'multi-user discount']}
+      />
       <Header />
       <main className="flex-1 pt-32 pb-16">
         <ResponsiveContainer>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { SEO } from "@/components/SEO";
 
 export default function TermsOfService() {
   const [showTableOfContents, setShowTableOfContents] = useState(false);
@@ -41,6 +42,12 @@ export default function TermsOfService() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Terms of Service - Gaapio"
+        description="Terms and conditions for using Gaapio's AI-powered accounting platform. Read our service terms, billing policies, and user rights."
+        canonical="/terms-of-service"
+        keywords={['terms of service', 'user agreement', 'Gaapio terms']}
+      />
       <Header />
       <main className="flex-1 bg-background">
         <div className="container px-4 md:px-6 max-w-5xl mx-auto py-20">

@@ -1,9 +1,9 @@
-
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { SEO } from "@/components/SEO";
 
 export default function Privacy() {
   const [showToc, setShowToc] = useState(false);
@@ -34,6 +34,12 @@ export default function Privacy() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <SEO 
+        title="Privacy Policy - Gaapio Data Protection"
+        description="Learn how Gaapio protects your data. Our privacy policy covers data collection, usage, security, and your rights under GDPR."
+        canonical="/privacy"
+        keywords={['privacy policy', 'data protection', 'GDPR compliance', 'data security']}
+      />
       <Header />
       
       <main className="flex-1 py-20">
