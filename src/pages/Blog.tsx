@@ -147,15 +147,16 @@ export default function Blog() {
             <div className="max-w-3xl mx-auto text-center">
               <h1 
                 className={cn(
-                  "text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight transition-all duration-1000",
+                  "text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight transition-all duration-1000",
                   heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
                 )}
               >
-                Gaapio Blog
+                <span className="text-black">Gaapio</span>{" "}
+                <span className="text-white">Blog</span>
               </h1>
               <p 
                 className={cn(
-                  "text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed transition-all duration-1000",
+                  "text-lg md:text-xl text-black/70 max-w-2xl mx-auto leading-relaxed transition-all duration-1000",
                   heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
                 )}
                 style={{ transitionDelay: "200ms" }}
