@@ -1,10 +1,18 @@
-
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { 
   Bold, 
   Italic, 
@@ -12,8 +20,12 @@ import {
   ListOrdered, 
   Link as LinkIcon, 
   Image as ImageIcon,
-  Heading
+  Heading,
+  Upload,
+  Loader2
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface PageWysiwygEditorProps {
   content: string;
@@ -21,6 +33,12 @@ interface PageWysiwygEditorProps {
 }
 
 export function PageWysiwygEditor({ content, onChange }: PageWysiwygEditorProps) {
+  const [imageDialogOpen, setImageDialogOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -52,24 +70,70 @@ export function PageWysiwygEditor({ content, onChange }: PageWysiwygEditorProps)
     }
     
     if (url === '') {
-      // Using extendMarkRange to ensure the right selection range for link
       editor.chain().focus().extendMarkRange('link').unsetMark('link').run();
       return;
     }
     
-    // Set link with the correct href attribute
     editor.chain().focus().extendMarkRange('link').setMark('link', { href: url }).run();
   }, [editor]);
 
-  const addImage = useCallback(() => {
-    if (!editor) return;
-    
-    const url = window.prompt('Image URL');
-    
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !editor) return;
+
+    setUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const filePath = `blog/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('Blog Images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: urlData } = supabase.storage
+        .from('Blog Images')
+        .getPublicUrl(filePath);
+
+      // Insert image into editor
+      editor.chain().focus().setImage({ src: urlData.publicUrl }).run();
+      
+      toast({
+        title: "Image uploaded",
+        description: "Image has been inserted into the content.",
+      });
+
+      setImageDialogOpen(false);
+      setImageUrl('');
+    } catch (error: any) {
+      toast({
+        title: "Error uploading image",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
-  }, [editor]);
+  };
+
+  const insertImageFromUrl = () => {
+    if (!editor || !imageUrl) return;
+    
+    editor.chain().focus().setImage({ src: imageUrl }).run();
+    setImageDialogOpen(false);
+    setImageUrl('');
+  };
+
+  const openImageDialog = () => {
+    setImageUrl('');
+    setImageDialogOpen(true);
+  };
 
   if (!editor) {
     return null;
@@ -147,7 +211,7 @@ export function PageWysiwygEditor({ content, onChange }: PageWysiwygEditorProps)
         <Button
           variant="ghost"
           size="icon"
-          onClick={addImage}
+          onClick={openImageDialog}
           type="button"
           aria-label="Add Image"
         >
@@ -158,6 +222,64 @@ export function PageWysiwygEditor({ content, onChange }: PageWysiwygEditorProps)
       <div className="p-4 min-h-[400px] prose prose-sm max-w-none">
         <EditorContent editor={editor} className="min-h-[380px] outline-none" />
       </div>
+
+      {/* Image Upload Dialog */}
+      <Dialog open={imageDialogOpen} onOpenChange={setImageDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Insert Image</DialogTitle>
+          </DialogHeader>
+          
+          <Tabs defaultValue="upload" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="upload">Upload</TabsTrigger>
+              <TabsTrigger value="url">URL</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="upload" className="space-y-4 pt-4">
+              <div className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 hover:border-primary/50 transition-colors">
+                <Upload className="h-10 w-10 text-muted-foreground mb-4" />
+                <p className="text-sm text-muted-foreground mb-4">
+                  Click to upload or drag and drop
+                </p>
+                <Input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  disabled={uploading}
+                  className="max-w-[200px]"
+                />
+                {uploading && (
+                  <div className="flex items-center gap-2 mt-4 text-sm text-muted-foreground">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Uploading...
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="url" className="space-y-4 pt-4">
+              <div className="space-y-2">
+                <Label htmlFor="image-url">Image URL</Label>
+                <Input
+                  id="image-url"
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+                  placeholder="https://example.com/image.jpg"
+                />
+              </div>
+              <Button 
+                onClick={insertImageFromUrl} 
+                disabled={!imageUrl}
+                className="w-full"
+              >
+                Insert Image
+              </Button>
+            </TabsContent>
+          </Tabs>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
