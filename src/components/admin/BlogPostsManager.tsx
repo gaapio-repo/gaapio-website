@@ -24,7 +24,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { PageWysiwygEditor } from "./PageWysiwygEditor";
-import { Plus, Pencil, Trash2, Eye, Image as ImageIcon } from "lucide-react";
+import { Plus, Pencil, Trash2, Eye, ToggleLeft, ToggleRight } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
 interface BlogPost {
@@ -245,6 +245,32 @@ export function BlogPostsManager() {
     } catch (error: any) {
       toast({
         title: "Error deleting post",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleTogglePublish = async (post: BlogPost) => {
+    try {
+      const newStatus = !post.is_published;
+      const { error } = await supabase
+        .from("blog_posts")
+        .update({ 
+          is_published: newStatus,
+          published_at: newStatus ? new Date().toISOString() : null
+        })
+        .eq("id", post.id);
+
+      if (error) throw error;
+      toast({ 
+        title: newStatus ? "Post published" : "Post unpublished",
+        description: `"${post.title}" is now ${newStatus ? "live" : "a draft"}.`
+      });
+      fetchPosts();
+    } catch (error: any) {
+      toast({
+        title: "Error updating post",
         description: error.message,
         variant: "destructive",
       });
@@ -492,6 +518,19 @@ export function BlogPostsManager() {
                         title="Preview"
                       >
                         <Eye className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleTogglePublish(post)}
+                        title={post.is_published ? "Unpublish" : "Publish"}
+                        className={post.is_published ? "text-green-600 hover:text-green-700" : "text-muted-foreground"}
+                      >
+                        {post.is_published ? (
+                          <ToggleRight className="h-4 w-4" />
+                        ) : (
+                          <ToggleLeft className="h-4 w-4" />
+                        )}
                       </Button>
                       <Button
                         variant="ghost"
