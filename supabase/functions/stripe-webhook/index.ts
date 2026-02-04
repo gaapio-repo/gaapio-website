@@ -234,7 +234,9 @@ async function handleCheckoutCompleted(
         amount: 0,
         user_limit: seats.toString(),
         stripe_customer_id: customerId,
-        stripe_subscription_id: subscriptionId
+        stripe_subscription_id: subscriptionId,
+        billing_email: customerEmail || null,
+        billing_contact: `${firstName} ${lastName}`.trim() || null
       })
       .select('id')
       .single();
