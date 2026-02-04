@@ -4,10 +4,17 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { GradientBackground } from "@/components/home/GradientBackground";
 import foundersPhoto from "@/assets/founders-photo.jpg";
+import { SEO } from "@/components/SEO";
 
 const WhyWeBuiltThis = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-background">
+      <SEO 
+        title="Why We Built Gaapio - Our Story"
+        description="Discover why Big 4 CPAs built Gaapio. From ASC standards adoption to AI innovation, learn about our mission to transform accounting."
+        canonical="/why-we-built-this"
+        keywords={['Gaapio story', 'accounting innovation', 'Big 4 CPAs', 'AI accounting']}
+      />
       <Header />
       
       <main className="flex-grow relative">

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -10,6 +9,7 @@ import { Loader2 } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
+import { SEO } from "@/components/SEO";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -93,6 +93,12 @@ export default function Login() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO 
+        title="Admin Login - Gaapio"
+        description="Secure login portal for Gaapio administrators and team members."
+        canonical="/login"
+        noindex={true}
+      />
       <Header />
       <main className="flex-1 flex items-center justify-center py-12">
         <ResponsiveContainer>

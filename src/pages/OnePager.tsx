@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -10,13 +9,14 @@ import {
   ShieldCheck, 
   FileSearch,
   FileCheck,
-  FileCode  // Changed from FileScope to FileCode as suggested by the error
+  FileCode
 } from "lucide-react";
 import { useRef } from "react";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { Separator } from "@/components/ui/separator";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { SEO } from "@/components/SEO";
 
 export default function OnePager() {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -69,6 +69,12 @@ export default function OnePager() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background" ref={contentRef}>
+      <SEO 
+        title="Gaapio One-Pager - Product Overview PDF"
+        description="Download the Gaapio one-pager for a quick overview of our AI-powered technical accounting platform and key capabilities."
+        canonical="/onepager"
+        keywords={['Gaapio overview', 'product one-pager', 'accounting software PDF']}
+      />
       <Header />
       
       <main className="py-10">

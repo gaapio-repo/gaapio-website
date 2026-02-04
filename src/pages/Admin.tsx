@@ -76,15 +76,40 @@ export default function Admin() {
   // Categorized website pages
   const websitePageCategories: PageCategory[] = [
     {
+      id: "products",
+      title: "🚀 Product Pages",
+      icon: <FileText className="h-5 w-5" />,
+      pages: [
+        { title: "Accounting Memos", path: "/accounting-memos", description: "AI-powered technical accounting memos", seoStatus: "complete" },
+        { title: "Footnote Disclosures", path: "/footnote-disclosures", description: "AI-generated footnote disclosures", seoStatus: "complete" },
+        { title: "Contract Analysis", path: "/contract-analysis", description: "AI contract analysis tool", seoStatus: "complete" },
+        { title: "Guidance Updates", path: "/guidance-updates", description: "Real-time accounting guidance updates", seoStatus: "complete" },
+        { title: "ResearchGPT", path: "/research-gpt", description: "AI-powered accounting research", seoStatus: "complete" },
+        { title: "SOX Controls", path: "/sox-controls", description: "SOX compliance documentation", seoStatus: "complete" },
+      ]
+    },
+    {
+      id: "solutions",
+      title: "💼 Solutions",
+      icon: <Users className="h-5 w-5" />,
+      pages: [
+        { title: "Private Company", path: "/solutions/private", description: "Solutions for private companies", seoStatus: "complete" },
+        { title: "Public Company", path: "/solutions/public", description: "Solutions for public companies", seoStatus: "complete" },
+        { title: "Accounting Firm", path: "/solutions/firm", description: "Solutions for CPA firms", seoStatus: "complete" },
+      ]
+    },
+    {
       id: "core",
       title: "🏠 Core Site Pages",
       icon: <Home className="h-5 w-5" />,
       pages: [
         { title: "Home Page", path: "/", description: "Main landing page", seoStatus: "complete" },
         { title: "About Us", path: "/about-us", description: "Company information page", seoStatus: "complete" },
+        { title: "Why We Built This", path: "/why-we-built-this", description: "Our story and mission", seoStatus: "complete" },
         { title: "Contact", path: "/contact", description: "Contact form and information", seoStatus: "complete" },
-        { title: "FAQ", path: "/faq", description: "Frequently asked questions", seoStatus: "incomplete" },
-        { title: "Resources", path: "/resources", description: "Blog and resource content", seoStatus: "incomplete" },
+        { title: "FAQ", path: "/faq", description: "Frequently asked questions", seoStatus: "complete" },
+        { title: "Careers", path: "/careers", description: "Job openings and opportunities", seoStatus: "complete" },
+        { title: "Resources", path: "/resources", description: "Accounting resources and guides", seoStatus: "complete" },
       ]
     },
     {
@@ -92,18 +117,10 @@ export default function Admin() {
       title: "📝 Legal & Compliance",
       icon: <Shield className="h-5 w-5" />,
       pages: [
-        { title: "Privacy Policy", path: "/privacy", description: "Privacy policy page", seoStatus: "complete" },
-        { title: "Terms of Service", path: "/ssa", description: "Subscription service agreement", seoStatus: "missing" },
-      ]
-    },
-    {
-      id: "billing",
-      title: "💳 Billing & Payment",
-      icon: <CreditCard className="h-5 w-5" />,
-      pages: [
-        { title: "Choose Plan", path: "/choose-plan", description: "Plan selection page", seoStatus: "missing" },
-        { title: "Success", path: "/success", description: "Payment success page", seoStatus: "missing" },
-        { title: "Cancel", path: "/cancel", description: "Payment cancellation page", seoStatus: "missing" },
+        { title: "Privacy Policy", path: "/privacy", description: "Data privacy policy", seoStatus: "complete" },
+        { title: "Terms of Service", path: "/terms-of-service", description: "Terms and conditions", seoStatus: "complete" },
+        { title: "Subscription Agreement", path: "/ssa", description: "Subscription services agreement", seoStatus: "complete" },
+        { title: "Data Processing Addendum", path: "/dpa", description: "GDPR data processing terms", seoStatus: "complete" },
       ]
     },
     {
@@ -111,17 +128,18 @@ export default function Admin() {
       title: "👥 User Access & Registration",
       icon: <Users className="h-5 w-5" />,
       pages: [
-        { title: "Login", path: "/login", description: "User login page", seoStatus: "incomplete" },
-        { title: "Sign Up", path: "/signup", description: "User registration flow", seoStatus: "incomplete" },
-        { title: "Firm Signup", path: "/firm-signup", description: "CPA firm signup page", seoStatus: "incomplete" },
+        { title: "Login", path: "/login", description: "Admin login page (noindex)", seoStatus: "complete" },
+        { title: "Sign Up", path: "/signup", description: "User registration and pricing", seoStatus: "complete" },
+        { title: "Firm Signup", path: "/firm-signup", description: "CPA firm contact form", seoStatus: "complete" },
       ]
     },
     {
       id: "leads",
-      title: "📩 Leads & Requests",
+      title: "📩 Demo & Sales",
       icon: <Mail className="h-5 w-5" />,
       pages: [
-        { title: "Request Demo", path: "/request-demo", description: "Demo request page", seoStatus: "missing" },
+        { title: "Request Demo", path: "/request-demo", description: "Demo request page", seoStatus: "complete" },
+        { title: "One Pager", path: "/onepager", description: "Product overview PDF", seoStatus: "complete" },
       ]
     },
     {
@@ -131,25 +149,19 @@ export default function Admin() {
       pages: [
         { title: "Blog", path: "/blog", description: "Blog articles and posts", seoStatus: "complete" },
         { title: "ASC 606 Pitfalls", path: "/blog/5-common-asc-606-pitfalls", description: "Blog article on ASC 606 pitfalls", seoStatus: "complete" },
-        { title: "Tech Accounting Memos", path: "/blog/why-technical-accounting-memos-matter", description: "Blog article on technical accounting memos", seoStatus: "incomplete" },
-        { title: "AI in Accounting", path: "/blog/how-ai-is-changing-the-accounting-landscape", description: "Blog article on AI in accounting", seoStatus: "incomplete" },
-      ]
-    },
-    {
-      id: "sales",
-      title: "📄 Sales Materials",
-      icon: <FileText className="h-5 w-5" />,
-      pages: [
-        { title: "One Pager", path: "/onepager", description: "Product one-pager", seoStatus: "missing" },
+        { title: "Tech Accounting Memos", path: "/blog/why-technical-accounting-memos-matter", description: "Blog article on technical accounting memos", seoStatus: "complete" },
+        { title: "AI in Accounting", path: "/blog/how-ai-is-changing-the-accounting-landscape", description: "Blog article on AI in accounting", seoStatus: "complete" },
       ]
     },
     {
       id: "system",
-      title: "⚙️ System / Admin",
+      title: "⚙️ System Pages",
       icon: <FileText className="h-5 w-5" />,
       pages: [
-        { title: "Status", path: "/status", description: "System status page", seoStatus: "missing" },
-        { title: "Not Found (404)", path: "/404", description: "404 error page", seoStatus: "missing" },
+        { title: "Status", path: "/status", description: "System status page", seoStatus: "complete" },
+        { title: "Success", path: "/success", description: "Payment success (noindex)", seoStatus: "complete" },
+        { title: "Cancel", path: "/cancel", description: "Payment canceled (noindex)", seoStatus: "complete" },
+        { title: "Not Found (404)", path: "/404", description: "404 error page (noindex)", seoStatus: "complete" },
       ]
     },
   ];

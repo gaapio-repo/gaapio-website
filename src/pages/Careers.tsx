@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GradientBackground } from "@/components/home/GradientBackground";
+import { SEO } from "@/components/SEO";
 
 interface JobListing {
   id: string;
@@ -268,6 +269,12 @@ const JobCard = ({ job }: { job: JobListing }) => {
 const Careers = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Careers at Gaapio - Join Our Team"
+        description="Join Gaapio and build the future of AI-powered accounting. We're hiring engineers, sales, and marketing professionals. Remote-first."
+        canonical="/careers"
+        keywords={['Gaapio careers', 'accounting jobs', 'AI jobs', 'remote work']}
+      />
       <Header />
       
       <main className="flex-grow">

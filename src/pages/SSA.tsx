@@ -1,10 +1,17 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
+import { SEO } from "@/components/SEO";
 
 export default function SSA() {
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO 
+        title="Subscription Services Agreement - Gaapio Terms"
+        description="Read the Gaapio Subscription Services Agreement governing access to our AI-powered accounting platform and related services."
+        canonical="/ssa"
+        keywords={['subscription agreement', 'service terms', 'Gaapio contract']}
+      />
       <Header />
       
       <main className="flex-1 pt-28">

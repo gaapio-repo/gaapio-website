@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -7,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 
 export default function Success() {
   const location = useLocation();
@@ -23,6 +23,11 @@ export default function Success() {
   
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO 
+        title="Subscription Successful - Gaapio"
+        description="Your Gaapio subscription is active. Welcome to AI-powered technical accounting."
+        noindex={true}
+      />
       <Header />
       <main className="flex-1 pt-32 pb-16">
         <ResponsiveContainer>

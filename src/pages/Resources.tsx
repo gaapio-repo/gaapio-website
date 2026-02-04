@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FileSearch, FileText, FileCheck, Download, Book, BookOpen, ExternalLink } from "lucide-react";
@@ -8,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { SEO } from "@/components/SEO";
 
 export default function Resources() {
   // Observer for scroll animations
@@ -39,6 +39,12 @@ export default function Resources() {
   
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO 
+        title="Accounting Resources - FASB, SEC, Big 4 Guidance"
+        description="Access curated accounting resources including SEC EDGAR, FASB Codification, and Big 4 guidance from Deloitte, PwC, EY, and KPMG."
+        canonical="/resources"
+        keywords={['accounting resources', 'FASB codification', 'SEC EDGAR', 'Big 4 guidance', 'CPA resources']}
+      />
       <Header />
       
       <main className="flex-1 pt-32 pb-24">
