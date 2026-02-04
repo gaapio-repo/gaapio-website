@@ -2,36 +2,37 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { HomepageCtaToggle } from "@/components/admin/HomepageCtaToggle";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { FeatureToggles } from "@/components/admin/FeatureToggles";
 import { UnderConstructionToggle } from "@/components/admin/UnderConstructionToggle";
+import { supabase } from "@/integrations/supabase/client";
 
 export function AdminDashboard() {
-  const [waitlistCount, setWaitlistCount] = useState(0);
-  const [contactCount, setContactCount] = useState(0);
-  const [userCount, setUserCount] = useState(0);
-  const [showMetricsOnHomepage, setShowMetricsOnHomepage] = useState(false);
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+  const [contactCount, setContactCount] = useState<number | null>(null);
+  const [userCount, setUserCount] = useState<number | null>(null);
+  const [companyCount, setCompanyCount] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
   
-  // Simulate fetching counts (in a real app, this would be an API call)
   useEffect(() => {
-    // Mock data - replace with actual API calls
-    const mockWaitlistData = JSON.parse(localStorage.getItem("waitlistSubmissions") || "[]");
-    const mockContactData = JSON.parse(localStorage.getItem("contactSubmissions") || "[]");
-    const mockUserData = JSON.parse(localStorage.getItem("userSignups") || "[]");
+    async function fetchCounts() {
+      setLoading(true);
+      
+      // Fetch all counts in parallel
+      const [waitlistRes, contactRes, userRes, companyRes] = await Promise.all([
+        supabase.from("waitlist_submissions").select("*", { count: "exact", head: true }),
+        supabase.from("contact_submissions").select("*", { count: "exact", head: true }),
+        supabase.from("users").select("*", { count: "exact", head: true }),
+        supabase.from("companies").select("*", { count: "exact", head: true }),
+      ]);
+      
+      setWaitlistCount(waitlistRes.count ?? 0);
+      setContactCount(contactRes.count ?? 0);
+      setUserCount(userRes.count ?? 0);
+      setCompanyCount(companyRes.count ?? 0);
+      setLoading(false);
+    }
     
-    setWaitlistCount(mockWaitlistData.length);
-    setContactCount(mockContactData.length);
-    setUserCount(mockUserData.length);
-    
-    const showMetrics = localStorage.getItem("showMetricsOnHomepage") === "true";
-    setShowMetricsOnHomepage(showMetrics);
+    fetchCounts();
   }, []);
-
-  const handleToggleMetricsVisibility = (checked: boolean) => {
-    setShowMetricsOnHomepage(checked);
-    localStorage.setItem("showMetricsOnHomepage", checked.toString());
-  };
 
   return (
     <div className="space-y-6">
@@ -48,18 +49,6 @@ export function AdminDashboard() {
           <HomepageCtaToggle />
         </CardContent>
       </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Homepage Feature Toggles</CardTitle>
-          <CardDescription>
-            Enable or disable features on your website (testimonials, pricing, partner logos)
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <FeatureToggles />
-        </CardContent>
-      </Card>
       
       <Card>
         <CardHeader>
@@ -69,23 +58,11 @@ export function AdminDashboard() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <MetricCard title="Waitlist Submissions" value={waitlistCount} />
-            <MetricCard title="Contact Submissions" value={contactCount} />
-            <MetricCard title="User Sign-ups" value={userCount} />
-          </div>
-          
-          <div className="mt-6 space-y-4">
-            <div className="flex items-center space-x-2">
-              <Switch 
-                id="show-metrics" 
-                checked={showMetricsOnHomepage}
-                onCheckedChange={handleToggleMetricsVisibility}
-              />
-              <Label htmlFor="show-metrics">
-                Show metrics on homepage (for admins only)
-              </Label>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <MetricCard title="Waitlist Submissions" value={waitlistCount} loading={loading} />
+            <MetricCard title="Contact Submissions" value={contactCount} loading={loading} />
+            <MetricCard title="User Sign-ups" value={userCount} loading={loading} />
+            <MetricCard title="Companies" value={companyCount} loading={loading} />
           </div>
         </CardContent>
       </Card>
@@ -93,11 +70,13 @@ export function AdminDashboard() {
   );
 }
 
-function MetricCard({ title, value }: { title: string; value: number }) {
+function MetricCard({ title, value, loading }: { title: string; value: number | null; loading: boolean }) {
   return (
     <div className="bg-accent/50 rounded-lg p-4">
       <h3 className="text-lg font-medium">{title}</h3>
-      <p className="text-3xl font-bold mt-2">{value}</p>
+      <p className="text-3xl font-bold mt-2">
+        {loading ? "..." : (value ?? 0)}
+      </p>
     </div>
   );
 }
