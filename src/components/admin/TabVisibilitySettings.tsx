@@ -48,9 +48,21 @@ export function TabVisibilitySettings() {
       visible: true
     },
     {
-      id: "firms",
-      name: "Firm Signups",
-      description: "Manage firm signup requests",
+      id: "logos",
+      name: "Customer Logos",
+      description: "Manage customer logo carousel",
+      visible: true
+    },
+    {
+      id: "testimonials",
+      name: "Customer Quotes",
+      description: "Manage customer testimonials",
+      visible: true
+    },
+    {
+      id: "blog",
+      name: "Blog Posts",
+      description: "Manage blog articles",
       visible: true
     },
     {

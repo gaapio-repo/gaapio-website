@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminDashboard } from "@/components/admin/AdminDashboard";
@@ -8,11 +7,8 @@ import { ContactTable } from "@/components/admin/ContactTable";
 import { DemoRequestsTable } from "@/components/admin/DemoRequestsTable";
 import { AdminPageGuard } from "@/components/admin/AdminPageGuard";
 import { AdminSecurityAlert } from "@/components/admin/AdminSecurityAlert";
-import { FirmSignupsTable } from "@/components/admin/FirmSignupsTable";
 import { AdminFetchErrorAlert } from "@/components/admin/AdminFetchErrorAlert";
-import { ZapierWebhookSetup } from "@/components/admin/ZapierWebhookSetup";
 import { FeatureToggles } from "@/components/admin/FeatureToggles";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { useCurrentAdmin } from "@/hooks/useCurrentAdmin";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useFetchAdmins } from "@/hooks/useFetchAdmins";
@@ -20,17 +16,14 @@ import { Button } from "@/components/ui/button";
 import { AddAdminDialog } from "@/components/admin/AddAdminDialog";
 import { AdminNameDialog } from "@/components/admin/AdminNameDialog";
 import { Header } from "@/components/header";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { ExternalLink, FileEdit, Home, FileText, Shield, CreditCard, Users, Mail, Book, ChevronDown, Image, Quote, PenTool } from "lucide-react";
+import { ExternalLink, FileEdit, Home, FileText, Shield, CreditCard, Users, Mail, Book } from "lucide-react";
 import { BlogPostsManager } from "@/components/admin/BlogPostsManager";
 import { PageEditor } from "@/components/admin/PageEditor";
 import { CustomerLogosManager } from "@/components/admin/CustomerLogosManager";
 import { TestimonialsManager } from "@/components/admin/TestimonialsManager";
 import { TabVisibilitySettings, AdminTab } from "@/components/admin/TabVisibilitySettings";
-import { PasswordProtectionSettings } from "@/components/admin/PasswordProtectionSettings";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Badge } from "@/components/ui/badge";
 
 // Group websites pages into categories
@@ -62,7 +55,7 @@ export default function Admin() {
     users: true,
     contacts: true,
     demos: true,
-    firms: true,
+    firms: false,  // Hidden - no longer in use
     logos: true,
     testimonials: true,
     blog: true,
@@ -320,11 +313,6 @@ export default function Admin() {
                 </TabsContent>
               )}
               
-              {tabVisibility.firms && (
-                <TabsContent value="firms" className="space-y-4">
-                  <FirmSignupsTable />
-                </TabsContent>
-              )}
               
               {tabVisibility.logos && (
                 <TabsContent value="logos" className="space-y-4">
@@ -406,8 +394,6 @@ export default function Admin() {
               
               {tabVisibility.settings && (
                 <TabsContent value="settings" className="space-y-8">
-                  <PasswordProtectionSettings />
-                  
                   <div className="border rounded-md p-6 bg-card">
                     <h2 className="text-2xl font-semibold mb-6">Admin Users</h2>
                     <div className="mb-6">
@@ -457,14 +443,6 @@ export default function Admin() {
                   <div className="border rounded-md p-6 bg-card">
                     <h2 className="text-2xl font-semibold mb-6">Admin Portal Settings</h2>
                     <TabVisibilitySettings />
-                  </div>
-                  
-                  <div className="border rounded-md p-6 bg-card">
-                    <h2 className="text-2xl font-semibold mb-6">Integrations</h2>
-                    <ZapierWebhookSetup 
-                      webhookType="zapier" 
-                      description="Connect Zapier to receive notifications when users submit forms" 
-                    />
                   </div>
                   
                   <div className="border rounded-md p-6 bg-card">
