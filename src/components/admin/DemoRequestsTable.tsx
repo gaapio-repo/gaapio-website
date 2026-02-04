@@ -1,8 +1,6 @@
-
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ZapierWebhookSetup } from "./ZapierWebhookSetup";
 import { PaginatedTable } from "./PaginatedTable";
 import { DemoRequest } from "./types/demoRequestTypes";
 import { EditDemoDialog } from "./dialogs/EditDemoDialog";
@@ -66,12 +64,6 @@ export function DemoRequestsTable() {
           />
         </CardContent>
       </Card>
-
-      <ZapierWebhookSetup
-        webhookType="demoRequest"
-        description="Receive a webhook trigger when a new demo request is submitted."
-      />
-
       {selectedRequest && (
         <>
           <EditDemoDialog

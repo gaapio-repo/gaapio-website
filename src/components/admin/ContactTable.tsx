@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ZapierWebhookSetup } from "./ZapierWebhookSetup";
 import { PaginatedTable } from "./PaginatedTable";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -226,11 +225,6 @@ export function ContactTable() {
           </Dialog>
         </>
       )}
-
-      <ZapierWebhookSetup 
-        webhookType="contact" 
-        description="Connect your contact form to this admin dashboard" 
-      />
     </div>
   );
 }
