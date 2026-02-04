@@ -6,6 +6,8 @@ import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Linkedin } from "lucide-react";
 
 const blogPosts = [
   {
@@ -111,7 +113,7 @@ export default function Blog() {
   return (
     <div className="flex min-h-screen flex-col">
       <SEO
-        title="Gaapio Blog - Technical Accounting Insights & Best Practices"
+        title="Gaapio Blog"
         description="Expert perspectives on technical accounting, compliance, and technology from the Gaapio team. Learn about ASC 606, ASC 842, AI in accounting, and more."
         canonical="/blog"
         keywords={['accounting blog', 'technical accounting insights', 'CPA resources', 'accounting best practices']}
@@ -207,12 +209,25 @@ export default function Blog() {
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
                 Stay Updated
               </h2>
-              <p className="text-muted-foreground mb-2">
+              <p className="text-muted-foreground mb-4">
                 More insights coming soon. Follow our journey as we continue to share expert perspectives on technical accounting.
               </p>
-              <p className="text-sm text-muted-foreground/70">
-                New articles published regularly on accounting standards, best practices, and emerging technology.
-              </p>
+              <Button 
+                variant="blue" 
+                size="lg" 
+                className="mt-4"
+                asChild
+              >
+                <a 
+                  href="https://www.linkedin.com/company/gaapio" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2"
+                >
+                  <Linkedin className="h-5 w-5" />
+                  Follow Us on LinkedIn
+                </a>
+              </Button>
             </div>
           </ResponsiveContainer>
         </section>
