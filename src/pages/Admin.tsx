@@ -73,19 +73,19 @@ export default function Admin() {
     fetchAdmins
   } = useFetchAdmins(currentUser);
 
-  // Categorized website pages
+  // Categorized website pages - descriptions show actual SEO metadata
   const websitePageCategories: PageCategory[] = [
     {
       id: "products",
       title: "🚀 Product Pages",
       icon: <FileText className="h-5 w-5" />,
       pages: [
-        { title: "Accounting Memos", path: "/accounting-memos", description: "AI-powered technical accounting memos", seoStatus: "complete" },
-        { title: "Footnote Disclosures", path: "/footnote-disclosures", description: "AI-generated footnote disclosures", seoStatus: "complete" },
-        { title: "Contract Analysis", path: "/contract-analysis", description: "AI contract analysis tool", seoStatus: "complete" },
-        { title: "Guidance Updates", path: "/guidance-updates", description: "Real-time accounting guidance updates", seoStatus: "complete" },
-        { title: "ResearchGPT", path: "/research-gpt", description: "AI-powered accounting research", seoStatus: "complete" },
-        { title: "SOX Controls", path: "/sox-controls", description: "SOX compliance documentation", seoStatus: "complete" },
+        { title: "Accounting Memos", path: "/accounting-memos", description: "Create audit-ready ASC 606, ASC 842 memos in minutes with AI-powered drafting and version history", seoStatus: "complete" },
+        { title: "Footnote Disclosures", path: "/footnote-disclosures", description: "Generate complete footnote disclosures with AI-trained benchmarking and requirement checklists", seoStatus: "complete" },
+        { title: "Contract Analysis", path: "/contract-analysis", description: "Automated contract analysis for ASC 606 revenue triggers and ASC 842 embedded lease identification", seoStatus: "complete" },
+        { title: "Guidance Updates", path: "/guidance-updates", description: "Daily monitoring of FASB, SEC, PCAOB, and Big 4 guidance with AI-powered impact summaries", seoStatus: "complete" },
+        { title: "ResearchGPT", path: "/research-gpt", description: "AI research assistant for technical accounting with citations to ASC, SEC, and Big 4 resources", seoStatus: "complete" },
+        { title: "SOX Controls", path: "/sox-controls", description: "AI-powered SOX compliance documentation, control narratives, and deficiency tracking", seoStatus: "complete" },
       ]
     },
     {
@@ -93,9 +93,9 @@ export default function Admin() {
       title: "💼 Solutions",
       icon: <Users className="h-5 w-5" />,
       pages: [
-        { title: "Private Company", path: "/solutions/private", description: "Solutions for private companies", seoStatus: "complete" },
-        { title: "Public Company", path: "/solutions/public", description: "Solutions for public companies", seoStatus: "complete" },
-        { title: "Accounting Firm", path: "/solutions/firm", description: "Solutions for CPA firms", seoStatus: "complete" },
+        { title: "Private Company", path: "/solutions/private", description: "Technical accounting solutions for private companies without Big 4 budgets", seoStatus: "complete" },
+        { title: "Public Company", path: "/solutions/public", description: "Enterprise-grade SEC-compliant disclosures, 10-K/10-Q support, and SOX documentation", seoStatus: "complete" },
+        { title: "Accounting Firm", path: "/solutions/firm", description: "Multi-client dashboards, standardized workflows, and firm-wide collaboration features", seoStatus: "complete" },
       ]
     },
     {
@@ -103,13 +103,13 @@ export default function Admin() {
       title: "🏠 Core Site Pages",
       icon: <Home className="h-5 w-5" />,
       pages: [
-        { title: "Home Page", path: "/", description: "Main landing page", seoStatus: "complete" },
-        { title: "About Us", path: "/about-us", description: "Company information page", seoStatus: "complete" },
-        { title: "Why We Built This", path: "/why-we-built-this", description: "Our story and mission", seoStatus: "complete" },
-        { title: "Contact", path: "/contact", description: "Contact form and information", seoStatus: "complete" },
-        { title: "FAQ", path: "/faq", description: "Frequently asked questions", seoStatus: "complete" },
-        { title: "Careers", path: "/careers", description: "Job openings and opportunities", seoStatus: "complete" },
-        { title: "Resources", path: "/resources", description: "Accounting resources and guides", seoStatus: "complete" },
+        { title: "Home Page", path: "/", description: "AI-powered platform built by CPAs for CPAs - memos, disclosures, contract analysis, compliance", seoStatus: "complete" },
+        { title: "About Us", path: "/about-us", description: "Founded by Big 4 CPAs who experienced technical accounting pain firsthand", seoStatus: "complete" },
+        { title: "Why We Built This", path: "/why-we-built-this", description: "From ASC standards adoption to AI innovation - our mission to transform accounting", seoStatus: "complete" },
+        { title: "Contact", path: "/contact", description: "Contact our team for sales inquiries, support, or partnership opportunities", seoStatus: "complete" },
+        { title: "FAQ", path: "/faq", description: "Answers to common questions about pricing, security, integrations, and features", seoStatus: "complete" },
+        { title: "Careers", path: "/careers", description: "Join our remote-first team - hiring engineers, sales, and marketing professionals", seoStatus: "complete" },
+        { title: "Resources", path: "/resources", description: "Curated links to SEC EDGAR, FASB Codification, and Big 4 guidance publications", seoStatus: "complete" },
       ]
     },
     {
@@ -117,10 +117,10 @@ export default function Admin() {
       title: "📝 Legal & Compliance",
       icon: <Shield className="h-5 w-5" />,
       pages: [
-        { title: "Privacy Policy", path: "/privacy", description: "Data privacy policy", seoStatus: "complete" },
-        { title: "Terms of Service", path: "/terms-of-service", description: "Terms and conditions", seoStatus: "complete" },
-        { title: "Subscription Agreement", path: "/ssa", description: "Subscription services agreement", seoStatus: "complete" },
-        { title: "Data Processing Addendum", path: "/dpa", description: "GDPR data processing terms", seoStatus: "complete" },
+        { title: "Privacy Policy", path: "/privacy", description: "Data collection, usage, security, and your rights under GDPR and CCPA", seoStatus: "complete" },
+        { title: "Terms of Service", path: "/terms-of-service", description: "Service terms, billing policies, and user responsibilities", seoStatus: "complete" },
+        { title: "Subscription Agreement", path: "/ssa", description: "Subscription Services Agreement governing platform access", seoStatus: "complete" },
+        { title: "Data Processing Addendum", path: "/dpa", description: "GDPR-compliant data processing terms for enterprise customers", seoStatus: "complete" },
       ]
     },
     {
@@ -128,9 +128,9 @@ export default function Admin() {
       title: "👥 User Access & Registration",
       icon: <Users className="h-5 w-5" />,
       pages: [
-        { title: "Login", path: "/login", description: "Admin login page (noindex)", seoStatus: "complete" },
-        { title: "Sign Up", path: "/signup", description: "User registration and pricing", seoStatus: "complete" },
-        { title: "Firm Signup", path: "/firm-signup", description: "CPA firm contact form", seoStatus: "complete" },
+        { title: "Login", path: "/login", description: "Admin login portal (noindex)", seoStatus: "complete" },
+        { title: "Sign Up", path: "/signup", description: "Choose your plan and start with AI-powered accounting today", seoStatus: "complete" },
+        { title: "Firm Signup", path: "/firm-signup", description: "Special pricing for CPA firms with multi-user discounts", seoStatus: "complete" },
       ]
     },
     {
@@ -138,8 +138,8 @@ export default function Admin() {
       title: "📩 Demo & Sales",
       icon: <Mail className="h-5 w-5" />,
       pages: [
-        { title: "Request Demo", path: "/request-demo", description: "Demo request page", seoStatus: "complete" },
-        { title: "One Pager", path: "/onepager", description: "Product overview PDF", seoStatus: "complete" },
+        { title: "Request Demo", path: "/request-demo", description: "Schedule a personalized demo of the AI-powered accounting platform", seoStatus: "complete" },
+        { title: "One Pager", path: "/onepager", description: "Quick overview PDF of platform capabilities and features", seoStatus: "complete" },
       ]
     },
     {
@@ -147,10 +147,10 @@ export default function Admin() {
       title: "📚 Blog & Articles",
       icon: <Book className="h-5 w-5" />,
       pages: [
-        { title: "Blog", path: "/blog", description: "Blog articles and posts", seoStatus: "complete" },
-        { title: "ASC 606 Pitfalls", path: "/blog/5-common-asc-606-pitfalls", description: "Blog article on ASC 606 pitfalls", seoStatus: "complete" },
-        { title: "Tech Accounting Memos", path: "/blog/why-technical-accounting-memos-matter", description: "Blog article on technical accounting memos", seoStatus: "complete" },
-        { title: "AI in Accounting", path: "/blog/how-ai-is-changing-the-accounting-landscape", description: "Blog article on AI in accounting", seoStatus: "complete" },
+        { title: "Blog", path: "/blog", description: "Expert insights on technical accounting, AI in finance, and ASC standards", seoStatus: "complete" },
+        { title: "ASC 606 Pitfalls", path: "/blog/5-common-asc-606-pitfalls", description: "5 most common revenue recognition mistakes and how to avoid them", seoStatus: "complete" },
+        { title: "Tech Accounting Memos", path: "/blog/why-technical-accounting-memos-matter", description: "Why technical accounting memos matter for audit readiness", seoStatus: "complete" },
+        { title: "AI in Accounting", path: "/blog/how-ai-is-changing-the-accounting-landscape", description: "How AI is transforming the accounting profession", seoStatus: "complete" },
       ]
     },
     {
@@ -158,10 +158,10 @@ export default function Admin() {
       title: "⚙️ System Pages",
       icon: <FileText className="h-5 w-5" />,
       pages: [
-        { title: "Status", path: "/status", description: "System status page", seoStatus: "complete" },
-        { title: "Success", path: "/success", description: "Payment success (noindex)", seoStatus: "complete" },
-        { title: "Cancel", path: "/cancel", description: "Payment canceled (noindex)", seoStatus: "complete" },
-        { title: "Not Found (404)", path: "/404", description: "404 error page (noindex)", seoStatus: "complete" },
+        { title: "Status", path: "/status", description: "Service health for API, web app, and database systems", seoStatus: "complete" },
+        { title: "Success", path: "/success", description: "Payment confirmation page (noindex)", seoStatus: "complete" },
+        { title: "Cancel", path: "/cancel", description: "Checkout canceled page (noindex)", seoStatus: "complete" },
+        { title: "Not Found (404)", path: "/404", description: "Error page for missing routes (noindex)", seoStatus: "complete" },
       ]
     },
   ];
