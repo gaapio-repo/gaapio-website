@@ -151,7 +151,7 @@ export default function Blog() {
                   heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
                 )}
               >
-                Insights & Resources
+                Gaapio Blog
               </h1>
               <p 
                 className={cn(
