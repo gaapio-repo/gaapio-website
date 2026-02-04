@@ -68,6 +68,12 @@ const companyPages = [
     description: "Meet the team and learn about our expertise"
   },
   {
+    name: "Blog",
+    href: "/blog",
+    icon: FileText,
+    description: "Insights on technical accounting and technology"
+  },
+  {
     name: "Trust and Security",
     href: "https://security.gaapio.com",
     icon: ShieldCheck,
