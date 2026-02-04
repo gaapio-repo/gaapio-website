@@ -479,18 +479,33 @@ export type Database = {
       site_config: {
         Row: {
           created_at: string
+          enable_customer_logos: boolean
+          enable_footer_logos: boolean
+          enable_pricing: boolean
+          enable_self_signup: boolean
+          enable_testimonials: boolean
           id: string
           under_construction: boolean
           updated_at: string
         }
         Insert: {
           created_at?: string
+          enable_customer_logos?: boolean
+          enable_footer_logos?: boolean
+          enable_pricing?: boolean
+          enable_self_signup?: boolean
+          enable_testimonials?: boolean
           id?: string
           under_construction?: boolean
           updated_at?: string
         }
         Update: {
           created_at?: string
+          enable_customer_logos?: boolean
+          enable_footer_logos?: boolean
+          enable_pricing?: boolean
+          enable_self_signup?: boolean
+          enable_testimonials?: boolean
           id?: string
           under_construction?: boolean
           updated_at?: string

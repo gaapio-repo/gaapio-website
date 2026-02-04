@@ -3,6 +3,7 @@ import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GradientBackground } from "./GradientBackground";
 import { AnimatedMemo } from "./AnimatedMemo";
+import { supabase } from "@/integrations/supabase/client";
 
 interface HeroSectionProps {
   title?: string;
@@ -19,28 +20,20 @@ export const HeroSection = memo(function HeroSection({
   useEffect(() => {
     setIsClient(true);
     
-    // Load the self-signup setting
-    const loadSelfSignupSetting = () => {
-      const savedSetting = localStorage.getItem("enableSelfSignup");
-      setEnableSelfSignup(savedSetting !== null ? savedSetting === "true" : true);
-    };
-    
-    // Initial load
-    loadSelfSignupSetting();
-    
-    // Listen for storage changes (in case admin updates in another tab)
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "enableSelfSignup") {
-        loadSelfSignupSetting();
+    // Fetch the self-signup setting from the database
+    const fetchSetting = async () => {
+      const { data } = await supabase
+        .from('site_config')
+        .select('enable_self_signup')
+        .single();
+      
+      if (data) {
+        setEnableSelfSignup(data.enable_self_signup);
       }
     };
     
-    window.addEventListener('storage', handleStorageChange);
-    
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, [enableSelfSignup]);
+    fetchSetting();
+  }, []);
 
   // Split title into parts for gradient effect
   const titleParts = title.split(" ");
@@ -58,30 +51,30 @@ export const HeroSection = memo(function HeroSection({
           {/* Left Column - Text Content */}
           <div className="flex flex-col items-start text-left space-y-6 md:space-y-8 animate-fade-up order-1">
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-              <span className="text-gray-900">
+              <span className="text-foreground">
                 {firstPart}
               </span>
               {" "}
-              <span className="text-white inline-block">
+              <span className="text-primary-foreground bg-primary px-2 rounded inline-block">
                 {secondPart}
               </span>
             </h1>
             
-            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-gray-800 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
+            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
               {subtitle}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-up" style={{ animationDelay: "200ms" }}>
               {enableSelfSignup ? (
-                <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold hover:bg-gray-800 hover:scale-105 transition-all" asChild>
+                <Button size="lg" className="text-base px-8 py-6 h-auto font-semibold hover:scale-105 transition-all" asChild>
                   <Link to="/signup">Sign Up Now</Link>
                 </Button>
               ) : (
-                <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold hover:bg-gray-800 hover:scale-105 transition-all" asChild>
+                <Button size="lg" className="text-base px-8 py-6 h-auto font-semibold hover:scale-105 transition-all" asChild>
                   <Link to="/contact">Contact Sales</Link>
                 </Button>
               )}
-              <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 hover:scale-105 text-base px-8 py-6 h-auto font-semibold transition-all" asChild>
+              <Button size="lg" variant="outline" className="border-2 hover:scale-105 text-base px-8 py-6 h-auto font-semibold transition-all" asChild>
                 <Link to="/request-demo">Request a Demo</Link>
               </Button>
             </div>
