@@ -147,7 +147,7 @@ export default function Blog() {
             <div className="max-w-3xl mx-auto text-center">
               <h1 
                 className={cn(
-                  "text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 tracking-tight transition-all duration-1000",
+                  "text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight transition-all duration-1000",
                   heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
                 )}
               >
@@ -155,7 +155,7 @@ export default function Blog() {
               </h1>
               <p 
                 className={cn(
-                  "text-lg md:text-xl text-black/70 max-w-2xl mx-auto leading-relaxed transition-all duration-1000",
+                  "text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed transition-all duration-1000",
                   heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
                 )}
                 style={{ transitionDelay: "200ms" }}
@@ -202,36 +202,37 @@ export default function Blog() {
           </ResponsiveContainer>
         </section>
 
-        {/* Newsletter CTA Section - Light gradient band */}
-        <section className="py-16 md:py-20 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900">
-          <ResponsiveContainer>
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
-                Stay Updated
-              </h2>
-              <p className="text-muted-foreground mb-4">
-                More insights coming soon. Follow our journey as we continue to share expert perspectives on technical accounting.
-              </p>
-              <Button 
-                variant="blue" 
-                size="lg" 
-                className="mt-4"
-                asChild
-              >
-                <a 
-                  href="https://www.linkedin.com/company/gaapio" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <Linkedin className="h-5 w-5" />
-                  Follow Us on LinkedIn
-                </a>
-              </Button>
-            </div>
-          </ResponsiveContainer>
-        </section>
       </main>
+
+      {/* Newsletter CTA Section - Removed gap by placing adjacent to FinalCta */}
+      <section className="py-16 md:py-20 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900">
+        <ResponsiveContainer>
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
+              Stay Updated
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              More insights coming soon. Follow our journey as we continue to share expert perspectives on technical accounting.
+            </p>
+            <Button 
+              variant="blue" 
+              size="lg" 
+              className="mt-4"
+              asChild
+            >
+              <a 
+                href="https://www.linkedin.com/company/gaapio" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2"
+              >
+                <Linkedin className="h-5 w-5" />
+                Follow Us on LinkedIn
+              </a>
+            </Button>
+          </div>
+        </ResponsiveContainer>
+      </section>
 
       {/* Final CTA Section - Outside main for proper footer flow */}
       <FinalCtaSection />
