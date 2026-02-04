@@ -1,302 +1,145 @@
 
 
-# Webhook-Driven Signup Flow Implementation Plan
+## Blog Page Refresh Plan
 
-## Overview
-
-This plan implements a reliable, webhook-driven flow for the signup process with two key trigger points:
-
-1. **Checkout Intent** - When user submits the signup form (before Stripe)
-2. **Payment Success** - When Stripe confirms payment via webhook
+This plan covers two objectives: adding Blog to the Company navigation dropdown and redesigning the Blog page to match the site's modern, professional design system.
 
 ---
 
-## Current State Analysis
+### Part 1: Add Blog to Company Navigation
 
-### What Exists Today
-- **Signup Flow**: User selects plan -> fills form -> redirected to Stripe checkout
-- **CRM Integration**: `sync-lead-to-crm` edge function already pushes to your CRM (DRCR) via `WEBSITE_LEAD_API_KEY`
-- **Stripe Checkout**: `create-checkout` creates Stripe sessions with customer metadata
-- **Webhook Outbox**: Database table + `queue-webhook`/`process-webhooks` functions for reliable delivery
-- **No Stripe Webhook Handler**: Currently missing - payment success relies on redirect page only
+**Location:** `src/components/header.tsx`
 
-### What's Missing
-1. CRM notification on "checkout started" (intent to buy)
-2. Stripe webhook handler for payment success events
-3. Product provisioning logic (organization creation, seat limits, tier assignment)
-4. Database tracking for checkout intents and conversions
+**Changes:**
+- Add "Blog" entry to the `companyPages` array (lines 57-83)
+- New entry will use the `FileText` icon (already imported)
+- Blog will appear alongside Why We Built This, About Us, Trust & Security, and Careers
+- Mobile menu will automatically include Blog since it iterates over `companyPages`
+
+**New Entry:**
+```text
+Name: "Blog"
+Href: "/blog"
+Icon: FileText
+Description: "Insights on technical accounting and technology"
+```
 
 ---
 
-## Implementation Architecture
+### Part 2: Blog Page Redesign
+
+The redesigned Blog page will follow the site's established "bookend" design system: brand blue gradient hero, clean content area, and seamless footer transition.
+
+**Design Structure:**
 
 ```text
-                           CHECKOUT STARTED FLOW
-+------------------+     +---------------------+     +------------------+
-|  Signup Form     | --> | create-checkout     | --> | sync-lead-to-crm |
-|  (Submit Click)  |     | (Edge Function)     |     | (status: Intent) |
-+------------------+     +---------------------+     +------------------+
-                                   |
-                                   v
-                         +--------------------+
-                         | Stripe Checkout    |
-                         +--------------------+
-                                   |
-                           PAYMENT SUCCESS FLOW
-                                   v
-+------------------+     +---------------------+     +------------------+
-|  Stripe Webhook  | --> | stripe-webhook      | --> | sync-lead-to-crm |
-|  (payment event) |     | (Edge Function)     |     | (status: Paid)   |
-+------------------+     +---------------------+     +------------------+
-                                   |
-                                   v
-                         +--------------------+
-                         | Product Provision  |
-                         | (DB: companies,    |
-                         |  users, status)    |
-                         +--------------------+
++--------------------------------------------------+
+|  HERO SECTION (Brand Blue Gradient)              |
+|  - Headline: "Insights & Resources"              |
+|  - Subtitle: "Expert perspectives on..."         |
+|  - Decorative dot grid texture                   |
++--------------------------------------------------+
+|  FEATURED POST (Large Card)                      |
+|  - Full-width featured article                   |
+|  - Large image, prominent title, excerpt         |
++--------------------------------------------------+
+|  POST GRID (3-Column)                            |
+|  - Remaining posts in responsive grid            |
+|  - Modern card design with hover effects         |
++--------------------------------------------------+
+|  NEWSLETTER CTA SECTION (Light gradient band)    |
+|  - "Stay Updated" messaging                      |
+|  - Subtle call-to-action                         |
++--------------------------------------------------+
+|  FINAL CTA (Brand Blue Gradient -> Footer)       |
+|  - Reuse FinalCtaSection component               |
++--------------------------------------------------+
 ```
 
 ---
 
-## Detailed Implementation Steps
+### Part 3: Updated BlogPostCard Component
 
-### Step 1: Database Schema Updates
+**Location:** `src/components/blog/BlogPostCard.tsx`
 
-Add tracking tables for checkout intents and conversions:
-
-**New Table: `checkout_intents`**
-| Column | Type | Description |
-|--------|------|-------------|
-| id | uuid | Primary key |
-| stripe_session_id | text | Stripe checkout session ID |
-| email | text | User email |
-| first_name | text | User first name |
-| last_name | text | User last name |
-| company | text | Company name |
-| phone | text | Phone number |
-| plan | text | Selected plan (research/core/pro) |
-| seats | integer | Number of seats |
-| utm_source | text | UTM source |
-| utm_medium | text | UTM medium |
-| utm_campaign | text | UTM campaign |
-| page_url | text | Page URL where checkout started |
-| status | text | intent/paid/cancelled |
-| stripe_customer_id | text | Stripe customer ID (after payment) |
-| stripe_subscription_id | text | Stripe subscription ID (after payment) |
-| created_at | timestamp | Created timestamp |
-| updated_at | timestamp | Updated timestamp |
-| paid_at | timestamp | Payment timestamp |
-
-**New Table: `stripe_events`** (for idempotency)
-| Column | Type | Description |
-|--------|------|-------------|
-| id | uuid | Primary key |
-| stripe_event_id | text | Stripe event ID (unique) |
-| event_type | text | Event type (e.g., checkout.session.completed) |
-| processed | boolean | Whether event was processed |
-| payload | jsonb | Full event payload |
-| created_at | timestamp | Created timestamp |
+**Improvements:**
+- Remove grayscale filter from images (show full color)
+- Add gradient overlay on hover for visual polish
+- Improve category badge styling with brand colors
+- Add subtle scale animation on hover
+- Improve typography hierarchy
+- Add reading time estimate
 
 ---
 
-### Step 2: Modify `create-checkout` Edge Function
+### Part 4: Updated Blog.tsx Page
 
-Update to:
-1. Record checkout intent to database
-2. Sync to CRM with status "Checkout Started"
-3. Capture UTM parameters and page URL
-4. Return session ID for tracking
+**Location:** `src/pages/Blog.tsx`
 
-**Key additions:**
-- Accept `utm_source`, `utm_medium`, `utm_campaign`, `page_url` from frontend
-- Insert into `checkout_intents` table
-- Call `sync-lead-to-crm` with extended payload including:
-  - All user data (name, email, company, phone)
-  - Plan selected, seat count
-  - UTM parameters
-  - Status: "Checkout Started" / "Intent"
-  - Timestamp
+**New Sections:**
 
----
+1. **Hero Section**
+   - Brand blue gradient background (matching HeroSection/FinalCtaSection)
+   - Dot grid texture overlay for depth
+   - Large headline with white text
+   - Descriptive subtitle
 
-### Step 3: Update Frontend Signup Form
+2. **Featured Post Section**
+   - First post displayed prominently at full width
+   - Larger image, bolder title treatment
+   - Enhanced visual hierarchy
 
-Modify `SignUp.tsx` to:
-1. Capture UTM parameters from URL on page load
-2. Pass UTM parameters and current page URL to checkout function
+3. **Post Grid**
+   - Remaining posts in a 3-column responsive grid
+   - Scroll-triggered fade-in animations (existing pattern)
+   - Card hover effects with elevation changes
 
-**Key changes:**
-- Add `useEffect` to extract UTM params from `window.location.search`
-- Include in the `supabase.functions.invoke("create-checkout")` body
+4. **Newsletter/Stay Updated Section**
+   - Light blue-gray gradient band (matching KeyBenefitsSection)
+   - Simple messaging about staying updated
+   - Subtle accent overlays
 
----
-
-### Step 4: Create Stripe Webhook Handler Edge Function
-
-**New Edge Function: `stripe-webhook`**
-
-Handles Stripe webhook events, specifically:
-- `checkout.session.completed` - Payment successful
-- `customer.subscription.created` - Subscription created
-- `customer.subscription.updated` - Subscription updated
-- `customer.subscription.deleted` - Subscription cancelled
-
-**For `checkout.session.completed`:**
-
-1. **Verify webhook signature** (using `STRIPE_WEBHOOK_SECRET`)
-2. **Check idempotency** - Skip if event already processed in `stripe_events`
-3. **Extract data** from session:
-   - Customer ID, Subscription ID
-   - Metadata (firstName, lastName, company, phone, etc.)
-   - Price/product info for tier determination
-4. **Update database:**
-   - Update `checkout_intents` status to "paid"
-   - Create/update `companies` record:
-     - Set `stripe_customer_id`, `stripe_subscription_id`
-     - Set `plan` based on product
-     - Set `status` to "active"
-     - Set `user_limit` based on seat count
-   - Create/update `users` record linked to company
-5. **Notify CRM:**
-   - Call `sync-lead-to-crm` with:
-     - Status: "Paid"
-     - Stripe customer ID
-     - Stripe subscription ID
-     - Deal stage update info
-6. **Mark event processed** in `stripe_events`
+5. **Final CTA**
+   - Reuse the existing `FinalCtaSection` component
+   - Provides consistent "bookend" with hero
 
 ---
 
-### Step 5: Update `sync-lead-to-crm` Edge Function
+### Technical Details
 
-Extend payload format to support:
-- Checkout status (Intent / Paid / Cancelled)
-- Stripe IDs (customer, subscription)
-- Plan/tier information
-- Seat count
-- UTM data
+**Files to Modify:**
+1. `src/components/header.tsx` - Add Blog to companyPages array
+2. `src/pages/Blog.tsx` - Complete page redesign
+3. `src/components/blog/BlogPostCard.tsx` - Enhanced card styling
 
-**Updated CRM payload structure:**
-```json
-{
-  "company_name": "Acme Inc",
-  "first_name": "John",
-  "last_name": "Doe",
-  "email": "john@acme.com",
-  "phone": "555-1234",
-  "source": "website",
-  "status": "Checkout Started",  // or "Paid"
-  "plan": "pro",
-  "seats": 5,
-  "stripe_customer_id": "cus_xxx",
-  "stripe_subscription_id": "sub_xxx",
-  "utm_source": "google",
-  "utm_medium": "cpc",
-  "utm_campaign": "spring2026",
-  "page_url": "https://gaapio.com/signup"
-}
-```
+**Design Tokens Used:**
+- Primary blue: `#0099FF` / `hsl(204 100% 50%)`
+- Hero gradient: `bg-gradient-to-br from-[hsl(204,100%,55%)] via-[hsl(204,100%,50%)] to-[hsl(204,100%,45%)]`
+- Light gradient band: `bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50`
+- Card shadows: `shadow-lg shadow-primary/5` on hover
+- Animations: `animate-fade-up`, `transition-all duration-300`
+
+**Responsive Breakpoints:**
+- Mobile: Single column post grid
+- Tablet (sm): 2-column grid
+- Desktop (lg): 3-column grid with featured post spanning full width
+
+**Accessibility:**
+- Proper heading hierarchy (h1 for page title, h2 for sections, h3 for cards)
+- Skip-to-content link (already exists)
+- Semantic HTML with role attributes
+- Focus-visible states on interactive elements
 
 ---
 
-### Step 6: Configure Stripe Webhook
+### Sample Blog Posts
 
-**You will need to configure this in Stripe Dashboard:**
+The page will use the existing 3 sample posts plus add 3 more for a fuller grid:
 
-1. Go to Stripe Dashboard -> Developers -> Webhooks
-2. Add endpoint: `https://bxojxrcerefklsrqkmrs.supabase.co/functions/v1/stripe-webhook`
-3. Select events:
-   - `checkout.session.completed`
-   - `customer.subscription.created`
-   - `customer.subscription.updated`
-   - `customer.subscription.deleted`
-4. Copy the webhook signing secret
-5. Store as `STRIPE_WEBHOOK_SECRET` in Supabase secrets
-
----
-
-### Step 7: Add Webhook Secret
-
-A new secret will be required:
-- **STRIPE_WEBHOOK_SECRET** - For verifying Stripe webhook signatures
-
----
-
-## Technical Details
-
-### Files to Create
-
-| File | Purpose |
-|------|---------|
-| `supabase/functions/stripe-webhook/index.ts` | Handle Stripe webhook events |
-
-### Files to Modify
-
-| File | Changes |
-|------|---------|
-| `supabase/functions/create-checkout/index.ts` | Add checkout intent tracking and CRM sync |
-| `supabase/functions/sync-lead-to-crm/index.ts` | Support extended payload with status/Stripe IDs |
-| `src/pages/SignUp.tsx` | Capture and pass UTM parameters |
-| `supabase/config.toml` | Register new edge function |
-
-### Database Migrations
-
-| Migration | Purpose |
-|-----------|---------|
-| Create `checkout_intents` table | Track checkout attempts |
-| Create `stripe_events` table | Event idempotency |
-| Add indexes for performance | On email, stripe_session_id, stripe_event_id |
-
----
-
-## Event Flow Summary
-
-### Flow 1: Checkout Started (Intent)
-
-1. User fills form, clicks "Continue to Payment"
-2. Frontend calls `create-checkout` with form data + UTM + page URL
-3. `create-checkout`:
-   - Creates Stripe checkout session
-   - Inserts into `checkout_intents` with status "intent"
-   - Calls `sync-lead-to-crm` with status "Checkout Started"
-   - Returns checkout URL
-4. User redirected to Stripe
-
-### Flow 2: Payment Success (Conversion)
-
-1. User completes payment on Stripe
-2. Stripe sends webhook to `stripe-webhook`
-3. `stripe-webhook`:
-   - Verifies signature
-   - Checks idempotency
-   - Updates `checkout_intents` to status "paid"
-   - Creates/updates `companies` with Stripe IDs and active status
-   - Creates/updates `users` linked to company
-   - Calls `sync-lead-to-crm` with status "Paid" + Stripe IDs
-   - Records event for idempotency
-4. User sees success page (redirect is just UX, webhook is source of truth)
-
----
-
-## Product Provisioning Notes
-
-The webhook will handle basic provisioning:
-- **Company record**: Created with plan, seat limit, active status
-- **User record**: Created and linked to company
-- **Stripe IDs**: Stored for future reference
-
-For full product access (your actual app), you mentioned this might need setup in your product. The webhook can:
-1. Create records in your website database
-2. Optionally call another webhook to your product's API for full provisioning
-
-If your product has its own user/org management, we can add an additional webhook call to provision there.
-
----
-
-## Dependencies & Prerequisites
-
-1. **STRIPE_WEBHOOK_SECRET** - New secret needed from Stripe Dashboard
-2. **Stripe Dashboard Configuration** - Webhook endpoint must be added manually
-3. **CRM Compatibility** - Verify your CRM webhook can accept the extended payload fields
+1. Why Technical Accounting Memos Matter (Best Practices)
+2. 5 Common ASC 606 Pitfalls (Accounting Standards)
+3. How AI Is Changing the Accounting Landscape (Technology)
+4. Understanding ASC 842 Lease Modifications (Accounting Standards)
+5. Building an Audit-Ready Documentation Process (Best Practices)
+6. The Future of Technical Accounting Teams (Industry Insights)
 
