@@ -1,70 +1,71 @@
 
-import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface FeatureToggle {
-  id: string;
+  id: 'enable_customer_logos' | 'enable_testimonials' | 'enable_pricing' | 'enable_footer_logos';
   name: string;
   description: string;
-  enabled: boolean;
 }
 
+const featureToggles: FeatureToggle[] = [
+  {
+    id: "enable_customer_logos",
+    name: "Customer Logos Section",
+    description: "Show or hide the customer logos section on the homepage"
+  },
+  {
+    id: "enable_testimonials",
+    name: "Testimonials Section",
+    description: "Show or hide the testimonials section on the homepage"
+  },
+  {
+    id: "enable_pricing",
+    name: "Pricing Section",
+    description: "Show or hide the pricing section on the homepage"
+  },
+  {
+    id: "enable_footer_logos",
+    name: "Footer Logos",
+    description: "Show or hide partner logos in the footer"
+  }
+];
+
 export function FeatureToggles() {
-  const [featureToggles, setFeatureToggles] = useState<FeatureToggle[]>([
-    {
-      id: "customer-logos",
-      name: "Customer Logos Section",
-      description: "Show or hide the customer logos section on the homepage",
-      enabled: true
-    },
-    {
-      id: "testimonials",
-      name: "Testimonials Section",
-      description: "Show or hide the testimonials section on the homepage",
-      enabled: true
-    },
-    {
-      id: "pricing",
-      name: "Pricing Section",
-      description: "Show or hide the pricing section on the homepage",
-      enabled: true
-    },
-    {
-      id: "footer-logos",
-      name: "Footer Logos",
-      description: "Show or hide partner logos in the footer",
-      enabled: true
-    }
-  ]);
+  const { siteConfig, loading, updating, updateFeatureToggle } = useSiteConfig();
 
-  // Load saved toggle states
-  useEffect(() => {
-    const savedToggles = localStorage.getItem("featureToggles");
-    if (savedToggles) {
-      setFeatureToggles(JSON.parse(savedToggles));
-    }
-  }, []);
-
-  // Save toggle states when changed
-  useEffect(() => {
-    localStorage.setItem("featureToggles", JSON.stringify(featureToggles));
-  }, [featureToggles]);
-
-  const handleToggleChange = (id: string, checked: boolean) => {
-    const updatedToggles = featureToggles.map((toggle) =>
-      toggle.id === id ? { ...toggle, enabled: checked } : toggle
-    );
-    setFeatureToggles(updatedToggles);
-    
-    // Trigger storage event for other tabs/windows
-    localStorage.setItem("featureToggles", JSON.stringify(updatedToggles));
-    window.dispatchEvent(new StorageEvent('storage', {
-      key: 'featureToggles',
-      newValue: JSON.stringify(updatedToggles)
-    }));
+  const handleToggleChange = async (id: FeatureToggle['id'], checked: boolean) => {
+    await updateFeatureToggle(id, checked);
   };
+
+  if (loading) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Feature Toggles</CardTitle>
+          <CardDescription>
+            Enable or disable features on your website
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="flex items-center justify-between">
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-32" />
+                  <Skeleton className="h-3 w-48" />
+                </div>
+                <Skeleton className="h-6 w-11" />
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card>
@@ -86,8 +87,9 @@ export function FeatureToggles() {
               </div>
               <Switch
                 id={toggle.id}
-                checked={toggle.enabled}
+                checked={siteConfig?.[toggle.id] ?? true}
                 onCheckedChange={(checked) => handleToggleChange(toggle.id, checked)}
+                disabled={updating}
               />
             </div>
           ))}
