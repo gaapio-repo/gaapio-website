@@ -47,8 +47,8 @@ export function FinalCtaSection() {
       {/* Subtle white glow for depth */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-br from-white/10 via-white/5 to-transparent blur-3xl pointer-events-none rounded-full" />
       
-      {/* Footer transition gradient */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
+      {/* Footer transition gradient - seamless to black footer */}
+      <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-b from-transparent to-black" />
 
       <ResponsiveContainer className="relative z-10">
         <div className="text-center max-w-3xl mx-auto">
