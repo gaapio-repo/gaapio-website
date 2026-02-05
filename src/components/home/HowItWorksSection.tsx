@@ -124,7 +124,9 @@ export function HowItWorksSection() {
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#339CFF20] mb-4 transition-transform duration-300 hover:scale-105 dark:bg-[#339CFF10]">
                 <step.icon className="h-6 w-6 text-[#339CFF]" />
               </div>
-              <h3 className="inline-block text-lg font-semibold mb-3 relative z-10 px-3 py-1 bg-[#339CFF] text-white rounded-md">{step.title}</h3>
+              <div className="-mx-6 px-6 py-2 bg-[#339CFF] mb-3">
+                <h3 className="text-lg font-semibold text-white">{step.title}</h3>
+              </div>
               <ul className="text-muted-foreground text-left text-sm space-y-2 dark:text-gray-400">
                 {step.bullets.map((bullet, idx) => (
                   <li key={idx} className="flex items-start">
