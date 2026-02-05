@@ -20,9 +20,9 @@ const firmChallenges: FirmChallenge[] = [
     name: "Small Firms",
     icon: Building2,
     headline: "Scale Your Practice Without Scaling Headcount",
-    challenge: "Hiring specialized technical staff isn't cost-effective, but clients still need reliable guidance on contracts, leases, and accounting questions.",
+    challenge: "You have plenty of staff but are light on managers and senior specialists. Clients still need reliable guidance on contracts, leases, and technical questions — and your team shouldn't have to wait for a partner to get answers.",
     solutions: [
-      "Internal GPT answers technical questions instantly",
+      "Internal GPT gives staff instant answers without interrupting management",
       "Contract Analysis handles complex reviews",
       "Lease Accounting tools let junior staff perform senior-level work"
     ],
@@ -47,7 +47,7 @@ const firmChallenges: FirmChallenge[] = [
     id: "fullFirm",
     name: "Firms Serving Public Companies",
     icon: Shield,
-    headline: "Meet SEC Deadlines Without the Audit Season Scramble",
+    headline: "Public Company–Ready from Day One",
     challenge: "SEC deadlines are unforgiving. SOX documentation is tedious. Disclosure benchmarking requires expensive tools or manual work.",
     solutions: [
       "SOX Compliance module streamlines control documentation",
