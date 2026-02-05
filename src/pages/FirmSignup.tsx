@@ -27,11 +27,8 @@ export default function FirmSignup() {
 
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId);
-    
-    // For contact plan, go directly to contact form
-    if (planId === "contact") {
-      setStep("info");
-    }
+    // Go directly to info step when a plan is selected
+    setStep("info");
   };
 
   const handleContinue = () => {
@@ -157,12 +154,6 @@ export default function FirmSignup() {
             
             <div className="relative z-10 pt-2 pb-8 md:pt-4 md:pb-10">
               <ResponsiveContainer>
-                <div className="mb-4">
-                  <Button variant="ghost" onClick={handleBackToSignup}>
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Back to Account Selection
-                  </Button>
-                </div>
-                
                 <div className="mx-auto max-w-6xl">
                   <ErrorBoundary fallback={
                     <div className="p-4 border border-red-300 bg-red-50 dark:bg-red-900/20 dark:border-red-800 rounded-md my-4">
@@ -175,14 +166,6 @@ export default function FirmSignup() {
                       onSelectProduct={handlePlanSelect} 
                     />
                   </ErrorBoundary>
-                  
-                  {selectedPlan && selectedPlan !== "contact" && (
-                    <div className="mt-8 text-center">
-                      <Button size="lg" onClick={handleContinue}>
-                        Continue <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </div>
-                  )}
                 </div>
 
                 {/* Trust Badges */}

@@ -10,8 +10,7 @@ export const FIRM_STRIPE_PRODUCTS = {
     features: [
       "Internal GPT for your firm",
       "Contract Analysis",
-      "Lease Accounting Export",
-      "Low-volume focus (1-2 leases per client)"
+      "Lease Accounting Export"
     ],
     popular: false
   },
