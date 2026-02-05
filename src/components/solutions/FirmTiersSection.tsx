@@ -47,7 +47,7 @@ const firmChallenges: FirmChallenge[] = [
     id: "fullFirm",
     name: "Firms Serving Public Companies",
     icon: Shield,
-    headline: "Public Company–Ready from Day One",
+    headline: "Your Firm Does It All—Private to Public, Advisory to Audit",
     challenge: "SEC deadlines are unforgiving. SOX documentation is tedious. Disclosure benchmarking requires expensive tools or manual work.",
     solutions: [
       "SOX Compliance module streamlines control documentation",
