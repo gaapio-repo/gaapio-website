@@ -1,250 +1,97 @@
 
-# Firm Page Enhancements & Signup Split Implementation Plan
+# Firm Page: Replace Pricing with Challenges & Solutions Section
 
 ## Overview
-
-This plan addresses two major requests:
-1. Add three tier-focused sections to the Accounting Firm page under "Why Firms Run on Gaapio"
-2. Create a Company/Firm split on the signup flow, with a new firm-specific pricing page
+Replace the "Firm Packages" pricing section on `/solutions/firm` with a new section called **"Challenges We Solve"** (or similar) that highlights the unique challenges each firm type faces and how Gaapio addresses them.
 
 ---
 
-## Part 1: Firm Page - Three Tier Sections
+## Content Structure
 
-### Current State
-The `/solutions/firm` page has a "Why Firms Run on Gaapio" section with 2 generic benefit cards. The user wants to highlight the three distinct tiers of service targeted at different firm types.
+### Three Firm Segments
 
-### Proposed Sections
-
-I will add three new cards/sections below "Why Firms Run on Gaapio" that explain what each tier is designed for:
-
-| Tier | Target Audience | Key Features | Price |
-|------|-----------------|--------------|-------|
-| **Audit Support** | Firms with pre-audit stage clients | Contract Analysis, Lease Accounting Export, Internal GPT | $1,500/yr |
-| **Technical Accounting** | Firms doing technical accounting work | Technical Accounting Memos, Research Tools, + all Audit Support features | $3,000/yr |
-| **Full Firm** | Firms serving public companies | SOX Compliance, Disclosure Generation, + all lower-tier features | $3,600/yr |
-
-### Design Approach
-- Create a new section component called `FirmTiersSection`
-- Use a 3-column card layout (responsive to single column on mobile)
-- Each card shows: Tier name, target description, feature list, "Sign Up" CTA
-- Place this section after the current "Why Firms Run on Gaapio" section
+| Segment | The Challenge | How Gaapio Helps |
+|---------|---------------|------------------|
+| **Small Firms** | Pre-audit clients need basic technical support, but hiring specialized staff isn't cost-effective. Associates lack confidence in technical areas. | Internal GPT answers questions instantly. Contract Analysis and Lease Accounting tools let junior staff handle complex tasks without senior oversight. |
+| **Technical Accounting Practices** | Research and memo-writing consumes hours of senior time. Quality varies across staff. Clients expect Big 4–level deliverables at regional firm prices. | AI-powered research and memo generation cuts hours to minutes. Standardized workflows ensure consistent, defensible output every time. |
+| **Firms Serving Public Companies** | SEC deadlines are unforgiving. SOX documentation is tedious. Disclosure benchmarking requires expensive tools or manual work. | SOX Compliance module streamlines control documentation. Footnote Disclosure generation with peer benchmarking delivers audit-ready output fast. |
 
 ---
 
-## Part 2: Signup Split - Company vs Firm
+## Design Approach
 
-### Current Flow
-- `/signup` page shows 4 pricing tiers (Research, Core, Pro, Enterprise)
-- All CTAs go directly to this page
+### Option: 3-Column Card Layout
+Each card features:
+- **Firm Type Header** (with icon or badge)
+- **"The Challenge"** section - 2-3 sentences describing pain points
+- **"How Gaapio Helps"** section - bullet points showing solutions
+- **CTA button** linking to `/firm-signup`
 
-### New Flow
-
-```text
-User clicks "Sign Up Now" anywhere on site
-          ↓
-    /signup-select (NEW)
-    "Choose Your Account Type"
-          ↓
-    ┌─────────────────┬─────────────────┐
-    │    Company      │    CPA Firm     │
-    │  (for internal  │  (for serving   │
-    │   accounting)   │   clients)      │
-    └─────────────────┴─────────────────┘
-          ↓                   ↓
-      /signup             /firm-signup (UPDATED)
-   (existing page)      (new pricing flow)
-```
-
-### Implementation Details
-
-#### 1. New Signup Selection Page (`/signup-select`)
-- Reuse the existing `ClientTypeSelector` component 
-- Two cards: "Company" and "CPA Firm"
-- Company → redirects to `/signup`
-- CPA Firm → redirects to `/firm-signup`
-
-#### 2. Updated Firm Signup Page (`/firm-signup`)
-The current FirmSignup page is a contact form. I will transform it into a full pricing flow mirroring the company signup:
-
-**Firm Products (from Stripe):**
-
-| Plan | Price | Price ID | Features |
-|------|-------|----------|----------|
-| **Audit Support** | $1,500/year | `price_1SxXUKErMdi9YyI1hz4kNVNp` | Internal GPT, Contract Analysis, Lease Accounting Export |
-| **Technical Accounting** | $3,000/year | `price_1SxXW8ErMdi9YyI17r8TSIA8` | Technical Accounting Memos, Accounting Research tools, All Tier 1 features |
-| **Full Firm** | $3,600/year | `price_1SxXYzErMdi9YyI1aE9R9wyQ` | SOX compliance, Footnote Discloser, Audit suite, All lower-tier features |
-| **Custom** | Contact Sales | N/A | Custom pricing, volume discounts, dedicated support |
-
-#### 3. Update CTAs Across Site
-- Change "Sign Up Now" links to point to `/signup-select` instead of `/signup`
-- Affected pages: Homepage, Firm solutions page, other product pages
+### Visual Style
+- Consistent with existing page design (gradient background, decorative blurs)
+- Cards use white background with subtle borders
+- Each card has a distinct accent color or icon to differentiate segments
+- No pricing shown (that lives on the signup page)
 
 ---
-
-## Files to Create
-
-| File | Purpose |
-|------|---------|
-| `src/pages/SignupSelect.tsx` | New account type selection page |
-| `src/components/solutions/FirmTiersSection.tsx` | New section for firm page showing 3 tiers |
-| `src/components/signup/FirmProductSelector.tsx` | Firm-specific pricing cards (mirroring ProductSelector) |
-| `src/components/signup/FirmSignupInfoForm.tsx` | Firm-specific info form with company label |
 
 ## Files to Modify
 
 | File | Changes |
 |------|---------|
-| `src/App.tsx` | Add route for `/signup-select` |
-| `src/pages/solutions/AccountingFirm.tsx` | Add FirmTiersSection component, update Sign Up CTA |
-| `src/pages/FirmSignup.tsx` | Replace contact form with full pricing flow |
-| `src/components/home/HeroSection.tsx` | Update Sign Up CTA link |
-| `src/components/home/FinalCtaSection.tsx` | Update Sign Up CTA link |
+| `src/components/solutions/FirmTiersSection.tsx` | Replace pricing content with challenges/solutions content |
+| `src/pages/solutions/AccountingFirm.tsx` | No changes needed (component is already imported) |
 
 ---
 
-## Technical Details
-
-### Stripe Product Configuration
+## New Component Content
 
 ```typescript
-// For FirmProductSelector.tsx
-export const FIRM_STRIPE_PRODUCTS = {
-  auditSupport: {
-    id: "auditSupport",
-    name: "Audit Support",
-    price: 1500,
-    priceId: "price_1SxXUKErMdi9YyI1hz4kNVNp",
-    productId: "prod_TvOGNzrXBhYqUD",
-    description: "For firms with pre-audit stage clients",
-    features: [
-      "Internal GPT for your firm",
-      "Contract Analysis",
-      "Lease Accounting Export",
-      "Low-volume focus (1-2 leases per client)"
-    ],
-    popular: false
+const firmChallenges = [
+  {
+    id: "smallFirm",
+    name: "Small Firms",
+    subtitle: "Pre-audit stage clients",
+    challenge: "Hiring specialized technical staff isn't cost-effective, but clients still need reliable guidance on contracts, leases, and accounting questions.",
+    solutions: [
+      "Internal GPT answers technical questions instantly",
+      "Contract Analysis handles complex reviews",
+      "Lease Accounting tools let junior staff perform senior-level work"
+    ]
   },
-  technicalAccounting: {
+  {
     id: "technicalAccounting",
-    name: "Technical Accounting",
-    price: 3000,
-    priceId: "price_1SxXW8ErMdi9YyI17r8TSIA8",
-    productId: "prod_TvOIdC5x1VGG8R",
-    description: "For firms doing technical accounting work",
-    features: [
-      "Technical Accounting Memos",
-      "Accounting Research tools (research, analysis, memo writer)",
-      "All Audit Support features included"
-    ],
-    popular: true
+    name: "Technical Accounting Practices",
+    subtitle: "Complex research & deliverables",
+    challenge: "Research and memo-writing consumes hours of senior time. Quality varies across staff, and clients expect Big 4–level deliverables.",
+    solutions: [
+      "AI-powered research cuts hours to minutes",
+      "Memo generation ensures consistent, defensible output",
+      "Standardized workflows reduce prep time"
+    ]
   },
-  fullFirm: {
+  {
     id: "fullFirm",
-    name: "Full Firm",
-    price: 3600,
-    priceId: "price_1SxXYzErMdi9YyI1aE9R9wyQ",
-    productId: "prod_TvOLPib96fbCV7",
-    description: "For firms serving public companies",
-    features: [
-      "SOX Compliance module",
-      "Footnote Disclosure generation & benchmarking",
-      "Audit suite (memo auditor, lease auditor)",
-      "All lower-tier features included"
-    ],
-    popular: false
-  },
-  contact: {
-    id: "contact",
-    name: "Custom",
-    price: null,
-    priceId: null,
-    productId: null,
-    description: "Custom pricing for larger firms",
-    features: [
-      "Custom user limits",
-      "Volume discounts", 
-      "Dedicated support",
-      "Custom integrations"
-    ],
-    popular: false
+    name: "Firms Serving Public Companies",
+    subtitle: "SEC filings & SOX compliance",
+    challenge: "SEC deadlines are unforgiving. SOX documentation is tedious. Disclosure benchmarking requires expensive tools or manual work.",
+    solutions: [
+      "SOX Compliance module streamlines control documentation",
+      "Footnote Disclosure generation with peer benchmarking",
+      "Audit suite delivers audit-ready output fast"
+    ]
   }
-};
+];
 ```
-
-### Routing Updates
-
-```typescript
-// In App.tsx
-import SignupSelect from "./pages/SignupSelect";
-
-// Add route
-<Route path="/signup-select" element={<SignupSelect />} />
-```
-
-### CTA Link Updates
-
-All "Sign Up Now" CTAs that currently point to `/signup` will be updated to `/signup-select`:
-- HeroSection.tsx
-- FinalCtaSection.tsx
-- AccountingFirm.tsx
-- PrivateCompany.tsx
-- PublicCompany.tsx
 
 ---
 
-## User Flow Diagram
-
-```text
-                    ┌─────────────────────────┐
-                    │   Any "Sign Up" CTA     │
-                    └───────────┬─────────────┘
-                                │
-                                ▼
-                    ┌─────────────────────────┐
-                    │    /signup-select       │
-                    │  "Choose Account Type"  │
-                    └───────────┬─────────────┘
-                                │
-              ┌─────────────────┴─────────────────┐
-              │                                   │
-              ▼                                   ▼
-    ┌─────────────────┐               ┌─────────────────┐
-    │     Company     │               │    CPA Firm     │
-    └────────┬────────┘               └────────┬────────┘
-             │                                  │
-             ▼                                  ▼
-    ┌─────────────────┐               ┌─────────────────┐
-    │    /signup      │               │  /firm-signup   │
-    │   4 tiers:      │               │   4 tiers:      │
-    │   Research      │               │   Audit Support │
-    │   Core          │               │   Technical     │
-    │   Pro           │               │   Full Firm     │
-    │   Enterprise    │               │   Custom        │
-    └────────┬────────┘               └────────┬────────┘
-             │                                  │
-             ▼                                  ▼
-    ┌─────────────────┐               ┌─────────────────┐
-    │  Info Form +    │               │  Info Form +    │
-    │  User Count     │               │  User Count     │
-    └────────┬────────┘               └────────┬────────┘
-             │                                  │
-             └──────────────┬───────────────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │   Stripe Checkout   │
-                 │   (opens new tab)   │
-                 └─────────────────────┘
-```
+## Section Title Options
+- "Challenges We Solve"
+- "Built for Every Firm Type"
+- "How Gaapio Helps Your Firm"
 
 ---
 
 ## Summary
-
-This implementation:
-1. Adds a clear three-tier section to the Firm page explaining who each tier is for
-2. Creates a "split" signup flow where users first choose Company vs Firm
-3. Gives firms a dedicated pricing page with firm-specific products
-4. Maintains consistency with the existing company signup flow
-5. Uses the actual Stripe products/prices the user created
+This change shifts the messaging from "here's what you pay" to "here's the problem you have and how we solve it" - a more compelling value proposition for the solutions page. Pricing details will still be available on the `/firm-signup` page when users are ready to purchase.
