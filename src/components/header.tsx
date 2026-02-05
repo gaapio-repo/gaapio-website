@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Logo } from "@/components/logo";
 import { Link } from "react-router-dom";
-import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain, Shield, Building, Building2 } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain, Shield, Building, Building2, Database } from "lucide-react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
@@ -36,7 +36,14 @@ const products = [
     href: "/research-gpt",
     icon: Brain,
     description: "Your firm's AI-powered research assistant",
-    features: ["Search Big 4 accounting guides and technical resources", "Natural language queries across comprehensive knowledge base", "Internal GPT (coming soon)"],
+    features: ["Search Big 4 accounting guides and technical resources", "Natural language queries across comprehensive knowledge base", "Access authoritative sources with citations"],
+  },
+  {
+    name: "Internal GPT",
+    href: "/internal-gpt",
+    icon: Database,
+    description: "Query your internal knowledge base with AI",
+    features: ["Upload policies, procedures, and memos", "Staff self-service for instant answers", "Preserve and access institutional knowledge"],
   },
   {
     name: "Guidance Updates",
