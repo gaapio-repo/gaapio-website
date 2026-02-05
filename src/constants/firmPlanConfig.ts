@@ -1,8 +1,8 @@
 // Stripe product configuration for CPA Firm plans
 export const FIRM_STRIPE_PRODUCTS = {
-  auditSupport: {
-    id: "auditSupport",
-    name: "Audit Support",
+  smallFirm: {
+    id: "smallFirm",
+    name: "Small Firm",
     price: 1500,
     priceId: "price_1SxXUKErMdi9YyI1hz4kNVNp",
     productId: "prod_TvOGNzrXBhYqUD",
@@ -26,9 +26,9 @@ export const FIRM_STRIPE_PRODUCTS = {
       "Technical Accounting Memos",
       "Accounting Research tools",
       "Analysis & Memo writer",
-      "All Audit Support features included"
+      "All Small Firm features included"
     ],
-    popular: true
+    popular: false
   },
   fullFirm: {
     id: "fullFirm",
@@ -43,7 +43,7 @@ export const FIRM_STRIPE_PRODUCTS = {
       "Audit suite (memo auditor, lease auditor)",
       "All lower-tier features included"
     ],
-    popular: false
+    popular: true
   },
   contact: {
     id: "contact",

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
@@ -6,20 +6,22 @@ import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
 import { SignupSuccess } from "@/components/signup/SignupSuccess";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Shield, CheckCircle } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { FirmProductSelector } from "@/components/signup/FirmProductSelector";
 import { FirmContactForm } from "@/components/signup/FirmContactForm";
 import { FirmSignupInfoForm, FirmSignupFormData } from "@/components/signup/FirmSignupInfoForm";
 import { FIRM_STRIPE_PRODUCTS } from "@/constants/firmPlanConfig";
+import { TrustBarSection } from "@/components/home/TrustBarSection";
 import { supabase } from "@/integrations/supabase/client";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export default function FirmSignup() {
   const { toast } = useToast();
   const navigate = useNavigate();
   
   const [step, setStep] = useState<"plan" | "info" | "success">("plan");
-  const [selectedPlan, setSelectedPlan] = useState("technicalAccounting");
+  const [selectedPlan, setSelectedPlan] = useState("fullFirm");
   const [userInfo, setUserInfo] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -113,90 +115,156 @@ export default function FirmSignup() {
   const handleBackToSignup = () => {
     navigate("/signup-select");
   };
+
+  const trustBadges = [
+    { icon: Shield, label: "Enterprise-Grade Security" },
+    { icon: CheckCircle, label: "SOC 2 Type II Ready" },
+  ];
   
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <SEO 
         title="CPA Firm Signup - Gaapio for Accounting Firms"
-        description="Choose the right Gaapio package for your CPA firm. Audit Support, Technical Accounting, or Full Firm access."
+        description="Choose the right Gaapio package for your CPA firm. Small Firm, Technical Accounting, or Full Firm access."
         canonical="/firm-signup"
         keywords={['CPA firm pricing', 'accounting firm software', 'multi-user discount']}
       />
       <Header />
-      <main className="flex-1 pt-32 pb-16">
-        <ResponsiveContainer>
-          {step === "plan" && (
-            <>
-              <div className="mb-8">
-                <Button variant="ghost" onClick={handleBackToSignup} className="mb-4">
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Account Selection
-                </Button>
-              </div>
-              
-              <FirmProductSelector 
-                selectedProduct={selectedPlan} 
-                onSelectProduct={handlePlanSelect} 
-              />
-              
-              {selectedPlan && selectedPlan !== "contact" && (
-                <div className="mt-8 text-center">
-                  <Button size="lg" onClick={handleContinue}>
-                    Continue <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              )}
-            </>
-          )}
-          
-          {step === "info" && selectedPlan === "contact" && (
-            <>
-              <div className="mb-8 text-center">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4">Custom Firm Pricing</h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Get in touch with our team to learn more about custom pricing for your firm.
+      
+      {step === "plan" && (
+        <>
+          {/* Hero Section with Brand Gradient */}
+          <section className="relative pt-28 pb-6 md:pt-32 md:pb-8 hero-gradient-bg overflow-hidden">
+            {/* Decorative blur orbs */}
+            <div className="absolute top-0 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" />
+            <div className="absolute bottom-0 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" style={{ animationDelay: "1.5s" }} />
+            
+            <ResponsiveContainer className="relative z-10">
+              <div className="text-center animate-fade-in">
+                <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
+                  <span className="text-gray-900">Multiply</span> Your Firm's Capacity
+                </h1>
+                <p className="text-lg md:text-xl text-gray-900 max-w-2xl mx-auto">
+                  Choose the package that fits your firm. Built by Big 4 CPAs for modern accounting workflows.
                 </p>
               </div>
-              
-              <div className="max-w-2xl mx-auto">
-                <FirmContactForm onSuccess={handleContactFormSuccess} />
-                
-                <div className="mt-6">
-                  <Button variant="outline" onClick={handleBack}>
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Back to Plans
+            </ResponsiveContainer>
+          </section>
+
+          {/* Main Content Section */}
+          <main className="flex-1 relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900 pointer-events-none" />
+            
+            <div className="relative z-10 pt-2 pb-8 md:pt-4 md:pb-10">
+              <ResponsiveContainer>
+                <div className="mb-4">
+                  <Button variant="ghost" onClick={handleBackToSignup}>
+                    <ArrowLeft className="mr-2 h-4 w-4" /> Back to Account Selection
                   </Button>
                 </div>
+                
+                <div className="mx-auto max-w-6xl">
+                  <ErrorBoundary fallback={
+                    <div className="p-4 border border-red-300 bg-red-50 dark:bg-red-900/20 dark:border-red-800 rounded-md my-4">
+                      <p className="text-red-500 dark:text-red-400">An error occurred loading this section. Please try refreshing the page.</p>
+                      <Button onClick={() => window.location.reload()} variant="outline" className="mt-2">Refresh Page</Button>
+                    </div>
+                  }>
+                    <FirmProductSelector 
+                      selectedProduct={selectedPlan} 
+                      onSelectProduct={handlePlanSelect} 
+                    />
+                  </ErrorBoundary>
+                  
+                  {selectedPlan && selectedPlan !== "contact" && (
+                    <div className="mt-8 text-center">
+                      <Button size="lg" onClick={handleContinue}>
+                        Continue <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Trust Badges */}
+                <div className="mt-16 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+                  <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+                    {trustBadges.map((badge, index) => (
+                      <div 
+                        key={badge.label}
+                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-border/50 shadow-sm"
+                        style={{ animationDelay: `${0.1 * index}s` }}
+                      >
+                        <badge.icon className="h-4 w-4 text-primary" />
+                        <span className="text-sm font-medium text-foreground">{badge.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </ResponsiveContainer>
+            </div>
+          </main>
+
+          {/* Customer Logos */}
+          <TrustBarSection />
+        </>
+      )}
+      
+      {step === "info" && selectedPlan === "contact" && (
+        <main className="flex-1 pt-32 pb-16">
+          <ResponsiveContainer>
+            <div className="mb-8 text-center">
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Custom Firm Pricing</h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Get in touch with our team to learn more about custom pricing for your firm.
+              </p>
+            </div>
+            
+            <div className="max-w-2xl mx-auto">
+              <FirmContactForm onSuccess={handleContactFormSuccess} />
+              
+              <div className="mt-6">
+                <Button variant="outline" onClick={handleBack}>
+                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Plans
+                </Button>
               </div>
-            </>
-          )}
-          
-          {step === "info" && selectedPlan !== "contact" && (
+            </div>
+          </ResponsiveContainer>
+        </main>
+      )}
+      
+      {step === "info" && selectedPlan !== "contact" && (
+        <main className="flex-1 pt-32 pb-16">
+          <ResponsiveContainer>
             <FirmSignupInfoForm
               selectedProduct={selectedPlan}
               onBack={handleBack}
               onSubmit={handleInfoFormSubmit}
               isLoading={isLoading}
             />
-          )}
-          
-          {step === "success" && (
-            <>
-              <SignupSuccess
-                showFirmContact={selectedPlan === "contact"}
-                userInfo={userInfo}
-                paymentInfo={null}
-                selectedPlan={selectedPlan}
-                onHomeClick={handleHomeClick}
-              />
-              
-              <div className="mt-6 text-center">
-                <Button variant="outline" onClick={handleBackToSignup}>
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Signup
-                </Button>
-              </div>
-            </>
-          )}
-        </ResponsiveContainer>
-      </main>
+          </ResponsiveContainer>
+        </main>
+      )}
+      
+      {step === "success" && (
+        <main className="flex-1 pt-32 pb-16">
+          <ResponsiveContainer>
+            <SignupSuccess
+              showFirmContact={selectedPlan === "contact"}
+              userInfo={userInfo}
+              paymentInfo={null}
+              selectedPlan={selectedPlan}
+              onHomeClick={handleHomeClick}
+            />
+            
+            <div className="mt-6 text-center">
+              <Button variant="outline" onClick={handleBackToSignup}>
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Signup
+              </Button>
+            </div>
+          </ResponsiveContainer>
+        </main>
+      )}
+
       <Footer />
     </div>
   );

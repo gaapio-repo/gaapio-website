@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 
 const firmTiers = [
   {
-    id: "auditSupport",
-    name: "Audit Support",
+    id: "smallFirm",
+    name: "Small Firm",
     price: 1500,
     targetAudience: "For firms with pre-audit stage clients",
     features: [
@@ -26,9 +26,9 @@ const firmTiers = [
       "Technical Accounting Memos",
       "Accounting Research tools",
       "Analysis & Memo writer",
-      "All Audit Support features included"
+      "All Small Firm features included"
     ],
-    popular: true
+    popular: false
   },
   {
     id: "fullFirm",
@@ -41,7 +41,7 @@ const firmTiers = [
       "Audit suite (memo auditor, lease auditor)",
       "All lower-tier features included"
     ],
-    popular: false
+    popular: true
   }
 ];
 
