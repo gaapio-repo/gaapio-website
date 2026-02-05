@@ -1,142 +1,210 @@
 import { Button } from "@/components/ui/button";
-import { Check, Building2, FileText, Shield } from "lucide-react";
+import { Check, Building2, FileText, Shield, LucideIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
-const firmChallenges = [
+interface FirmChallenge {
+  id: string;
+  name: string;
+  icon: LucideIcon;
+  headline: string;
+  challenge: string;
+  solutions: string[];
+  reversed: boolean;
+  bgVariant: "white" | "gradient";
+}
+
+const firmChallenges: FirmChallenge[] = [
   {
     id: "smallFirm",
     name: "Small Firms",
-    subtitle: "Pre-audit stage clients",
     icon: Building2,
+    headline: "Scale Your Practice Without Scaling Headcount",
     challenge: "Hiring specialized technical staff isn't cost-effective, but clients still need reliable guidance on contracts, leases, and accounting questions.",
     solutions: [
       "Internal GPT answers technical questions instantly",
       "Contract Analysis handles complex reviews",
       "Lease Accounting tools let junior staff perform senior-level work"
-    ]
+    ],
+    reversed: false,
+    bgVariant: "white"
   },
   {
     id: "technicalAccounting",
     name: "Technical Accounting Practices",
-    subtitle: "Complex research & deliverables",
     icon: FileText,
-    challenge: "Research and memo-writing consumes hours of senior time. Quality varies across staff, and clients expect Big 4–level deliverables.",
+    headline: "Deliver Big 4–Quality Work at Regional Firm Prices",
+    challenge: "Research and memo-writing consumes hours of senior time. Quality varies across staff, and clients expect premium deliverables.",
     solutions: [
       "AI-powered research cuts hours to minutes",
       "Memo generation ensures consistent, defensible output",
       "Standardized workflows reduce prep time"
-    ]
+    ],
+    reversed: true,
+    bgVariant: "gradient"
   },
   {
     id: "fullFirm",
     name: "Firms Serving Public Companies",
-    subtitle: "SEC filings & SOX compliance",
     icon: Shield,
+    headline: "Meet SEC Deadlines Without the Audit Season Scramble",
     challenge: "SEC deadlines are unforgiving. SOX documentation is tedious. Disclosure benchmarking requires expensive tools or manual work.",
     solutions: [
       "SOX Compliance module streamlines control documentation",
       "Footnote Disclosure generation with peer benchmarking",
       "Audit suite delivers audit-ready output fast"
-    ]
+    ],
+    reversed: false,
+    bgVariant: "white"
   }
 ];
 
-export function FirmTiersSection() {
-  return (
-    <section className="py-24 md:py-32 relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/30 to-slate-50 dark:from-slate-900 dark:via-slate-800/30 dark:to-slate-900" />
+interface VisualCardProps {
+  icon: LucideIcon;
+  name: string;
+}
+
+const VisualCard = ({ icon: Icon, name }: VisualCardProps) => (
+  <div className="relative w-full max-w-md mx-auto">
+    {/* Decorative blur circles */}
+    <div className="absolute -top-8 -right-8 w-32 h-32 bg-primary/10 rounded-full blur-2xl" />
+    <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-primary/5 rounded-full blur-3xl" />
+    
+    {/* Main card */}
+    <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-xl border border-slate-200/80 dark:border-slate-700/50">
+      {/* Gradient accent bar */}
+      <div className="absolute top-0 left-8 right-8 h-1 bg-gradient-to-r from-primary/60 via-primary to-primary/60 rounded-b-full" />
       
-      {/* Decorative blurs */}
-      <div className="absolute top-20 left-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+      {/* Icon container */}
+      <div className="flex items-center justify-center mb-6">
+        <div className="relative">
+          <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl" />
+          <div className="relative w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-2xl flex items-center justify-center shadow-lg">
+            <Icon className="w-10 h-10 text-white" />
+          </div>
+        </div>
+      </div>
+      
+      {/* Decorative content lines */}
+      <div className="space-y-3">
+        <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded-full w-3/4 mx-auto" />
+        <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded-full w-full" />
+        <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded-full w-5/6 mx-auto" />
+        <div className="pt-2 flex justify-center gap-2">
+          <div className="h-8 w-20 bg-primary/20 rounded-md" />
+          <div className="h-8 w-20 bg-slate-100 dark:bg-slate-700 rounded-md" />
+        </div>
+      </div>
+      
+      {/* Floating badge */}
+      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-primary text-white text-sm font-medium rounded-full shadow-md">
+        {name}
+      </div>
+    </div>
+  </div>
+);
+
+interface ChallengeSectionProps {
+  item: FirmChallenge;
+}
+
+const ChallengeSection = ({ item }: ChallengeSectionProps) => {
+  const IconComponent = item.icon;
+  
+  return (
+    <section 
+      className={cn(
+        "py-20 md:py-28 relative overflow-hidden",
+        item.bgVariant === "gradient" 
+          ? "bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900"
+          : "bg-white dark:bg-slate-900"
+      )}
+    >
+      {/* Background decorative elements */}
+      {item.bgVariant === "gradient" && (
+        <>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        </>
+      )}
       
       <div className="container px-4 md:px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Challenges We Solve
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Every firm type faces unique obstacles. Here's how Gaapio helps you overcome them.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {firmChallenges.map((item, index) => {
-            const IconComponent = item.icon;
-            return (
-              <div 
-                key={item.id}
-                className={cn(
-                  "relative group rounded-2xl transition-all duration-300",
-                  "hover:-translate-y-2 hover:shadow-2xl",
-                  "shadow-lg hover:shadow-xl"
-                )}
-                style={{ animationDelay: `${0.1 * index}s` }}
-              >
-                {/* Card Background */}
-                <div className={cn(
-                  "absolute inset-0 rounded-2xl overflow-hidden",
-                  "bg-white dark:bg-slate-800",
-                  "border border-border/50"
-                )}>
-                  {/* Blue header band */}
-                  <div className="h-14 bg-gradient-to-r from-[#0099FF] to-[#33ADFF] dark:from-[#0088EE] dark:to-[#0099FF] flex items-center justify-center gap-2">
-                    <IconComponent className="h-5 w-5 text-white" />
-                    <h3 className="text-xl font-bold text-white">{item.name}</h3>
-                  </div>
-                </div>
-                
-                {/* Card Content */}
-                <div className="relative p-6 pt-20 flex flex-col h-full min-h-[420px]">
-                  {/* Subtitle */}
-                  <p className="text-center text-sm font-medium text-primary mb-4">
-                    {item.subtitle}
-                  </p>
-                  
-                  {/* The Challenge */}
-                  <div className="mb-6">
-                    <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-                      The Challenge
-                    </h4>
-                    <p className="text-foreground/90 text-sm leading-relaxed">
-                      {item.challenge}
-                    </p>
-                  </div>
-                  
-                  {/* How Gaapio Helps */}
-                  <div className="flex-grow mb-6">
-                    <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">
-                      How Gaapio Helps
-                    </h4>
-                    <ul className="space-y-2.5">
-                      {item.solutions.map((solution, solutionIndex) => (
-                        <li key={solutionIndex} className="flex items-start text-sm text-left">
-                          <Check className="h-4 w-4 mr-2.5 shrink-0 mt-0.5 text-primary" />
-                          <span className="text-foreground/90">{solution}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  {/* CTA Button */}
-                  <Button 
-                    variant="outline" 
-                    className={cn(
-                      "w-full mt-auto font-semibold transition-all",
-                      "hover:bg-primary hover:text-primary-foreground"
-                    )}
-                    asChild
-                  >
-                    <Link to="/firm-signup">Get Started</Link>
-                  </Button>
-                </div>
-              </div>
-            );
-          })}
+        <div className={cn(
+          "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center",
+          item.reversed && "lg:grid-flow-dense"
+        )}>
+          {/* Text Content */}
+          <div className={cn(
+            "text-center lg:text-left",
+            item.reversed && "lg:col-start-2"
+          )}>
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 mb-6">
+              <IconComponent className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">{item.name}</span>
+            </div>
+            
+            {/* Headline */}
+            <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-foreground mb-6 leading-tight">
+              {item.headline}
+            </h2>
+            
+            {/* The Challenge */}
+            <div className="mb-8">
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">
+                The Challenge
+              </h3>
+              <p className="text-lg text-foreground/80 leading-relaxed">
+                {item.challenge}
+              </p>
+            </div>
+            
+            {/* How Gaapio Helps */}
+            <div className="mb-8">
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-4">
+                How Gaapio Helps
+              </h3>
+              <ul className="space-y-3">
+                {item.solutions.map((solution, index) => (
+                  <li key={index} className="flex items-start gap-3 text-left">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center mt-0.5">
+                      <Check className="h-3 w-3 text-primary" />
+                    </div>
+                    <span className="text-foreground/90">{solution}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* CTA */}
+            <Button 
+              size="lg" 
+              className="font-semibold px-8"
+              asChild
+            >
+              <Link to="/firm-signup">Get Started</Link>
+            </Button>
+          </div>
+          
+          {/* Visual Side */}
+          <div className={cn(
+            "flex items-center justify-center",
+            item.reversed && "lg:col-start-1"
+          )}>
+            <VisualCard icon={IconComponent} name={item.name} />
+          </div>
         </div>
       </div>
     </section>
+  );
+};
+
+export function FirmTiersSection() {
+  return (
+    <>
+      {firmChallenges.map((item) => (
+        <ChallengeSection key={item.id} item={item} />
+      ))}
+    </>
   );
 }
