@@ -55,7 +55,7 @@ export const HeroSection = memo(function HeroSection({
                 {firstPart}
               </span>
               {" "}
-              <span className="text-primary">
+              <span className="text-white">
                 {secondPart}
               </span>
             </h1>
