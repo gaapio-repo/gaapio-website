@@ -9,9 +9,9 @@ interface FirmProductSelectorProps {
 }
 
 export function FirmProductSelector({ selectedProduct, onSelectProduct }: FirmProductSelectorProps) {
-  // Order: Audit Support, Technical Accounting, Full Firm, Custom
+  // Order: Small Firm, Technical Accounting, Full Firm, Custom
   const products = [
-    FIRM_STRIPE_PRODUCTS.auditSupport,
+    FIRM_STRIPE_PRODUCTS.smallFirm,
     FIRM_STRIPE_PRODUCTS.technicalAccounting,
     FIRM_STRIPE_PRODUCTS.fullFirm,
     FIRM_STRIPE_PRODUCTS.contact
