@@ -489,7 +489,7 @@ export function Header() {
           {/* Action Buttons - Right Aligned */}
           <div className="hidden md:flex items-center space-x-4">
               <Button variant="blue" asChild>
-              <Link to="/signup">Sign Up Now</Link>
+              <Link to="/signup-select">Sign Up Now</Link>
               </Button>
               <a 
                 href="https://app.gaapio.com/"
@@ -667,7 +667,7 @@ export function Header() {
               <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                 <div className="mt-3 px-3 space-y-3">
                   <Button variant="blue" asChild className="w-full">
-                    <Link to="/signup" onClick={closeMenu}>Sign Up Now</Link>
+                    <Link to="/signup-select" onClick={closeMenu}>Sign Up Now</Link>
                   </Button>
                   <a
                     href="https://app.gaapio.com/"
