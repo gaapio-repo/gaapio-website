@@ -18,8 +18,9 @@ export const SOXHeroSection = memo(function SOXHeroSection() {
             <span className="text-sm font-semibold text-green-600 dark:text-green-400">Coming Soon</span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up text-gray-900 dark:text-white" style={{ animationDelay: "100ms" }}>
-            SOX Controls Management
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up" style={{ animationDelay: "100ms" }}>
+            <span className="text-gray-900 dark:text-white">SOX Controls </span>
+            <span className="text-white">Management</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-800 dark:text-white/90 mb-10 animate-fade-up" style={{ animationDelay: "200ms" }}>
