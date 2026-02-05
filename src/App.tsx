@@ -24,6 +24,8 @@ import Careers from "./pages/Careers";
 import Resources from "./pages/Resources";
 import FAQ from "./pages/FAQ";
 import SignUp from "./pages/SignUp";
+import SignupSelect from "./pages/SignupSelect";
+import FirmSignup from "./pages/FirmSignup";
 import RequestDemo from "./pages/RequestDemo";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
@@ -86,6 +88,8 @@ function App() {
             <Route path="/resources" element={<Resources />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup-select" element={<SignupSelect />} />
+            <Route path="/firm-signup" element={<FirmSignup />} />
             <Route path="/request-demo" element={<RequestDemo />} />
             <Route path="/login" element={<Login />} />
             <Route path="/one-pager" element={<OnePager />} />
