@@ -1,82 +1,121 @@
-import { memo } from "react";
-import { Clock, Shield, Target, Zap, Users, CheckCircle } from "lucide-react";
+import { memo, useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export const DisclosureBenefitsSection = memo(function DisclosureBenefitsSection() {
-  const benefits = [
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const steps = [
     {
-      icon: Clock,
-      title: "Save Time",
-      description: "Generate comprehensive footnote disclosures in minutes, not hours"
+      number: 1,
+      title: "Input Details",
+      description: "Enter accounting area and key activity information",
+      delay: 0
     },
     {
-      icon: Shield,
-      title: "Ensure Compliance",
-      description: "Stay current with ASC requirements and audit standards"
+      number: 2,
+      title: "AI Generation",
+      description: "Generate compliant footnote content in seconds",
+      delay: 150
     },
     {
-      icon: Target,
-      title: "Improve Accuracy",
-      description: "Reduce errors with AI-powered analysis and verification"
+      number: 3,
+      title: "Review & Edit",
+      description: "Refine and customize your disclosures",
+      delay: 300
     },
     {
-      icon: Zap,
-      title: "Boost Efficiency",
-      description: "Streamline your disclosure process with automated workflows"
-    },
-    {
-      icon: Users,
-      title: "Team Collaboration",
-      description: "Enable seamless review and approval processes across your team"
-    },
-    {
-      icon: CheckCircle,
-      title: "Audit Ready",
-      description: "Generate audit-ready documentation with complete traceability"
+      number: 4,
+      title: "Export Ready",
+      description: "Download audit-ready documentation",
+      delay: 450
     }
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-800/60 dark:via-slate-800/60 dark:to-slate-800/60">
-      <div className="container px-4 md:px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Key Benefits</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Transform your footnote disclosure process with AI-powered automation
+    <section 
+      ref={sectionRef}
+      className="py-24 md:py-32 bg-white dark:bg-slate-900"
+    >
+      <div className="container px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto">
+        {/* Section header */}
+        <div className="text-center mb-16 md:mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+            How It Works
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            From input to audit-ready disclosures in four simple steps
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {benefits.map((benefit, index) => {
-            const Icon = benefit.icon;
-            return (
-              <div
-                key={index}
-                className="text-center p-8 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-md hover:shadow-lg transition-all duration-500 h-full flex flex-col min-h-[280px]"
+        {/* Horizontal timeline */}
+        <div className="relative">
+          {/* Connecting line - visible on larger screens */}
+          <div className="hidden lg:block absolute top-8 left-[12%] right-[12%] h-[2px] bg-gray-200 dark:bg-gray-700" />
+          
+          {/* Progress line overlay (blue) */}
+          <div 
+            className={cn(
+              "hidden lg:block absolute top-8 left-[12%] h-[2px] bg-[#0099FF] transition-all duration-1000 ease-out",
+              isVisible ? "right-[12%]" : "right-[88%]"
+            )}
+            style={{ transitionDelay: "300ms" }}
+          />
+
+          {/* Steps container */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+            {steps.map((step) => (
+              <div 
+                key={step.number}
+                className={cn(
+                  "flex flex-col items-center text-center transition-all duration-500",
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                )}
+                style={{ 
+                  transitionDelay: `${step.delay}ms`,
+                  transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
+                }}
               >
-                {/* Icon Circle */}
-                <div className="flex justify-center mb-6">
-                  <Icon className="h-8 w-8 text-[#2B70F7]" />
+                {/* Number badge */}
+                <div className="relative z-10 w-16 h-16 rounded-full bg-white dark:bg-slate-800 border-2 border-[#0099FF] flex items-center justify-center mb-6 shadow-sm">
+                  <span className="text-xl font-bold text-[#0099FF]">
+                    {step.number}
+                  </span>
                 </div>
-                
-                {/* Content */}
-                <h3 className="text-lg font-bold mb-4">
-                  {benefit.title}
+
+                {/* Title */}
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  {step.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed flex-grow">
-                  {benefit.description}
+
+                {/* Description */}
+                <p className="text-gray-500 dark:text-gray-400 text-[15px] leading-relaxed max-w-[220px]">
+                  {step.description}
                 </p>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Bottom highlight */}
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-950 px-8 py-4 rounded-full border border-blue-200 dark:border-blue-800">
-            <CheckCircle className="w-6 h-6 text-[#2B70F7]" />
-            <span className="text-lg font-medium text-[#2B70F7]">
-              Compliance-ready footnote disclosures in minutes
-            </span>
+            ))}
           </div>
         </div>
       </div>
