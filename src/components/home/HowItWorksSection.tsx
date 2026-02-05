@@ -104,47 +104,52 @@ export function HowItWorksSection() {
             <div 
               key={step.number}
               className={cn(
-                "group flex flex-col bg-white dark:bg-[#1a2234] rounded-[18px] p-7 relative overflow-hidden",
+                "group flex flex-col rounded-[18px] py-9 px-7 relative overflow-hidden",
                 "transition-all duration-300 ease-out",
-                "shadow-[0_2px_8px_rgba(0,0,0,0.04),0_4px_16px_rgba(0,0,0,0.06)]",
+                "shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.04)]",
                 "dark:shadow-[0_4px_12px_rgba(0,0,0,0.3)]",
-                "hover:shadow-[0_8px_24px_rgba(0,153,255,0.08),0_16px_32px_rgba(0,0,0,0.08)]",
+                "hover:shadow-[0_6px_20px_rgba(0,0,0,0.08),0_12px_28px_rgba(0,153,255,0.06)]",
                 "dark:hover:shadow-[0_8px_24px_rgba(0,153,255,0.15)]",
-                "hover:-translate-y-1",
-                "hover:border-[#0099FF]/30 border border-transparent",
+                "hover:-translate-y-[3px]",
+                "border border-gray-100/80 hover:border-[#0099FF]/25",
                 "dark:border-white/5 dark:hover:border-[#0099FF]/40",
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
               )}
               style={{ 
                 transitionDelay: `${step.delay}ms`,
-                transitionDuration: "600ms",
-                transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
+                transitionDuration: "500ms",
+                transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+                backgroundColor: '#FFFFFF',
               }}
             >
+              {/* Dark mode background */}
+              <div className="absolute inset-0 bg-[#1a2234] opacity-0 dark:opacity-100 -z-10" />
+              
               {/* Blue accent line at top */}
-              <div className="absolute top-0 left-0 right-0 h-[5px] bg-[#0099FF] rounded-t-[18px]" />
+              <div className="absolute top-0 left-0 right-0 h-[4px] bg-[#0099FF] rounded-t-[18px]" />
               
               {/* Background step number - decorative */}
               <div 
-                className="absolute right-3 top-6 text-[72px] font-bold leading-none select-none pointer-events-none"
+                className="absolute right-3 top-8 text-[72px] font-bold leading-none select-none pointer-events-none"
                 style={{ 
-                  color: 'rgba(0, 153, 255, 0.07)',
+                  color: 'rgba(0, 153, 255, 0.06)',
                 }}
               >
-                <span className="dark:text-white/[0.04]">{step.number}</span>
+                <span className="dark:hidden">{step.number}</span>
+                <span className="hidden dark:inline text-white/[0.04]">{step.number}</span>
               </div>
               
               {/* Title */}
-              <h3 className="text-lg font-semibold text-[#0099FF] mb-4 mt-2 relative z-10 group-hover:text-[#007acc] transition-colors duration-300">
+              <h3 className="text-[17px] font-semibold text-[#0099FF] mb-5 mt-1 relative z-10 group-hover:text-[#0088EE] transition-colors duration-300">
                 {step.title}
               </h3>
               
               {/* Bullets */}
-              <ul className="text-left space-y-3 relative z-10 flex-grow">
+              <ul className="text-left space-y-3.5 relative z-10 flex-grow">
                 {step.bullets.map((bullet, idx) => (
                   <li key={idx} className="flex items-start">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#0099FF]/60 mt-2 mr-2.5 flex-shrink-0" />
-                    <span className="text-gray-600 dark:text-gray-400 text-[14px] leading-relaxed font-normal">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#0099FF]/50 mt-[7px] mr-2.5 flex-shrink-0" />
+                    <span className="text-gray-700 dark:text-gray-400 text-[14px] leading-[1.7] font-normal">
                       {bullet}
                     </span>
                   </li>
