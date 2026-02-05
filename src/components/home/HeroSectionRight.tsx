@@ -2,8 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowDownCircle } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatedMemoRight } from "./AnimatedMemoRight";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { AnimatedMemo } from "./AnimatedMemo";
 import { GradientBackground } from "./GradientBackground";
 
 interface HeroSectionProps {
@@ -15,11 +14,6 @@ export const HeroSection = memo(function HeroSection({
 }: HeroSectionProps) {
   const [isClient, setIsClient] = useState(false);
   const [enableSelfSignup, setEnableSelfSignup] = useState(true);
-  const isLargeScreen = useMediaQuery('lg');
-  
-  useEffect(() => {
-    console.log('Hero: isLargeScreen =', isLargeScreen, 'window.innerWidth =', window.innerWidth);
-  }, [isLargeScreen]);
   
   useEffect(() => {
     setIsClient(true);
@@ -47,9 +41,9 @@ export const HeroSection = memo(function HeroSection({
     };
   }, [enableSelfSignup]);
   
-  // Scroll to Product Highlights section when arrow is clicked
+  // Scroll to next section when arrow is clicked
   const scrollToNextSection = () => {
-    const nextSection = document.getElementById('product-highlights');
+    const nextSection = document.getElementById('how-it-works');
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: 'smooth' });
     }
@@ -80,15 +74,15 @@ export const HeroSection = memo(function HeroSection({
           </div>
         </div>
         
-        {/* Constrained animated memo display with better mobile spacing */}
+        {/* Animated memo display - using the same component as homepage */}
         {isClient && (
           <div className="hero-memo-container mb-24 md:mb-16">
-            <AnimatedMemoRight />
+            <AnimatedMemo />
           </div>
         )}
       </div>
       
-      {/* Down arrow for scrolling to next section - now with proper spacing */}
+      {/* Down arrow for scrolling to next section */}
       <div 
         className="animate-fade-up absolute bottom-8 md:bottom-6" 
         style={{ animationDelay: "400ms" }} 
