@@ -1,90 +1,250 @@
 
+# Firm Page Enhancements & Signup Split Implementation Plan
 
-# Fix PageEditor to Show Actual SEO Data & Confirm SEO Works
+## Overview
 
-## The Problem
-
-The PageEditor in the admin portal is showing placeholder data like "Home Page" and "Main landing page" instead of the actual SEO values from the React pages. This is because:
-
-1. **The PageEditor is a non-functional mockup** - It doesn't read from or write to the actual page files
-2. **The actual pages already have good SEO** - The React components have proper `<SEO />` tags with optimized titles and descriptions
-
-## Does the SEO Actually Work?
-
-**Yes, the SEO on the live website works correctly.** Here's why:
-
-The actual page files (like `Index.tsx`, `AccountingMemos.tsx`, etc.) use the `<SEO />` component which uses `react-helmet-async` to inject meta tags into the HTML `<head>`. These are the real SEO values that search engines see.
-
-For example, the **Home Page** (`Index.tsx`) already has:
-- **Title**: "Gaapio - AI-Powered Technical Accounting Platform"
-- **Description**: "AI-powered platform built by CPAs for CPAs. Create technical accounting memos, footnote disclosures, contract analysis, and compliance documentation faster and more accurately."
-- **Keywords**: technical accounting software, AI accounting memos, CPA tools, ASC 606, ASC 842, footnote disclosures
-- **Canonical URL**: /
-- **Structured Data**: SoftwareApplicationSchema
-
-## Solution
-
-To make the admin panel useful and accurate, I will update the `websitePageCategories` array in `Admin.tsx` to display the **actual SEO metadata** from each page, and update the PageEditor to show this real data (read-only view of current SEO).
+This plan addresses two major requests:
+1. Add three tier-focused sections to the Accounting Firm page under "Why Firms Run on Gaapio"
+2. Create a Company/Firm split on the signup flow, with a new firm-specific pricing page
 
 ---
 
-## Implementation Plan
+## Part 1: Firm Page - Three Tier Sections
 
-### Step 1: Update Admin.tsx with Actual SEO Data
+### Current State
+The `/solutions/firm` page has a "Why Firms Run on Gaapio" section with 2 generic benefit cards. The user wants to highlight the three distinct tiers of service targeted at different firm types.
 
-Add accurate descriptions and SEO status to the `websitePageCategories` array so admins can see what SEO each page actually has.
+### Proposed Sections
 
-**Current (placeholder)**:
-```
-{ title: "Home Page", path: "/", description: "Main landing page" }
-```
+I will add three new cards/sections below "Why Firms Run on Gaapio" that explain what each tier is designed for:
 
-**Updated (accurate)**:
-```
-{ 
-  title: "Home Page", 
-  path: "/", 
-  description: "AI-powered platform built by CPAs. Create technical accounting memos, footnote disclosures, contract analysis...",
-  seoTitle: "Gaapio - AI-Powered Technical Accounting Platform",
-  seoStatus: "complete"
-}
-```
+| Tier | Target Audience | Key Features | Price |
+|------|-----------------|--------------|-------|
+| **Audit Support** | Firms with pre-audit stage clients | Contract Analysis, Lease Accounting Export, Internal GPT | $1,500/yr |
+| **Technical Accounting** | Firms doing technical accounting work | Technical Accounting Memos, Research Tools, + all Audit Support features | $3,000/yr |
+| **Full Firm** | Firms serving public companies | SOX Compliance, Disclosure Generation, + all lower-tier features | $3,600/yr |
 
-### Step 2: Update PageEditor to Show Real SEO
-
-Modify the PageEditor to display the actual SEO values from a centralized config, making it a useful reference for admins.
-
-I'll create a `seoConfig.ts` file that maps page paths to their actual SEO data, then have the PageEditor read from this config.
-
-### Step 3: Pages to Update with Improved SEO
-
-After reviewing all pages, most already have good SEO. However, I'll enhance descriptions for the pages in the admin listing to be more informative:
-
-| Page | Current Admin Description | New Description (from actual SEO) |
-|------|--------------------------|-----------------------------------|
-| Home | "Main landing page" | "AI-powered platform by CPAs for CPAs - memos, disclosures, compliance" |
-| Accounting Memos | "AI-powered technical accounting memos" | "Create audit-ready ASC 606, ASC 842 memos in minutes with version history" |
-| Footnote Disclosures | "AI-generated footnote disclosures" | "AI-trained benchmarking and requirement checklists for complete disclosures" |
-| Contract Analysis | "AI contract analysis tool" | "Automated revenue recognition triggers and embedded lease identification" |
-| Guidance Updates | "Real-time accounting guidance updates" | "Daily monitoring of FASB, SEC, Big 4 guidance with impact summaries" |
-| ResearchGPT | "AI-powered accounting research" | "Get answers with citations to ASC, SEC guidance, and Big 4 resources" |
-| SOX Controls | "SOX compliance documentation" | "AI-powered SOX compliance documentation and control management" |
+### Design Approach
+- Create a new section component called `FirmTiersSection`
+- Use a 3-column card layout (responsive to single column on mobile)
+- Each card shows: Tier name, target description, feature list, "Sign Up" CTA
+- Place this section after the current "Why Firms Run on Gaapio" section
 
 ---
+
+## Part 2: Signup Split - Company vs Firm
+
+### Current Flow
+- `/signup` page shows 4 pricing tiers (Research, Core, Pro, Enterprise)
+- All CTAs go directly to this page
+
+### New Flow
+
+```text
+User clicks "Sign Up Now" anywhere on site
+          ↓
+    /signup-select (NEW)
+    "Choose Your Account Type"
+          ↓
+    ┌─────────────────┬─────────────────┐
+    │    Company      │    CPA Firm     │
+    │  (for internal  │  (for serving   │
+    │   accounting)   │   clients)      │
+    └─────────────────┴─────────────────┘
+          ↓                   ↓
+      /signup             /firm-signup (UPDATED)
+   (existing page)      (new pricing flow)
+```
+
+### Implementation Details
+
+#### 1. New Signup Selection Page (`/signup-select`)
+- Reuse the existing `ClientTypeSelector` component 
+- Two cards: "Company" and "CPA Firm"
+- Company → redirects to `/signup`
+- CPA Firm → redirects to `/firm-signup`
+
+#### 2. Updated Firm Signup Page (`/firm-signup`)
+The current FirmSignup page is a contact form. I will transform it into a full pricing flow mirroring the company signup:
+
+**Firm Products (from Stripe):**
+
+| Plan | Price | Price ID | Features |
+|------|-------|----------|----------|
+| **Audit Support** | $1,500/year | `price_1SxXUKErMdi9YyI1hz4kNVNp` | Internal GPT, Contract Analysis, Lease Accounting Export |
+| **Technical Accounting** | $3,000/year | `price_1SxXW8ErMdi9YyI17r8TSIA8` | Technical Accounting Memos, Accounting Research tools, All Tier 1 features |
+| **Full Firm** | $3,600/year | `price_1SxXYzErMdi9YyI1aE9R9wyQ` | SOX compliance, Footnote Discloser, Audit suite, All lower-tier features |
+| **Custom** | Contact Sales | N/A | Custom pricing, volume discounts, dedicated support |
+
+#### 3. Update CTAs Across Site
+- Change "Sign Up Now" links to point to `/signup-select` instead of `/signup`
+- Affected pages: Homepage, Firm solutions page, other product pages
+
+---
+
+## Files to Create
+
+| File | Purpose |
+|------|---------|
+| `src/pages/SignupSelect.tsx` | New account type selection page |
+| `src/components/solutions/FirmTiersSection.tsx` | New section for firm page showing 3 tiers |
+| `src/components/signup/FirmProductSelector.tsx` | Firm-specific pricing cards (mirroring ProductSelector) |
+| `src/components/signup/FirmSignupInfoForm.tsx` | Firm-specific info form with company label |
 
 ## Files to Modify
 
 | File | Changes |
 |------|---------|
-| `src/pages/Admin.tsx` | Update `websitePageCategories` with accurate descriptions from actual SEO |
-| `src/components/admin/PageEditor.tsx` | Update to load actual SEO data from config instead of placeholder data |
-| `src/config/seoConfig.ts` (new) | Create centralized SEO config that mirrors actual page SEO |
+| `src/App.tsx` | Add route for `/signup-select` |
+| `src/pages/solutions/AccountingFirm.tsx` | Add FirmTiersSection component, update Sign Up CTA |
+| `src/pages/FirmSignup.tsx` | Replace contact form with full pricing flow |
+| `src/components/home/HeroSection.tsx` | Update Sign Up CTA link |
+| `src/components/home/FinalCtaSection.tsx` | Update Sign Up CTA link |
 
 ---
 
-## Technical Notes
+## Technical Details
 
-1. **The SEO component works correctly** - Meta tags are injected via react-helmet-async and are visible in page source
-2. **The PageEditor cannot edit React files** - This would require a backend CMS, so it will remain read-only but accurate
-3. **Future enhancement** - Could store SEO overrides in database and have pages check for overrides before using hardcoded values
+### Stripe Product Configuration
 
+```typescript
+// For FirmProductSelector.tsx
+export const FIRM_STRIPE_PRODUCTS = {
+  auditSupport: {
+    id: "auditSupport",
+    name: "Audit Support",
+    price: 1500,
+    priceId: "price_1SxXUKErMdi9YyI1hz4kNVNp",
+    productId: "prod_TvOGNzrXBhYqUD",
+    description: "For firms with pre-audit stage clients",
+    features: [
+      "Internal GPT for your firm",
+      "Contract Analysis",
+      "Lease Accounting Export",
+      "Low-volume focus (1-2 leases per client)"
+    ],
+    popular: false
+  },
+  technicalAccounting: {
+    id: "technicalAccounting",
+    name: "Technical Accounting",
+    price: 3000,
+    priceId: "price_1SxXW8ErMdi9YyI17r8TSIA8",
+    productId: "prod_TvOIdC5x1VGG8R",
+    description: "For firms doing technical accounting work",
+    features: [
+      "Technical Accounting Memos",
+      "Accounting Research tools (research, analysis, memo writer)",
+      "All Audit Support features included"
+    ],
+    popular: true
+  },
+  fullFirm: {
+    id: "fullFirm",
+    name: "Full Firm",
+    price: 3600,
+    priceId: "price_1SxXYzErMdi9YyI1aE9R9wyQ",
+    productId: "prod_TvOLPib96fbCV7",
+    description: "For firms serving public companies",
+    features: [
+      "SOX Compliance module",
+      "Footnote Disclosure generation & benchmarking",
+      "Audit suite (memo auditor, lease auditor)",
+      "All lower-tier features included"
+    ],
+    popular: false
+  },
+  contact: {
+    id: "contact",
+    name: "Custom",
+    price: null,
+    priceId: null,
+    productId: null,
+    description: "Custom pricing for larger firms",
+    features: [
+      "Custom user limits",
+      "Volume discounts", 
+      "Dedicated support",
+      "Custom integrations"
+    ],
+    popular: false
+  }
+};
+```
+
+### Routing Updates
+
+```typescript
+// In App.tsx
+import SignupSelect from "./pages/SignupSelect";
+
+// Add route
+<Route path="/signup-select" element={<SignupSelect />} />
+```
+
+### CTA Link Updates
+
+All "Sign Up Now" CTAs that currently point to `/signup` will be updated to `/signup-select`:
+- HeroSection.tsx
+- FinalCtaSection.tsx
+- AccountingFirm.tsx
+- PrivateCompany.tsx
+- PublicCompany.tsx
+
+---
+
+## User Flow Diagram
+
+```text
+                    ┌─────────────────────────┐
+                    │   Any "Sign Up" CTA     │
+                    └───────────┬─────────────┘
+                                │
+                                ▼
+                    ┌─────────────────────────┐
+                    │    /signup-select       │
+                    │  "Choose Account Type"  │
+                    └───────────┬─────────────┘
+                                │
+              ┌─────────────────┴─────────────────┐
+              │                                   │
+              ▼                                   ▼
+    ┌─────────────────┐               ┌─────────────────┐
+    │     Company     │               │    CPA Firm     │
+    └────────┬────────┘               └────────┬────────┘
+             │                                  │
+             ▼                                  ▼
+    ┌─────────────────┐               ┌─────────────────┐
+    │    /signup      │               │  /firm-signup   │
+    │   4 tiers:      │               │   4 tiers:      │
+    │   Research      │               │   Audit Support │
+    │   Core          │               │   Technical     │
+    │   Pro           │               │   Full Firm     │
+    │   Enterprise    │               │   Custom        │
+    └────────┬────────┘               └────────┬────────┘
+             │                                  │
+             ▼                                  ▼
+    ┌─────────────────┐               ┌─────────────────┐
+    │  Info Form +    │               │  Info Form +    │
+    │  User Count     │               │  User Count     │
+    └────────┬────────┘               └────────┬────────┘
+             │                                  │
+             └──────────────┬───────────────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │   Stripe Checkout   │
+                 │   (opens new tab)   │
+                 └─────────────────────┘
+```
+
+---
+
+## Summary
+
+This implementation:
+1. Adds a clear three-tier section to the Firm page explaining who each tier is for
+2. Creates a "split" signup flow where users first choose Company vs Firm
+3. Gives firms a dedicated pricing page with firm-specific products
+4. Maintains consistency with the existing company signup flow
+5. Uses the actual Stripe products/prices the user created
