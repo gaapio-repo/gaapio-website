@@ -10,7 +10,7 @@ const steps = [
     title: "Research",
     delay: 0,
     bullets: [
-      "Research guidance with our Internal GPT",
+      "Research guidance quickly",
       "Upload and analyze contracts for key terms",
       "Access authoritative sources and Big 4 resources"
     ]
