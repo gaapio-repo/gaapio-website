@@ -23,8 +23,9 @@ export const DisclosureHeroSection = memo(function DisclosureHeroSection({
         
         {/* Text content centered */}
         <div className="max-w-4xl mx-auto mb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up text-gray-900 dark:text-white">
-            {title}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up">
+            <span className="text-gray-900 dark:text-white">Comprehensive </span>
+            <span className="text-white">Footnote Disclosures</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-800 dark:text-white/90 mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
             {subtitle}
