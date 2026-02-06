@@ -141,19 +141,19 @@ export const ContractToSpreadsheetSection = memo(function ContractToSpreadsheetS
         </div>
 
         {/* Feature grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10 max-w-5xl mx-auto">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <div
                 key={index}
                 className={cn(
-                  "bg-card dark:bg-[hsl(220_25%_14%)] rounded-xl p-6 border border-border dark:border-[hsl(220_20%_20%)] hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500",
+                  "text-center transition-all duration-500",
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                 )}
                 style={{ transitionDelay: `${600 + index * 80}ms` }}
               >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 mx-auto">
                   <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-sm font-semibold text-foreground mb-1.5">
