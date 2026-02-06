@@ -7,22 +7,22 @@ const features = [
   {
     icon: BookOpen,
     title: "GAAP-Aligned Templates",
-    description: "Templates built around standards like ASC 842 and ASC 606, so analysis matches your technical accounting process.",
+    description: "Templates built around ASC 842 and ASC 606, so analysis matches your technical accounting process.",
   },
   {
     icon: GitBranch,
     title: "Issue-Centric Workflows",
-    description: "Parent steps identify items like lease components or performance obligations, and child steps analyze each one.",
+    description: "Parent steps identify items like lease components; child steps analyze each one.",
   },
   {
     icon: HelpCircle,
     title: "Clear Questions at Each Step",
-    description: "Each analysis item has a specific question so reviewers know exactly what to decide and document.",
+    description: "Each item has a specific question so reviewers know exactly what to decide.",
   },
   {
     icon: ListChecks,
     title: "Structured Response Types",
-    description: "Steps support text, yes/no, amounts, dates, and picklists to capture the right type of information at each point.",
+    description: "Text, yes/no, amounts, dates, and picklists capture the right information at each point.",
   },
   {
     icon: ShieldCheck,
@@ -43,60 +43,137 @@ export const AccountingDrivenSection = memo(function AccountingDrivenSection() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => { if (sectionRef.current) observer.unobserve(sectionRef.current); };
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 bg-[#F8FBFF] dark:bg-[#1A1F2B]">
-      <ResponsiveContainer>
-        <div className="text-center mb-16">
-          <p className={cn(
-            "text-sm font-semibold uppercase tracking-wider text-[#0099FF] mb-3 transition-all duration-700",
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          )}>
-            Accounting-Driven Structure
-          </p>
-          <h2 className={cn(
-            "text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white transition-all duration-700",
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          )} style={{ transitionDelay: "100ms" }}>
-            Analysis that follows how you think about accounting
-          </h2>
-          <p className={cn(
-            "text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto transition-all duration-700",
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          )} style={{ transitionDelay: "200ms" }}>
-            Structured templates, GAAP-aligned workflows, and repeatable extraction from contracts to spreadsheets.
-          </p>
-        </div>
+    <section ref={sectionRef} className="py-24 md:py-32 bg-background relative overflow-hidden">
+      {/* Subtle gradient accent */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/[0.03] to-transparent pointer-events-none" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 max-w-5xl mx-auto">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <div
-                key={index}
-                className={cn(
-                  "flex flex-col items-center text-center transition-all duration-700",
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                )}
-                style={{ transitionDelay: `${300 + index * 100}ms` }}
-              >
-                <div className="w-14 h-14 rounded-full bg-[#0099FF]/10 flex items-center justify-center mb-5">
-                  <Icon className="w-6 h-6 text-[#0099FF]" strokeWidth={1.5} />
+      <ResponsiveContainer>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          {/* Left: Text content */}
+          <div className={cn(
+            "transition-all duration-700",
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          )}>
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">
+              Accounting-Driven Structure
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-5 text-foreground !leading-tight">
+              Analysis that follows how you think about accounting
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-10">
+              GAAP-aligned templates with issue-centric workflows, so every contract follows the same rigorous path from identification to conclusion.
+            </p>
+
+            <div className="space-y-6">
+              {features.map((feature, index) => {
+                const Icon = feature.icon;
+                return (
+                  <div
+                    key={index}
+                    className={cn(
+                      "flex gap-4 transition-all duration-600",
+                      isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-6"
+                    )}
+                    style={{ transitionDelay: `${200 + index * 100}ms` }}
+                  >
+                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mt-0.5">
+                      <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <h3 className="text-[15px] font-semibold text-foreground mb-0.5">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right: Product screenshot mockup */}
+          <div className={cn(
+            "relative transition-all duration-700",
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+          )} style={{ transitionDelay: "300ms" }}>
+            {/* Glow behind the screenshot */}
+            <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-3xl blur-2xl" />
+            
+            {/* Screenshot container */}
+            <div className="relative bg-card rounded-2xl border border-border shadow-2xl overflow-hidden">
+              {/* Browser chrome */}
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/50">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-400/60" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
+                  <div className="w-3 h-3 rounded-full bg-green-400/60" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 text-[15px] leading-relaxed max-w-[280px]">
-                  {feature.description}
-                </p>
+                <div className="flex-1 mx-4">
+                  <div className="h-6 bg-muted rounded-md flex items-center px-3">
+                    <span className="text-[11px] text-muted-foreground">app.gaapio.com/contracts/analysis</span>
+                  </div>
+                </div>
               </div>
-            );
-          })}
+              
+              {/* Mock UI - Analysis checklist */}
+              <div className="p-6 space-y-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <h4 className="text-sm font-semibold text-foreground">ASC 842 – Lease Analysis</h4>
+                    <p className="text-xs text-muted-foreground">Office Lease Agreement – 123 Main St</p>
+                  </div>
+                  <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-primary/10 text-primary">In Progress</span>
+                </div>
+                
+                {/* Steps */}
+                {[
+                  { step: "1", q: "Does the arrangement contain a lease?", status: "done", answer: "Yes" },
+                  { step: "2", q: "Identify lease components", status: "done", answer: "2 components" },
+                  { step: "2a", q: "Component 1: Office space classification", status: "active", answer: "" },
+                  { step: "2b", q: "Component 2: Equipment classification", status: "pending", answer: "" },
+                  { step: "3", q: "Determine lease term", status: "pending", answer: "" },
+                ].map((item, i) => (
+                  <div key={i} className={cn(
+                    "flex items-center gap-3 p-3 rounded-lg border transition-colors",
+                    item.status === "active" 
+                      ? "border-primary/30 bg-primary/5" 
+                      : item.status === "done"
+                        ? "border-border bg-muted/30"
+                        : "border-border/50 bg-transparent"
+                  )}>
+                    <div className={cn(
+                      "w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0",
+                      item.status === "done" 
+                        ? "bg-green-500/15 text-green-600 dark:text-green-400" 
+                        : item.status === "active"
+                          ? "bg-primary/15 text-primary"
+                          : "bg-muted text-muted-foreground"
+                    )}>
+                      {item.status === "done" ? "✓" : item.step}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className={cn(
+                        "text-xs font-medium truncate",
+                        item.status === "pending" ? "text-muted-foreground" : "text-foreground"
+                      )}>{item.q}</p>
+                    </div>
+                    {item.answer && (
+                      <span className="text-xs text-muted-foreground flex-shrink-0">{item.answer}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </ResponsiveContainer>
     </section>
