@@ -1,7 +1,7 @@
 import { memo, useRef, useState, useEffect } from "react";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { cn } from "@/lib/utils";
-import { Settings, GitMerge, PenLine, ListFilter, Building2, ChevronRight } from "lucide-react";
+import { Settings, GitMerge, PenLine, ListFilter, Building2 } from "lucide-react";
 
 const capabilities = [
   {
@@ -31,12 +31,10 @@ const capabilities = [
   },
 ];
 
-const workflowSteps = [
-  { label: "Select Template", sub: "ASC 842 · Lease Analysis" },
-  { label: "Configure Steps", sub: "12 steps · 3 parent groups" },
-  { label: "Set Response Types", sub: "Picklists, dates, amounts" },
-  { label: "Assign to Contract", sub: "Office Lease – 123 Main St" },
-  { label: "Run Analysis", sub: "AI + reviewer workflow" },
+const templateCards = [
+  { name: "ASC 842 – Lease Analysis", steps: 12, groups: 3, status: "Published" },
+  { name: "ASC 606 – Revenue Recognition", steps: 18, groups: 5, status: "Published" },
+  { name: "ASC 805 – Business Combinations", steps: 9, groups: 2, status: "Draft" },
 ];
 
 export const FlexibleTemplatesSection = memo(function FlexibleTemplatesSection() {
@@ -58,119 +56,142 @@ export const FlexibleTemplatesSection = memo(function FlexibleTemplatesSection()
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(210 40% 97%) 0%, hsl(210 40% 98.5%) 100%)" }}>
-      {/* Dark mode override */}
-      <div className="absolute inset-0 bg-[hsl(220_20%_12%)] dark:block hidden" />
-      
+    <section ref={sectionRef} className="py-24 md:py-32 relative overflow-hidden bg-muted/30">
       <ResponsiveContainer className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left: Text content */}
-          <div className={cn(
-            "transition-all duration-700",
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          )}>
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">
-              Flexible & Customizable
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-5 text-foreground !leading-tight">
-              Templates that fit your process and policies
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-10">
-              Adapt templates to your contract types, accounting topics, and reporting needs. Built to be customized for how your team works.
-            </p>
+        {/* Centered header */}
+        <div className={cn(
+          "text-center max-w-2xl mx-auto mb-16 transition-all duration-700",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+        )}>
+          <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">
+            Flexible & Customizable
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-5 text-foreground !leading-tight">
+            Templates that fit your process and policies
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            Adapt templates to your contract types, accounting topics, and reporting needs. Built to be customized for how your team works.
+          </p>
+        </div>
 
-            <div className="space-y-5">
-              {capabilities.map((cap, index) => {
-                const Icon = cap.icon;
-                return (
-                  <div
-                    key={index}
-                    className={cn(
-                      "flex gap-4 transition-all duration-600",
-                      isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-6"
-                    )}
-                    style={{ transitionDelay: `${200 + index * 100}ms` }}
-                  >
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mt-0.5">
-                      <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
-                    </div>
-                    <div>
-                      <h3 className="text-[15px] font-semibold text-foreground mb-0.5">
-                        {cap.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {cap.description}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Right: Vertical workflow diagram */}
-          <div className={cn(
-            "relative transition-all duration-700",
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-          )} style={{ transitionDelay: "300ms" }}>
+        {/* Template library mockup cards */}
+        <div className={cn(
+          "mb-16 transition-all duration-700",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        )} style={{ transitionDelay: "200ms" }}>
+          <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-br from-primary/8 via-primary/4 to-transparent rounded-3xl blur-2xl" />
             
-            <div className="relative bg-card rounded-2xl border border-border shadow-2xl p-8">
-              <div className="flex items-center gap-2 mb-8">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Settings className="w-4 h-4 text-primary" />
+            <div className="relative bg-card rounded-2xl border border-border shadow-2xl overflow-hidden">
+              {/* Toolbar */}
+              <div className="flex items-center justify-between px-6 py-3.5 border-b border-border bg-muted/40">
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Settings className="w-3.5 h-3.5 text-primary" />
+                  </div>
+                  <div>
+                    <span className="text-sm font-semibold text-foreground">Template Library</span>
+                    <span className="text-xs text-muted-foreground ml-2">3 templates</span>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-foreground">Template Workflow</h4>
-                  <p className="text-xs text-muted-foreground">From setup to analysis</p>
+                <div className="hidden sm:flex items-center gap-2">
+                  <span className="text-[11px] px-2.5 py-1 rounded-md border border-border text-muted-foreground bg-background">+ New Template</span>
                 </div>
               </div>
 
-              <div className="relative">
-                {/* Vertical line */}
-                <div className="absolute left-[19px] top-4 bottom-4 w-px bg-gradient-to-b from-primary/40 via-primary/20 to-border" />
-
-                <div className="space-y-0">
-                  {workflowSteps.map((step, i) => (
-                    <div
-                      key={i}
-                      className={cn(
-                        "relative flex items-start gap-4 py-4 transition-all duration-500",
-                        isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
-                      )}
-                      style={{ transitionDelay: `${500 + i * 120}ms` }}
-                    >
-                      {/* Node */}
+              {/* Template rows */}
+              <div className="divide-y divide-border">
+                {templateCards.map((tpl, i) => (
+                  <div
+                    key={i}
+                    className={cn(
+                      "flex items-center justify-between px-6 py-4 transition-all duration-500 hover:bg-muted/30",
+                      isVisible ? "opacity-100" : "opacity-0"
+                    )}
+                    style={{ transitionDelay: `${350 + i * 100}ms` }}
+                  >
+                    <div className="flex items-center gap-4">
                       <div className={cn(
-                        "relative z-10 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 border-2 transition-colors",
-                        i === 0 
-                          ? "bg-primary border-primary text-primary-foreground" 
-                          : i < 3
-                            ? "bg-primary/10 border-primary/30 text-primary"
-                            : "bg-muted border-border text-muted-foreground"
+                        "w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0",
+                        i === 0 ? "bg-primary/10" : i === 1 ? "bg-blue-500/10" : "bg-amber-500/10"
                       )}>
-                        <span className="text-xs font-bold">{i + 1}</span>
+                        <Settings className={cn(
+                          "w-4 h-4",
+                          i === 0 ? "text-primary" : i === 1 ? "text-blue-500" : "text-amber-500"
+                        )} strokeWidth={1.5} />
                       </div>
-
-                      <div className="flex-1 pt-1.5">
-                        <div className="flex items-center gap-2">
-                          <h4 className="text-sm font-semibold text-foreground">{step.label}</h4>
-                          {i < workflowSteps.length - 1 && (
-                            <ChevronRight className="w-3 h-3 text-muted-foreground/50 rotate-90 hidden" />
-                          )}
-                        </div>
-                        <p className="text-xs text-muted-foreground mt-0.5">{step.sub}</p>
+                      <div>
+                        <h4 className="text-sm font-semibold text-foreground">{tpl.name}</h4>
+                        <p className="text-xs text-muted-foreground">{tpl.steps} steps · {tpl.groups} parent groups</p>
                       </div>
-
-                      {i === 0 && (
-                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary mt-2 flex-shrink-0">Active</span>
-                      )}
                     </div>
-                  ))}
+                    <div className="flex items-center gap-3">
+                      <span className={cn(
+                        "text-[11px] font-medium px-2 py-0.5 rounded-full",
+                        tpl.status === "Published"
+                          ? "bg-green-500/10 text-green-600 dark:text-green-400"
+                          : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                      )}>{tpl.status}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Expanded template detail preview */}
+              <div className="border-t border-border bg-muted/20 p-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="bg-background rounded-lg border border-border p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <GitMerge className="w-4 h-4 text-primary" strokeWidth={1.5} />
+                      <span className="text-xs font-semibold text-foreground">Parent-Child</span>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed">3 parent groups with 9 child analysis steps</p>
+                  </div>
+                  <div className="bg-background rounded-lg border border-border p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <ListFilter className="w-4 h-4 text-primary" strokeWidth={1.5} />
+                      <span className="text-xs font-semibold text-foreground">Response Types</span>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed">Picklists, dates, amounts, yes/no, text</p>
+                  </div>
+                  <div className="bg-background rounded-lg border border-border p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Building2 className="w-4 h-4 text-primary" strokeWidth={1.5} />
+                      <span className="text-xs font-semibold text-foreground">Scope</span>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed">Global template, 4 company overrides</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Capabilities grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
+          {capabilities.map((cap, index) => {
+            const Icon = cap.icon;
+            return (
+              <div
+                key={index}
+                className={cn(
+                  "text-center transition-all duration-500",
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                )}
+                style={{ transitionDelay: `${600 + index * 80}ms` }}
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                  <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-sm font-semibold text-foreground mb-1">
+                  {cap.title}
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {cap.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </ResponsiveContainer>
     </section>
