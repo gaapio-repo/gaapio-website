@@ -2,41 +2,13 @@ import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useActiveCustomerLogos } from "@/hooks/useCustomerLogos";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 
 export function TrustBarSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(true);
+  const { siteConfig, loading: configLoading } = useSiteConfig();
   const { data: logos, isLoading } = useActiveCustomerLogos();
-
-  useEffect(() => {
-    // Check feature toggle setting
-    const checkToggle = () => {
-      const savedToggles = localStorage.getItem("featureToggles");
-      if (savedToggles) {
-        const toggles = JSON.parse(savedToggles);
-        const logosToggle = toggles.find((toggle: any) => toggle.id === "customer-logos");
-        if (logosToggle) {
-          setIsEnabled(logosToggle.enabled);
-        }
-      }
-    };
-
-    checkToggle();
-
-    // Listen for changes in localStorage (from admin panel)
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'featureToggles') {
-        checkToggle();
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -72,7 +44,7 @@ export function TrustBarSection() {
   }, [logos]); // Re-run when logos load
 
   // Don't render if feature is disabled
-  if (!isEnabled) {
+  if (configLoading || (siteConfig && !siteConfig.enable_customer_logos)) {
     return null;
   }
 
