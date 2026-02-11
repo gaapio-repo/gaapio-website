@@ -5,41 +5,15 @@ import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Quote } from "lucide-react";
 import { useActiveTestimonials } from "@/hooks/useCustomerTestimonials";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 
 export function TestimonialsSection() {
-  // Temporarily hidden
-  return null;
-  
-  const [isVisible, setIsVisible] = useState(true);
   const [inView, setInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const { data: testimonials, isLoading, error } = useActiveTestimonials();
+  const { siteConfig, loading: configLoading } = useSiteConfig();
 
   useEffect(() => {
-    // Check feature toggle setting
-    const checkToggle = () => {
-      const savedToggles = localStorage.getItem("featureToggles");
-      if (savedToggles) {
-        const toggles = JSON.parse(savedToggles);
-        const testimonialsToggle = toggles.find((toggle: any) => toggle.id === "testimonials");
-        if (testimonialsToggle) {
-          setIsVisible(testimonialsToggle.enabled);
-        }
-      }
-    };
-
-    checkToggle();
-
-    // Listen for changes in localStorage (from admin panel)
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'featureToggles') {
-        checkToggle();
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    // Set up intersection observer for animation
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -47,7 +21,7 @@ export function TestimonialsSection() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.6 } // Trigger when 60% of section is visible
+      { threshold: 0.6 }
     );
 
     if (sectionRef.current) {
@@ -55,14 +29,14 @@ export function TestimonialsSection() {
     }
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
     };
   }, []);
 
-  if (!isVisible) {
+  // Don't render if feature is disabled
+  if (configLoading || (siteConfig && !siteConfig.enable_testimonials)) {
     return null;
   }
 
