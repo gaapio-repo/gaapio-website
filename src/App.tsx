@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ProtectedLayout } from "./components/layout/ProtectedLayout";
 import { ScrollToTop } from "./components/layout/ScrollToTop";
-import { UnderConstructionPage } from "./components/UnderConstructionPage";
-import { supabase } from "@/integrations/supabase/client";
+import { Toaster } from "./components/ui/toaster";
 
 // Pages
 import Index from "./pages/Index";
@@ -44,13 +42,7 @@ import PublicCompany from "./pages/solutions/PublicCompany";
 import AccountingFirm from "./pages/solutions/AccountingFirm";
 
 function App() {
-  console.log("[App] Starting...");
-  
-  // Completely disable construction mode check - causing loading issues
-  const isUnderConstruction = false;
-  
-  console.log("[App] Rendering routes...");
-
+  console.log("[App] Starting...", new Date().toISOString());
   return (
     <Router>
       <ScrollToTop />
@@ -109,6 +101,7 @@ function App() {
           </Routes>
         </ProtectedLayout>
       </ErrorBoundary>
+      <Toaster />
     </Router>
   );
 }
