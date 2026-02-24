@@ -22,22 +22,24 @@ const queryClient = new QueryClient({
 const rootElement = document.getElementById("root");
 
 if (!rootElement) {
+  document.body.innerHTML = '<div style="padding:2rem;color:red">Root element not found</div>';
   throw new Error("Failed to find the root element");
 }
 
-// Diagnostics
-console.log("[Diag] React version:", React.version);
-console.log("[Diag] Build:", "2026-02-24-refresh");
-console.log("[Diag] DevTools renderers:", (window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__?.renderers?.size);
-
-createRoot(rootElement).render(
-  <StrictMode>
-    <HelmetProvider>
-      <ThemeProvider defaultTheme="light" storageKey="ui-theme">
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </ThemeProvider>
-    </HelmetProvider>
-  </StrictMode>
-);
+try {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <HelmetProvider>
+        <ThemeProvider defaultTheme="light" storageKey="ui-theme">
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
+        </ThemeProvider>
+      </HelmetProvider>
+    </StrictMode>
+  );
+  console.log("[Main] App rendered successfully");
+} catch (err) {
+  console.error("[Main] Failed to render:", err);
+  rootElement.innerHTML = '<div style="padding:2rem;color:red">App failed to render. Check console.</div>';
+}
