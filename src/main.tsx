@@ -27,7 +27,7 @@ if (!rootElement) {
 
 // Diagnostics
 console.log("[Diag] React version:", React.version);
-console.log("[Diag] React identity:", React);
+console.log("[Diag] Build:", "2026-02-24-refresh");
 console.log("[Diag] DevTools renderers:", (window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__?.renderers?.size);
 
 createRoot(rootElement).render(
