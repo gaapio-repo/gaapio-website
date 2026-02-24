@@ -88,13 +88,13 @@ export function PageWysiwygEditor({ content, onChange }: PageWysiwygEditorProps)
       const filePath = `blog/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
-        .from('Blog Images')
+        .from('blog-images')
         .upload(filePath, file);
 
       if (uploadError) throw uploadError;
 
       const { data: urlData } = supabase.storage
-        .from('Blog Images')
+        .from('blog-images')
         .getPublicUrl(filePath);
 
       // Insert image into editor
