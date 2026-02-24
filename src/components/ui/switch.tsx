@@ -10,26 +10,25 @@ const Switch = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SwitchPrimitives.Root
     className={cn(
-      "group peer inline-flex h-[22px] w-[52px] shrink-0 cursor-pointer items-center rounded-full border-2 border-muted-foreground/30 transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-40 data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=unchecked]:bg-muted-foreground/15",
+      "group peer relative inline-flex h-5 w-[52px] shrink-0 cursor-pointer items-center rounded-full transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-40",
       className
     )}
     {...props}
     ref={ref}
   >
+    {/* Thin track bar */}
+    <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[14px] rounded-full transition-colors duration-300 data-[state=checked]:bg-primary data-[state=unchecked]:bg-muted-foreground/25" data-state={props.checked !== undefined ? (props.checked ? "checked" : "unchecked") : undefined} />
     <SwitchPrimitives.Thumb
       className={cn(
-        "pointer-events-none relative flex items-center justify-center rounded-full shadow-sm transition-all duration-300 ease-in-out",
-        // Unchecked: smaller thumb
-        "data-[state=unchecked]:h-3 data-[state=unchecked]:w-3 data-[state=unchecked]:translate-x-1.5 data-[state=unchecked]:bg-muted-foreground/60",
-        // Checked: larger thumb with checkmark
-        "data-[state=checked]:h-[18px] data-[state=checked]:w-[18px] data-[state=checked]:translate-x-[28px] data-[state=checked]:bg-primary-foreground",
-        // Hover grow
-        "group-hover:data-[state=unchecked]:h-3.5 group-hover:data-[state=unchecked]:w-3.5 group-hover:data-[state=unchecked]:translate-x-1",
-        "group-hover:data-[state=checked]:h-5 group-hover:data-[state=checked]:w-5 group-hover:data-[state=checked]:translate-x-[27px]",
+        "pointer-events-none relative z-10 flex items-center justify-center rounded-full bg-background shadow-md ring-1 ring-border/10 transition-all duration-300 ease-in-out",
+        // Unchecked
+        "data-[state=unchecked]:h-5 data-[state=unchecked]:w-5 data-[state=unchecked]:translate-x-0",
+        // Checked
+        "data-[state=checked]:h-6 data-[state=checked]:w-6 data-[state=checked]:translate-x-[28px] data-[state=checked]:bg-primary-foreground data-[state=checked]:shadow-lg",
       )}
     >
       <svg
-        className="h-2.5 w-2.5 text-primary opacity-0 transition-opacity duration-200 data-[state=checked]:opacity-100"
+        className="h-3 w-3 text-primary opacity-0 transition-opacity duration-200 data-[state=checked]:opacity-100"
         data-state={props.checked ? "checked" : "unchecked"}
         viewBox="0 0 16 16"
         fill="none"
