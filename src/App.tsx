@@ -31,6 +31,7 @@ import RequestDemo from "./pages/RequestDemo";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import OnePager from "./pages/OnePager";
+import ResetPassword from "./pages/ResetPassword";
 import Admin from "./pages/Admin";
 import AdminUsers from "./pages/AdminUsers";
 import PolicyDetail from "./pages/PolicyDetail";
@@ -94,6 +95,7 @@ function App() {
             <Route path="/firm-signup" element={<FirmSignup />} />
             <Route path="/request-demo" element={<RequestDemo />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/one-pager" element={<OnePager />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/users" element={<AdminUsers />} />
