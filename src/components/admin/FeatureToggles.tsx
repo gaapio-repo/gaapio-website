@@ -6,7 +6,7 @@ import { useSiteConfig } from "@/hooks/useSiteConfig";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface FeatureToggle {
-  id: 'enable_customer_logos' | 'enable_testimonials' | 'enable_pricing' | 'enable_footer_logos';
+  id: 'enable_customer_logos' | 'enable_testimonials' | 'enable_footer_logos';
   name: string;
   description: string;
 }
@@ -21,11 +21,6 @@ const featureToggles: FeatureToggle[] = [
     id: "enable_testimonials",
     name: "Testimonials Section",
     description: "Show or hide the testimonials section on the homepage"
-  },
-  {
-    id: "enable_pricing",
-    name: "Pricing Section",
-    description: "Show or hide the pricing section on the homepage"
   },
   {
     id: "enable_footer_logos",
@@ -52,7 +47,7 @@ export function FeatureToggles() {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {[1, 2, 3, 4].map((i) => (
+            {[1, 2, 3].map((i) => (
               <div key={i} className="flex items-center justify-between">
                 <div className="space-y-2">
                   <Skeleton className="h-4 w-32" />

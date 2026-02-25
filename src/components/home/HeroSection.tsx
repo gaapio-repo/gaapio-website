@@ -3,7 +3,7 @@ import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GradientBackground } from "./GradientBackground";
 import { AnimatedMemo } from "./AnimatedMemo";
-import { supabase } from "@/integrations/supabase/client";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 
 interface HeroSectionProps {
   title?: string;
@@ -15,24 +15,11 @@ export const HeroSection = memo(function HeroSection({
   subtitle = "AI-Powered. CPA-Approved."
 }: HeroSectionProps) {
   const [isClient, setIsClient] = useState(false);
-  const [enableSelfSignup, setEnableSelfSignup] = useState(true);
-  
+  const { siteConfig } = useSiteConfig();
+  const enableSelfSignup = siteConfig?.enable_self_signup ?? true;
+
   useEffect(() => {
     setIsClient(true);
-    
-    // Fetch the self-signup setting from the database
-    const fetchSetting = async () => {
-      const { data } = await supabase
-        .from('site_config')
-        .select('enable_self_signup')
-        .single();
-      
-      if (data) {
-        setEnableSelfSignup(data.enable_self_signup);
-      }
-    };
-    
-    fetchSetting();
   }, []);
 
   // Split title into parts for gradient effect

@@ -161,8 +161,8 @@ export default function BlogPost() {
 
         {/* Content Section */}
         <ResponsiveContainer className="py-12 md:py-16">
-          <article 
-            className="prose prose-gray dark:prose-invert mx-auto max-w-4xl prose-headings:font-bold prose-a:text-primary prose-img:rounded-lg"
+          <article
+            className="prose prose-gray dark:prose-invert max-w-4xl [&_*]:!text-left prose-headings:font-bold prose-a:text-primary prose-img:rounded-lg"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
           
