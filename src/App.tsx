@@ -40,6 +40,7 @@ import TermsOfService from "./pages/TermsOfService";
 import PrivateCompany from "./pages/solutions/PrivateCompany";
 import PublicCompany from "./pages/solutions/PublicCompany";
 import AccountingFirm from "./pages/solutions/AccountingFirm";
+import { SignupGuard } from "./components/SignupGuard";
 
 function App() {
   console.log("[App] Starting...", new Date().toISOString());
@@ -82,9 +83,9 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signup-select" element={<SignupSelect />} />
-            <Route path="/firm-signup" element={<FirmSignup />} />
+            <Route path="/signup" element={<SignupGuard><SignUp /></SignupGuard>} />
+            <Route path="/signup-select" element={<SignupGuard><SignupSelect /></SignupGuard>} />
+            <Route path="/firm-signup" element={<SignupGuard><FirmSignup /></SignupGuard>} />
             <Route path="/request-demo" element={<RequestDemo />} />
             <Route path="/login" element={<Login />} />
             <Route path="/reset-password" element={<ResetPassword />} />

@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Logo } from "@/components/logo";
 import { Link } from "react-router-dom";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain, Shield, Building, Building2, Database } from "lucide-react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Separator } from "@/components/ui/separator";
@@ -124,27 +125,11 @@ export function Header() {
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isCompanyOpen, setIsCompanyOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
-  const [enableSelfSignup, setEnableSelfSignup] = useState(true);
   const [hoveredProduct, setHoveredProduct] = useState(products[0]);
   const [hoveredCompanyPage, setHoveredCompanyPage] = useState(companyPages[0]);
   const [hoveredSolutionPage, setHoveredSolutionPage] = useState(solutionPages[0]);
-
-  useEffect(() => {
-    const savedSetting = localStorage.getItem("enableSelfSignup");
-    setEnableSelfSignup(savedSetting !== null ? savedSetting === "true" : true);
-
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "enableSelfSignup") {
-        const newSetting = e.newValue !== null ? e.newValue === "true" : true;
-        setEnableSelfSignup(newSetting);
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
+  const { siteConfig } = useSiteConfig();
+  const enableSelfSignup = siteConfig?.enable_self_signup ?? true;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -495,9 +480,15 @@ export function Header() {
 
           {/* Action Buttons - Right Aligned */}
           <div className="hidden md:flex items-center space-x-4">
+            {enableSelfSignup ? (
               <Button variant="blue" asChild>
-              <Link to="/signup-select">Sign Up Now</Link>
+                <Link to="/signup-select">Sign Up Now</Link>
               </Button>
+            ) : (
+              <Button variant="blue" asChild>
+                <Link to="/contact">Contact Sales</Link>
+              </Button>
+            )}
               <a 
                 href="https://app.gaapio.com/"
                 target="_blank"
@@ -673,9 +664,15 @@ export function Header() {
               {/* Demo button and Login for mobile */}
               <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                 <div className="mt-3 px-3 space-y-3">
-                  <Button variant="blue" asChild className="w-full">
-                    <Link to="/signup-select" onClick={closeMenu}>Sign Up Now</Link>
-                  </Button>
+                  {enableSelfSignup ? (
+                    <Button variant="blue" asChild className="w-full">
+                      <Link to="/signup-select" onClick={closeMenu}>Sign Up Now</Link>
+                    </Button>
+                  ) : (
+                    <Button variant="blue" asChild className="w-full">
+                      <Link to="/contact" onClick={closeMenu}>Contact Sales</Link>
+                    </Button>
+                  )}
                   <a
                     href="https://app.gaapio.com/"
                     target="_blank"

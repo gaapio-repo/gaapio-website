@@ -376,9 +376,11 @@ export function BlogPostsManager() {
                 <Label>Content *</Label>
                 <PageWysiwygEditor
                   content={formData.content}
-                  onChange={(html) =>
-                    setFormData((prev) => ({ ...prev, content: html }))
-                  }
+                  onChange={(html) => {
+                    const wordCount = html.replace(/<[^>]+>/g, '').trim().split(/\s+/).filter(Boolean).length;
+                    const minutes = Math.max(1, Math.ceil(wordCount / 200));
+                    setFormData((prev) => ({ ...prev, content: html, reading_time: `${minutes} min read` }));
+                  }}
                 />
               </div>
 

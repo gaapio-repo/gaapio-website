@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 
 export function FinalCtaSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const { siteConfig } = useSiteConfig();
+  const showSignup = !siteConfig || siteConfig.enable_self_signup;
   
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -77,14 +80,25 @@ export function FinalCtaSection() {
             )} 
             style={{ transitionDelay: "400ms" }}
           >
-            <Button 
-              size="lg" 
-              variant="black" 
-              className="px-8 hover:bg-gray-800 hover:scale-105 transition-all"
-              asChild
-            >
-              <Link to="/signup-select">Sign Up Now</Link>
-            </Button>
+            {showSignup ? (
+              <Button
+                size="lg"
+                variant="black"
+                className="px-8 hover:bg-gray-800 hover:scale-105 transition-all"
+                asChild
+              >
+                <Link to="/signup-select">Sign Up Now</Link>
+              </Button>
+            ) : (
+              <Button
+                size="lg"
+                variant="black"
+                className="px-8 hover:bg-gray-800 hover:scale-105 transition-all"
+                asChild
+              >
+                <Link to="/contact">Contact Sales</Link>
+              </Button>
+            )}
             <Button 
               size="lg" 
               variant="outline" 
