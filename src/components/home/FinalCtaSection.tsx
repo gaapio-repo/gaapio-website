@@ -8,7 +8,7 @@ import { useSiteConfig } from "@/hooks/useSiteConfig";
 export function FinalCtaSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const { siteConfig } = useSiteConfig();
+  const { siteConfig, loading } = useSiteConfig();
   const showSignup = !siteConfig || siteConfig.enable_self_signup;
   
   useEffect(() => {
@@ -73,11 +73,11 @@ export function FinalCtaSection() {
             Join the CPAs who are already saving hours every month with AI-powered accounting documentation.
           </p>
           
-          <div 
+          <div
             className={cn(
               "flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-            )} 
+              loading ? "invisible" : isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+            )}
             style={{ transitionDelay: "400ms" }}
           >
             {showSignup ? (

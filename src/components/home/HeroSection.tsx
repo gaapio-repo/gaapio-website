@@ -15,7 +15,7 @@ export const HeroSection = memo(function HeroSection({
   subtitle = "AI-Powered. CPA-Approved."
 }: HeroSectionProps) {
   const [isClient, setIsClient] = useState(false);
-  const { siteConfig } = useSiteConfig();
+  const { siteConfig, loading } = useSiteConfig();
   const enableSelfSignup = siteConfig?.enable_self_signup ?? true;
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const HeroSection = memo(function HeroSection({
               {subtitle}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-up" style={{ animationDelay: "200ms" }}>
+            <div className={`flex flex-col sm:flex-row gap-4 animate-fade-up${loading ? " invisible" : ""}`} style={{ animationDelay: "200ms" }}>
               {enableSelfSignup ? (
                 <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold hover:scale-105 transition-all" asChild>
                   <Link to="/signup-select">Sign Up Now</Link>

@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 
+const CACHE_KEY = 'gaapio_site_config';
+
 interface SiteConfig {
   id: string;
   under_construction: boolean;
@@ -15,9 +17,25 @@ interface SiteConfig {
   updated_at: string;
 }
 
+function readCache(): SiteConfig | null {
+  try {
+    const cached = localStorage.getItem(CACHE_KEY);
+    return cached ? JSON.parse(cached) : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeCache(config: SiteConfig) {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify(config));
+  } catch {}
+}
+
 export function useSiteConfig() {
-  const [siteConfig, setSiteConfig] = useState<SiteConfig | null>(null);
-  const [loading, setLoading] = useState(true);
+  // Initialise from cache synchronously — no flash on repeat visits.
+  const [siteConfig, setSiteConfig] = useState<SiteConfig | null>(readCache);
+  const [loading, setLoading] = useState(() => readCache() === null);
   const [updating, setUpdating] = useState(false);
   const { toast } = useToast();
 
@@ -34,6 +52,7 @@ export function useSiteConfig() {
       }
 
       setSiteConfig(data as SiteConfig);
+      writeCache(data as SiteConfig);
     } catch (error) {
       console.error('Error fetching site config:', error);
     } finally {
@@ -61,7 +80,9 @@ export function useSiteConfig() {
         return false;
       }
 
-      setSiteConfig(prev => prev ? { ...prev, under_construction: underConstruction } : null);
+      const updated = { ...siteConfig, under_construction: underConstruction };
+      setSiteConfig(updated);
+      writeCache(updated);
       toast({
         title: "Success",
         description: `Construction mode ${underConstruction ? 'enabled' : 'disabled'}`,
@@ -100,7 +121,9 @@ export function useSiteConfig() {
         return false;
       }
 
-      setSiteConfig(prev => prev ? { ...prev, [field]: value } : null);
+      const updated = { ...siteConfig, [field]: value };
+      setSiteConfig(updated);
+      writeCache(updated);
       toast({
         title: "Success",
         description: "Setting updated successfully",

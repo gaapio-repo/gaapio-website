@@ -128,7 +128,7 @@ export function Header() {
   const [hoveredProduct, setHoveredProduct] = useState(products[0]);
   const [hoveredCompanyPage, setHoveredCompanyPage] = useState(companyPages[0]);
   const [hoveredSolutionPage, setHoveredSolutionPage] = useState(solutionPages[0]);
-  const { siteConfig } = useSiteConfig();
+  const { siteConfig, loading } = useSiteConfig();
   const enableSelfSignup = siteConfig?.enable_self_signup ?? true;
 
   const toggleMenu = () => {
@@ -480,15 +480,17 @@ export function Header() {
 
           {/* Action Buttons - Right Aligned */}
           <div className="hidden md:flex items-center space-x-4">
-            {enableSelfSignup ? (
-              <Button variant="blue" asChild>
-                <Link to="/signup-select">Sign Up Now</Link>
-              </Button>
-            ) : (
-              <Button variant="blue" asChild>
-                <Link to="/contact">Contact Sales</Link>
-              </Button>
-            )}
+            <div className={loading ? "invisible" : ""}>
+              {enableSelfSignup ? (
+                <Button variant="blue" asChild>
+                  <Link to="/signup-select">Sign Up Now</Link>
+                </Button>
+              ) : (
+                <Button variant="blue" asChild>
+                  <Link to="/contact">Contact Sales</Link>
+                </Button>
+              )}
+            </div>
               <a 
                 href="https://app.gaapio.com/"
                 target="_blank"
@@ -664,15 +666,17 @@ export function Header() {
               {/* Demo button and Login for mobile */}
               <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                 <div className="mt-3 px-3 space-y-3">
-                  {enableSelfSignup ? (
-                    <Button variant="blue" asChild className="w-full">
-                      <Link to="/signup-select" onClick={closeMenu}>Sign Up Now</Link>
-                    </Button>
-                  ) : (
-                    <Button variant="blue" asChild className="w-full">
-                      <Link to="/contact" onClick={closeMenu}>Contact Sales</Link>
-                    </Button>
-                  )}
+                  <div className={loading ? "invisible" : ""}>
+                    {enableSelfSignup ? (
+                      <Button variant="blue" asChild className="w-full">
+                        <Link to="/signup-select" onClick={closeMenu}>Sign Up Now</Link>
+                      </Button>
+                    ) : (
+                      <Button variant="blue" asChild className="w-full">
+                        <Link to="/contact" onClick={closeMenu}>Contact Sales</Link>
+                      </Button>
+                    )}
+                  </div>
                   <a
                     href="https://app.gaapio.com/"
                     target="_blank"
