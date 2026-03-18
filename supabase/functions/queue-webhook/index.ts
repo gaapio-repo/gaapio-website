@@ -22,7 +22,19 @@ Deno.serve(async (req) => {
     }
 
     // Parse request body
-    const { payload, target_url } = await req.json()
+    let { payload, target_url } = await req.json()
+
+    // For waitlist submissions, use env vars instead of client-provided URL (keeps webhook URL and destination email secret)
+    if (payload?.Source === 'Waitlist Form') {
+      const zapierUrl = Deno.env.get('ZAPIER_WEBHOOK_URL')
+      const zapierDestination = Deno.env.get('ZAPIER_DESTINATION_EMAIL')
+      if (zapierUrl) {
+        target_url = zapierUrl
+        if (zapierDestination) {
+          payload = { ...payload, Destination: zapierDestination }
+        }
+      }
+    }
 
     // Validate request
     if (!payload || !target_url) {

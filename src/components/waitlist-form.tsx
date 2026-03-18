@@ -5,8 +5,6 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/22551110/2xusps1/";
-
 export const WaitlistForm = memo(function WaitlistForm() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -47,21 +45,20 @@ export const WaitlistForm = memo(function WaitlistForm() {
           },
         ]);
 
-      // Format data with exact field names for Zapier
+      // Format data with exact field names for Zapier (URL and destination email are set server-side via env vars)
       const zapierData = {
         "Email": trimmedEmail,
         "Name": trimmedName,
         "Company": trimmedCompany,
         "Source": "Waitlist Form",
         "Submission Date": new Date().toISOString(),
-        "Destination": "zacklarsen11@gmail.com",
       };
 
-      // Queue webhook via edge function
+      // Queue webhook via edge function (ZAPIER_WEBHOOK_URL and ZAPIER_DESTINATION_EMAIL are configured in Supabase)
       await supabase.functions.invoke('queue-webhook', {
         body: {
           payload: zapierData,
-          target_url: ZAPIER_WEBHOOK_URL
+          target_url: '' // Edge function uses ZAPIER_WEBHOOK_URL from env when Source is "Waitlist Form"
         }
       }).catch(err => {
         console.error("Error queuing webhook:", err);

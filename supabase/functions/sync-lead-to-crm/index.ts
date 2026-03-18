@@ -1,7 +1,5 @@
 import { corsHeaders } from '../_shared/cors.ts';
 
-const CRM_WEBHOOK_URL = 'https://mfsfgmhfavwwqfmtcckb.supabase.co/functions/v1/website-lead-webhook';
-
 Deno.serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -16,10 +14,11 @@ Deno.serve(async (req) => {
       status: leadData.status 
     });
 
-    // Get the API key from environment variables
+    // Get CRM webhook URL and API key from environment variables
+    const crmWebhookUrl = Deno.env.get('CRM_WEBHOOK_URL');
     const apiKey = Deno.env.get('WEBSITE_LEAD_API_KEY');
-    if (!apiKey) {
-      console.error('WEBSITE_LEAD_API_KEY not configured');
+    if (!crmWebhookUrl || !apiKey) {
+      console.error('CRM_WEBHOOK_URL or WEBSITE_LEAD_API_KEY not configured');
       return new Response(
         JSON.stringify({ error: 'CRM integration not configured' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -64,7 +63,7 @@ Deno.serve(async (req) => {
     });
 
     // Forward to CRM webhook
-    const response = await fetch(CRM_WEBHOOK_URL, {
+    const response = await fetch(crmWebhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
