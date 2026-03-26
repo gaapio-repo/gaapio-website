@@ -165,7 +165,7 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
+          <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2">
             <NavigationMenu>
               <NavigationMenuList className="flex items-center space-x-4">
                 {/* Solutions Mega Menu - matching Products structure */}
@@ -479,7 +479,7 @@ export function Header() {
           </div>
 
           {/* Action Buttons - Right Aligned */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <div className={loading ? "invisible" : ""}>
               {enableSelfSignup ? (
                 <Button variant="blue" asChild>
@@ -503,7 +503,7 @@ export function Header() {
             </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="lg:hidden flex items-center space-x-2">
             <ModeToggle />
             <button
               onClick={toggleMenu}
@@ -522,7 +522,7 @@ export function Header() {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
               
               {/* Solutions Section */}
