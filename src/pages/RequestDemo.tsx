@@ -7,7 +7,7 @@ import { DemoRequestSuccess } from "@/components/demo/DemoRequestSuccess";
 import { SEO } from "@/components/SEO";
 import { GradientBackground } from "@/components/home/GradientBackground";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
-import { Check, Shield, FileText, BarChart3, Lock } from "lucide-react";
+import { Check, Shield } from "lucide-react";
 
 export default function RequestDemo() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -83,43 +83,7 @@ export default function RequestDemo() {
                     </ul>
                   </div>
 
-                  {/* Product Preview Mock */}
-                  <div className="w-full max-w-lg mt-2">
-                    <div className="bg-white/[0.12] backdrop-blur-md rounded-xl border border-white/15 p-4 shadow-lg">
-                      {/* Mini title bar */}
-                      <div className="flex items-center gap-1.5 mb-3">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
-                        <span className="ml-2 text-[11px] text-white/50 font-medium">Gaapio Platform</span>
-                      </div>
-                      {/* Mock UI rows */}
-                      <div className="space-y-2.5">
-                        <div className="flex items-center gap-3 bg-white/10 rounded-lg px-3 py-2.5">
-                          <FileText className="h-4 w-4 text-white/70 flex-shrink-0" />
-                          <div className="flex-1">
-                            <div className="h-2.5 bg-white/30 rounded-full w-3/4" />
-                          </div>
-                          <span className="text-[10px] text-green-300 font-semibold px-2 py-0.5 bg-green-400/15 rounded-full">Complete</span>
-                        </div>
-                        <div className="flex items-center gap-3 bg-white/10 rounded-lg px-3 py-2.5">
-                          <BarChart3 className="h-4 w-4 text-white/70 flex-shrink-0" />
-                          <div className="flex-1">
-                            <div className="h-2.5 bg-white/25 rounded-full w-1/2" />
-                          </div>
-                          <span className="text-[10px] text-blue-200 font-semibold px-2 py-0.5 bg-blue-400/15 rounded-full">In Review</span>
-                        </div>
-                        <div className="flex items-center gap-3 bg-white/10 rounded-lg px-3 py-2.5">
-                          <Lock className="h-4 w-4 text-white/70 flex-shrink-0" />
-                          <div className="flex-1">
-                            <div className="h-2.5 bg-white/20 rounded-full w-2/3" />
-                          </div>
-                          <span className="text-[10px] text-white/60 font-semibold px-2 py-0.5 bg-white/10 rounded-full">SOX Ready</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
+
                   <div className="flex items-center gap-2 pt-1 text-white/80">
                     <Shield className="h-4 w-4" />
                     <span className="text-sm font-medium">Your information is secure and never shared</span>
@@ -128,7 +92,7 @@ export default function RequestDemo() {
                 
                 {/* Right Column - Form Card */}
                 <div className="animate-fade-up" style={{ animationDelay: "150ms" }}>
-                  <div className="bg-white dark:bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] p-7 md:p-9 border border-white/30">
+                  <div className="bg-white dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] p-7 md:p-9 border border-white/30 dark:border-slate-700/50">
                     <div className="text-center mb-7">
                       <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Request Your Demo</h2>
                       <p className="text-sm text-muted-foreground mt-1.5">Fill out the form and we'll be in touch shortly</p>
