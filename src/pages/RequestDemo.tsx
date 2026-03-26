@@ -36,7 +36,7 @@ export default function RequestDemo() {
       
       <main className="flex-1">
         {/* Hero Section with Gradient */}
-        <section className="relative min-h-[80vh] flex items-center pt-24 pb-16 overflow-hidden">
+        <section className="relative min-h-[80vh] flex items-center -mt-[1px] pt-24 pb-16 overflow-hidden">
           <GradientBackground />
           
           <div className="container px-4 md:px-6 relative z-10">
