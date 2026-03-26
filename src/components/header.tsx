@@ -167,7 +167,7 @@ export function Header() {
           {/* Desktop Navigation - Centered */}
           <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2">
             <NavigationMenu>
-              <NavigationMenuList className="flex items-center space-x-4">
+              <NavigationMenuList className="flex items-center space-x-2">
                 {/* Solutions Mega Menu - matching Products structure */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-gray-700 dark:text-gray-200 text-base font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white">
