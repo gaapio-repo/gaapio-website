@@ -487,7 +487,7 @@ export function Header() {
                 </Button>
               ) : (
                 <Button variant="blue" asChild>
-                  <Link to="/contact">Contact Sales</Link>
+                  <Link to="/request-demo">Request a Demo</Link>
                 </Button>
               )}
             </div>
@@ -673,7 +673,7 @@ export function Header() {
                       </Button>
                     ) : (
                       <Button variant="blue" asChild className="w-full">
-                        <Link to="/contact" onClick={closeMenu}>Contact Sales</Link>
+                        <Link to="/request-demo" onClick={closeMenu}>Request a Demo</Link>
                       </Button>
                     )}
                   </div>
