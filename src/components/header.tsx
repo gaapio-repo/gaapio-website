@@ -165,7 +165,7 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
+          <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2">
             <NavigationMenu>
               <NavigationMenuList className="flex items-center space-x-4">
                 {/* Solutions Mega Menu - matching Products structure */}
