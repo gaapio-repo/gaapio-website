@@ -92,7 +92,7 @@ export default function RequestDemo() {
                 
                 {/* Right Column - Form Card */}
                 <div className="animate-fade-up" style={{ animationDelay: "150ms" }}>
-                  <div className="bg-white dark:bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] p-7 md:p-9 border border-white/30">
+                  <div className="bg-white dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] p-7 md:p-9 border border-white/30 dark:border-slate-700/50">
                     <div className="text-center mb-7">
                       <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Request Your Demo</h2>
                       <p className="text-sm text-muted-foreground mt-1.5">Fill out the form and we'll be in touch shortly</p>
