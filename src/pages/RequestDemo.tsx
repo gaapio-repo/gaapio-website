@@ -36,7 +36,7 @@ export default function RequestDemo() {
       
       <main className="flex-1 -mt-20">
         {/* Hero Section with Gradient */}
-        <section className="relative min-h-[85vh] flex items-center -mt-[1px] pt-32 pb-20 overflow-hidden">
+         <section className={`relative -mt-[1px] overflow-hidden ${isSubmitted ? 'min-h-[80vh] pt-24 pb-16' : 'min-h-[85vh] flex items-center pt-32 pb-20'}`}>
           <GradientBackground />
           
           {/* Softened mesh pattern overlay - reduced opacity */}
