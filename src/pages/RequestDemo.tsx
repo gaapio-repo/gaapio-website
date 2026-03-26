@@ -53,8 +53,8 @@ export default function RequestDemo() {
                   </span>
                   
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
-                    <span className="text-gray-900 dark:text-white">See Gaapio</span>{" "}
-                    <span className="text-white">in Action</span>
+                    <span className="text-gray-900 dark:text-white">See Gaapio in</span>{" "}
+                    <span className="text-white">Action</span>
                   </h1>
                   
                   <p className="text-lg md:text-xl text-gray-900 dark:text-gray-900 max-w-lg leading-relaxed">
