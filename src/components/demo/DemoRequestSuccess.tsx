@@ -7,35 +7,36 @@ export function DemoRequestSuccess() {
   const navigate = useNavigate();
   
   return (
-    <div className="text-center py-12">
+    <div className="text-center py-4">
       <div className="flex justify-center">
-        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-          <Check className="h-8 w-8 text-primary" />
+        <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4">
+          <Check className="h-7 w-7 text-white" strokeWidth={3} />
         </div>
       </div>
       
-      <h1 className="text-3xl font-bold mb-4">Thank You for Your Request!</h1>
+      <h1 className="text-3xl font-bold mb-3 text-white">Thank You for Your Request!</h1>
       
-      <p className="text-muted-foreground max-w-md mx-auto mb-6">
+      <p className="text-white/90 max-w-md mx-auto mb-6 text-base font-medium">
         We've received your demo request. Schedule a time below, and our team will be in touch shortly.
       </p>
       
-      <div className="mb-8">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <Calendar className="h-5 w-5 text-primary" />
-          <h2 className="text-xl font-semibold">Schedule Your Demo Now</h2>
+      <div className="mb-6">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <Calendar className="h-5 w-5 text-white" />
+          <h2 className="text-xl font-semibold text-white">Schedule Your Demo Now</h2>
         </div>
-        <p className="text-muted-foreground text-sm mb-4">
+        <p className="text-white/80 text-sm mb-4 font-medium">
           Pick a time that works best for you.
         </p>
-        <div className="w-full max-w-3xl mx-auto rounded-lg overflow-hidden border border-border">
+        <div className="w-full max-w-3xl mx-auto rounded-xl overflow-hidden border border-white/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]">
           <iframe 
             src="https://outlook.office.com/book/GaapioSales@gaapio.com/?ismsaljsauthenabled" 
             width="100%" 
-            height="600" 
+            height="550" 
             scrolling="yes" 
             style={{ border: 0 }}
             title="Schedule a demo with Gaapio"
+            className="bg-white"
           />
         </div>
       </div>
@@ -43,7 +44,7 @@ export function DemoRequestSuccess() {
       <Button 
         onClick={() => navigate("/")} 
         size="lg"
-        variant="outline"
+        className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 font-semibold"
       >
         Return to Homepage
       </Button>
