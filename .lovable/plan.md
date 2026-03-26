@@ -1,26 +1,52 @@
 
 
-## Add Microsoft Entra ID (Azure AD) Login to Admin Portal
+## Redesign Request a Demo Page with "AI with Receipts" Tagline
 
 ### Overview
-Add a "Sign in with Microsoft" button to the login page that uses Supabase's built-in Azure/Entra ID OAuth provider. Since you've already configured Entra ID in the Supabase dashboard, this only requires a frontend change.
+Transform the plain Request a Demo page into a professional landing page using the homepage's gradient background, a two-column layout, the "AI with Receipts" tagline, and social proof -- all focused on driving form submissions.
 
-### What will change
+### Layout
 
-**Login Page (`src/pages/Login.tsx`)**
-- Add a "Sign in with Microsoft" button below the existing login form
-- The button calls `supabase.auth.signInWithOAuth({ provider: 'azure', options: { redirectTo, scopes: 'email' } })`
-- It will be placed after the Magic Link button, separated by an "or" divider
-- After OAuth redirect, the existing `useEffect` session check will detect the session and redirect to `/admin`
-- The `AdminPageGuard` will handle admin role verification as usual -- Entra ID users without the admin role will be blocked
+```text
+┌──────────────────────────────────────────────┐
+│  Header                                      │
+├──────────────────────────────────────────────┤
+│  HERO (GradientBackground)                   │
+│  ┌─────────────────┬───────────────────────┐ │
+│  │ Left Column     │ Right Column          │ │
+│  │                 │                       │ │
+│  │ "AI with        │ ┌───────────────────┐ │ │
+│  │  Receipts."     │ │ Demo Request Form │ │ │
+│  │                 │ │ (white card,      │ │ │
+│  │ "See Gaapio     │ │  shadow-2xl)      │ │ │
+│  │  in Action"     │ │                   │ │ │
+│  │                 │ │ Name, Email, etc  │ │ │
+│  │ ✓ 30-min demo   │ │                   │ │ │
+│  │ ✓ Live AI memos │ │ [Submit]          │ │ │
+│  │ ✓ Your use case │ └───────────────────┘ │ │
+│  │ ✓ No commitment │                       │ │
+│  │                 │                       │ │
+│  │ 🔒 Secure info  │                       │ │
+│  └─────────────────┴───────────────────────┘ │
+├──────────────────────────────────────────────┤
+│  TrustBarSection (customer logos)             │
+├──────────────────────────────────────────────┤
+│  Footer                                      │
+└──────────────────────────────────────────────┘
+```
 
-### Technical details
+### Changes to `src/pages/RequestDemo.tsx`
 
-- Uses `supabase.auth.signInWithOAuth({ provider: 'azure' })` with `redirectTo` set to the current origin + `/admin`
-- Supabase handles the entire OAuth flow (redirect to Microsoft, token exchange, session creation)
-- No new pages, routes, or backend changes needed
-- The `scopes` option requests `email` to ensure the user's email is available for role lookups
+1. **Gradient hero background** -- Import and use `GradientBackground` component, same as homepage
+2. **Tagline** -- Add "AI with Receipts." as a small badge/label above the main heading, styled in white/light text to pop against the blue gradient
+3. **Two-column grid** -- Left: headline ("See Gaapio in Action"), subtitle, 4 value bullets with check icons, security note. Right: `DemoRequestForm` in an elevated white card (`bg-white/95 dark:bg-gray-900/95 shadow-2xl rounded-xl`)
+4. **Social proof** -- Add `TrustBarSection` below the hero section
+5. **Typography** -- Follow the hero typography pattern: tagline text in white, heading split with black intro + white key words against the gradient
+6. **Success state** -- `DemoRequestSuccess` renders centered over the gradient when submitted
+7. **Responsive** -- Stacks to single column on mobile (value props on top, form below)
 
-### Files to modify
-- `src/pages/Login.tsx` -- add Microsoft sign-in button with OAuth handler
+### No changes to
+- `DemoRequestForm`, `DemoRequestSuccess`, or any form logic
+- SEO metadata (kept as-is)
+- Any other pages or components
 
