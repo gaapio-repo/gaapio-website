@@ -7,7 +7,7 @@ import { DemoRequestSuccess } from "@/components/demo/DemoRequestSuccess";
 import { SEO } from "@/components/SEO";
 import { GradientBackground } from "@/components/home/GradientBackground";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
-import { Check, Shield } from "lucide-react";
+import { Check, Shield, FileText, BarChart3, Lock } from "lucide-react";
 
 export default function RequestDemo() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -36,8 +36,16 @@ export default function RequestDemo() {
       
       <main className="flex-1 -mt-20">
         {/* Hero Section with Gradient */}
-        <section className="relative min-h-[80vh] flex items-center pt-32 pb-16 overflow-hidden">
+        <section className="relative min-h-[85vh] flex items-center -mt-[1px] pt-32 pb-20 overflow-hidden">
           <GradientBackground />
+          
+          {/* Softened mesh pattern overlay - reduced opacity */}
+          <div 
+            className="absolute inset-0 z-[1] pointer-events-none opacity-[0.06] blur-[0.5px]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
           
           <div className="container px-4 md:px-6 relative z-10">
             {isSubmitted ? (
@@ -47,43 +55,83 @@ export default function RequestDemo() {
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 items-center">
                 {/* Left Column - Value Proposition */}
-                <div className="flex flex-col items-start text-left space-y-6 animate-fade-up">
-                  <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-semibold tracking-wide">
+                <div className="flex flex-col items-start text-left space-y-7 animate-fade-up">
+                  <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-semibold tracking-wide border border-white/20">
                     AI with Receipts.
                   </span>
                   
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08]">
                     <span className="text-gray-900 dark:text-white">See Gaapio in</span>{" "}
-                    <span className="text-white">Action</span>
+                    <span className="text-white drop-shadow-sm">Action</span>
                   </h1>
                   
-                  <p className="text-lg md:text-xl text-gray-900 dark:text-gray-900 max-w-lg leading-relaxed">
+                  <p className="text-lg md:text-xl text-white/95 max-w-lg leading-relaxed font-medium">
                     Discover how AI-powered technical accounting saves your team hours every week — with full transparency and audit-ready documentation.
                   </p>
                   
-                  <ul className="space-y-3 pt-2">
-                    {benefits.map((benefit, i) => (
-                      <li key={i} className="flex items-center gap-3 text-gray-900 dark:text-gray-100">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center">
-                          <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                        </span>
-                        <span className="text-base md:text-lg font-medium">{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Subtle card behind bullets */}
+                  <div className="bg-white/[0.08] backdrop-blur-sm rounded-xl p-5 border border-white/10 w-full max-w-lg">
+                    <ul className="space-y-4">
+                      {benefits.map((benefit, i) => (
+                        <li key={i} className="flex items-center gap-3 text-white">
+                          <span className="flex-shrink-0 w-7 h-7 rounded-full bg-white/25 backdrop-blur-sm flex items-center justify-center shadow-sm">
+                            <Check className="h-4 w-4 text-white" strokeWidth={3} />
+                          </span>
+                          <span className="text-base md:text-lg font-semibold">{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Product Preview Mock */}
+                  <div className="w-full max-w-lg mt-2">
+                    <div className="bg-white/[0.12] backdrop-blur-md rounded-xl border border-white/15 p-4 shadow-lg">
+                      {/* Mini title bar */}
+                      <div className="flex items-center gap-1.5 mb-3">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+                        <span className="ml-2 text-[11px] text-white/50 font-medium">Gaapio Platform</span>
+                      </div>
+                      {/* Mock UI rows */}
+                      <div className="space-y-2.5">
+                        <div className="flex items-center gap-3 bg-white/10 rounded-lg px-3 py-2.5">
+                          <FileText className="h-4 w-4 text-white/70 flex-shrink-0" />
+                          <div className="flex-1">
+                            <div className="h-2.5 bg-white/30 rounded-full w-3/4" />
+                          </div>
+                          <span className="text-[10px] text-green-300 font-semibold px-2 py-0.5 bg-green-400/15 rounded-full">Complete</span>
+                        </div>
+                        <div className="flex items-center gap-3 bg-white/10 rounded-lg px-3 py-2.5">
+                          <BarChart3 className="h-4 w-4 text-white/70 flex-shrink-0" />
+                          <div className="flex-1">
+                            <div className="h-2.5 bg-white/25 rounded-full w-1/2" />
+                          </div>
+                          <span className="text-[10px] text-blue-200 font-semibold px-2 py-0.5 bg-blue-400/15 rounded-full">In Review</span>
+                        </div>
+                        <div className="flex items-center gap-3 bg-white/10 rounded-lg px-3 py-2.5">
+                          <Lock className="h-4 w-4 text-white/70 flex-shrink-0" />
+                          <div className="flex-1">
+                            <div className="h-2.5 bg-white/20 rounded-full w-2/3" />
+                          </div>
+                          <span className="text-[10px] text-white/60 font-semibold px-2 py-0.5 bg-white/10 rounded-full">SOX Ready</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   
-                  <div className="flex items-center gap-2 pt-2 text-gray-800 dark:text-gray-200">
+                  <div className="flex items-center gap-2 pt-1 text-white/80">
                     <Shield className="h-4 w-4" />
-                    <span className="text-sm">Your information is secure and never shared</span>
+                    <span className="text-sm font-medium">Your information is secure and never shared</span>
                   </div>
                 </div>
                 
                 {/* Right Column - Form Card */}
                 <div className="animate-fade-up" style={{ animationDelay: "150ms" }}>
-                  <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-xl shadow-2xl p-6 md:p-8 border border-white/20">
-                    <div className="text-center mb-6">
-                      <h2 className="text-xl font-bold text-gray-900 dark:text-white">Request Your Demo</h2>
-                      <p className="text-sm text-muted-foreground mt-1">Fill out the form and we'll be in touch shortly</p>
+                  <div className="bg-white dark:bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] p-7 md:p-9 border border-white/30">
+                    <div className="text-center mb-7">
+                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Request Your Demo</h2>
+                      <p className="text-sm text-muted-foreground mt-1.5">Fill out the form and we'll be in touch shortly</p>
                     </div>
                     <DemoRequestForm onSuccess={handleSubmitSuccess} />
                   </div>

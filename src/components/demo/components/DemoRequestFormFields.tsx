@@ -18,7 +18,7 @@ interface DemoRequestFormFieldsProps {
 export function DemoRequestFormFields({ form }: DemoRequestFormFieldsProps) {
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <FormField
           control={form.control}
           name="firstName"
