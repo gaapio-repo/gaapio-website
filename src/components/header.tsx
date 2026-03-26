@@ -503,7 +503,7 @@ export function Header() {
             </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="lg:hidden flex items-center space-x-2">
             <ModeToggle />
             <button
               onClick={toggleMenu}
