@@ -460,18 +460,9 @@ export function Header() {
                 <NavigationMenuItem>
                   <Link 
                     to="/faq" 
-                    className="text-gray-700 dark:text-gray-200 font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2"
+                    className="text-gray-700 dark:text-gray-200 text-sm font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-2 py-2"
                   >
                     FAQ
-                  </Link>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <Link 
-                    to="/contact" 
-                    className="text-gray-700 dark:text-gray-200 font-medium hover:text-gray-900 dark:hover:text-white hover:underline transition-colors px-3 py-2"
-                  >
-                    Contact
                   </Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
