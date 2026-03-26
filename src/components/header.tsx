@@ -470,7 +470,7 @@ export function Header() {
           </div>
 
           {/* Action Buttons - Right Aligned */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3">
             <div className={loading ? "invisible" : ""}>
               {enableSelfSignup ? (
                 <Button variant="blue" asChild>
