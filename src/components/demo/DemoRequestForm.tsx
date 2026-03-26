@@ -13,7 +13,7 @@ export function DemoRequestForm({ onSuccess }: DemoRequestFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} className="space-y-6">
+      <form onSubmit={onSubmit} className="space-y-5">
         <DemoRequestFormFields form={form} />
         <Button 
           type="submit" 
