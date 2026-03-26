@@ -7,7 +7,7 @@ import { DemoRequestSuccess } from "@/components/demo/DemoRequestSuccess";
 import { SEO } from "@/components/SEO";
 import { GradientBackground } from "@/components/home/GradientBackground";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
-import { Check, Shield, FileText, BarChart3, Lock } from "lucide-react";
+import { Check, Shield } from "lucide-react";
 
 export default function RequestDemo() {
   const [isSubmitted, setIsSubmitted] = useState(false);
