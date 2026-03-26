@@ -17,12 +17,12 @@ export function DemoRequestForm({ onSuccess }: DemoRequestFormProps) {
         <DemoRequestFormFields form={form} />
         <Button 
           type="submit" 
-          className="w-full dark:text-white dark:hover:bg-primary/60" 
+          className="w-full text-base font-semibold dark:text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:brightness-110 transition-all duration-200" 
           size="lg"
           variant="blue"
           disabled={isLoading}
         >
-          {isLoading ? "Submitting..." : "Request Demo"}
+          {isLoading ? "Submitting..." : "Show Me Gaapio"}
         </Button>
       </form>
     </Form>
