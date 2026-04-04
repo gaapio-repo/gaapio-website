@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import type { CommentLetter } from '@/types/commentLetters';
 import { topicToSlug } from '@/types/commentLetters';
+import { CARD_STYLES } from './styles';
 
 interface CommentLetterCardProps {
   letter: CommentLetter;
@@ -14,7 +15,7 @@ export function CommentLetterCard({ letter }: CommentLetterCardProps) {
   });
 
   return (
-    <article className="group py-5 px-6 rounded-lg bg-muted/70 shadow-sm hover:shadow-md transition-shadow duration-200 mb-3 last:mb-0">
+    <article className={`group py-5 px-6 mb-3 last:mb-0 ${CARD_STYLES}`}>
       {/* Company name + ticker */}
       <div className="flex items-baseline gap-2 mb-1">
         <Link

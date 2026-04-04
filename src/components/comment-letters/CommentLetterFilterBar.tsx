@@ -7,6 +7,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { Search, SlidersHorizontal, X } from 'lucide-react';
 import type { CommentLetterFilters } from '@/types/commentLetters';
 import type { TopicStat } from '@/types/commentLetters';
+import { INPUT_STYLES } from './styles';
 
 interface CommentLetterFilterBarProps {
   filters: CommentLetterFilters;
@@ -75,7 +76,7 @@ export function CommentLetterFilterBar({
           value={filters.topic || '_all'}
           onValueChange={v => onFilterChange({ topic: v === '_all' ? undefined : v })}
         >
-          <SelectTrigger className="bg-muted/70 border-0 shadow-sm">
+          <SelectTrigger className={INPUT_STYLES}>
             <SelectValue placeholder="All Topics" />
           </SelectTrigger>
           <SelectContent>
@@ -93,7 +94,7 @@ export function CommentLetterFilterBar({
         value={filters.year || '_all'}
         onValueChange={v => onFilterChange({ year: v === '_all' ? undefined : v })}
       >
-        <SelectTrigger className="bg-muted/70 border-0 shadow-sm">
+        <SelectTrigger className={INPUT_STYLES}>
           <SelectValue placeholder="All Years" />
         </SelectTrigger>
         <SelectContent>
@@ -108,7 +109,7 @@ export function CommentLetterFilterBar({
         value={filters.letterType || '_all'}
         onValueChange={v => onFilterChange({ letterType: v === '_all' ? undefined : v })}
       >
-        <SelectTrigger className="bg-muted/70 border-0 shadow-sm">
+        <SelectTrigger className={INPUT_STYLES}>
           <SelectValue placeholder="All Types" />
         </SelectTrigger>
         <SelectContent>
@@ -123,7 +124,7 @@ export function CommentLetterFilterBar({
         value={filters.industry || '_all'}
         onValueChange={v => onFilterChange({ industry: v === '_all' ? undefined : v })}
       >
-        <SelectTrigger className="bg-muted/70 border-0 shadow-sm">
+        <SelectTrigger className={INPUT_STYLES}>
           <SelectValue placeholder="All Industries" />
         </SelectTrigger>
         <SelectContent>
@@ -146,7 +147,7 @@ export function CommentLetterFilterBar({
             placeholder="Search by company, ticker, or keyword..."
             value={searchValue}
             onChange={e => handleSearchChange(e.target.value)}
-            className="pl-9 bg-muted/70 border-0 shadow-sm"
+            className={`pl-9 ${INPUT_STYLES}`}
           />
           {searchValue && (
             <button
@@ -161,7 +162,7 @@ export function CommentLetterFilterBar({
           value={filters.sort || 'date_desc'}
           onValueChange={v => onFilterChange({ sort: v as CommentLetterFilters['sort'] })}
         >
-          <SelectTrigger className="w-full sm:w-48 bg-muted/70 border-0 shadow-sm">
+          <SelectTrigger className={`w-full sm:w-48 ${INPUT_STYLES}`}>
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent>

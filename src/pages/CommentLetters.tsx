@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
@@ -52,15 +53,10 @@ export default function CommentLetters() {
       <Header />
 
       {/* Hero */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
+      <section className="relative pt-24 pb-8 md:pb-12 overflow-hidden">
         <GradientBackground />
-        <ResponsiveContainer className="relative z-10 text-center max-w-4xl">
-          <div className="flex justify-center mb-6">
-            <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-sm">
-              <FileSearch className="h-8 w-8 text-white" />
-            </div>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+        <ResponsiveContainer className="relative z-10 text-center max-w-3xl">
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-3 tracking-tight">
             SEC Comment Letter Browser
           </h1>
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
@@ -68,14 +64,14 @@ export default function CommentLetters() {
               ? `Search ${totalLetters.toLocaleString()} SEC comment letters with AI summaries and ASC topic classification.`
               : 'Search SEC comment letters with AI summaries and ASC topic classification.'}
           </p>
-          <p className="text-sm text-white/60 mt-3">
+          <p className="text-sm text-white/70 mt-2">
             Free and open. No login required.
           </p>
         </ResponsiveContainer>
       </section>
 
       {/* Filters + Results */}
-      <section className="py-8 md:py-12">
+      <section className="py-4 md:py-6">
         <ResponsiveContainer className="max-w-7xl">
           <CommentLetterFilterBar
             filters={filters}
@@ -84,12 +80,19 @@ export default function CommentLetters() {
             topics={topics}
           />
 
+          {/* Topics link */}
+          <div className="mt-5 mb-2">
+            <Link to="/comment-letters/topics" className="text-sm text-primary hover:underline transition-colors">
+              Browse all {topics?.length || ''} topics →
+            </Link>
+          </div>
+
           {/* Results count */}
           {!isLoading && results && (
-            <p className="text-sm text-muted-foreground mt-6 mb-4">
+            <p className="text-xs text-muted-foreground/70 mt-5 mb-3">
               {results.count === 0
                 ? 'No letters match your filters.'
-                : `Showing ${threads.length} thread${threads.length !== 1 ? 's' : ''} (${results.count.toLocaleString()} letters total)`}
+                : `Showing ${threads.length} thread${threads.length !== 1 ? 's' : ''} · ${results.count.toLocaleString()} letters total`}
             </p>
           )}
 

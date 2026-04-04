@@ -79,13 +79,13 @@ export default function CommentLetterTopicDetail() {
       <Header />
 
       {/* Hero */}
-      <section className="relative py-16 md:py-20 overflow-hidden">
+      <section className="relative pt-24 pb-8 md:pb-10 overflow-hidden">
         <GradientBackground />
-        <ResponsiveContainer className="relative z-10 text-center max-w-4xl">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+        <ResponsiveContainer className="relative z-10 text-center max-w-3xl">
+          <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
             SEC Comment Letters — {topicName}
           </h1>
-          <p className="text-lg text-white/80">
+          <p className="text-base md:text-lg text-white/80">
             {matchedTopic
               ? `${matchedTopic.letter_count} comment ${matchedTopic.letter_count === 1 ? 'letter' : 'letters'} addressing ${topicName}`
               : `SEC comment letters related to ${topicName}`}
@@ -93,7 +93,7 @@ export default function CommentLetterTopicDetail() {
         </ResponsiveContainer>
       </section>
 
-      <section className="py-8 md:py-12">
+      <section className="py-4 md:py-6">
         <ResponsiveContainer className="max-w-7xl">
           {/* Breadcrumbs */}
           <Breadcrumb className="mb-6">
@@ -123,19 +123,19 @@ export default function CommentLetterTopicDetail() {
           </Breadcrumb>
 
           {/* Topic overview — question-format headings for AEO */}
-          <div className="mb-8 p-6 bg-muted/50 rounded-lg">
-            <h2 className="text-xl font-semibold mb-3">
+          <div className="mb-6">
+            <h2 className="text-base font-semibold mb-2">
               What does the SEC commonly ask about {topicName}?
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
               SEC staff frequently questions companies about their application and disclosure of {topicName}.
               Common areas of inquiry include measurement approaches, disclosure completeness, and the basis
               for significant judgments and estimates related to this accounting area.
             </p>
-            <h3 className="text-lg font-semibold mb-2">
+            <h3 className="text-base font-semibold mb-2">
               How many SEC comment letters have addressed {topicName}?
             </h3>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               {matchedTopic
                 ? `As of ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}, the SEC has issued ${matchedTopic.letter_count} comment ${matchedTopic.letter_count === 1 ? 'letter' : 'letters'} referencing ${topicName}.`
                 : `Browse the letters below to see SEC correspondence related to ${topicName}.`}
@@ -152,21 +152,22 @@ export default function CommentLetterTopicDetail() {
 
           {/* Results count */}
           {!isLoading && results && (
-            <p className="text-sm text-muted-foreground mt-6 mb-4">
+            <p className="text-xs text-muted-foreground/70 mt-5 mb-3">
               {results.count === 0
                 ? 'No letters match your filters.'
-                : `Showing ${((page - 1) * results.pageSize) + 1}–${Math.min(page * results.pageSize, results.count)} of ${results.count.toLocaleString()} letters`}
+                : `Showing ${threads.length} thread${threads.length !== 1 ? 's' : ''} · ${results.count.toLocaleString()} letters total`}
             </p>
           )}
 
           {/* Loading */}
           {isLoading && (
-            <div className="mt-6 space-y-0 divide-y divide-border/60">
+            <div className="mt-6 space-y-3">
               {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="py-6 space-y-2.5">
+                <div key={i} className="py-5 px-6 rounded-lg bg-muted/40 space-y-2.5">
                   <Skeleton className="h-5 w-1/3" />
                   <Skeleton className="h-3.5 w-1/4" />
                   <Skeleton className="h-10 w-full" />
+                  <Skeleton className="h-3 w-1/3" />
                 </div>
               ))}
             </div>

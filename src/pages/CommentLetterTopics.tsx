@@ -8,9 +8,10 @@ import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TopicCard } from '@/components/comment-letters/TopicCard';
 import { SoftCTA } from '@/components/comment-letters/SoftCTA';
+import { INPUT_STYLES } from '@/components/comment-letters/styles';
 import { CommentLetterStructuredData, buildBreadcrumbSchema } from '@/components/comment-letters/CommentLetterStructuredData';
 import { useCommentLetterTopics } from '@/hooks/useCommentLetterTopics';
-import { Search, Tag } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
 
@@ -44,15 +45,10 @@ export default function CommentLetterTopics() {
       <Header />
 
       {/* Hero */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
+      <section className="relative pt-24 pb-8 md:pb-10 overflow-hidden">
         <GradientBackground />
-        <ResponsiveContainer className="relative z-10 text-center max-w-4xl">
-          <div className="flex justify-center mb-6">
-            <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-sm">
-              <Tag className="h-8 w-8 text-white" />
-            </div>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+        <ResponsiveContainer className="relative z-10 text-center max-w-3xl">
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-3 tracking-tight">
             SEC Comment Letters by ASC Topic
           </h1>
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
@@ -63,7 +59,7 @@ export default function CommentLetterTopics() {
         </ResponsiveContainer>
       </section>
 
-      <section className="py-8 md:py-12">
+      <section className="py-4 md:py-6">
         <ResponsiveContainer className="max-w-7xl">
           {/* Breadcrumbs */}
           <Breadcrumb className="mb-6">
@@ -93,7 +89,7 @@ export default function CommentLetterTopics() {
               placeholder="Search topics..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="pl-9"
+              className={`pl-9 ${INPUT_STYLES}`}
             />
           </div>
 

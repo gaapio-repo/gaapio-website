@@ -4,7 +4,6 @@ import { SEO } from '@/components/SEO';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { ResponsiveContainer } from '@/components/layout/ResponsiveContainer';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
@@ -283,16 +282,22 @@ export default function CommentLetterDetail() {
             </div>
 
             {letter.tags.length > 0 && (
-              <div>
-                <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">Accounting Topics</span>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {letter.tags.map(tag => (
-                    <Link key={tag} to={`/comment-letters/topics/${topicToSlug(tag)}`}>
-                      <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border-0 cursor-pointer text-xs">{tag}</Badge>
-                    </Link>
+              <>
+                <hr className="border-t border-border/30 my-4" />
+                <div className="flex flex-wrap items-center text-[10px] uppercase tracking-widest text-muted-foreground/50">
+                  {letter.tags.map((tag, i) => (
+                    <span key={tag} className="flex items-center">
+                      {i > 0 && <span className="mx-2">·</span>}
+                      <Link
+                        to={`/comment-letters/topics/${topicToSlug(tag)}`}
+                        className="hover:text-primary transition-colors"
+                      >
+                        {tag}
+                      </Link>
+                    </span>
                   ))}
                 </div>
-              </div>
+              </>
             )}
           </div>
 

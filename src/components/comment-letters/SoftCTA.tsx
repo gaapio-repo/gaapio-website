@@ -9,12 +9,12 @@ interface SoftCTAProps {
 
 export function SoftCTA({ context }: SoftCTAProps) {
   const heading = context
-    ? `Researching ${context}?`
-    : 'Need deeper research?';
+    ? `Apply ${context} to your company's situation`
+    : 'Go beyond browsing — apply comment letters to your situation';
 
   const description = context
-    ? `Gaapio provides citation-verified analysis for ${context} with AI-powered Codification search. Get answers grounded in authoritative guidance.`
-    : "Gaapio's AI analyzes the Codification and applies it to your specific scenario. Get citation-verified answers in minutes, not hours.";
+    ? `Gaapio's AI connects SEC comment letter insights on ${context} to your specific facts and circumstances. Search across the Codification, comment letters, and Big 4 guidance in one place.`
+    : "Gaapio's AI lets you search comment letters alongside the Codification and Big 4 guidance, then apply the findings to your company's specific facts and circumstances.";
 
   return (
     <section className="relative py-16 md:py-20 overflow-hidden">
@@ -35,7 +35,7 @@ export function SoftCTA({ context }: SoftCTAProps) {
         </p>
         <Button asChild size="lg" variant="secondary" className="group">
           <Link to="/request-demo">
-            Try Gaapio Free
+            Request a Demo
             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </Button>
