@@ -11,6 +11,8 @@ import { SoftCTA } from '@/components/comment-letters/SoftCTA';
 import { INPUT_STYLES } from '@/components/comment-letters/styles';
 import { CommentLetterStructuredData, buildBreadcrumbSchema } from '@/components/comment-letters/CommentLetterStructuredData';
 import { useCommentLetterTopics } from '@/hooks/useCommentLetterTopics';
+import { appSupabase } from '@/integrations/supabase/appClient';
+import { useQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
@@ -23,7 +25,20 @@ export default function CommentLetterTopics() {
     t.topic.toLowerCase().includes(search.toLowerCase())
   );
 
-  const totalLetters = (topics || []).reduce((sum, t) => sum + t.letter_count, 0);
+  // Get actual unique letter count (not inflated by multi-tag letters)
+  const { data: letterCount } = useQuery({
+    queryKey: ['comment-letter-total-count'],
+    staleTime: 30 * 60 * 1000,
+    queryFn: async () => {
+      const { count, error } = await appSupabase
+        .from('sec_comment_letters')
+        .select('id', { count: 'exact', head: true })
+        .eq('accounting_relevant', true);
+      if (error) throw error;
+      return count || 0;
+    },
+  });
+  const totalLetters = letterCount || 0;
   const allCounts = useMemo(() => (topics || []).map(t => t.letter_count).sort((a, b) => a - b), [topics]);
 
   return (
