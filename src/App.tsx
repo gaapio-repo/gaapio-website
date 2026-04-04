@@ -34,6 +34,10 @@ import Admin from "./pages/Admin";
 import AdminUsers from "./pages/AdminUsers";
 import PolicyDetail from "./pages/PolicyDetail";
 import Status from "./pages/Status";
+import CommentLetters from "./pages/CommentLetters";
+import CommentLetterDetail from "./pages/CommentLetterDetail";
+import CommentLetterTopics from "./pages/CommentLetterTopics";
+import CommentLetterTopicDetail from "./pages/CommentLetterTopicDetail";
 import Privacy from "./pages/Privacy";
 import SSA from "./pages/SSA";
 import TermsOfService from "./pages/TermsOfService";
@@ -98,6 +102,10 @@ function App() {
             <Route path="/dpa" element={<Privacy />} />
             <Route path="/ssa" element={<SSA />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/comment-letters" element={<CommentLetters />} />
+            <Route path="/comment-letters/topics" element={<CommentLetterTopics />} />
+            <Route path="/comment-letters/topics/:topicSlug" element={<CommentLetterTopicDetail />} />
+            <Route path="/comment-letters/:slug" element={<CommentLetterDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ProtectedLayout>

@@ -89,6 +89,12 @@ const companyPages = [
     external: true
   },
   {
+    name: "SEC Comment Letters",
+    href: "/comment-letters",
+    icon: FileSearch,
+    description: "Browse SEC comment letters by ASC topic"
+  },
+  {
     name: "Careers",
     href: "/careers",
     icon: Briefcase,

@@ -72,11 +72,19 @@ export function Footer() {
               <h3 className="text-lg font-semibold mb-2 text-white">Resources</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link 
-                    to="/resources" 
+                  <Link
+                    to="/resources"
                     className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Resource Center
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/comment-letters"
+                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  >
+                    SEC Comment Letters
                   </Link>
                 </li>
                 <li>
