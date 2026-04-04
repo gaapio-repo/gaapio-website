@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { SEO } from '@/components/SEO';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
@@ -24,6 +24,7 @@ export default function CommentLetterTopics() {
   );
 
   const totalLetters = (topics || []).reduce((sum, t) => sum + t.letter_count, 0);
+  const allCounts = useMemo(() => (topics || []).map(t => t.letter_count).sort((a, b) => a - b), [topics]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -109,7 +110,7 @@ export default function CommentLetterTopics() {
           {!isLoading && filteredTopics.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {filteredTopics.map(topic => (
-                <TopicCard key={topic.topic} topic={topic} />
+                <TopicCard key={topic.topic} topic={topic} allCounts={allCounts} />
               ))}
             </div>
           )}

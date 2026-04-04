@@ -6,27 +6,32 @@ import { CARD_STYLES } from './styles';
 
 interface TopicCardProps {
   topic: TopicStat;
+  /** Sorted array of all letter counts across topics, for relative scaling */
+  allCounts?: number[];
 }
 
 /** 10-step volume gradient: grey → teal → blue */
 const VOLUME_STYLES = [
-  'bg-[#f1f1f1] text-[#999]',       // 1–10
-  'bg-[#e8e8e8] text-[#777]',       // 11–25
-  'bg-[#dde8e8] text-[#5f7a7a]',    // 26–50
-  'bg-[#d0e8ee] text-[#3d7a8a]',    // 51–100
-  'bg-[#bee0f0] text-[#2a6f8f]',    // 101–200
-  'bg-[#a8d5f2] text-[#1a6090]',    // 201–350
-  'bg-[#8ec8f4] text-[#0e5090]',    // 351–500
-  'bg-[#70b8f5] text-[#084080]',    // 501–750
-  'bg-[#4da3f0] text-white',        // 751–1500
-  'bg-[#0088ee] text-white',        // 1500+
+  'bg-[#f1f1f1] text-[#999]',
+  'bg-[#e8e8e8] text-[#777]',
+  'bg-[#dde8e8] text-[#5f7a7a]',
+  'bg-[#d0e8ee] text-[#3d7a8a]',
+  'bg-[#bee0f0] text-[#2a6f8f]',
+  'bg-[#a8d5f2] text-[#1a6090]',
+  'bg-[#8ec8f4] text-[#0e5090]',
+  'bg-[#70b8f5] text-[#084080]',
+  'bg-[#4da3f0] text-white',
+  'bg-[#0088ee] text-white',
 ];
 
-const VOLUME_THRESHOLDS = [10, 25, 50, 100, 200, 350, 500, 750, 1500];
-
-function getVolumeStyle(count: number): string {
-  const idx = VOLUME_THRESHOLDS.findIndex(t => count <= t);
-  return VOLUME_STYLES[idx === -1 ? VOLUME_STYLES.length - 1 : idx];
+/** Get volume style based on percentile rank within all topics */
+function getVolumeStyle(count: number, allCounts?: number[]): string {
+  if (!allCounts || allCounts.length === 0) return VOLUME_STYLES[4];
+  // Find what percentile this count is at
+  const rank = allCounts.filter(c => c <= count).length;
+  const percentile = rank / allCounts.length;
+  const idx = Math.min(Math.floor(percentile * 10), 9);
+  return VOLUME_STYLES[idx];
 }
 
 /** 10-step recency gradient: green → grey */
@@ -60,8 +65,8 @@ function getRecencyColor(dateStr: string): string {
   return RECENCY_COLORS[9];
 }
 
-export function TopicCard({ topic }: TopicCardProps) {
-  const volumeStyle = getVolumeStyle(topic.letter_count);
+export function TopicCard({ topic, allCounts }: TopicCardProps) {
+  const volumeStyle = getVolumeStyle(topic.letter_count, allCounts);
   const recencyColor = topic.latest_filing_date ? getRecencyColor(topic.latest_filing_date) : RECENCY_COLORS[9];
 
   return (
