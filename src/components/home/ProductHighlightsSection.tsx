@@ -49,7 +49,7 @@ export function ProductHighlightsSection() {
       hasHoverDescriptions: true,
       href: "/contract-analysis",
       icon: FileSearch,
-      iconColor: "#339CFF"
+      iconColor: "hsl(var(--primary))"
     },
     {
       id: "memos",
@@ -62,7 +62,7 @@ export function ProductHighlightsSection() {
       ],
       href: "/accounting-memos",
       icon: FileText,
-      iconColor: "#339CFF"
+      iconColor: "hsl(var(--primary))"
     },
     {
       id: "disclosures",
@@ -75,7 +75,7 @@ export function ProductHighlightsSection() {
       ],
       href: "/footnote-disclosures",
       icon: FileCheck,
-      iconColor: "#339CFF"
+      iconColor: "hsl(var(--primary))"
     },
     {
       id: "research-gpt",
@@ -88,7 +88,7 @@ export function ProductHighlightsSection() {
       ],
       href: "/research-gpt",
       icon: Brain,
-      iconColor: "#339CFF"
+      iconColor: "hsl(var(--primary))"
     },
     {
       id: "updates",
@@ -101,7 +101,7 @@ export function ProductHighlightsSection() {
       ],
       href: "/guidance-updates",
       icon: Bell,
-      iconColor: "#339CFF"
+      iconColor: "hsl(var(--primary))"
     },
     {
       id: "sox-controls",
@@ -110,7 +110,7 @@ export function ProductHighlightsSection() {
       bulletPoints: [],
       href: "/sox-controls",
       icon: Shield,
-      iconColor: "#339CFF"
+      iconColor: "hsl(var(--primary))"
     }
   ];
 
@@ -154,7 +154,7 @@ export function ProductHighlightsSection() {
                       <TabsTrigger
                         key={product.id}
                         value={product.id}
-                        className="w-full h-auto p-6 justify-start text-left bg-white/80 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 border border-gray-200 dark:border-white/20 rounded-xl data-[state=active]:bg-[#339CFF] data-[state=active]:text-white data-[state=active]:border-[#339CFF] text-gray-900 dark:text-white data-[state=active]:text-white transition-all duration-300 shadow-sm dark:shadow-none"
+                        className="w-full h-auto p-6 justify-start text-left bg-white/80 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 border border-gray-200 dark:border-white/20 rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary data-[state=active]:shadow-sm text-gray-900 dark:text-white data-[state=active]:text-white transition-all duration-300 shadow-sm dark:shadow-none"
                       >
                         <div className="font-semibold text-base leading-tight">
                           {product.label}
@@ -177,7 +177,7 @@ export function ProductHighlightsSection() {
                     >
                       <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 h-full flex flex-col">
                         <div className="mb-6">
-                          <span className="text-sm font-bold text-[#339CFF] tracking-wider">
+                          <span className="text-sm font-bold text-primary tracking-wider">
                             {product.label}
                           </span>
                         </div>
@@ -221,7 +221,7 @@ export function ProductHighlightsSection() {
                                   )}
                                   disabled={!hasExpandableContent}
                                 >
-                                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#339CFF] mt-2 mr-3"></div>
+                                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2 mr-3"></div>
                                   <span className="text-gray-700 dark:text-gray-300 flex-1">
                                     {title}
                                   </span>

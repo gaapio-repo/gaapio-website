@@ -47,7 +47,7 @@ export const HeroSection = memo(function HeroSection({
               </span>
             </h1>
             
-            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-gray-900 dark:text-gray-900 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
+            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-gray-900 dark:text-gray-100 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
               {subtitle}
             </p>
             

@@ -38,20 +38,13 @@ export function FinalCtaSection() {
       {/* Light Gaapio blue gradient background */}
       <div className="absolute inset-0 cta-gradient-bg" />
       
-      {/* Subtle dot grid texture */}
-      <div 
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 1px)`,
-          backgroundSize: '24px 24px'
-        }}
-      />
+      {/* Removed dot grid texture — too subtle to add value */}
       
       {/* Subtle white glow for depth */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-br from-white/10 via-white/5 to-transparent blur-3xl pointer-events-none rounded-full" />
       
       {/* Footer transition gradient - seamless to black footer */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent via-black/50 to-black" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent via-black/20 to-black" />
 
       <ResponsiveContainer className="relative z-10">
         <div className="text-center max-w-3xl mx-auto">
@@ -84,7 +77,7 @@ export function FinalCtaSection() {
               <Button
                 size="lg"
                 variant="black"
-                className="px-8 hover:bg-gray-800 hover:scale-105 transition-all"
+                className="px-8 hover:bg-gray-800 hover:shadow-lg hover:brightness-110 transition-all"
                 asChild
               >
                 <Link to="/signup-select">Sign Up Now</Link>
@@ -93,7 +86,7 @@ export function FinalCtaSection() {
               <Button
                 size="lg"
                 variant="black"
-                className="px-8 hover:bg-gray-800 hover:scale-105 transition-all"
+                className="px-8 hover:bg-gray-800 hover:shadow-lg hover:brightness-110 transition-all"
                 asChild
               >
                 <Link to="/contact">Contact Sales</Link>

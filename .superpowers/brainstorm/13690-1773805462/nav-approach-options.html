@@ -1,0 +1,166 @@
+<h2>Mega Menu Design Directions</h2>
+<p class="subtitle">Three approaches to improve polish and consistency. Click the one that feels most aligned with the Gaapio brand.</p>
+
+<!-- Option A: Clean Card Grid -->
+<div class="cards">
+  <div class="card" data-choice="clean-grid" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 0; overflow: hidden;">
+      <div style="background: #fff; padding: 24px; min-height: 300px;">
+        <div style="font-size: 10px; font-weight: 700; color: #0099FF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Products</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="padding: 16px; border-radius: 12px; border: 1px solid #f0f0f0; transition: all 0.2s;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #0099FF15, #0099FF08); display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+              <span style="font-size: 16px;">📄</span>
+            </div>
+            <div style="font-size: 13px; font-weight: 600; color: #111; margin-bottom: 4px;">Memos</div>
+            <div style="font-size: 11px; color: #888; line-height: 1.4;">Better memos, faster</div>
+          </div>
+          <div style="padding: 16px; border-radius: 12px; border: 1px solid #f0f0f0;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #0099FF15, #0099FF08); display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+              <span style="font-size: 16px;">✅</span>
+            </div>
+            <div style="font-size: 13px; font-weight: 600; color: #111; margin-bottom: 4px;">Footnotes</div>
+            <div style="font-size: 11px; color: #888; line-height: 1.4;">AI checklists</div>
+          </div>
+          <div style="padding: 16px; border-radius: 12px; border: 1px solid #f0f0f0;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #0099FF15, #0099FF08); display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+              <span style="font-size: 16px;">🔍</span>
+            </div>
+            <div style="font-size: 13px; font-weight: 600; color: #111; margin-bottom: 4px;">Contracts</div>
+            <div style="font-size: 11px; color: #888; line-height: 1.4;">AI-powered analysis</div>
+          </div>
+          <div style="padding: 16px; border-radius: 12px; border: 1px solid #f0f0f0;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #0099FF15, #0099FF08); display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+              <span style="font-size: 16px;">🧠</span>
+            </div>
+            <div style="font-size: 13px; font-weight: 600; color: #111; margin-bottom: 4px;">Research</div>
+            <div style="font-size: 11px; color: #888; line-height: 1.4;">AI research assistant</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Clean Card Grid</h3>
+      <p>Drop the two-column hover preview entirely. Use a consistent card grid for all three menus (Solutions, Products, Company). Each item is a self-contained card with icon, title, and one-line description. Cleaner, more modern, consistent.</p>
+      <div class="pros-cons" style="margin-top: 12px;">
+        <div class="pros"><h4>Pros</h4><ul><li>Fully consistent across all menus</li><li>Simpler, less visual clutter</li><li>Faster to scan — no hovering needed</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Loses the detail preview (features list)</li><li>Less differentiation between menus</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="refined-split" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 0; overflow: hidden;">
+      <div style="background: #fff; padding: 0; min-height: 300px; display: grid; grid-template-columns: 260px 1fr;">
+        <!-- Left -->
+        <div style="padding: 20px; border-right: 1px solid #f0f0f0;">
+          <div style="font-size: 10px; font-weight: 700; color: #0099FF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px;">Products</div>
+          <div style="display: flex; flex-direction: column; gap: 2px;">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; background: #f0f7ff;">
+              <span style="font-size: 14px;">📄</span>
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #111;">Memos</div>
+                <div style="font-size: 11px; color: #888;">Better memos, faster</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px;">
+              <span style="font-size: 14px;">✅</span>
+              <div>
+                <div style="font-size: 13px; font-weight: 500; color: #555;">Footnotes</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px;">
+              <span style="font-size: 14px;">🔍</span>
+              <div>
+                <div style="font-size: 13px; font-weight: 500; color: #555;">Contracts</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right -->
+        <div style="padding: 20px; background: #fafbfc;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 40px; height: 40px; border-radius: 10px; background: #0099FF; display: flex; align-items: center; justify-content: center;">
+              <span style="color: white; font-size: 18px;">📄</span>
+            </div>
+            <div>
+              <div style="font-size: 15px; font-weight: 700; color: #111;">Memos</div>
+              <div style="font-size: 12px; color: #888;">Better memos, faster</div>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555;">
+              <div style="width: 5px; height: 5px; border-radius: 50%; background: #0099FF;"></div>
+              Version history & reviewer comments
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555;">
+              <div style="width: 5px; height: 5px; border-radius: 50%; background: #0099FF;"></div>
+              Guided AI prompts
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555;">
+              <div style="width: 5px; height: 5px; border-radius: 50%; background: #0099FF;"></div>
+              Exportable audit package
+            </div>
+          </div>
+          <div style="margin-top: 16px; font-size: 12px; font-weight: 600; color: #0099FF;">Learn more →</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Refined Two-Column (Polish the Current)</h3>
+      <p>Keep the two-column hover-preview pattern but refine the visual execution: tighter spacing, subtle backgrounds instead of strong gradients, more refined typography. Make all three menus consistent with this pattern (including Company).</p>
+      <div class="pros-cons" style="margin-top: 12px;">
+        <div class="pros"><h4>Pros</h4><ul><li>Preserves detail preview for Products/Solutions</li><li>Consistent structure for all menus</li><li>Feels more intentional and polished</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Still a lot of content to take in</li><li>Hover interaction required to see details</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="minimal-list" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 0; overflow: hidden;">
+      <div style="background: #fff; padding: 24px; min-height: 300px;">
+        <div style="font-size: 10px; font-weight: 700; color: #0099FF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px;">Products</div>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <div style="display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 10px; border: 1px solid #f0f0f0; background: #fafbfc;">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: #0099FF; display: flex; align-items: center; justify-content: center;">
+              <span style="color: white; font-size: 14px;">📄</span>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 600; color: #111;">Memos</div>
+              <div style="font-size: 11px; color: #888;">AI-assisted accounting memo drafting</div>
+            </div>
+            <span style="color: #ccc; font-size: 14px;">→</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 10px;">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: #e8e8e8; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 14px;">✅</span>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 600; color: #111;">Footnote Disclosures</div>
+              <div style="font-size: 11px; color: #888;">Benchmarked, AI-completed checklists</div>
+            </div>
+            <span style="color: #ccc; font-size: 14px;">→</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 10px;">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: #e8e8e8; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 14px;">🔍</span>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 600; color: #111;">Contract Analysis</div>
+              <div style="font-size: 11px; color: #888;">AI-powered contract review</div>
+            </div>
+            <span style="color: #ccc; font-size: 14px;">→</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: Minimal Stacked List</h3>
+      <p>Single-column list with icon, title, and one-line description per item. No hover preview, no grid. Think Linear or Stripe's nav — clean, narrow, fast. Same structure for all three menus. Compact and premium feeling.</p>
+      <div class="pros-cons" style="margin-top: 12px;">
+        <div class="pros"><h4>Pros</h4><ul><li>Most modern / premium feeling</li><li>Fastest to scan and navigate</li><li>Narrow footprint — doesn't dominate the page</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>No room for feature details</li><li>Relies on individual pages to sell each product</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>

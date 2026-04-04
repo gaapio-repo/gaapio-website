@@ -69,8 +69,8 @@ export function TrustBarSection() {
                 key={logo.id}
                 className={cn(
                   "flex items-center justify-center transition-all duration-700",
-                  isVisible 
-                    ? "opacity-70 translate-y-0 hover:opacity-100" 
+                  isVisible
+                    ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-[10px]"
                 )}
                 style={{ 
@@ -80,7 +80,7 @@ export function TrustBarSection() {
               <img
                   src={logo.logo_url}
                   alt={logo.company_name}
-                  className="h-8 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                  className="h-8 md:h-10 w-auto object-contain transition-all duration-300 grayscale hover:grayscale-0 hover:scale-105"
                   title={logo.company_name}
                 />
               </div>

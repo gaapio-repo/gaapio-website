@@ -1,0 +1,115 @@
+<h2>Updated Active State — No Border Accent</h2>
+<p class="subtitle">Three alternatives for the left-side active item. Pick the one that feels cleanest.</p>
+
+<div class="cards">
+  <!-- Option A: White card lift -->
+  <div class="card" data-choice="white-lift" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 0; overflow: hidden;">
+      <div style="background: #f5f6f8; border-radius: 12px; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;">
+        <div style="font-size: 11px; font-weight: 700; color: #0099FF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding: 0 8px;">Products</div>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <!-- Active: white card with subtle shadow -->
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: #ffffff; box-shadow: 0 1px 4px rgba(0,0,0,0.06); cursor: pointer;">
+            <div style="width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, #0099FF, #0077CC); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600; color: #111;">Memos</div>
+              <div style="font-size: 11px; color: #666; margin-top: 1px;">Better memos, faster</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer;">
+            <div style="width: 28px; height: 28px; border-radius: 7px; background: #e5e7eb; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="m9 15 2 2 4-4"/></svg>
+            </div>
+            <div style="font-size: 13px; font-weight: 500; color: #555;">Footnote Disclosures</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer;">
+            <div style="width: 28px; height: 28px; border-radius: 7px; background: #e5e7eb; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <div style="font-size: 13px; font-weight: 500; color: #555;">Contract Analysis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: White Card Lift</h3>
+      <p>Active item becomes a white card with subtle shadow, lifting off the gray background. Icon turns blue. No borders. Clean and minimal.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Blue tint (no border) -->
+  <div class="card" data-choice="blue-tint" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 0; overflow: hidden;">
+      <div style="background: #f5f6f8; border-radius: 12px; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;">
+        <div style="font-size: 11px; font-weight: 700; color: #0099FF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding: 0 8px;">Products</div>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <!-- Active: soft blue tint, no border -->
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: #e8f1ff; cursor: pointer;">
+            <div style="width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, #0099FF, #0077CC); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600; color: #0077CC;">Memos</div>
+              <div style="font-size: 11px; color: #5588bb; margin-top: 1px;">Better memos, faster</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer;">
+            <div style="width: 28px; height: 28px; border-radius: 7px; background: #e5e7eb; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="m9 15 2 2 4-4"/></svg>
+            </div>
+            <div style="font-size: 13px; font-weight: 500; color: #555;">Footnote Disclosures</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer;">
+            <div style="width: 28px; height: 28px; border-radius: 7px; background: #e5e7eb; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <div style="font-size: 13px; font-weight: 500; color: #555;">Contract Analysis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Soft Blue Tint (No Border)</h3>
+      <p>Active item gets light blue background. Text turns blue. Icon turns blue. No border, no shadow. More colorful but still subtle.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Bold weight only -->
+  <div class="card" data-choice="bold-only" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 0; overflow: hidden;">
+      <div style="background: #f5f6f8; border-radius: 12px; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;">
+        <div style="font-size: 11px; font-weight: 700; color: #0099FF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding: 0 8px;">Products</div>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <!-- Active: just bold text + blue icon, no background change -->
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer;">
+            <div style="width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, #0099FF, #0077CC); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 700; color: #111;">Memos</div>
+              <div style="font-size: 11px; color: #666; margin-top: 1px;">Better memos, faster</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer;">
+            <div style="width: 28px; height: 28px; border-radius: 7px; background: #e5e7eb; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="m9 15 2 2 4-4"/></svg>
+            </div>
+            <div style="font-size: 13px; font-weight: 500; color: #555;">Footnote Disclosures</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer;">
+            <div style="width: 28px; height: 28px; border-radius: 7px; background: #e5e7eb; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <div style="font-size: 13px; font-weight: 500; color: #555;">Contract Analysis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: Icon + Bold Only</h3>
+      <p>No background change at all. Active item is indicated only by the blue icon and bolder text weight. Maximum minimalism — the dark card on the right already tells you what's selected.</p>
+    </div>
+  </div>
+</div>
