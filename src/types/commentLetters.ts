@@ -18,6 +18,7 @@ export interface CommentLetter {
 
 export interface CommentLetterDetail extends CommentLetter {
   cleaned_text?: string | null;
+  raw_text?: string | null;
 }
 
 export interface TopicStat {

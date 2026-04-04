@@ -8,18 +8,26 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { SoftCTA } from '@/components/comment-letters/SoftCTA';
 import { CommentLetterStructuredData, buildBreadcrumbSchema, buildWebPageSchema } from '@/components/comment-letters/CommentLetterStructuredData';
 import { useCommentLetterDetail } from '@/hooks/useCommentLetterDetail';
 import { topicToSlug } from '@/types/commentLetters';
-import { ArrowLeft, Calendar, Building2, ExternalLink, FileText, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowLeft, Calendar, Building2, ExternalLink, FileText } from 'lucide-react';
+/** Extract the HTML content from EDGAR raw text, stripping the SGML wrapper */
+function extractHtmlBody(raw: string): string {
+  // EDGAR wraps content in <DOCUMENT><TYPE>CORRESP...<TEXT> before the actual HTML
+  const htmlMatch = raw.match(/<HTML[\s\S]*<\/HTML>/i);
+  if (htmlMatch) return htmlMatch[0];
+  // Fallback: try to find a <BODY> tag
+  const bodyMatch = raw.match(/<BODY[\s\S]*<\/BODY>/i);
+  if (bodyMatch) return `<html><head><style>body{font-family:system-ui,sans-serif;font-size:14px;line-height:1.6;padding:24px;max-width:100%;}</style></head>${bodyMatch[0]}</html>`;
+  // Last resort: wrap plain text
+  return `<html><head><style>body{font-family:system-ui,sans-serif;font-size:14px;line-height:1.6;padding:24px;white-space:pre-wrap;}</style></head><body>${raw}</body></html>`;
+}
 
 export default function CommentLetterDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { data: letter, isLoading, error } = useCommentLetterDetail(slug);
-  const [contentOpen, setContentOpen] = useState(false);
 
   // Loading state
   if (isLoading) {
@@ -219,27 +227,47 @@ export default function CommentLetterDetail() {
             </CardContent>
           </Card>
 
-          {/* Letter Content (collapsible) */}
-          {letter.cleaned_text && (
-            <Collapsible open={contentOpen} onOpenChange={setContentOpen}>
-              <Card>
-                <CollapsibleTrigger asChild>
-                  <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors">
-                    <CardTitle className="text-lg flex items-center justify-between">
-                      Letter Content
-                      <ChevronDown className={`h-5 w-5 transition-transform ${contentOpen ? 'rotate-180' : ''}`} />
-                    </CardTitle>
-                  </CardHeader>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <CardContent>
-                    <div className="prose prose-sm max-w-none text-muted-foreground whitespace-pre-line">
-                      {letter.cleaned_text}
-                    </div>
-                  </CardContent>
-                </CollapsibleContent>
-              </Card>
-            </Collapsible>
+          {/* Letter Content */}
+          {(letter.raw_text || letter.cleaned_text) && (
+            <Card className="mb-6">
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle className="text-lg">Original Letter</CardTitle>
+                {letter.sec_url && (
+                  <a
+                    href={letter.sec_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1"
+                  >
+                    View on EDGAR
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                )}
+              </CardHeader>
+              <CardContent className={letter.raw_text ? 'p-0' : undefined}>
+                {letter.raw_text ? (
+                  <iframe
+                    srcDoc={extractHtmlBody(letter.raw_text)}
+                    title={`SEC Comment Letter — ${letter.company_name}`}
+                    className="w-full border-0 rounded-b-lg"
+                    style={{ height: '80vh', minHeight: '600px' }}
+                    sandbox=""
+                  />
+                ) : (
+                  <div className="prose prose-sm max-w-none dark:prose-invert">
+                    {letter.cleaned_text!.split('\n\n').map((paragraph, i) => {
+                      const trimmed = paragraph.trim();
+                      if (!trimmed) return null;
+                      return (
+                        <p key={i} className="text-sm text-muted-foreground leading-relaxed">
+                          {trimmed}
+                        </p>
+                      );
+                    })}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           )}
 
           {/* Back link */}

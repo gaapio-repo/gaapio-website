@@ -29,7 +29,7 @@ export function useCommentLetterDetail(slug: string | undefined) {
           .eq('comment_letter_id', letter.id),
         appSupabase
           .from('sec_comment_contents')
-          .select('cleaned_text')
+          .select('cleaned_text, raw_text')
           .eq('comment_letter_id', letter.id)
           .maybeSingle(),
       ]);
@@ -46,6 +46,7 @@ export function useCommentLetterDetail(slug: string | undefined) {
         tags,
         primary_tags: primaryTags,
         cleaned_text: contentResult.data?.cleaned_text || null,
+        raw_text: contentResult.data?.raw_text || null,
       } as CommentLetterDetail;
     },
   });
