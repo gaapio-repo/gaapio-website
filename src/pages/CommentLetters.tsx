@@ -1,10 +1,11 @@
+import { useMemo } from 'react';
 import { SEO } from '@/components/SEO';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { ResponsiveContainer } from '@/components/layout/ResponsiveContainer';
 import { GradientBackground } from '@/components/home/GradientBackground';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CommentLetterCard } from '@/components/comment-letters/CommentLetterCard';
+import { CommentLetterThreadCard } from '@/components/comment-letters/CommentLetterThreadCard';
 import { CommentLetterFilterBar } from '@/components/comment-letters/CommentLetterFilterBar';
 import { CommentLetterPagination } from '@/components/comment-letters/CommentLetterPagination';
 import { SoftCTA } from '@/components/comment-letters/SoftCTA';
@@ -13,6 +14,7 @@ import { useURLFilters } from '@/hooks/useURLFilters';
 import { useCommentLetters } from '@/hooks/useCommentLetters';
 import { useCommentLetterTopics } from '@/hooks/useCommentLetterTopics';
 import { useCommentLetterFilterOptions } from '@/hooks/useCommentLetterFilters';
+import { groupIntoThreads } from '@/types/commentLetters';
 import { FileSearch } from 'lucide-react';
 
 export default function CommentLetters() {
@@ -23,6 +25,12 @@ export default function CommentLetters() {
 
   const totalLetters = results?.count || 0;
   const page = filters.page || 1;
+
+  // Group fetched letters into threads
+  const threads = useMemo(() => {
+    if (!results?.data) return [];
+    return groupIntoThreads(results.data);
+  }, [results?.data]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -81,40 +89,40 @@ export default function CommentLetters() {
             <p className="text-sm text-muted-foreground mt-6 mb-4">
               {results.count === 0
                 ? 'No letters match your filters.'
-                : `Showing ${((page - 1) * results.pageSize) + 1}–${Math.min(page * results.pageSize, results.count)} of ${results.count.toLocaleString()} letters`}
+                : `Showing ${threads.length} thread${threads.length !== 1 ? 's' : ''} (${results.count.toLocaleString()} letters total)`}
             </p>
           )}
 
           {/* Loading state */}
           {isLoading && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            <div className="mt-6 space-y-3">
               {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="space-y-3 p-6 border rounded-lg">
-                  <Skeleton className="h-5 w-3/4" />
-                  <Skeleton className="h-4 w-1/2" />
-                  <Skeleton className="h-16 w-full" />
-                  <div className="flex gap-2">
-                    <Skeleton className="h-5 w-20" />
-                    <Skeleton className="h-5 w-16" />
-                  </div>
+                <div key={i} className="py-5 px-6 rounded-lg bg-muted/40 space-y-2.5">
+                  <Skeleton className="h-5 w-1/3" />
+                  <Skeleton className="h-3.5 w-1/4" />
+                  <Skeleton className="h-10 w-full" />
+                  <Skeleton className="h-3 w-1/3" />
                 </div>
               ))}
             </div>
           )}
 
-          {/* Results grid */}
-          {!isLoading && results && results.data.length > 0 && (
+          {/* Results — grouped by thread */}
+          {!isLoading && threads.length > 0 && (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {results.data.map(letter => (
-                  <CommentLetterCard key={letter.id} letter={letter} />
+              <div>
+                {threads.map(thread => (
+                  <CommentLetterThreadCard
+                    key={thread.file_number || thread.slug}
+                    thread={thread}
+                  />
                 ))}
               </div>
 
               <div className="mt-8">
                 <CommentLetterPagination
                   currentPage={page}
-                  totalPages={results.totalPages}
+                  totalPages={results?.totalPages || 1}
                   onPageChange={p => setFilters({ page: p })}
                 />
               </div>

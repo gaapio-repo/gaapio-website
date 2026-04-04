@@ -75,7 +75,7 @@ export function CommentLetterFilterBar({
           value={filters.topic || '_all'}
           onValueChange={v => onFilterChange({ topic: v === '_all' ? undefined : v })}
         >
-          <SelectTrigger>
+          <SelectTrigger className="bg-muted/70 border-0 shadow-sm">
             <SelectValue placeholder="All Topics" />
           </SelectTrigger>
           <SelectContent>
@@ -93,7 +93,7 @@ export function CommentLetterFilterBar({
         value={filters.year || '_all'}
         onValueChange={v => onFilterChange({ year: v === '_all' ? undefined : v })}
       >
-        <SelectTrigger>
+        <SelectTrigger className="bg-muted/70 border-0 shadow-sm">
           <SelectValue placeholder="All Years" />
         </SelectTrigger>
         <SelectContent>
@@ -108,7 +108,7 @@ export function CommentLetterFilterBar({
         value={filters.letterType || '_all'}
         onValueChange={v => onFilterChange({ letterType: v === '_all' ? undefined : v })}
       >
-        <SelectTrigger>
+        <SelectTrigger className="bg-muted/70 border-0 shadow-sm">
           <SelectValue placeholder="All Types" />
         </SelectTrigger>
         <SelectContent>
@@ -123,7 +123,7 @@ export function CommentLetterFilterBar({
         value={filters.industry || '_all'}
         onValueChange={v => onFilterChange({ industry: v === '_all' ? undefined : v })}
       >
-        <SelectTrigger>
+        <SelectTrigger className="bg-muted/70 border-0 shadow-sm">
           <SelectValue placeholder="All Industries" />
         </SelectTrigger>
         <SelectContent>
@@ -146,7 +146,7 @@ export function CommentLetterFilterBar({
             placeholder="Search by company, ticker, or keyword..."
             value={searchValue}
             onChange={e => handleSearchChange(e.target.value)}
-            className="pl-9"
+            className="pl-9 bg-muted/70 border-0 shadow-sm"
           />
           {searchValue && (
             <button
@@ -161,7 +161,7 @@ export function CommentLetterFilterBar({
           value={filters.sort || 'date_desc'}
           onValueChange={v => onFilterChange({ sort: v as CommentLetterFilters['sort'] })}
         >
-          <SelectTrigger className="w-full sm:w-48">
+          <SelectTrigger className="w-full sm:w-48 bg-muted/70 border-0 shadow-sm">
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent>

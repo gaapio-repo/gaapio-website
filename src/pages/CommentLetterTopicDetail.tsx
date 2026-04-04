@@ -6,7 +6,7 @@ import { ResponsiveContainer } from '@/components/layout/ResponsiveContainer';
 import { GradientBackground } from '@/components/home/GradientBackground';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
-import { CommentLetterCard } from '@/components/comment-letters/CommentLetterCard';
+import { CommentLetterThreadCard } from '@/components/comment-letters/CommentLetterThreadCard';
 import { CommentLetterFilterBar } from '@/components/comment-letters/CommentLetterFilterBar';
 import { CommentLetterPagination } from '@/components/comment-letters/CommentLetterPagination';
 import { SoftCTA } from '@/components/comment-letters/SoftCTA';
@@ -15,7 +15,7 @@ import { useURLFilters } from '@/hooks/useURLFilters';
 import { useCommentLetters } from '@/hooks/useCommentLetters';
 import { useCommentLetterTopics } from '@/hooks/useCommentLetterTopics';
 import { useCommentLetterFilterOptions } from '@/hooks/useCommentLetterFilters';
-import { slugToTopicPattern } from '@/types/commentLetters';
+import { slugToTopicPattern, groupIntoThreads } from '@/types/commentLetters';
 import { FileSearch } from 'lucide-react';
 import { useMemo } from 'react';
 
@@ -44,6 +44,11 @@ export default function CommentLetterTopicDetail() {
 
   const { data: results, isLoading: lettersLoading } = useCommentLetters(effectiveFilters);
   const page = filters.page || 1;
+
+  const threads = useMemo(() => {
+    if (!results?.data) return [];
+    return groupIntoThreads(results.data);
+  }, [results?.data]);
 
   const isLoading = topicsLoading || lettersLoading;
 
@@ -156,23 +161,26 @@ export default function CommentLetterTopicDetail() {
 
           {/* Loading */}
           {isLoading && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            <div className="mt-6 space-y-0 divide-y divide-border/60">
               {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="space-y-3 p-6 border rounded-lg">
-                  <Skeleton className="h-5 w-3/4" />
-                  <Skeleton className="h-4 w-1/2" />
-                  <Skeleton className="h-16 w-full" />
+                <div key={i} className="py-6 space-y-2.5">
+                  <Skeleton className="h-5 w-1/3" />
+                  <Skeleton className="h-3.5 w-1/4" />
+                  <Skeleton className="h-10 w-full" />
                 </div>
               ))}
             </div>
           )}
 
-          {/* Results */}
-          {!isLoading && results && results.data.length > 0 && (
+          {/* Results — grouped by thread */}
+          {!isLoading && threads.length > 0 && (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {results.data.map(letter => (
-                  <CommentLetterCard key={letter.id} letter={letter} />
+              <div>
+                {threads.map(thread => (
+                  <CommentLetterThreadCard
+                    key={thread.file_number || thread.slug}
+                    thread={thread}
+                  />
                 ))}
               </div>
               <div className="mt-8">

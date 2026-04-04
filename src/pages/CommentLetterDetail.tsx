@@ -5,14 +5,15 @@ import { Footer } from '@/components/footer';
 import { ResponsiveContainer } from '@/components/layout/ResponsiveContainer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
 import { SoftCTA } from '@/components/comment-letters/SoftCTA';
 import { CommentLetterStructuredData, buildBreadcrumbSchema, buildWebPageSchema } from '@/components/comment-letters/CommentLetterStructuredData';
 import { useCommentLetterDetail } from '@/hooks/useCommentLetterDetail';
+import { useCommentLetterThread, ThreadLetter } from '@/hooks/useCommentLetterThread';
 import { topicToSlug } from '@/types/commentLetters';
-import { ArrowLeft, Calendar, Building2, ExternalLink, FileText } from 'lucide-react';
+import { ArrowLeft, ExternalLink, FileText } from 'lucide-react';
+
 /** Extract the HTML content from EDGAR raw text, stripping the SGML wrapper */
 function extractHtmlBody(raw: string): string {
   // EDGAR wraps content in <DOCUMENT><TYPE>CORRESP...<TEXT> before the actual HTML
@@ -20,14 +21,105 @@ function extractHtmlBody(raw: string): string {
   if (htmlMatch) return htmlMatch[0];
   // Fallback: try to find a <BODY> tag
   const bodyMatch = raw.match(/<BODY[\s\S]*<\/BODY>/i);
-  if (bodyMatch) return `<html><head><style>body{font-family:system-ui,sans-serif;font-size:14px;line-height:1.6;padding:24px;max-width:100%;}</style></head>${bodyMatch[0]}</html>`;
-  // Last resort: wrap plain text
-  return `<html><head><style>body{font-family:system-ui,sans-serif;font-size:14px;line-height:1.6;padding:24px;white-space:pre-wrap;}</style></head><body>${raw}</body></html>`;
+  if (bodyMatch) return `<html><head><style>body{font-family:system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.7;padding:32px;max-width:100%;color:#333;}</style></head>${bodyMatch[0]}</html>`;
+  // Last resort: format plain text with proper typography
+  const escaped = raw
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  return `<html><head><style>
+    body { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; line-height: 1.7; padding: 32px; max-width: 100%; color: #333; }
+    p { margin: 0 0 1em 0; }
+  </style></head><body>${escaped.replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')}</body></html>`;
+}
+
+/** Render a single letter's content */
+function LetterContent({ item }: { item: ThreadLetter }) {
+  const date = new Date(item.date_filed).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  const isSecStaff = item.letter_type === 'SEC Staff';
+
+  return (
+    <div className="rounded-lg bg-muted/70 shadow-sm overflow-hidden">
+      {/* Letter header */}
+      <div className="flex items-center justify-between p-5 md:px-8">
+        <div className="flex items-center gap-3">
+          <div className={`w-2 h-2 rounded-full shrink-0 ${isSecStaff ? 'bg-amber-500' : 'bg-primary'}`} />
+          <h3 className="text-base font-semibold">
+            {item.letter_type}
+          </h3>
+          <span className="text-sm text-muted-foreground">{date}</span>
+        </div>
+        {item.sec_url && (
+          <a
+            href={item.sec_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1"
+          >
+            View on EDGAR
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        )}
+      </div>
+
+      {/* Letter content */}
+      {item.raw_text ? (
+        <div className="px-5 md:px-8 pb-5">
+          <iframe
+            srcDoc={extractHtmlBody(item.raw_text)}
+            title={`${item.letter_type} — ${date}`}
+            className="w-full border-0 bg-white rounded-lg shadow-inner"
+            style={{ height: '70vh', minHeight: '500px' }}
+            sandbox=""
+          />
+        </div>
+      ) : item.cleaned_text ? (
+        <div className="px-5 md:px-8 pb-5">
+          <iframe
+            srcDoc={extractHtmlBody(item.cleaned_text)}
+            title={`${item.letter_type} — ${date}`}
+            className="w-full border-0 bg-white rounded-lg shadow-inner"
+            style={{ height: '70vh', minHeight: '500px' }}
+            sandbox=""
+          />
+        </div>
+      ) : (
+        <div className="px-5 md:px-8 pb-5">
+          <p className="text-sm text-muted-foreground italic">Content not available.</p>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function CommentLetterDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { data: letter, isLoading, error } = useCommentLetterDetail(slug);
+  const { data: letter, isLoading } = useCommentLetterDetail(slug);
+  const { data: threadLetters } = useCommentLetterThread(letter?.file_number, letter?.id || '');
+
+  // Determine what letters to show: full thread if available, otherwise just the current letter
+  const hasThread = threadLetters && threadLetters.length > 1;
+  const lettersToShow: ThreadLetter[] = hasThread
+    ? threadLetters
+    : letter
+      ? [{
+          id: letter.id,
+          company_name: letter.company_name,
+          letter_type: letter.letter_type,
+          date_filed: letter.date_filed,
+          slug: letter.slug,
+          file_number: letter.file_number || null,
+          ai_summary: letter.ai_summary,
+          sec_url: letter.sec_url,
+          raw_text: letter.raw_text || null,
+          cleaned_text: letter.cleaned_text || null,
+        }]
+      : [];
 
   // Loading state
   if (isLoading) {
@@ -79,10 +171,15 @@ export default function CommentLetterDetail() {
 
   const primaryTopic = letter.primary_tags[0] || letter.tags[0];
 
+  // Thread date range
+  const threadDateRange = hasThread
+    ? `${new Date(threadLetters[0].date_filed).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} — ${new Date(threadLetters[threadLetters.length - 1].date_filed).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`
+    : filingDateFormatted;
+
   return (
     <div className="flex min-h-screen flex-col">
       <SEO
-        title={`${letter.company_name} SEC Comment Letter ${filingDateFormatted}`}
+        title={`${letter.company_name} SEC Comment Letter${hasThread ? ` — ${threadLetters.length} Letters` : ` ${filingDateFormatted}`}`}
         description={letter.ai_summary?.slice(0, 155) || `SEC comment letter for ${letter.company_name} filed on ${filingDateFormatted}`}
         canonical={`/comment-letters/${letter.slug}`}
         keywords={['SEC comment letter', letter.company_name, ...(letter.primary_tags || [])]}
@@ -122,144 +219,89 @@ export default function CommentLetterDetail() {
             </BreadcrumbList>
           </Breadcrumb>
 
-          {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-start gap-3 mb-3">
+          {/* Unified Header */}
+          <div className="rounded-lg bg-muted/70 shadow-sm p-6 md:p-8 mb-6">
+            {/* Company + ticker */}
+            <div className="flex items-baseline gap-3 mb-2">
               <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
                 {letter.company_name}
               </h1>
               {letter.ticker && (
-                <Badge variant="secondary" className="text-sm mt-1">
+                <span className="text-sm font-medium text-muted-foreground/70 tracking-wide uppercase">
                   {letter.ticker}
-                </Badge>
+                </span>
               )}
             </div>
-            <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <Calendar className="h-4 w-4" />
-                {filingDateFormatted}
-              </span>
-              <Badge variant="outline">{letter.letter_type}</Badge>
-              {letter.industry && (
-                <span className="flex items-center gap-1.5">
-                  <Building2 className="h-4 w-4" />
-                  {letter.industry}
+
+            {/* Filing details grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm mt-4 mb-5 pb-5 border-b border-border/40">
+              <div>
+                <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">
+                  {hasThread ? 'Date Range' : 'Filing Date'}
                 </span>
+                <p className="font-medium mt-0.5">{threadDateRange}</p>
+              </div>
+              <div>
+                <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">
+                  {hasThread ? 'Letters' : 'Letter Type'}
+                </span>
+                <p className="font-medium mt-0.5">
+                  {hasThread ? `${threadLetters.length} in thread` : letter.letter_type}
+                </p>
+              </div>
+              {letter.industry && (
+                <div>
+                  <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">Industry</span>
+                  <p className="font-medium mt-0.5">{letter.industry}</p>
+                </div>
               )}
               {letter.cik && (
-                <span className="text-xs text-muted-foreground/60">
-                  CIK: {letter.cik}
-                </span>
+                <div>
+                  <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">CIK</span>
+                  <p className="font-medium mt-0.5">{letter.cik}</p>
+                </div>
               )}
             </div>
-          </div>
 
-          {/* AI Summary */}
-          {letter.ai_summary && (
-            <Card className="mb-6">
-              <CardHeader>
-                <CardTitle className="text-lg">What did the SEC ask about in this comment letter?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                  {letter.ai_summary}
-                </p>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* ASC Topics */}
-          {letter.tags.length > 0 && (
-            <Card className="mb-6">
-              <CardHeader>
-                <CardTitle className="text-lg">Accounting Topics</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
+            {/* Accounting Topics */}
+            {letter.tags.length > 0 && (
+              <div>
+                <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">Accounting Topics</span>
+                <div className="flex flex-wrap gap-2 mt-2">
                   {letter.tags.map(tag => (
                     <Link key={tag} to={`/comment-letters/topics/${topicToSlug(tag)}`}>
-                      <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border-0 cursor-pointer">
+                      <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border-0 cursor-pointer text-xs">
                         {tag}
                       </Badge>
                     </Link>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            )}
+          </div>
+
+          {/* AI Summary */}
+          {letter.ai_summary && (
+            <div className="rounded-lg bg-muted/70 shadow-sm p-6 md:p-8 mb-6">
+              <h2 className="text-lg font-semibold mb-3">Summary</h2>
+              <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                {letter.ai_summary}
+              </p>
+            </div>
           )}
 
-          {/* View on EDGAR */}
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">Filing Details</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-muted-foreground">Filing Date</span>
-                  <p className="font-medium">{filingDateFormatted}</p>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Letter Type</span>
-                  <p className="font-medium">{letter.letter_type}</p>
-                </div>
-                {letter.industry && (
-                  <div>
-                    <span className="text-muted-foreground">Industry</span>
-                    <p className="font-medium">{letter.industry}</p>
-                  </div>
-                )}
-                {letter.cik && (
-                  <div>
-                    <span className="text-muted-foreground">CIK</span>
-                    <p className="font-medium">{letter.cik}</p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Letter Content */}
-          {(letter.raw_text || letter.cleaned_text) && (
-            <Card className="mb-6">
-              <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="text-lg">Original Letter</CardTitle>
-                {letter.sec_url && (
-                  <a
-                    href={letter.sec_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1"
-                  >
-                    View on EDGAR
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                )}
-              </CardHeader>
-              <CardContent className={letter.raw_text ? 'p-0' : undefined}>
-                {letter.raw_text ? (
-                  <iframe
-                    srcDoc={extractHtmlBody(letter.raw_text)}
-                    title={`SEC Comment Letter — ${letter.company_name}`}
-                    className="w-full border-0 rounded-b-lg"
-                    style={{ height: '80vh', minHeight: '600px' }}
-                    sandbox=""
-                  />
-                ) : (
-                  <div className="prose prose-sm max-w-none dark:prose-invert">
-                    {letter.cleaned_text!.split('\n\n').map((paragraph, i) => {
-                      const trimmed = paragraph.trim();
-                      if (!trimmed) return null;
-                      return (
-                        <p key={i} className="text-sm text-muted-foreground leading-relaxed">
-                          {trimmed}
-                        </p>
-                      );
-                    })}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+          {/* Correspondence — all letters inline */}
+          {lettersToShow.length > 0 && (
+            <div className="space-y-4">
+              {hasThread && (
+                <h2 className="text-lg font-semibold px-1">
+                  Correspondence ({threadLetters.length} letters)
+                </h2>
+              )}
+              {lettersToShow.map(item => (
+                <LetterContent key={item.id} item={item} />
+              ))}
+            </div>
           )}
 
           {/* Back link */}

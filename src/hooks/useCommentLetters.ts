@@ -29,7 +29,7 @@ export function useCommentLetters(filters: CommentLetterFilters) {
       // Query the base letters table
       let query = appSupabase
         .from('sec_comment_letters')
-        .select('id, company_name, ticker, cik, date_filed, industry, ai_summary, sec_url, letter_type, filing_type, form_type, slug, created_at', { count: 'exact' })
+        .select('id, company_name, ticker, cik, date_filed, industry, ai_summary, sec_url, letter_type, filing_type, form_type, file_number, slug, created_at', { count: 'exact' })
         .eq('accounting_relevant', true);
 
       // Topic filter — use the IDs we fetched
