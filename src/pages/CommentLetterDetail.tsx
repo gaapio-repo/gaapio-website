@@ -216,14 +216,6 @@ export default function CommentLetterDetail() {
                   </div>
                 )}
               </div>
-              {letter.sec_url && (
-                <Button asChild variant="outline" className="mt-2">
-                  <a href={letter.sec_url} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    View Original on EDGAR
-                  </a>
-                </Button>
-              )}
             </CardContent>
           </Card>
 
