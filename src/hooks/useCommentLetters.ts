@@ -12,29 +12,22 @@ export function useCommentLetters(filters: CommentLetterFilters) {
       const from = (page - 1) * PAGE_SIZE;
       const to = from + PAGE_SIZE - 1;
 
-      // If filtering by topic, first get matching letter IDs from tags table
-      let letterIdsForTopic: string[] | null = null;
+      // Build the select — if topic filter is active, use inner join with tags table
+      const selectFields = 'id, company_name, ticker, cik, date_filed, industry, ai_summary, sec_url, letter_type, filing_type, form_type, file_number, slug, created_at';
+
+      let query;
       if (filters.topic) {
-        const { data: tagRows, error: tagError } = await appSupabase
-          .from('sec_comment_letter_tags')
-          .select('comment_letter_id')
-          .eq('tag', filters.topic);
-        if (tagError) throw tagError;
-        letterIdsForTopic = (tagRows || []).map(r => r.comment_letter_id);
-        if (letterIdsForTopic.length === 0) {
-          return { data: [], count: 0, page, pageSize: PAGE_SIZE, totalPages: 0 };
-        }
-      }
-
-      // Query the base letters table
-      let query = appSupabase
-        .from('sec_comment_letters')
-        .select('id, company_name, ticker, cik, date_filed, industry, ai_summary, sec_url, letter_type, filing_type, form_type, file_number, slug, created_at', { count: 'exact' })
-        .eq('accounting_relevant', true);
-
-      // Topic filter — use the IDs we fetched
-      if (letterIdsForTopic) {
-        query = query.in('id', letterIdsForTopic);
+        // Inner join: only return letters that have a matching tag
+        query = appSupabase
+          .from('sec_comment_letters')
+          .select(`${selectFields}, sec_comment_letter_tags!inner(tag)`, { count: 'exact' })
+          .eq('accounting_relevant', true)
+          .eq('sec_comment_letter_tags.tag', filters.topic);
+      } else {
+        query = appSupabase
+          .from('sec_comment_letters')
+          .select(selectFields, { count: 'exact' })
+          .eq('accounting_relevant', true);
       }
 
       // Search filter
@@ -85,8 +78,8 @@ export function useCommentLetters(filters: CommentLetterFilters) {
         return { data: [], count: count || 0, page, pageSize: PAGE_SIZE, totalPages: Math.ceil((count || 0) / PAGE_SIZE) };
       }
 
-      // Fetch tags for the returned letters
-      const letterIds = letters.map(l => l.id);
+      // Fetch tags for the returned letters (only 25 IDs max — safe for .in())
+      const letterIds = letters.map((l: any) => l.id);
       const { data: tags } = await appSupabase
         .from('sec_comment_letter_tags')
         .select('comment_letter_id, tag, tag_type')
@@ -104,11 +97,15 @@ export function useCommentLetters(filters: CommentLetterFilters) {
       }
 
       const totalCount = count || 0;
-      const enriched: CommentLetter[] = letters.map(l => ({
-        ...l,
-        tags: tagsByLetter.get(l.id)?.tags || [],
-        primary_tags: tagsByLetter.get(l.id)?.primary_tags || [],
-      }));
+      const enriched: CommentLetter[] = letters.map((l: any) => {
+        // Strip the joined tag data from the response
+        const { sec_comment_letter_tags, ...letterData } = l;
+        return {
+          ...letterData,
+          tags: tagsByLetter.get(l.id)?.tags || [],
+          primary_tags: tagsByLetter.get(l.id)?.primary_tags || [],
+        };
+      });
 
       return {
         data: enriched,
