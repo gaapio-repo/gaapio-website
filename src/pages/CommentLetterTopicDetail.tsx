@@ -132,14 +132,6 @@ export default function CommentLetterTopicDetail() {
               Common areas of inquiry include measurement approaches, disclosure completeness, and the basis
               for significant judgments and estimates related to this accounting area.
             </p>
-            <h3 className="text-base font-semibold mb-2">
-              How many SEC comment letters have addressed {topicName}?
-            </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {matchedTopic
-                ? `As of ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}, the SEC has issued ${matchedTopic.letter_count} comment ${matchedTopic.letter_count === 1 ? 'letter' : 'letters'} referencing ${topicName}.`
-                : `Browse the letters below to see SEC correspondence related to ${topicName}.`}
-            </p>
           </div>
 
           {/* Filters (topic locked) */}

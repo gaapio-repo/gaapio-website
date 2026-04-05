@@ -251,14 +251,11 @@ export default function CommentLetterDetail() {
 
           {/* Header card — company info, filing details, topics */}
           <div className="rounded-lg bg-muted/70 shadow-sm p-6 md:p-8 mb-6">
-            <div className="flex items-baseline gap-3 mb-2">
-              <h1 className="text-2xl md:text-3xl font-bold tracking-tight">{letter.company_name}</h1>
-              {letter.ticker && (
-                <span className="text-sm font-medium text-muted-foreground/70 tracking-wide uppercase">{letter.ticker}</span>
-              )}
-            </div>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-center">
+              {letter.company_name}
+            </h1>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm mt-4 mb-5 pb-5 border-b border-border/40">
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm mb-5 pb-5 border-b border-border/40 text-center">
               <div>
                 <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">{hasThread ? 'Date Range' : 'Filing Date'}</span>
                 <p className="font-medium mt-0.5">{threadDateRange}</p>
@@ -267,16 +264,21 @@ export default function CommentLetterDetail() {
                 <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">{hasThread ? 'Letters' : 'Letter Type'}</span>
                 <p className="font-medium mt-0.5">{hasThread ? `${threadLetters.length} in thread` : letter.letter_type}</p>
               </div>
+              {letter.ticker ? (
+                <div>
+                  <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">Ticker</span>
+                  <p className="font-medium mt-0.5">{letter.ticker}</p>
+                </div>
+              ) : letter.cik ? (
+                <div>
+                  <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">CIK</span>
+                  <p className="font-medium mt-0.5">{letter.cik}</p>
+                </div>
+              ) : null}
               {letter.industry && (
                 <div>
                   <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">Industry</span>
                   <p className="font-medium mt-0.5">{letter.industry}</p>
-                </div>
-              )}
-              {letter.cik && (
-                <div>
-                  <span className="text-muted-foreground/60 text-xs uppercase tracking-wide">CIK</span>
-                  <p className="font-medium mt-0.5">{letter.cik}</p>
                 </div>
               )}
             </div>
