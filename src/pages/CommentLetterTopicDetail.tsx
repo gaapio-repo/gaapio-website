@@ -1,22 +1,22 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { ResponsiveContainer } from '@/components/layout/ResponsiveContainer';
-import { GradientBackground } from '@/components/home/GradientBackground';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import { BreadcrumbNav } from '@/components/comment-letters/BreadcrumbNav';
+import { CommentLetterHero } from '@/components/comment-letters/CommentLetterHero';
 import { CommentLetterThreadCard } from '@/components/comment-letters/CommentLetterThreadCard';
 import { CommentLetterFilterBar } from '@/components/comment-letters/CommentLetterFilterBar';
 import { CommentLetterPagination } from '@/components/comment-letters/CommentLetterPagination';
 import { SoftCTA } from '@/components/comment-letters/SoftCTA';
+import { SkeletonCards } from '@/components/comment-letters/SkeletonCards';
+import { EmptyState } from '@/components/comment-letters/EmptyState';
 import { CommentLetterStructuredData, buildBreadcrumbSchema, buildFAQSchema, buildCollectionPageSchema } from '@/components/comment-letters/CommentLetterStructuredData';
 import { useURLFilters } from '@/hooks/useURLFilters';
 import { useCommentLetters } from '@/hooks/useCommentLetters';
 import { useCommentLetterTopics } from '@/hooks/useCommentLetterTopics';
 import { useCommentLetterFilterOptions } from '@/hooks/useCommentLetterFilters';
 import { slugToTopicPattern, groupIntoThreads } from '@/types/commentLetters';
-import { FileSearch } from 'lucide-react';
 import { useMemo } from 'react';
 
 export default function CommentLetterTopicDetail() {
@@ -24,23 +24,16 @@ export default function CommentLetterTopicDetail() {
   const { data: allTopics, isLoading: topicsLoading } = useCommentLetterTopics();
   const { data: filterOptions } = useCommentLetterFilterOptions();
 
-  // Resolve the topic name from the slug
   const topicPattern = topicSlug ? slugToTopicPattern(topicSlug) : '';
   const matchedTopic = useMemo(() => {
     if (!allTopics || !topicPattern) return null;
-    return allTopics.find(t =>
-      t.topic.toLowerCase().includes(topicPattern.toLowerCase())
-    ) || null;
+    return allTopics.find(t => t.topic.toLowerCase().includes(topicPattern.toLowerCase())) || null;
   }, [allTopics, topicPattern]);
 
   const topicName = matchedTopic?.topic || topicPattern;
 
-  // Use URL filters but force topic filter
   const [filters, setFilters] = useURLFilters();
-  const effectiveFilters = useMemo(() => ({
-    ...filters,
-    topic: topicName,
-  }), [filters, topicName]);
+  const effectiveFilters = useMemo(() => ({ ...filters, topic: topicName }), [filters, topicName]);
 
   const { data: results, isLoading: lettersLoading } = useCommentLetters(effectiveFilters);
   const page = filters.page || 1;
@@ -56,7 +49,7 @@ export default function CommentLetterTopicDetail() {
     <div className="flex min-h-screen flex-col">
       <SEO
         title={`SEC Comment Letters: ${topicName}`}
-        description={`Browse ${matchedTopic?.letter_count || ''} SEC comment letters related to ${topicName}, with AI summaries explaining what the SEC asked and why it matters.`}
+        description={`Browse ${matchedTopic?.letter_count || ''} SEC comment letters related to ${topicName}, with AI summaries.`}
         canonical={`/comment-letters/topics/${topicSlug}`}
         keywords={[topicName, 'SEC comment letters', 'SEC scrutiny', 'accounting standards']}
       />
@@ -69,72 +62,39 @@ export default function CommentLetterTopicDetail() {
             { name: topicName, url: `/comment-letters/topics/${topicSlug}` },
           ]),
           buildCollectionPageSchema(topicName, `/comment-letters/topics/${topicSlug}`),
-          buildFAQSchema(
-            topicName,
-            matchedTopic?.letter_count || 0,
-            `SEC staff frequently questions companies about their application and disclosure of ${topicName}. Common areas of inquiry include measurement approaches, disclosure completeness, and the basis for significant judgments and estimates.`
-          ),
+          buildFAQSchema(topicName, matchedTopic?.letter_count || 0,
+            `SEC staff frequently questions companies about their application and disclosure of ${topicName}. Common areas of inquiry include measurement approaches, disclosure completeness, and the basis for significant judgments and estimates.`),
         ]}
       />
       <Header />
 
-      {/* Hero */}
-      <section className="relative pt-24 pb-8 md:pb-10 overflow-hidden">
-        <GradientBackground />
-        <ResponsiveContainer className="relative z-10 text-center max-w-3xl">
-          <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
-            SEC Comment Letters — {topicName}
-          </h1>
-          <p className="text-base md:text-lg text-white/80">
-            {matchedTopic
-              ? `${matchedTopic.letter_count} comment ${matchedTopic.letter_count === 1 ? 'letter' : 'letters'} addressing ${topicName}`
-              : `SEC comment letters related to ${topicName}`}
-          </p>
-        </ResponsiveContainer>
-      </section>
+      <CommentLetterHero
+        title={`SEC Comment Letters — ${topicName}`}
+        description={matchedTopic
+          ? `${matchedTopic.letter_count} comment ${matchedTopic.letter_count === 1 ? 'letter' : 'letters'} addressing ${topicName}`
+          : `SEC comment letters related to ${topicName}`}
+      />
 
       <section className="py-4 md:py-6">
         <ResponsiveContainer className="max-w-7xl">
-          {/* Breadcrumbs */}
-          <Breadcrumb className="mb-6">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link to="/">Home</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link to="/comment-letters">Comment Letters</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link to="/comment-letters/topics">Topics</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{topicName}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <BreadcrumbNav items={[
+            { name: 'Home', url: '/' },
+            { name: 'Comment Letters', url: '/comment-letters' },
+            { name: 'Topics', url: '/comment-letters/topics' },
+            { name: topicName },
+          ]} />
 
-          {/* Topic overview — question-format headings for AEO */}
           <div className="mb-6">
             <h2 className="text-base font-semibold mb-2">
               What does the SEC commonly ask about {topicName}?
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               SEC staff frequently questions companies about their application and disclosure of {topicName}.
               Common areas of inquiry include measurement approaches, disclosure completeness, and the basis
               for significant judgments and estimates related to this accounting area.
             </p>
           </div>
 
-          {/* Filters (topic locked) */}
           <CommentLetterFilterBar
             filters={filters}
             onFilterChange={setFilters}
@@ -142,7 +102,6 @@ export default function CommentLetterTopicDetail() {
             lockedTopic={topicName}
           />
 
-          {/* Results count */}
           {!isLoading && results && (
             <p className="text-xs text-muted-foreground/70 mt-5 mb-3">
               {results.count === 0
@@ -151,50 +110,27 @@ export default function CommentLetterTopicDetail() {
             </p>
           )}
 
-          {/* Loading */}
-          {isLoading && (
-            <div className="mt-6 space-y-3">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="py-5 px-6 rounded-lg bg-muted/40 space-y-2.5">
-                  <Skeleton className="h-5 w-1/3" />
-                  <Skeleton className="h-3.5 w-1/4" />
-                  <Skeleton className="h-10 w-full" />
-                  <Skeleton className="h-3 w-1/3" />
-                </div>
-              ))}
-            </div>
-          )}
+          {isLoading && <SkeletonCards />}
 
-          {/* Results — grouped by thread */}
           {!isLoading && threads.length > 0 && (
             <>
               <div>
                 {threads.map(thread => (
-                  <CommentLetterThreadCard
-                    key={thread.file_number || thread.slug}
-                    thread={thread}
-                  />
+                  <CommentLetterThreadCard key={thread.file_number || thread.slug} thread={thread} />
                 ))}
               </div>
               <div className="mt-8">
                 <CommentLetterPagination
                   currentPage={page}
-                  totalPages={results.totalPages}
+                  totalPages={results?.totalPages || 1}
                   onPageChange={p => setFilters({ page: p })}
                 />
               </div>
             </>
           )}
 
-          {/* Empty */}
           {!isLoading && results && results.data.length === 0 && (
-            <div className="text-center py-16">
-              <FileSearch className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No letters found</h3>
-              <p className="text-muted-foreground">
-                Try adjusting your filters.
-              </p>
-            </div>
+            <EmptyState description="Try adjusting your filters." />
           )}
         </ResponsiveContainer>
       </section>

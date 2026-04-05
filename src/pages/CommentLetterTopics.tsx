@@ -3,9 +3,10 @@ import { SEO } from '@/components/SEO';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { ResponsiveContainer } from '@/components/layout/ResponsiveContainer';
-import { GradientBackground } from '@/components/home/GradientBackground';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
+import { BreadcrumbNav } from '@/components/comment-letters/BreadcrumbNav';
+import { CommentLetterHero } from '@/components/comment-letters/CommentLetterHero';
 import { TopicCard } from '@/components/comment-letters/TopicCard';
 import { SoftCTA } from '@/components/comment-letters/SoftCTA';
 import { INPUT_STYLES } from '@/components/comment-letters/styles';
@@ -14,8 +15,6 @@ import { useCommentLetterTopics } from '@/hooks/useCommentLetterTopics';
 import { appSupabase } from '@/integrations/supabase/appClient';
 import { useQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
 
 export default function CommentLetterTopics() {
   const { data: topics, isLoading } = useCommentLetterTopics();
@@ -25,7 +24,6 @@ export default function CommentLetterTopics() {
     t.topic.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Get actual unique letter count (not inflated by multi-tag letters)
   const { data: letterCount } = useQuery({
     queryKey: ['comment-letter-total-count'],
     staleTime: 30 * 60 * 1000,
@@ -50,55 +48,29 @@ export default function CommentLetterTopics() {
         keywords={['ASC topics', 'SEC comment letter topics', 'accounting standards', 'FASB ASC', 'SEC scrutiny by topic']}
       />
       <CommentLetterStructuredData
-        schemas={[
-          buildBreadcrumbSchema([
-            { name: 'Home', url: '/' },
-            { name: 'SEC Comment Letters', url: '/comment-letters' },
-            { name: 'Topics', url: '/comment-letters/topics' },
-          ]),
-        ]}
+        schemas={[buildBreadcrumbSchema([
+          { name: 'Home', url: '/' },
+          { name: 'SEC Comment Letters', url: '/comment-letters' },
+          { name: 'Topics', url: '/comment-letters/topics' },
+        ])]}
       />
       <Header />
 
-      {/* Hero */}
-      <section className="relative pt-24 pb-8 md:pb-10 overflow-hidden">
-        <GradientBackground />
-        <ResponsiveContainer className="relative z-10 text-center max-w-3xl">
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-3 tracking-tight">
-            SEC Comment Letters by ASC Topic
-          </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-            {topics && topics.length > 0
-              ? `Browse ${topics.length} accounting topics across ${totalLetters.toLocaleString()} SEC comment letters.`
-              : 'Browse SEC comment letters organized by ASC Codification topic.'}
-          </p>
-        </ResponsiveContainer>
-      </section>
+      <CommentLetterHero
+        title="SEC Comment Letters by ASC Topic"
+        description={topics && topics.length > 0
+          ? `Browse ${topics.length} accounting topics across ${totalLetters.toLocaleString()} SEC comment letters.`
+          : 'Browse SEC comment letters organized by ASC Codification topic.'}
+      />
 
       <section className="py-4 md:py-6">
         <ResponsiveContainer className="max-w-7xl">
-          {/* Breadcrumbs */}
-          <Breadcrumb className="mb-6">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link to="/">Home</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link to="/comment-letters">Comment Letters</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Topics</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <BreadcrumbNav items={[
+            { name: 'Home', url: '/' },
+            { name: 'Comment Letters', url: '/comment-letters' },
+            { name: 'Topics' },
+          ]} />
 
-          {/* Search */}
           <div className="relative max-w-md mb-8">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
@@ -109,11 +81,10 @@ export default function CommentLetterTopics() {
             />
           </div>
 
-          {/* Loading */}
           {isLoading && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="p-6 border rounded-lg space-y-2">
+                <div key={i} className="p-5 rounded-lg bg-muted/40 space-y-2">
                   <Skeleton className="h-5 w-3/4" />
                   <Skeleton className="h-4 w-1/2" />
                 </div>
@@ -121,7 +92,6 @@ export default function CommentLetterTopics() {
             </div>
           )}
 
-          {/* Topics grid */}
           {!isLoading && filteredTopics.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {filteredTopics.map(topic => (
@@ -130,7 +100,6 @@ export default function CommentLetterTopics() {
             </div>
           )}
 
-          {/* Empty */}
           {!isLoading && filteredTopics.length === 0 && search && (
             <div className="text-center py-12">
               <p className="text-muted-foreground">No topics match "{search}"</p>

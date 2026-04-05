@@ -1,22 +1,16 @@
 import { Link } from 'react-router-dom';
 import type { CommentLetter } from '@/types/commentLetters';
-import { topicToSlug } from '@/types/commentLetters';
 import { CARD_STYLES } from './styles';
+import { TagList } from './TagList';
+import { formatDate } from '@/utils/formatDate';
 
 interface CommentLetterCardProps {
   letter: CommentLetter;
 }
 
 export function CommentLetterCard({ letter }: CommentLetterCardProps) {
-  const date = new Date(letter.date_filed).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-
   return (
     <article className={`group py-5 px-6 mb-3 last:mb-0 ${CARD_STYLES}`}>
-      {/* Company name + ticker */}
       <div className="flex items-baseline gap-2 mb-1">
         <Link
           to={`/comment-letters/${letter.slug}`}
@@ -31,9 +25,8 @@ export function CommentLetterCard({ letter }: CommentLetterCardProps) {
         )}
       </div>
 
-      {/* Metadata line */}
       <p className="text-sm text-muted-foreground/70 mb-2.5">
-        {date}
+        {formatDate(letter.date_filed)}
         <span className="mx-1.5">·</span>
         {letter.letter_type}
         {letter.industry && (
@@ -44,34 +37,13 @@ export function CommentLetterCard({ letter }: CommentLetterCardProps) {
         )}
       </p>
 
-      {/* AI Summary */}
       {letter.ai_summary && (
         <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-3">
           {letter.ai_summary}
         </p>
       )}
 
-      {/* Topic tags as text links */}
-      {letter.primary_tags.length > 0 && (
-        <div className="flex flex-wrap items-center gap-x-1 text-xs">
-          {letter.primary_tags.slice(0, 3).map((tag, i) => (
-            <span key={tag} className="flex items-center">
-              {i > 0 && <span className="text-muted-foreground/40 mr-1">·</span>}
-              <Link
-                to={`/comment-letters/topics/${topicToSlug(tag)}`}
-                className="text-primary/80 hover:text-primary hover:underline transition-colors"
-              >
-                {tag}
-              </Link>
-            </span>
-          ))}
-          {letter.primary_tags.length > 3 && (
-            <span className="text-muted-foreground/50 ml-1">
-              +{letter.primary_tags.length - 3} more
-            </span>
-          )}
-        </div>
-      )}
+      <TagList tags={letter.primary_tags} maxTags={3} />
     </article>
   );
 }
