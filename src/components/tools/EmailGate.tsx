@@ -83,13 +83,19 @@ export function EmailGate({
       const internalDomains = toolConfig.internal_domains ?? [];
       const isInternal = emailDomain ? internalDomains.some(d => d.toLowerCase() === emailDomain) : false;
 
-      await supabase.from('tool_email_captures').insert({
+      const { error: insertError } = await supabase.from('tool_email_captures').insert({
         tool_slug: toolSlug,
         email,
         ab_variant_id: abVariantId ?? null,
         page_path: window.location.pathname,
         is_internal: isInternal,
       });
+
+      if (insertError) {
+        console.error('Email capture insert failed:', insertError);
+        setError('Something went wrong. Please try again.');
+        return;
+      }
 
       localStorage.setItem(storageKey, email);
       setOpen(false);

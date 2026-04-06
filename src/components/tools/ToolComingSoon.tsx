@@ -32,11 +32,17 @@ export function ToolComingSoon({ toolName, toolDescription, toolSlug }: ToolComi
 
     setSubmitting(true);
     try {
-      await supabase.from('tool_email_captures').insert({
+      const { error: insertError } = await supabase.from('tool_email_captures').insert({
         tool_slug: toolSlug,
         email,
         page_path: window.location.pathname,
       });
+
+      if (insertError) {
+        console.error('Email capture insert failed:', insertError);
+        toast.error('Something went wrong. Please try again.');
+        return;
+      }
 
       toast.success('You\'ll be notified when this tool is available!');
       setEmail('');
