@@ -16,7 +16,7 @@ import { useURLFilters } from '@/hooks/useURLFilters';
 import { useCommentLetters } from '@/hooks/useCommentLetters';
 import { useCommentLetterTopics } from '@/hooks/useCommentLetterTopics';
 import { useCommentLetterFilterOptions } from '@/hooks/useCommentLetterFilters';
-import { slugToTopicPattern, groupIntoThreads } from '@/types/commentLetters';
+import { topicToSlug, groupIntoThreads } from '@/types/commentLetters';
 import { useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/tools/ToolPageWrapper';
 
@@ -25,13 +25,12 @@ export default function CommentLetterTopicDetail() {
   const { data: allTopics, isLoading: topicsLoading } = useCommentLetterTopics();
   const { data: filterOptions } = useCommentLetterFilterOptions();
 
-  const topicPattern = topicSlug ? slugToTopicPattern(topicSlug) : '';
   const matchedTopic = useMemo(() => {
-    if (!allTopics || !topicPattern) return null;
-    return allTopics.find(t => t.topic.toLowerCase().includes(topicPattern.toLowerCase())) || null;
-  }, [allTopics, topicPattern]);
+    if (!allTopics || !topicSlug) return null;
+    return allTopics.find(t => topicToSlug(t.topic) === topicSlug) || null;
+  }, [allTopics, topicSlug]);
 
-  const topicName = matchedTopic?.topic || topicPattern;
+  const topicName = matchedTopic?.topic || (topicSlug || '').replace(/-/g, ' ');
 
   const [filters, setFilters] = useURLFilters();
   const effectiveFilters = useMemo(() => ({ ...filters, topic: topicName }), [filters, topicName]);

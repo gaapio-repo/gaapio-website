@@ -101,12 +101,35 @@ export function useCommentLetters(filters: CommentLetterFilters) {
         if (t.tag_type === 'primary' && !entry.primary_tags.includes(t.tag)) entry.primary_tags.push(t.tag);
       }
 
+      // Fetch the full thread letter counts for file_numbers on this page
+      // so thread cards show the real count, not just what's on this page
+      const fileNumbers = [...new Set(letters.map((l: any) => l.file_number).filter(Boolean))];
+      const threadCountMap = new Map<string, number>();
+
+      if (fileNumbers.length > 0) {
+        // Count ALL letters per thread (not just accounting_relevant) so the
+        // card count matches what the detail page timeline shows
+        const { data: threadCounts } = await appSupabase
+          .from('sec_comment_letters')
+          .select('file_number')
+          .in('file_number', fileNumbers);
+
+        if (threadCounts) {
+          // Count occurrences of each file_number
+          for (const row of threadCounts) {
+            const fn = row.file_number;
+            if (fn) threadCountMap.set(fn, (threadCountMap.get(fn) || 0) + 1);
+          }
+        }
+      }
+
       const totalCount = count || 0;
       const enriched: CommentLetter[] = letters.map((l: any) => {
         // Strip the joined tag data from the response
         const { sec_comment_letter_tags, ...letterData } = l;
         return {
           ...letterData,
+          thread_total: l.file_number ? (threadCountMap.get(l.file_number) || 1) : 1,
           tags: tagsByLetter.get(l.id)?.tags || [],
           primary_tags: tagsByLetter.get(l.id)?.primary_tags || [],
         };

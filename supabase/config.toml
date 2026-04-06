@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.stripe-webhook]
 verify_jwt = false
+
+[functions.proxy-sec-pdf]
+verify_jwt = false

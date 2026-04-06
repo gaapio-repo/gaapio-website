@@ -57,7 +57,7 @@ export function useURLFilters(): [CommentLetterFilters, (updates: Partial<Commen
       }
 
       return next;
-    }, { replace: true });
+    }, { replace: 'page' in updates && Object.keys(updates).length === 1 });
   }, [setSearchParams]);
 
   return [filters, setFilters];

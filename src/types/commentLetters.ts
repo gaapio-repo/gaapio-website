@@ -15,6 +15,7 @@ export interface CommentLetter {
   created_at: string;
   tags: string[];
   primary_tags: string[];
+  thread_total?: number;
 }
 
 export interface CommentLetterDetail extends CommentLetter {
@@ -84,13 +85,17 @@ export function groupIntoThreads(letters: CommentLetter[]): CommentLetterThread[
     const allTags = [...new Set(threadLetters.flatMap(l => l.tags))];
     const allPrimaryTags = [...new Set(threadLetters.flatMap(l => l.primary_tags))];
 
+    // Use thread_total from the DB query if available (accurate across pages),
+    // otherwise fall back to the count of letters on this page
+    const letterCount = latest.thread_total || threadLetters.length;
+
     threads.push({
       file_number: latest.file_number,
       company_name: latest.company_name,
       ticker: latest.ticker,
       industry: latest.industry,
       slug: latest.slug,
-      letter_count: threadLetters.length,
+      letter_count: letterCount,
       first_date: threadLetters[0].date_filed,
       last_date: latest.date_filed,
       ai_summary: latest.ai_summary,

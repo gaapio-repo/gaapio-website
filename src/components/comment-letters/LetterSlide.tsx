@@ -2,6 +2,7 @@ import { ExternalLink } from 'lucide-react';
 import type { ThreadLetter } from '@/hooks/useCommentLetterThread';
 import { extractHtmlBody } from '@/utils/extractHtmlBody';
 import { formatDate } from '@/utils/formatDate';
+import { PdfViewer } from './PdfViewer';
 import { CARD_STYLES_STATIC } from './styles';
 
 interface LetterSlideProps {
@@ -11,7 +12,6 @@ interface LetterSlideProps {
 export function LetterSlide({ item }: LetterSlideProps) {
   const date = formatDate(item.date_filed, 'long');
   const isSecStaff = item.letter_type === 'SEC Staff';
-  const isPdf = item.sec_url?.toLowerCase().endsWith('.pdf');
 
   return (
     <div className={`overflow-hidden ${CARD_STYLES_STATIC}`}>
@@ -42,15 +42,10 @@ export function LetterSlide({ item }: LetterSlideProps) {
         )}
       </div>
 
-      {/* Letter content */}
-      {isPdf && item.sec_url ? (
-        <div className="px-5 md:px-8 pb-5">
-          <iframe
-            src={`https://docs.google.com/viewer?url=${encodeURIComponent(item.sec_url)}&embedded=true`}
-            title={`${item.letter_type} — ${date}`}
-            className="w-full border-0 bg-background rounded-lg shadow-inner"
-            style={{ height: '70vh', minHeight: '500px' }}
-          />
+      {/* Letter content — SEC Staff letters use PDF viewer, company responses use HTML */}
+      {isSecStaff && item.sec_url ? (
+        <div className="px-5 md:px-8 pb-5 rounded-lg overflow-hidden border border-border/40">
+          <PdfViewer url={item.sec_url} title={`${item.letter_type} — ${date}`} />
         </div>
       ) : (item.raw_text || item.cleaned_text) ? (
         <div className="px-5 md:px-8 pb-5">
@@ -61,6 +56,10 @@ export function LetterSlide({ item }: LetterSlideProps) {
             style={{ height: '70vh', minHeight: '500px' }}
             sandbox=""
           />
+        </div>
+      ) : item.sec_url ? (
+        <div className="px-5 md:px-8 pb-5 rounded-lg overflow-hidden border border-border/40">
+          <PdfViewer url={item.sec_url} title={`${item.letter_type} — ${date}`} />
         </div>
       ) : (
         <div className="px-5 md:px-8 pb-5">
