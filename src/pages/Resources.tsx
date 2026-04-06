@@ -81,7 +81,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Access public company filings and disclosure documents. Search for financial statements, annual reports, and regulatory filings.
                   </p>
                 </CardContent>
@@ -113,7 +113,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Comprehensive technical accounting guidance and publications. Access in-depth resources on accounting standards and implementation.
                   </p>
                 </CardContent>
@@ -145,7 +145,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     In-depth accounting and financial reporting guidance. Industry-specific resources and technical insights from PwC professionals.
                   </p>
                 </CardContent>
@@ -177,7 +177,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Technical insights on accounting, regulatory and financial reporting. Access EY's interpretations and guidance on complex accounting matters.
                   </p>
                 </CardContent>
@@ -209,7 +209,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Accounting standards implementation and practical insights. Stay up-to-date with KPMG's interpretations of new and existing standards.
                   </p>
                 </CardContent>
@@ -241,7 +241,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Access the official source of authoritative GAAP, including real-time updates to U.S. accounting standards via the FASB Codification platform.
                   </p>
                 </CardContent>
@@ -276,7 +276,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Learn about the five-step model for revenue recognition, common implementation challenges, and practical examples.
                   </p>
                 </CardContent>
@@ -299,7 +299,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Compare IFRS 15 with ASC 606, understand key differences, and navigate international reporting requirements.
                   </p>
                 </CardContent>
@@ -321,7 +321,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Navigate the complexities of lease accounting with our comprehensive guide to classification, measurement and disclosure.
                   </p>
                 </CardContent>
@@ -349,12 +349,12 @@ export default function Resources() {
                       <FileSearch className="h-8 w-8 mb-3 text-primary mr-3 dark:text-[#339CFF]" />
                       <div>
                         <CardTitle>Revenue Recognition Calculator</CardTitle>
-                        <Badge variant="outline" className="mt-1 mb-2 text-xs font-normal dark:text-gray-300 dark:border-gray-700">Interactive Tool</Badge>
+                        <Badge variant="outline" className="mt-1 mb-2 text-xs font-normal">Interactive Tool</Badge>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent className="flex-grow">
-                    <p className="text-sm text-muted-foreground dark:text-gray-400">
+                    <p className="text-sm text-muted-foreground">
                       Input contract details, performance obligations, and transaction price to get automatic calculations and recognition schedules.
                     </p>
                   </CardContent>
@@ -372,12 +372,12 @@ export default function Resources() {
                       <FileSearch className="h-8 w-8 mb-3 text-primary mr-3 dark:text-[#339CFF]" />
                       <div>
                         <CardTitle>Disclosure Checklist</CardTitle>
-                        <Badge variant="outline" className="mt-1 mb-2 text-xs font-normal dark:text-gray-300 dark:border-gray-700">Compliance Tool</Badge>
+                        <Badge variant="outline" className="mt-1 mb-2 text-xs font-normal">Compliance Tool</Badge>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent className="flex-grow">
-                    <p className="text-sm text-muted-foreground dark:text-gray-400">
+                    <p className="text-sm text-muted-foreground">
                       Ensure compliance with GAAP and SEC requirements with our checklist covering all required financial statement disclosures.
                     </p>
                   </CardContent>
@@ -395,12 +395,12 @@ export default function Resources() {
                       <FileSearch className="h-8 w-8 mb-3 text-primary mr-3 dark:text-[#339CFF]" />
                       <div>
                         <CardTitle>Impairment Test Tool</CardTitle>
-                        <Badge variant="outline" className="mt-1 mb-2 text-xs font-normal dark:text-gray-300 dark:border-gray-700">Analysis Tool</Badge>
+                        <Badge variant="outline" className="mt-1 mb-2 text-xs font-normal">Analysis Tool</Badge>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent className="flex-grow">
-                    <p className="text-sm text-muted-foreground dark:text-gray-400">
+                    <p className="text-sm text-muted-foreground">
                       Navigate ASC 350 and ASC 360 requirements with our tool that guides you through impairment indicators, testing procedures and calculations.
                     </p>
                   </CardContent>
@@ -433,7 +433,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Save time with our professionally designed memo template that includes all essential sections and formatting.
                   </p>
                 </CardContent>
@@ -456,7 +456,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Explore how artificial intelligence is changing accounting workflows, improving efficiency, and reducing errors.
                   </p>
                 </CardContent>
@@ -479,7 +479,7 @@ export default function Resources() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Ensure you're fully prepared for your next audit with our detailed checklist covering documentation, controls, and common audit requests.
                   </p>
                 </CardContent>

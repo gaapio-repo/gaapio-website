@@ -58,7 +58,7 @@ export default function AdminUsers() {
 
   return (
     <AdminPageGuard>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-muted">
         <Header />
         <div className="max-w-6xl mx-auto py-8 mt-16">
           <div className="flex flex-col gap-4 mb-8">

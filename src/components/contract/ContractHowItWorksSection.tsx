@@ -27,13 +27,13 @@ export const ContractHowItWorksSection = memo(function ContractHowItWorksSection
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-white dark:bg-[#1A1F2B]">
+    <section className="py-20 md:py-32 bg-background">
       <ResponsiveContainer>
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
             How Contract Analysis Works
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Transform complex contracts into clear accounting insights with our AI-powered analysis platform
           </p>
         </div>
@@ -43,7 +43,7 @@ export const ContractHowItWorksSection = memo(function ContractHowItWorksSection
             const IconComponent = step.icon;
             return (
               <div key={index} className="relative">
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700 h-full">
+                <div className="bg-background rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-border h-full">
                   <div className="flex flex-col items-center text-center">
                     <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
                       <IconComponent className="w-8 h-8 text-blue-600 dark:text-blue-400" />
@@ -51,10 +51,10 @@ export const ContractHowItWorksSection = memo(function ContractHowItWorksSection
                     <div className="absolute -top-3 -right-3 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
                       {index + 1}
                     </div>
-                    <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
+                    <h3 className="text-lg font-semibold mb-3 text-foreground">
                       {step.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -66,10 +66,10 @@ export const ContractHowItWorksSection = memo(function ContractHowItWorksSection
 
         <div className="text-center mt-16">
           <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-8 max-w-3xl mx-auto">
-            <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+            <h3 className="text-xl font-semibold mb-4 text-foreground">
               Ready to streamline your contract analysis?
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-muted-foreground mb-6">
               Join accounting professionals who trust Gaapio to handle their most complex contract analysis needs.
             </p>
           </div>

@@ -92,8 +92,8 @@ export function InternalGPTHowItWorksSection() {
       
       <div className="container px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto relative z-10">
         <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-[#f0f0f0]">How It Works</h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto dark:text-gray-300">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">How It Works</h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Turn your internal documentation into an AI-powered knowledge assistant.
           </p>
         </div>
@@ -110,7 +110,7 @@ export function InternalGPTHowItWorksSection() {
                 "hover:shadow-[0_6px_20px_rgba(0,0,0,0.08),0_12px_28px_rgba(0,153,255,0.06)]",
                 "dark:hover:shadow-[0_8px_24px_rgba(0,153,255,0.15)]",
                 "hover:-translate-y-[3px]",
-                "border border-gray-100/80 hover:border-[#0099FF]/25",
+                "border border-border/80 hover:border-[#0099FF]/25",
                 "dark:border-white/5 dark:hover:border-[#0099FF]/40",
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
               )}
@@ -148,7 +148,7 @@ export function InternalGPTHowItWorksSection() {
                 {step.bullets.map((bullet, idx) => (
                   <li key={idx} className="flex items-start">
                     <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#0099FF]/50 mt-[7px] mr-2.5 flex-shrink-0" />
-                    <span className="text-gray-700 dark:text-gray-400 text-[14px] leading-[1.7] font-normal">
+                    <span className="text-muted-foreground dark:text-muted-foreground text-[14px] leading-[1.7] font-normal">
                       {bullet}
                     </span>
                   </li>

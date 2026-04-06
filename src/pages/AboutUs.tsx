@@ -205,7 +205,7 @@ export default function AboutUs() {
                 }}
               >
                 <h1 className="text-4xl md:text-5xl font-bold mb-6 dark:text-white">About Gaapio</h1>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto dark:text-gray-300">
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                   Built by CPAs for CPAs — Accounting Excellence Meets Cutting-Edge Technology
                 </p>
               </div>
@@ -250,13 +250,13 @@ export default function AboutUs() {
                     transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
                   }}
                 >
-                  <p className="text-lg dark:text-gray-200">
+                  <p className="text-lg">
                     With over a decade of experience in both Big 4 environments and specialized accounting consultancies,
                     we understand the pain points of technical accounting documentation. That's why we built Gaapio—a 
                     purpose-built platform that transforms how accounting teams approach technical memos and documentation.
                   </p>
                   
-                  <p className="text-lg dark:text-gray-200">
+                  <p className="text-lg">
                     What is Gaapio? It's not just another accounting tool. It's a purposefully designed 
                     workspace that transforms the entire technical memo process. Teams get clear, purpose-built
                     documentation that feels more like a guided conversation than a tedious form to populate.
@@ -273,7 +273,7 @@ export default function AboutUs() {
         {/* Our Expertise Section */}
         <section 
           ref={expertiseRef}
-          className="py-16 md:py-24 border-t border-b border-muted dark:border-gray-800 dark:bg-background"
+          className="py-16 md:py-24 border-t border-b border-muted"
         >
           <ResponsiveContainer>
             <div className="max-w-5xl mx-auto">
@@ -284,7 +284,7 @@ export default function AboutUs() {
                   <div 
                     key={index}
                     className={cn(
-                      "flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#f4faff] dark:hover:bg-gray-800 group",
+                      "flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#f4faff] group",
                       expertiseVisible 
                         ? "opacity-100 translate-y-0" 
                         : "opacity-0 translate-y-[30px]"
@@ -300,7 +300,7 @@ export default function AboutUs() {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold mb-2 group-hover:text-[#339CFF] transition-colors dark:text-white">{item.title}</h3>
-                      <p className="text-muted-foreground group-hover:text-foreground transition-colors dark:text-gray-300">{item.description}</p>
+                      <p className="text-muted-foreground group-hover:text-foreground transition-colors">{item.description}</p>
                     </div>
                   </div>
                 ))}
@@ -322,7 +322,7 @@ export default function AboutUs() {
             <div className="max-w-3xl mx-auto">
               <div 
                 className={cn(
-                  "text-left space-y-6 transition-all dark:bg-gray-800/30 dark:p-8 dark:rounded-xl",
+                  "text-left space-y-6 transition-all",
                   philosophyVisible 
                     ? "opacity-100 translate-y-0" 
                     : "opacity-0 translate-y-[30px]"
@@ -336,19 +336,19 @@ export default function AboutUs() {
                   <h2 className="text-3xl font-bold mb-6 dark:text-white">Our Philosophy: Reliability Meets Innovation</h2>
                 </div>
                 
-                <p className="text-lg leading-relaxed dark:text-gray-200">
+                <p className="text-lg leading-relaxed">
                   We believe accountants deserve cutting-edge technology that doesn't sacrifice reliability. 
                   Our platform is built on the foundation of practitioner knowledge, ensuring that innovation 
                   enhances—rather than disrupts—the accounting workflow.
                 </p>
                 
-                <p className="text-lg leading-relaxed dark:text-gray-200">
+                <p className="text-lg leading-relaxed">
                   Having spent years in the trenches of technical accounting, we've experienced firsthand the 
                   challenges of documentation workflows. Gaapio addresses these pain points with thoughtful 
                   design informed by real accounting experience.
                 </p>
                 
-                <p className="text-lg leading-relaxed dark:text-gray-200">
+                <p className="text-lg leading-relaxed">
                   Our commitment to quality extends beyond our product. As CPAs ourselves, we uphold the profession's 
                   highest standards of integrity, accuracy, and excellence in everything we build.
                 </p>
@@ -360,13 +360,13 @@ export default function AboutUs() {
         {/* Building on Experience Section - REVISED TO MATCH DESIGN IMAGE */}
         <section 
           ref={timelineRef}
-          className="py-16 md:py-24 border-b relative dark:bg-background dark:border-gray-800"
+          className="py-16 md:py-24 border-b relative"
         >
           <ResponsiveContainer>
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold mb-6 dark:text-white">Building on Experience</h2>
-                <p className="text-lg text-muted-foreground max-w-3xl mx-auto dark:text-gray-300">
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                   Our journey from accounting professionals to software innovators
                 </p>
               </div>
@@ -375,7 +375,7 @@ export default function AboutUs() {
                 {/* Timeline Container */}
                 <div className="max-w-4xl mx-auto relative">
                   {/* Timeline Line - Only visible in desktop */}
-                  <div className="absolute left-[28px] top-[30px] bottom-8 w-[2px] bg-[#eaeaea] dark:bg-gray-700 hidden md:block"></div>
+                  <div className="absolute left-[28px] top-[30px] bottom-8 w-[2px] bg-[#eaeaea] hidden md:block"></div>
                   
                   {/* Timeline Events */}
                   {timelineEvents.map((event, index) => (
@@ -406,7 +406,7 @@ export default function AboutUs() {
                         {/* Content */}
                         <div className="md:ml-8 max-w-3xl">
                           <h3 className="text-xl md:text-2xl font-bold mb-2 dark:text-white">{event.title}</h3>
-                          <p className="text-muted-foreground dark:text-gray-300">{event.description}</p>
+                          <p className="text-muted-foreground">{event.description}</p>
                         </div>
                       </div>
                     </div>
@@ -429,7 +429,7 @@ export default function AboutUs() {
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold mb-6 dark:text-white">Our Values</h2>
-                <p className="text-lg text-muted-foreground max-w-3xl mx-auto dark:text-gray-300">
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                   The principles that guide our work and define our approach to serving accounting professionals
                 </p>
               </div>
@@ -439,7 +439,7 @@ export default function AboutUs() {
                   <div 
                     key={index}
                     className={cn(
-                      "flex gap-3 transition-all hover:scale-[1.02] hover:bg-[#f0f9ff] dark:hover:bg-gray-800 p-4 rounded-lg dark:bg-gray-800/50",
+                      "flex gap-3 transition-all hover:scale-[1.02] hover:bg-[#f0f9ff] p-4 rounded-lg",
                       valuesVisible 
                         ? "opacity-100 translate-y-0" 
                         : "opacity-0 translate-y-[30px]"
@@ -455,7 +455,7 @@ export default function AboutUs() {
                     </div>
                     <div className="text-left">
                       <h3 className="text-xl font-bold mb-1 dark:text-white">{value.title}</h3>
-                      <p className="text-muted-foreground dark:text-gray-300">{value.description}</p>
+                      <p className="text-muted-foreground">{value.description}</p>
                     </div>
                   </div>
                 ))}
@@ -467,7 +467,7 @@ export default function AboutUs() {
         {/* CTA Section */}
         <section
           ref={ctaRef}
-          className="py-16 md:py-20 border-t dark:border-gray-800 dark:bg-background"
+          className="py-16 md:py-20 border-t"
         >
           <ResponsiveContainer>
             <div 
@@ -483,7 +483,7 @@ export default function AboutUs() {
               }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6 dark:text-white">Ready to transform your technical accounting workflows?</h2>
-              <p className="text-lg text-muted-foreground mb-8 dark:text-gray-300">
+              <p className="text-lg text-muted-foreground mb-8">
                 Let us help you simplify your technical accounting workflows.
               </p>
               <Button size="lg" variant="blue" asChild>

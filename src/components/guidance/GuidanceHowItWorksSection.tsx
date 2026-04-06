@@ -26,13 +26,13 @@ export function GuidanceHowItWorksSection() {
   ];
 
   return (
-    <section className="py-20 bg-white dark:bg-[#1A1F2B]">
+    <section className="py-20 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
             How Gaapio Guidance Updates Work
           </h2>
-          <p className="text-xl text-muted-foreground dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Stay ahead of accounting standards with our comprehensive monitoring and alert system
           </p>
         </div>
@@ -43,10 +43,10 @@ export function GuidanceHowItWorksSection() {
               <div className="w-16 h-16 mx-auto mb-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center group-hover:bg-blue-500 transition-colors duration-300">
                 <step.icon className="w-8 h-8 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors duration-300" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
+              <h3 className="text-xl font-semibold mb-3 text-foreground">
                 {step.title}
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 {step.description}
               </p>
             </div>

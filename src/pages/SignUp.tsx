@@ -153,9 +153,9 @@ export default function SignUp() {
         <ResponsiveContainer className="relative z-10">
           <div className="text-center animate-fade-in">
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-              <span className="text-gray-900">Simplify</span> Your Technical Accounting Journey
+              <span className="text-foreground">Simplify</span> Your Technical Accounting Journey
             </h1>
-            <p className="text-lg md:text-xl text-gray-900 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-foreground max-w-2xl mx-auto">
               Choose the plan that fits your team. Built by Big 4 CPAs for modern accounting workflows.
             </p>
           </div>
@@ -165,7 +165,7 @@ export default function SignUp() {
       {/* Main Content Section with Light Blue-Gray Gradient */}
       <main className="flex-1 relative">
         {/* Gradient background for pricing section */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-muted via-blue-50/40 to-muted dark:from-background dark:via-background dark:to-background pointer-events-none" />
         
         <div className="relative z-10 pt-2 pb-8 md:pt-4 md:pb-10">
           <ResponsiveContainer>
@@ -199,7 +199,7 @@ export default function SignUp() {
                   {trustBadges.map((badge, index) => (
                     <div 
                       key={badge.label}
-                      className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-border/50 shadow-sm"
+                      className="flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 shadow-sm"
                       style={{ animationDelay: `${0.1 * index}s` }}
                     >
                       <badge.icon className="h-4 w-4 text-primary" />

@@ -25,10 +25,10 @@ export const InternalGPTHeroSection = memo(function InternalGPTHeroSection() {
         {/* Text content centered */}
         <div className="max-w-4xl mx-auto mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up">
-            <span className="text-gray-900 dark:text-white">Your Firm's </span>
+            <span className="text-foreground">Your Firm's </span>
             <span className="text-white">Internal GPT</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-800 dark:text-white/90 mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
+          <p className="text-xl md:text-2xl text-foreground mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
             AI-Powered Knowledge Base. Instant Answers.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
@@ -41,7 +41,7 @@ export const InternalGPTHeroSection = memo(function InternalGPTHeroSection() {
                 <Link to="/contact">Contact Sales</Link>
               </Button>
             )}
-            <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted" asChild>
               <Link to="/request-demo">Request a Demo</Link>
             </Button>
           </div>
@@ -50,15 +50,15 @@ export const InternalGPTHeroSection = memo(function InternalGPTHeroSection() {
         {/* Visual representation */}
         <div className="flex justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
           <div className="relative w-full max-w-3xl">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700">
+            <div className="bg-background rounded-2xl shadow-2xl p-8 border border-border">
               {/* Mock chat interface */}
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border">
                 <div className="w-10 h-10 rounded-full bg-[#0099FF]/10 flex items-center justify-center">
                   <Database className="w-5 h-5 text-[#0099FF]" />
                 </div>
                 <div className="text-left">
-                  <h3 className="font-semibold text-gray-900 dark:text-white text-sm">Internal GPT</h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Connected to your knowledge base</p>
+                  <h3 className="font-semibold text-foreground text-sm">Internal GPT</h3>
+                  <p className="text-xs text-muted-foreground">Connected to your knowledge base</p>
                 </div>
               </div>
               
@@ -70,10 +70,10 @@ export const InternalGPTHeroSection = memo(function InternalGPTHeroSection() {
                   </div>
                 </div>
                 <div className="flex justify-start">
-                  <div className="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white px-4 py-3 rounded-2xl rounded-bl-md max-w-[85%]">
+                  <div className="bg-muted text-foreground px-4 py-3 rounded-2xl rounded-bl-md max-w-[85%]">
                     <p className="text-sm leading-relaxed">Based on your uploaded policy documents, multi-element arrangements should be evaluated under ASC 606-10-25. Your internal memo from Q2 2024 specifies that...</p>
-                    <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-600">
-                      <p className="text-xs text-gray-500 dark:text-gray-400">📎 Source: Revenue Recognition Policy v3.2, Internal Memo 2024-Q2-007</p>
+                    <div className="mt-2 pt-2 border-t border-border">
+                      <p className="text-xs text-muted-foreground">📎 Source: Revenue Recognition Policy v3.2, Internal Memo 2024-Q2-007</p>
                     </div>
                   </div>
                 </div>

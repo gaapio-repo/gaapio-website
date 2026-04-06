@@ -69,7 +69,7 @@ export default function PolicyDetail() {
               </TabsTrigger>
             </TabsList>
             
-            <div className="bg-white border border-border/30 rounded-lg mt-4 min-h-[600px]">
+            <div className="bg-background border border-border/30 rounded-lg mt-4 min-h-[600px]">
               {/* Details Tab */}
               <TabsContent value="details" className="p-6">
                 <h2 className="text-xl font-semibold mb-4">Policy Details</h2>

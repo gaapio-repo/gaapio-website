@@ -52,8 +52,8 @@ function App() {
     <Router>
       <ScrollToTop />
       <ErrorBoundary fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-          <div className="text-center p-8 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700">
+        <div className="min-h-screen flex items-center justify-center bg-muted">
+          <div className="text-center p-8 rounded-lg bg-background shadow-lg border border-border">
             <h2 className="text-2xl font-bold text-red-500 mb-4">Something went wrong</h2>
             <p className="mb-4">We're sorry, but an error has occurred.</p>
             <button 

@@ -31,14 +31,14 @@ interface ABTestManagerProps {
 }
 
 const STATUS_COLORS: Record<ABTest["status"], string> = {
-  draft: "bg-gray-100 text-gray-700 border-gray-200",
+  draft: "bg-muted text-muted-foreground border-border",
   running: "bg-green-50 text-green-700 border-green-200",
   paused: "bg-yellow-50 text-yellow-700 border-yellow-200",
   completed: "bg-blue-50 text-blue-700 border-blue-200",
 };
 
 const STATUS_DOT: Record<ABTest["status"], string> = {
-  draft: "bg-gray-400",
+  draft: "bg-muted-foreground",
   running: "bg-green-500 animate-pulse",
   paused: "bg-yellow-500",
   completed: "bg-blue-500",

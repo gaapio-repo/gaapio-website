@@ -118,7 +118,7 @@ export function ProductHighlightsSection() {
     <section 
       id="product-highlights" 
       ref={sectionRef}
-      className="py-20 md:py-32 bg-white dark:bg-slate-900 relative overflow-hidden"
+      className="py-20 md:py-32 bg-background relative overflow-hidden"
     >
       {/* Background decorative elements - subtle */}
       <div className="absolute inset-0 overflow-hidden">
@@ -154,7 +154,7 @@ export function ProductHighlightsSection() {
                       <TabsTrigger
                         key={product.id}
                         value={product.id}
-                        className="w-full h-auto p-6 justify-start text-left bg-white/80 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 border border-gray-200 dark:border-white/20 rounded-xl data-[state=active]:bg-[#339CFF] data-[state=active]:text-white data-[state=active]:border-[#339CFF] text-gray-900 dark:text-white data-[state=active]:text-white transition-all duration-300 shadow-sm dark:shadow-none"
+                        className="w-full h-auto p-6 justify-start text-left bg-background/80 hover:bg-background border border-border rounded-xl data-[state=active]:bg-[#339CFF] data-[state=active]:text-white data-[state=active]:border-[#339CFF] text-foreground data-[state=active]:text-white transition-all duration-300 shadow-sm dark:shadow-none"
                       >
                         <div className="font-semibold text-base leading-tight">
                           {product.label}
@@ -175,14 +175,14 @@ export function ProductHighlightsSection() {
                       value={product.id}
                       className="mt-0 h-full data-[state=active]:animate-in data-[state=active]:fade-in-50 data-[state=active]:slide-in-from-right-2"
                     >
-                      <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 h-full flex flex-col">
+                      <div className="bg-background rounded-2xl p-8 shadow-lg border border-border h-full flex flex-col">
                         <div className="mb-6">
                           <span className="text-sm font-bold text-[#339CFF] tracking-wider">
                             {product.label}
                           </span>
                         </div>
 
-                        <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                        <h3 className="text-2xl font-bold mb-4 text-foreground">
                           {product.title}
                         </h3>
 
@@ -216,19 +216,19 @@ export function ProductHighlightsSection() {
                                   aria-expanded={hasExpandableContent ? isExpanded : undefined}
                                   className={cn(
                                     "flex items-start w-full text-left py-2 px-2 -mx-2 rounded-lg transition-colors duration-150",
-                                    hasExpandableContent && "cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50",
-                                    isExpanded && "bg-slate-50 dark:bg-slate-700/50"
+                                    hasExpandableContent && "cursor-pointer hover:bg-muted",
+                                    isExpanded && "bg-muted"
                                   )}
                                   disabled={!hasExpandableContent}
                                 >
                                   <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#339CFF] mt-2 mr-3"></div>
-                                  <span className="text-gray-700 dark:text-gray-300 flex-1">
+                                  <span className="text-muted-foreground flex-1">
                                     {title}
                                   </span>
                                   {hasExpandableContent && (
                                     <ChevronDown 
                                       className={cn(
-                                        "w-4 h-4 text-gray-400 ml-2 mt-1 flex-shrink-0 transition-transform duration-200 ease-in-out",
+                                        "w-4 h-4 text-muted-foreground ml-2 mt-1 flex-shrink-0 transition-transform duration-200 ease-in-out",
                                         isExpanded && "rotate-180"
                                       )}
                                     />
@@ -243,7 +243,7 @@ export function ProductHighlightsSection() {
                                       isExpanded ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                                     )}
                                   >
-                                    <div className="ml-5 pl-3 py-2 mt-1 mb-1 border-l-2 border-slate-200 dark:border-slate-600 bg-[#f7f9fc] dark:bg-slate-800/50 rounded-r-md">
+                                    <div className="ml-5 pl-3 py-2 mt-1 mb-1 border-l-2 border-border bg-muted rounded-r-md">
                                       <p className="text-sm text-muted-foreground leading-relaxed">
                                         {description}
                                       </p>

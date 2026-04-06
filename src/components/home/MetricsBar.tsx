@@ -14,7 +14,7 @@ export const MetricsBar = memo(function MetricsBar() {
     value: "500+",
     label: "Firms Trust Us"
   }];
-  return <section className="py-12 bg-white/10 dark:bg-black/20 backdrop-blur-sm border-y border-white/20 dark:border-gray-800/50">
+  return <section className="py-12 bg-white/10 dark:bg-black/20 backdrop-blur-sm border-y border-white/20 dark:border-border/50">
       <ResponsiveContainer>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {metrics.map((metric, index) => <div key={index} className="text-center animate-fade-up" style={{

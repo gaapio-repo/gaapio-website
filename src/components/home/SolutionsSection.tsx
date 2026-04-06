@@ -6,24 +6,24 @@ import { cn } from "@/lib/utils";
 
 // Mini UI mockup components for each card
 const PrivateMockup = () => (
-  <div className="w-full h-24 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2.5 flex gap-2 overflow-hidden">
-    <div className="w-1/3 bg-white dark:bg-slate-900 rounded shadow-sm p-2 flex flex-col gap-1.5">
+  <div className="w-full h-24 bg-gradient-to-br from-muted to-muted dark:from-muted dark:to-muted rounded-lg border border-border p-2.5 flex gap-2 overflow-hidden">
+    <div className="w-1/3 bg-background rounded shadow-sm p-2 flex flex-col gap-1.5">
       <div className="h-2 w-3/4 bg-primary/30 rounded-full"></div>
-      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-      <div className="h-1.5 w-2/3 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-full bg-muted rounded-full"></div>
+      <div className="h-1.5 w-2/3 bg-muted rounded-full"></div>
     </div>
-    <div className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-2 flex flex-col gap-1.5">
+    <div className="flex-1 bg-background rounded shadow-sm p-2 flex flex-col gap-1.5">
       <div className="h-2 w-1/2 bg-primary/40 rounded-full"></div>
-      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-      <div className="h-1.5 w-3/4 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-full bg-muted rounded-full"></div>
+      <div className="h-1.5 w-full bg-muted rounded-full"></div>
+      <div className="h-1.5 w-3/4 bg-muted rounded-full"></div>
     </div>
   </div>
 );
 
 const PublicMockup = () => (
-  <div className="w-full h-24 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2.5 flex gap-2 overflow-hidden">
-    <div className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-2 flex flex-col justify-between">
+  <div className="w-full h-24 bg-gradient-to-br from-muted to-muted dark:from-muted dark:to-muted rounded-lg border border-border p-2.5 flex gap-2 overflow-hidden">
+    <div className="flex-1 bg-background rounded shadow-sm p-2 flex flex-col justify-between">
       <div className="flex gap-1.5">
         <div className="h-2.5 w-2.5 rounded-full bg-green-400"></div>
         <div className="h-2.5 w-2.5 rounded-full bg-blue-400"></div>
@@ -37,10 +37,10 @@ const PublicMockup = () => (
         <div className="w-2.5 bg-primary rounded-t" style={{height: '100%'}}></div>
       </div>
     </div>
-    <div className="w-1/3 bg-white dark:bg-slate-900 rounded shadow-sm p-2 flex flex-col gap-1.5">
+    <div className="w-1/3 bg-background rounded shadow-sm p-2 flex flex-col gap-1.5">
       <div className="h-2 w-full bg-primary/30 rounded-full"></div>
-      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-      <div className="h-1.5 w-2/3 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+      <div className="h-1.5 w-full bg-muted rounded-full"></div>
+      <div className="h-1.5 w-2/3 bg-muted rounded-full"></div>
       <div className="h-4 w-full bg-green-100 dark:bg-green-900/30 rounded mt-auto flex items-center justify-center">
         <div className="h-1.5 w-1/2 bg-green-500 rounded-full"></div>
       </div>
@@ -49,12 +49,12 @@ const PublicMockup = () => (
 );
 
 const FirmMockup = () => (
-  <div className="w-full h-24 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 p-2.5 flex gap-2 overflow-hidden">
+  <div className="w-full h-24 bg-gradient-to-br from-muted to-muted dark:from-muted dark:to-muted rounded-lg border border-border p-2.5 flex gap-2 overflow-hidden">
     {[1, 2, 3].map((i) => (
-      <div key={i} className="flex-1 bg-white dark:bg-slate-900 rounded shadow-sm p-2 flex flex-col gap-1.5">
+      <div key={i} className="flex-1 bg-background rounded shadow-sm p-2 flex flex-col gap-1.5">
         <div className="h-2 w-2/3 bg-primary/30 rounded-full"></div>
-        <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
-        <div className="h-1.5 w-3/4 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+        <div className="h-1.5 w-full bg-muted rounded-full"></div>
+        <div className="h-1.5 w-3/4 bg-muted rounded-full"></div>
         <div className="mt-auto h-3 w-full bg-primary/10 rounded flex items-center px-1.5">
           <div className="h-1.5 w-1/2 bg-primary/40 rounded-full"></div>
         </div>
@@ -96,7 +96,7 @@ export function SolutionsSection() {
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
       {/* Premium gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/80 via-white to-white dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-900" />
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/80 via-white to-white dark:from-background dark:via-background/95 dark:to-background" />
       
       {/* Subtle decorative elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -125,15 +125,15 @@ export function SolutionsSection() {
                 onMouseLeave={() => setHoveredIndex(null)}
                 className={cn(
                   "group relative rounded-2xl transition-all duration-300 ease-out p-8 lg:p-10 flex flex-col",
-                  "bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm",
-                  "border border-white/50 dark:border-slate-700/50",
-                  "shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50",
+                  "bg-background/80 backdrop-blur-sm",
+                  "border border-white/50 dark:border-border/50",
+                  "shadow-lg shadow-muted dark:shadow-none",
                   "hover:-translate-y-2",
                   isHovered ? [
                     "shadow-2xl shadow-primary/20 dark:shadow-primary/10",
                     "scale-[1.02]",
                     "ring-2 ring-primary/20 dark:ring-primary/30",
-                    "bg-gradient-to-br from-white via-white to-blue-50/50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-700/50",
+                    "bg-gradient-to-br from-white via-white to-blue-50/50 dark:from-card dark:via-card dark:to-card",
                   ] : [
                     "hover:shadow-xl hover:shadow-primary/10",
                   ]
@@ -167,7 +167,7 @@ export function SolutionsSection() {
                   </h3>
                   
                   {/* Description - lighter color, constrained width */}
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-8 leading-relaxed flex-1 max-w-[220px]">
+                  <p className="text-sm text-muted-foreground mb-8 leading-relaxed flex-1 max-w-[220px]">
                     {solution.beforeBold}
                     <span className="font-medium text-foreground">{solution.boldPart}</span>
                     {solution.afterBold}

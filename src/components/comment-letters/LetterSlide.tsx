@@ -48,7 +48,7 @@ export function LetterSlide({ item }: LetterSlideProps) {
           <iframe
             src={`https://docs.google.com/viewer?url=${encodeURIComponent(item.sec_url)}&embedded=true`}
             title={`${item.letter_type} — ${date}`}
-            className="w-full border-0 bg-white rounded-lg shadow-inner"
+            className="w-full border-0 bg-background rounded-lg shadow-inner"
             style={{ height: '70vh', minHeight: '500px' }}
           />
         </div>
@@ -57,7 +57,7 @@ export function LetterSlide({ item }: LetterSlideProps) {
           <iframe
             srcDoc={extractHtmlBody(item.raw_text || item.cleaned_text!)}
             title={`${item.letter_type} — ${date}`}
-            className="w-full border-0 bg-white rounded-lg shadow-inner"
+            className="w-full border-0 bg-background rounded-lg shadow-inner"
             style={{ height: '70vh', minHeight: '500px' }}
             sandbox=""
           />
