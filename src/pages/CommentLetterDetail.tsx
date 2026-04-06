@@ -18,6 +18,7 @@ import { useCommentLetterThread, ThreadLetter } from '@/hooks/useCommentLetterTh
 import { formatDate } from '@/utils/formatDate';
 import { ArrowLeft, ArrowRight, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ToolPageWrapper } from '@/components/tools/ToolPageWrapper';
 
 export default function CommentLetterDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -49,6 +50,7 @@ export default function CommentLetterDetail() {
 
   if (isLoading) {
     return (
+      <ToolPageWrapper toolSlug="sec-comment-letters">
       <div className="flex min-h-screen flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-12">
@@ -60,11 +62,13 @@ export default function CommentLetterDetail() {
         </main>
         <Footer />
       </div>
+      </ToolPageWrapper>
     );
   }
 
   if (!letter) {
     return (
+      <ToolPageWrapper toolSlug="sec-comment-letters">
       <div className="flex min-h-screen flex-col">
         <SEO title="Letter Not Found" description="The requested SEC comment letter could not be found." noindex />
         <Header />
@@ -80,6 +84,7 @@ export default function CommentLetterDetail() {
         </main>
         <Footer />
       </div>
+      </ToolPageWrapper>
     );
   }
 
@@ -89,6 +94,7 @@ export default function CommentLetterDetail() {
     : formatDate(letter.date_filed, 'long');
 
   return (
+    <ToolPageWrapper toolSlug="sec-comment-letters">
     <div className="flex min-h-screen flex-col">
       <SEO
         title={`${letter.company_name} SEC Comment Letter${hasThread ? ` — ${threadLetters.length} Letters` : ` ${formatDate(letter.date_filed, 'long')}`}`}
@@ -219,5 +225,6 @@ export default function CommentLetterDetail() {
       <SoftCTA context={primaryTopic} />
       <Footer />
     </div>
+    </ToolPageWrapper>
   );
 }

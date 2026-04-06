@@ -18,6 +18,7 @@ import { useCommentLetterTopics } from '@/hooks/useCommentLetterTopics';
 import { useCommentLetterFilterOptions } from '@/hooks/useCommentLetterFilters';
 import { slugToTopicPattern, groupIntoThreads } from '@/types/commentLetters';
 import { useMemo } from 'react';
+import { ToolPageWrapper } from '@/components/tools/ToolPageWrapper';
 
 export default function CommentLetterTopicDetail() {
   const { topicSlug } = useParams<{ topicSlug: string }>();
@@ -46,6 +47,7 @@ export default function CommentLetterTopicDetail() {
   const isLoading = topicsLoading || lettersLoading;
 
   return (
+    <ToolPageWrapper toolSlug="sec-comment-letters">
     <div className="flex min-h-screen flex-col">
       <SEO
         title={`SEC Comment Letters: ${topicName}`}
@@ -106,7 +108,7 @@ export default function CommentLetterTopicDetail() {
             <p className="text-xs text-muted-foreground/70 mt-5 mb-3">
               {results.count === 0
                 ? 'No letters match your filters.'
-                : `Showing ${threads.length} thread${threads.length !== 1 ? 's' : ''} · ${results.count.toLocaleString()} letters total`}
+                : `Showing ${threads.length} of ${results.count.toLocaleString()} results`}
             </p>
           )}
 
@@ -138,5 +140,6 @@ export default function CommentLetterTopicDetail() {
       <SoftCTA context={topicName} />
       <Footer />
     </div>
+    </ToolPageWrapper>
   );
 }

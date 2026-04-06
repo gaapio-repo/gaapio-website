@@ -72,6 +72,12 @@ export function TabVisibilitySettings() {
       visible: true
     },
     {
+      id: "tools",
+      name: "Tools",
+      description: "Manage public-facing tools and analytics",
+      visible: true
+    },
+    {
       id: "settings",
       name: "Settings",
       description: "Admin system settings",

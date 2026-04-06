@@ -15,6 +15,7 @@ import { useCommentLetterTopics } from '@/hooks/useCommentLetterTopics';
 import { appSupabase } from '@/integrations/supabase/appClient';
 import { useQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
+import { ToolPageWrapper } from '@/components/tools/ToolPageWrapper';
 
 export default function CommentLetterTopics() {
   const { data: topics, isLoading } = useCommentLetterTopics();
@@ -40,6 +41,7 @@ export default function CommentLetterTopics() {
   const allCounts = useMemo(() => (topics || []).map(t => t.letter_count).sort((a, b) => a - b), [topics]);
 
   return (
+    <ToolPageWrapper toolSlug="sec-comment-letters">
     <div className="flex min-h-screen flex-col">
       <SEO
         title="Browse SEC Comment Letters by ASC Topic"
@@ -114,5 +116,6 @@ export default function CommentLetterTopics() {
       <SoftCTA />
       <Footer />
     </div>
+    </ToolPageWrapper>
   );
 }

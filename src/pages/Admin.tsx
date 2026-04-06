@@ -24,6 +24,7 @@ import { PageEditor } from "@/components/admin/PageEditor";
 import { CustomerLogosManager } from "@/components/admin/CustomerLogosManager";
 import { TestimonialsManager } from "@/components/admin/TestimonialsManager";
 import { TabVisibilitySettings, AdminTab } from "@/components/admin/TabVisibilitySettings";
+import { ToolsManager } from "@/components/admin/ToolsManager";
 import { Badge } from "@/components/ui/badge";
 
 // Group websites pages into categories
@@ -60,6 +61,7 @@ export default function Admin() {
     testimonials: true,
     blog: true,
     webpages: true,
+    tools: true,
     settings: true
   });
   
@@ -292,6 +294,7 @@ export default function Admin() {
                 {tabVisibility.testimonials && <TabsTrigger value="testimonials">Customer Quotes</TabsTrigger>}
                 {tabVisibility.blog && <TabsTrigger value="blog">Blog Posts</TabsTrigger>}
                 {tabVisibility.webpages && <TabsTrigger value="webpages">Webpages</TabsTrigger>}
+                {tabVisibility.tools && <TabsTrigger value="tools">Tools</TabsTrigger>}
                  {tabVisibility.settings && <TabsTrigger value="settings">Settings</TabsTrigger>}
               </TabsList>
 
@@ -404,6 +407,12 @@ export default function Admin() {
                 </TabsContent>
               )}
               
+              {tabVisibility.tools && (
+                <TabsContent value="tools" className="space-y-4">
+                  <ToolsManager />
+                </TabsContent>
+              )}
+
               {tabVisibility.settings && (
                 <TabsContent value="settings" className="space-y-8">
                   <div className="border rounded-md p-6 bg-card">
