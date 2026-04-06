@@ -5,7 +5,7 @@ import { Bell, Mail, Smartphone } from "lucide-react";
 
 export function NeverMissUpdateSection() {
   return (
-    <section className="py-20 bg-blue-50 dark:bg-blue-950/30">
+    <section className="py-20 bg-blue-50 dark:bg-muted">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}
@@ -26,7 +26,7 @@ export function NeverMissUpdateSection() {
 
           {/* Right side - Visual mockup */}
           <div className="relative">
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-muted dark:to-muted rounded-2xl p-8">
               <div className="space-y-4">
                 {/* Email alert mockup */}
                 <div className="bg-background rounded-lg shadow-lg p-4 border border-border">

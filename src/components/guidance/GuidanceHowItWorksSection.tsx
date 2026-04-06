@@ -40,7 +40,7 @@ export function GuidanceHowItWorksSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (
             <div key={index} className="text-center group">
-              <div className="w-16 h-16 mx-auto mb-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center group-hover:bg-blue-500 transition-colors duration-300">
+              <div className="w-16 h-16 mx-auto mb-6 bg-blue-100 dark:bg-muted rounded-full flex items-center justify-center group-hover:bg-blue-500 transition-colors duration-300">
                 <step.icon className="w-8 h-8 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors duration-300" />
               </div>
               <h3 className="text-xl font-semibold mb-3 text-foreground">

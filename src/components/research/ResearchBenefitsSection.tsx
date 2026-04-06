@@ -36,7 +36,7 @@ export const ResearchBenefitsSection = memo(function ResearchBenefitsSection() {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-800/60 dark:via-slate-800/60 dark:to-slate-800/60">
+    <section className="py-20 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-background dark:via-background dark:to-background">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-foreground">
@@ -54,9 +54,9 @@ export const ResearchBenefitsSection = memo(function ResearchBenefitsSection() {
             return (
               <div
                 key={index}
-                className="flex flex-col md:flex-row gap-6 items-start p-8 rounded-2xl border border-border hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 bg-gradient-to-br from-white to-blue-50/30 dark:from-gray-800 dark:to-blue-900/10"
+                className="flex flex-col md:flex-row gap-6 items-start p-8 rounded-2xl border border-border hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 bg-gradient-to-br from-white to-blue-50/30 dark:from-muted dark:to-muted"
               >
-                <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-blue-100 dark:bg-muted flex items-center justify-center">
                   <Icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                 </div>
                 

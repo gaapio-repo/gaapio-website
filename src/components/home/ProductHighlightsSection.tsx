@@ -148,13 +148,13 @@ export function ProductHighlightsSection() {
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Left side - Tab buttons */}
               <div className="lg:w-1/3">
-                <TabsList className="flex flex-col h-auto w-full bg-transparent space-y-2 p-0">
+                <TabsList className="flex flex-col h-auto w-full bg-transparent border-0 shadow-none space-y-2 p-0">
                   {products.map((product) => {
                     return (
                       <TabsTrigger
                         key={product.id}
                         value={product.id}
-                        className="w-full h-auto p-6 justify-start text-left bg-background/80 hover:bg-background border border-border rounded-xl data-[state=active]:bg-[#339CFF] data-[state=active]:text-white data-[state=active]:border-[#339CFF] text-foreground data-[state=active]:text-white transition-all duration-300 shadow-sm dark:shadow-none"
+                        className="w-full h-auto p-6 justify-start text-left rounded-lg bg-muted/70 shadow-inner hover:shadow-md !border-0 data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-md text-foreground transition-shadow duration-200"
                       >
                         <div className="font-semibold text-base leading-tight">
                           {product.label}
@@ -175,7 +175,7 @@ export function ProductHighlightsSection() {
                       value={product.id}
                       className="mt-0 h-full data-[state=active]:animate-in data-[state=active]:fade-in-50 data-[state=active]:slide-in-from-right-2"
                     >
-                      <div className="bg-background rounded-2xl p-8 shadow-lg border border-border h-full flex flex-col">
+                      <div className="rounded-lg bg-muted/70 shadow-inner p-8 h-full flex flex-col">
                         <div className="mb-6">
                           <span className="text-sm font-bold text-[#339CFF] tracking-wider">
                             {product.label}

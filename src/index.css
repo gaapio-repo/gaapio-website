@@ -94,12 +94,12 @@
     --sidebar-ring: 204 100% 50%;
 
     /* Custom benefits section background for dark mode */
-    --benefits-bg: #1A1F2B; /* dark navy-gray background */
-    
-    /* Hero gradient colors - darker for dark mode */
-    --hero-gradient-from: 204 100% 45%; /* Darker #0099FF */
-    --hero-gradient-via: 200 90% 50%; /* Darker cyan-blue */
-    --hero-gradient-to: 195 90% 55%; /* Darker cyan */
+    --benefits-bg: hsl(0 0% 13%); /* neutral dark background */
+
+    /* Hero gradient colors - neutral dark for dark mode */
+    --hero-gradient-from: 0 0% 10%;
+    --hero-gradient-via: 0 0% 12%;
+    --hero-gradient-to: 0 0% 14%;
   }
 }
 

@@ -76,7 +76,7 @@ export default function Resources() {
                     </div>
                     <div className="flex-1">
                       <CardTitle>SEC EDGAR</CardTitle>
-                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-blue-900/30 dark:text-blue-300">Authoritative</Badge>
+                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-muted dark:text-blue-300">Authoritative</Badge>
                     </div>
                   </div>
                 </CardHeader>
@@ -108,7 +108,7 @@ export default function Resources() {
                     </div>
                     <div className="flex-1">
                       <CardTitle>Deloitte Accounting Library</CardTitle>
-                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-blue-900/30 dark:text-blue-300">Big 4</Badge>
+                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-muted dark:text-blue-300">Big 4</Badge>
                     </div>
                   </div>
                 </CardHeader>
@@ -140,7 +140,7 @@ export default function Resources() {
                     </div>
                     <div className="flex-1">
                       <CardTitle>PwC Inform</CardTitle>
-                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-blue-900/30 dark:text-blue-300">Big 4</Badge>
+                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-muted dark:text-blue-300">Big 4</Badge>
                     </div>
                   </div>
                 </CardHeader>
@@ -172,7 +172,7 @@ export default function Resources() {
                     </div>
                     <div className="flex-1">
                       <CardTitle>EY AccountingLink</CardTitle>
-                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-blue-900/30 dark:text-blue-300">Big 4</Badge>
+                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-muted dark:text-blue-300">Big 4</Badge>
                     </div>
                   </div>
                 </CardHeader>
@@ -204,7 +204,7 @@ export default function Resources() {
                     </div>
                     <div className="flex-1">
                       <CardTitle>KPMG Guidance Center</CardTitle>
-                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-blue-900/30 dark:text-blue-300">Big 4</Badge>
+                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-muted dark:text-blue-300">Big 4</Badge>
                     </div>
                   </div>
                 </CardHeader>
@@ -236,7 +236,7 @@ export default function Resources() {
                     </div>
                     <div className="flex-1">
                       <CardTitle>FASB Codification</CardTitle>
-                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-blue-900/30 dark:text-blue-300">Standards</Badge>
+                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-muted dark:text-blue-300">Standards</Badge>
                     </div>
                   </div>
                 </CardHeader>
@@ -428,7 +428,7 @@ export default function Resources() {
                     <FileCheck className="h-8 w-8 mb-3 text-primary mr-3 dark:text-[#339CFF]" />
                     <div>
                       <CardTitle>Technical Memo Template</CardTitle>
-                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-blue-900/30 dark:text-blue-300">High Quality</Badge>
+                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-muted dark:text-blue-300">High Quality</Badge>
                     </div>
                   </div>
                 </CardHeader>
@@ -451,7 +451,7 @@ export default function Resources() {
                     <FileCheck className="h-8 w-8 mb-3 text-primary mr-3 dark:text-[#339CFF]" />
                     <div>
                       <CardTitle>White Paper: AI in Finance</CardTitle>
-                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-blue-900/30 dark:text-blue-300">New</Badge>
+                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-muted dark:text-blue-300">New</Badge>
                     </div>
                   </div>
                 </CardHeader>
@@ -474,7 +474,7 @@ export default function Resources() {
                     <FileCheck className="h-8 w-8 mb-3 text-primary mr-3 dark:text-[#339CFF]" />
                     <div>
                       <CardTitle>Audit Readiness Checklist</CardTitle>
-                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-blue-900/30 dark:text-blue-300">Popular</Badge>
+                      <Badge className="mt-1 bg-[#eef6ff] text-[#0369a1] dark:bg-muted dark:text-blue-300">Popular</Badge>
                     </div>
                   </div>
                 </CardHeader>

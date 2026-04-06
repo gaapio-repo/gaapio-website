@@ -45,7 +45,7 @@ export const ContractHowItWorksSection = memo(function ContractHowItWorksSection
               <div key={index} className="relative">
                 <div className="bg-background rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-border h-full">
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
+                    <div className="w-16 h-16 bg-blue-100 dark:bg-muted rounded-full flex items-center justify-center mb-4">
                       <IconComponent className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div className="absolute -top-3 -right-3 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
@@ -65,7 +65,7 @@ export const ContractHowItWorksSection = memo(function ContractHowItWorksSection
         </div>
 
         <div className="text-center mt-16">
-          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-8 max-w-3xl mx-auto">
+          <div className="bg-blue-50 dark:bg-muted rounded-xl p-8 max-w-3xl mx-auto">
             <h3 className="text-xl font-semibold mb-4 text-foreground">
               Ready to streamline your contract analysis?
             </h3>

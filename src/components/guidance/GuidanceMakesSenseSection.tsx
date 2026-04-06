@@ -18,7 +18,7 @@ export function GuidanceMakesSenseSection() {
         {/* Three-column benefits */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="text-center">
-            <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-blue-100 dark:bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-4">Plain English Explanations</h3>
@@ -26,7 +26,7 @@ export function GuidanceMakesSenseSection() {
           </div>
           
           <div className="text-center">
-            <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-blue-100 dark:bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
               <Clock className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-4">Quick Implementation</h3>
@@ -34,7 +34,7 @@ export function GuidanceMakesSenseSection() {
           </div>
           
           <div className="text-center">
-            <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-blue-100 dark:bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
               <FileText className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-4">CPA-Reviewed Content</h3>
@@ -44,7 +44,7 @@ export function GuidanceMakesSenseSection() {
 
         {/* Arrow pointing down */}
         <div className="flex justify-center mb-12">
-          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+          <div className="w-12 h-12 bg-blue-100 dark:bg-muted rounded-full flex items-center justify-center">
             <ArrowDown className="w-6 h-6 text-blue-600 dark:text-blue-400" />
           </div>
         </div>

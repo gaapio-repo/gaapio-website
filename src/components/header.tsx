@@ -196,7 +196,7 @@ export function Header() {
                                   className={cn(
                                     "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
                                     hoveredSolutionPage.name === solution.name
-                                      ? "bg-blue-100 dark:bg-blue-900/30"
+                                      ? "bg-blue-100 dark:bg-muted"
                                       : "hover:bg-muted"
                                   )}
                                 >
@@ -229,7 +229,7 @@ export function Header() {
                         </div>
 
                         {/* Right Column - Solution Details */}
-                        <div className="p-8 bg-gradient-to-br from-blue-50 to-blue-100/30 dark:from-blue-950/50 dark:to-blue-900/20">
+                        <div className="p-8 bg-gradient-to-br from-blue-50 to-blue-100/30 dark:from-muted dark:to-muted">
                           <div className="flex items-start gap-4 mb-6">
                             <div className="p-3 rounded-xl bg-[#339CFF] shadow-lg">
                               <hoveredSolutionPage.icon className="h-7 w-7 text-white" />
@@ -297,7 +297,7 @@ export function Header() {
                                         className={cn(
                                           "flex items-center gap-3 px-3 py-3 rounded-lg transition-all group",
                                           hoveredProduct.name === product.name
-                                            ? "bg-blue-100 dark:bg-blue-900/30"
+                                            ? "bg-blue-100 dark:bg-muted"
                                             : "hover:bg-muted"
                                         )}
                                       >
@@ -330,7 +330,7 @@ export function Header() {
                               </div>
 
                               {/* Right Column - Product Details */}
-                              <div className="p-8 bg-gradient-to-br from-blue-50 to-blue-100/30 dark:from-blue-950/50 dark:to-blue-900/20">
+                              <div className="p-8 bg-gradient-to-br from-blue-50 to-blue-100/30 dark:from-muted dark:to-muted">
                                 <div className="flex items-start gap-4 mb-6">
                                   <div className="p-3 rounded-xl bg-[#339CFF] shadow-lg">
                                     <hoveredProduct.icon className="h-7 w-7 text-white" />
@@ -400,7 +400,7 @@ export function Header() {
                                     className={cn(
                                       "flex items-center gap-2 px-3 py-3 rounded-lg transition-all group",
                                       (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
-                                        ? "bg-blue-100 dark:bg-blue-900/30"
+                                        ? "bg-blue-100 dark:bg-muted"
                                         : "hover:bg-muted"
                                     )}
                                   >
@@ -431,7 +431,7 @@ export function Header() {
                                       className={cn(
                                         "flex items-center gap-2 px-3 py-3 rounded-lg transition-all group",
                                         (hoveredCompanyPage.name === page.name || (index === 0 && hoveredCompanyPage === companyPages[0]))
-                                          ? "bg-blue-100 dark:bg-blue-900/30"
+                                          ? "bg-blue-100 dark:bg-muted"
                                           : "hover:bg-muted"
                                       )}
                                     >

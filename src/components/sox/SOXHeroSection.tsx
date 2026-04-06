@@ -40,7 +40,7 @@ export const SOXHeroSection = memo(function SOXHeroSection() {
         {/* Visual Element */}
         <div className="flex justify-center animate-fade-up" style={{ animationDelay: "400ms" }}>
           <div className="relative w-full max-w-4xl">
-            <div className="bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-3xl p-8 shadow-2xl border border-border">
+            <div className="bg-gradient-to-br from-green-50 to-blue-50 dark:from-muted dark:to-muted rounded-3xl p-8 shadow-2xl border border-border">
               {/* Mock Control Dashboard */}
               <div className="bg-background rounded-2xl p-6 mb-6 shadow-lg">
                 <div className="flex items-center justify-between mb-6">

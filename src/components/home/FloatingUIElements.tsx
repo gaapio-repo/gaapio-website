@@ -40,7 +40,7 @@ export const FloatingUIElements = memo(function FloatingUIElements() {
       <div className="absolute bottom-8 left-0 md:left-8 lg:left-16 z-20 animate-float-delayed-more hidden md:block">
         <div className="bg-background rounded-lg shadow-xl p-4 border border-border w-52">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+            <div className="p-2 bg-blue-100 dark:bg-muted rounded-lg">
               <CheckCircle2 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
             </div>
             <div>

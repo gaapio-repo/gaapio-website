@@ -50,7 +50,7 @@ const WhyWeBuiltThis = () => {
 
             {/* When Possibility Met Experience - With Founders Photo */}
             <section className="mb-12 -mx-8 md:-mx-12">
-              <div className="bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 p-8 md:p-12 rounded-lg">
+              <div className="bg-gradient-to-br from-gray-50 to-blue-50 dark:from-background dark:to-muted p-8 md:p-12 rounded-lg">
                 <h2 className="text-3xl font-bold mb-8 text-foreground">
                   When Possibility Met Experience
                 </h2>
@@ -101,7 +101,7 @@ const WhyWeBuiltThis = () => {
       </main>
 
       {/* Call to Action Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 relative z-10">
+      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-background dark:to-muted relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
               Join Us in Transforming Accounting
