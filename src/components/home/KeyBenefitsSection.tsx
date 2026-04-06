@@ -40,9 +40,9 @@ function FeatureCard({ benefit }: { benefit: BenefitCard }) {
       className={cn(
         "group relative rounded-2xl p-6 md:p-8",
         // Card background - light with subtle gradient in light mode, dark solid in dark mode
-        "bg-gradient-to-br from-white via-white to-muted/30 dark:from-slate-700 dark:via-slate-700 dark:to-slate-700/80",
+        "bg-gradient-to-br from-white via-white to-muted/30 dark:from-card dark:via-card dark:to-card/80",
         // Border with subtle shadow
-        "border border-border/60 dark:border-slate-600",
+        "border border-border/60",
         "shadow-sm",
         // Hover effects
         "hover:border-primary/30 hover:-translate-y-1",
@@ -66,7 +66,7 @@ function FeatureCard({ benefit }: { benefit: BenefitCard }) {
         </div>
         
         {/* Description paragraph */}
-        <p className="text-muted-foreground dark:text-slate-300 text-[15px] leading-relaxed">
+        <p className="text-muted-foreground text-[15px] leading-relaxed">
           {benefit.description}
         </p>
       </div>
@@ -78,7 +78,7 @@ export function KeyBenefitsSection() {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
       {/* Light blue-gray gradient band - light mode */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-800/60 dark:via-slate-800/60 dark:to-slate-800/60 -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-muted via-blue-50/40 to-muted dark:via-muted/40 -z-10" />
       
       {/* Subtle accent overlays */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_hsl(var(--primary)/0.04)_0%,_transparent_50%)] -z-10" />

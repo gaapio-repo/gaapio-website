@@ -26,13 +26,13 @@ export const ResearchHowItWorksSection = memo(function ResearchHowItWorksSection
   ];
 
   return (
-    <section className="py-20 bg-white dark:bg-[#1A1F2B]">
+    <section className="py-20 bg-background">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
             How It Works
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto dark:text-gray-300">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Get instant answers to your accounting and auditing questions
           </p>
         </div>
@@ -43,7 +43,7 @@ export const ResearchHowItWorksSection = memo(function ResearchHowItWorksSection
             return (
               <div
                 key={index}
-                className="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
+                className="group relative bg-background rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-border"
               >
                 {/* Step Number */}
                 <div className="absolute -top-4 -left-4 w-8 h-8 bg-[#339CFF] text-white rounded-full flex items-center justify-center text-sm font-bold">
@@ -56,10 +56,10 @@ export const ResearchHowItWorksSection = memo(function ResearchHowItWorksSection
                 </div>
                 
                 {/* Content */}
-                <h3 className="text-xl font-semibold mb-4 dark:text-white">
+                <h3 className="text-xl font-semibold mb-4">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed dark:text-gray-300">
+                <p className="text-muted-foreground leading-relaxed">
                   {step.description}
                 </p>
                 
@@ -72,9 +72,9 @@ export const ResearchHowItWorksSection = memo(function ResearchHowItWorksSection
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow-md border border-gray-100 dark:border-gray-700">
+          <div className="inline-flex items-center gap-2 bg-background px-6 py-3 rounded-full shadow-md border border-border">
             <CheckCircle className="w-5 h-5 text-green-500" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            <span className="text-sm font-medium text-muted-foreground">
               Authoritative answers with source citations
             </span>
           </div>

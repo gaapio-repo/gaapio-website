@@ -24,17 +24,17 @@ export const DisclosureHeroSection = memo(function DisclosureHeroSection({
         {/* Text content centered */}
         <div className="max-w-4xl mx-auto mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up">
-            <span className="text-gray-900 dark:text-white">Comprehensive </span>
+            <span className="text-foreground">Comprehensive </span>
             <span className="text-white">Footnote Disclosures</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-800 dark:text-white/90 mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
+          <p className="text-xl md:text-2xl text-foreground mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
             {subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
             <Button size="lg" variant="black" asChild>
               <Link to="/signup-select">Sign Up Now</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted" asChild>
               <Link to="/request-demo">Request a Demo</Link>
             </Button>
           </div>

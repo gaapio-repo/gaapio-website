@@ -5,13 +5,13 @@ import { Download, ArrowRight } from "lucide-react";
 
 export function FinalCtaBanner() {
   return (
-    <section className="py-20 bg-white dark:bg-background">
+    <section className="py-20 bg-background">
       <div className="container mx-auto px-4 md:px-6 text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             Know the Standards. Apply Them Confidently.
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground mb-10 max-w-3xl mx-auto">
             Join firms who trust Gaapio to deliver compliance updates that make sense.
           </p>
           

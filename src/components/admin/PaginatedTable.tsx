@@ -3,7 +3,6 @@ import React from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableHead,
   TableHeader,
   TableRow,
@@ -49,10 +48,9 @@ export function PaginatedTable<T>({
 
   return (
     <div className="space-y-4">
-      <div className="rounded-md border overflow-hidden">
+      <div className="rounded-md overflow-hidden">
         <div className="overflow-x-auto">
           <Table>
-            {caption && <TableCaption>{caption}</TableCaption>}
             <TableHeader>
               <TableRow>
                 {columns.map((column, idx) => (

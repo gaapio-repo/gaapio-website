@@ -58,17 +58,17 @@ export const HeroSection = memo(function HeroSection({
       <div className="container px-4 md:px-6 flex flex-col items-center relative z-10">
         {/* Text content centered */}
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-8 md:mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up text-gray-900 dark:text-white">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up text-foreground">
             Better Memos, <span className="text-white">Faster</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-800 dark:text-white/90 mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
+          <p className="text-xl md:text-2xl text-foreground mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
             {subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
             <Button size="lg" variant="black" asChild>
               <Link to="/signup-select">Sign Up Now</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted" asChild>
               <Link to="/request-demo">Request a Demo</Link>
             </Button>
           </div>
@@ -88,7 +88,7 @@ export const HeroSection = memo(function HeroSection({
         style={{ animationDelay: "400ms" }} 
         onClick={scrollToNextSection}
       >
-        <ArrowDownCircle className="h-10 w-10 text-muted-foreground/50 dark:text-gray-400/70 animate-pulse-slow cursor-pointer" aria-hidden="true" />
+        <ArrowDownCircle className="h-10 w-10 text-muted-foreground/50 animate-pulse-slow cursor-pointer" aria-hidden="true" />
       </div>
     </section>
   );

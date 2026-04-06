@@ -71,7 +71,7 @@ const VisualCard = ({ icon: Icon, name }: VisualCardProps) => (
     <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-primary/5 rounded-full blur-3xl" />
     
     {/* Main card */}
-    <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-xl border border-slate-200/80 dark:border-slate-700/50">
+    <div className="relative bg-background rounded-2xl p-8 shadow-xl border border-border/80">
       {/* Gradient accent bar */}
       <div className="absolute top-0 left-8 right-8 h-1 bg-gradient-to-r from-primary/60 via-primary to-primary/60 rounded-b-full" />
       
@@ -87,12 +87,12 @@ const VisualCard = ({ icon: Icon, name }: VisualCardProps) => (
       
       {/* Decorative content lines */}
       <div className="space-y-3">
-        <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded-full w-3/4 mx-auto" />
-        <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded-full w-full" />
-        <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded-full w-5/6 mx-auto" />
+        <div className="h-3 bg-muted rounded-full w-3/4 mx-auto" />
+        <div className="h-3 bg-muted rounded-full w-full" />
+        <div className="h-3 bg-muted rounded-full w-5/6 mx-auto" />
         <div className="pt-2 flex justify-center gap-2">
           <div className="h-8 w-20 bg-primary/20 rounded-md" />
-          <div className="h-8 w-20 bg-slate-100 dark:bg-slate-700 rounded-md" />
+          <div className="h-8 w-20 bg-muted rounded-md" />
         </div>
       </div>
       
@@ -116,8 +116,8 @@ const ChallengeSection = ({ item }: ChallengeSectionProps) => {
       className={cn(
         "py-20 md:py-28 relative overflow-hidden",
         item.bgVariant === "gradient" 
-          ? "bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900"
-          : "bg-white dark:bg-slate-900"
+          ? "bg-gradient-to-b from-muted via-blue-50/40 to-muted dark:from-background dark:via-background dark:to-background"
+          : "bg-background"
       )}
     >
       {/* Background decorative elements */}

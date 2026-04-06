@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { PaginatedTable } from "./PaginatedTable";
 import { Button } from "@/components/ui/button";
@@ -167,56 +166,54 @@ export function CompaniesTable() {
   ];
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Companies</CardTitle>
-        <CardDescription>
+    <div className="rounded-lg bg-muted/70 shadow-inner p-5">
+      <div className="mb-3">
+        <h2 className="text-xl font-semibold">Companies</h2>
+        <p className="text-sm text-muted-foreground">
           View and manage company accounts
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="mb-4">
-          <Input
-            placeholder="Search by company name or plan..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="max-w-md"
-          />
-        </div>
-        
-        <PaginatedTable
-          data={filteredCompanies}
-          columns={columns}
-          loading={loading}
-          searchQuery={searchQuery}
-          caption="A list of all companies"
-          noDataMessage="No companies found"
+        </p>
+      </div>
+      <div className="mb-3">
+        <Input
+          placeholder="Search by company name or plan..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="max-w-md bg-muted/70 border-0 shadow-sm"
         />
+      </div>
 
-        {selectedCompany && (
-          <>
-            <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-              <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0">
-                <EditCompanyDialog 
-                  company={selectedCompany}
-                  onSave={handleCompanyUpdate}
-                  onClose={() => setEditDialogOpen(false)}
-                />
-              </DialogContent>
-            </Dialog>
-            
-            <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-              <DialogContent>
-                <DeleteCompanyDialog 
-                  company={selectedCompany}
-                  onDelete={handleCompanyDelete}
-                  onClose={() => setDeleteDialogOpen(false)}
-                />
-              </DialogContent>
-            </Dialog>
-          </>
-        )}
-      </CardContent>
-    </Card>
+      <PaginatedTable
+        data={filteredCompanies}
+        columns={columns}
+        loading={loading}
+        searchQuery={searchQuery}
+        caption="A list of all companies"
+        noDataMessage="No companies found"
+      />
+
+      {selectedCompany && (
+        <>
+          <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0">
+              <EditCompanyDialog
+                company={selectedCompany}
+                onSave={handleCompanyUpdate}
+                onClose={() => setEditDialogOpen(false)}
+              />
+            </DialogContent>
+          </Dialog>
+
+          <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+            <DialogContent>
+              <DeleteCompanyDialog
+                company={selectedCompany}
+                onDelete={handleCompanyDelete}
+                onClose={() => setDeleteDialogOpen(false)}
+              />
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
+    </div>
   );
 }

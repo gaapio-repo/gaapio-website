@@ -1,5 +1,5 @@
 -- Create checkout_intents table to track checkout attempts
-CREATE TABLE public.checkout_intents (
+CREATE TABLE IF NOT EXISTS public.checkout_intents (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
   stripe_session_id TEXT,
   email TEXT NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE public.checkout_intents (
 );
 
 -- Create stripe_events table for webhook idempotency
-CREATE TABLE public.stripe_events (
+CREATE TABLE IF NOT EXISTS public.stripe_events (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
   stripe_event_id TEXT NOT NULL UNIQUE,
   event_type TEXT NOT NULL,
@@ -32,10 +32,10 @@ CREATE TABLE public.stripe_events (
 );
 
 -- Add indexes for performance
-CREATE INDEX idx_checkout_intents_email ON public.checkout_intents(email);
-CREATE INDEX idx_checkout_intents_stripe_session_id ON public.checkout_intents(stripe_session_id);
-CREATE INDEX idx_checkout_intents_status ON public.checkout_intents(status);
-CREATE INDEX idx_stripe_events_stripe_event_id ON public.stripe_events(stripe_event_id);
+CREATE INDEX IF NOT EXISTS idx_checkout_intents_email ON public.checkout_intents(email);
+CREATE INDEX IF NOT EXISTS idx_checkout_intents_stripe_session_id ON public.checkout_intents(stripe_session_id);
+CREATE INDEX IF NOT EXISTS idx_checkout_intents_status ON public.checkout_intents(status);
+CREATE INDEX IF NOT EXISTS idx_stripe_events_stripe_event_id ON public.stripe_events(stripe_event_id);
 
 -- Add trigger for updated_at on checkout_intents
 CREATE OR REPLACE FUNCTION public.update_checkout_intents_updated_at()
@@ -46,6 +46,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS update_checkout_intents_updated_at ON public.checkout_intents;
 CREATE TRIGGER update_checkout_intents_updated_at
 BEFORE UPDATE ON public.checkout_intents
 FOR EACH ROW
@@ -56,22 +57,26 @@ ALTER TABLE public.checkout_intents ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.stripe_events ENABLE ROW LEVEL SECURITY;
 
 -- RLS policies for checkout_intents - only admins can view
+DROP POLICY IF EXISTS "Admins can view checkout intents" ON public.checkout_intents;
 CREATE POLICY "Admins can view checkout intents"
 ON public.checkout_intents
 FOR SELECT
 USING (has_role(auth.uid(), 'admin'::app_role));
 
+DROP POLICY IF EXISTS "Admins can manage checkout intents" ON public.checkout_intents;
 CREATE POLICY "Admins can manage checkout intents"
 ON public.checkout_intents
 FOR ALL
 USING (has_role(auth.uid(), 'admin'::app_role));
 
 -- RLS policies for stripe_events - only admins can view
+DROP POLICY IF EXISTS "Admins can view stripe events" ON public.stripe_events;
 CREATE POLICY "Admins can view stripe events"
 ON public.stripe_events
 FOR SELECT
 USING (has_role(auth.uid(), 'admin'::app_role));
 
+DROP POLICY IF EXISTS "Admins can manage stripe events" ON public.stripe_events;
 CREATE POLICY "Admins can manage stripe events"
 ON public.stripe_events
 FOR ALL

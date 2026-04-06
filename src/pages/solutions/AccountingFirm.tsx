@@ -14,47 +14,47 @@ import { ServiceSchema } from "@/components/StructuredData";
 // Hero Product Screenshot Mockup - Memo workflow view
 const HeroScreenshotMockup = () => (
   <div className="w-full max-w-lg mx-auto">
-    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden">
+    <div className="bg-background rounded-xl border border-border shadow-2xl overflow-hidden">
       {/* Window chrome */}
-      <div className="bg-slate-100 dark:bg-slate-700 px-4 py-2.5 flex items-center gap-2 border-b border-slate-200 dark:border-slate-600">
+      <div className="bg-muted px-4 py-2.5 flex items-center gap-2 border-b border-border">
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full bg-red-400"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
           <div className="w-3 h-3 rounded-full bg-green-400"></div>
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="h-5 w-32 bg-slate-200 dark:bg-slate-600 rounded-md"></div>
+          <div className="h-5 w-32 bg-muted rounded-md"></div>
         </div>
       </div>
-      
+
       {/* App content - Memo workflow */}
       <div className="p-4 flex gap-3">
         {/* Sidebar - Client list */}
         <div className="w-1/4 space-y-2">
           <div className="h-6 w-full bg-primary/20 rounded-md"></div>
           <div className="h-4 w-4/5 bg-primary/30 rounded"></div>
-          <div className="h-4 w-3/5 bg-slate-200 dark:bg-slate-600 rounded"></div>
-          <div className="h-4 w-4/5 bg-slate-200 dark:bg-slate-600 rounded"></div>
-          <div className="h-4 w-2/3 bg-slate-200 dark:bg-slate-600 rounded"></div>
+          <div className="h-4 w-3/5 bg-muted rounded"></div>
+          <div className="h-4 w-4/5 bg-muted rounded"></div>
+          <div className="h-4 w-2/3 bg-muted rounded"></div>
         </div>
-        
+
         {/* Main content - Memo view */}
         <div className="flex-1 space-y-3">
           {/* Header with client badge */}
-          <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-600">
+          <div className="flex items-center justify-between pb-2 border-b border-border">
             <div className="h-5 w-28 bg-primary/40 rounded"></div>
             <div className="h-4 w-20 bg-green-500/30 rounded-full"></div>
           </div>
-          
+
           {/* Memo content */}
           <div className="space-y-2">
             <div className="h-4 w-20 bg-amber-400/60 rounded"></div>
-            <div className="h-3 w-full bg-slate-200 dark:bg-slate-600 rounded"></div>
-            <div className="h-3 w-11/12 bg-slate-200 dark:bg-slate-600 rounded"></div>
-            <div className="h-3 w-4/5 bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="h-3 w-full bg-muted rounded"></div>
+            <div className="h-3 w-11/12 bg-muted rounded"></div>
+            <div className="h-3 w-4/5 bg-muted rounded"></div>
             <div className="mt-3 h-4 w-24 bg-primary/30 rounded"></div>
-            <div className="h-3 w-full bg-slate-200 dark:bg-slate-600 rounded"></div>
-            <div className="h-3 w-10/12 bg-slate-200 dark:bg-slate-600 rounded"></div>
+            <div className="h-3 w-full bg-muted rounded"></div>
+            <div className="h-3 w-10/12 bg-muted rounded"></div>
           </div>
         </div>
       </div>
@@ -106,16 +106,16 @@ export default function AccountingFirm() {
             {/* Left - Text Content */}
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-                <Briefcase className="h-5 w-5 text-gray-800 dark:text-white" />
-                <span className="text-sm font-medium text-gray-800 dark:text-white">Accounting Firm Solutions</span>
+                <Briefcase className="h-5 w-5 text-foreground" />
+                <span className="text-sm font-medium text-foreground">Accounting Firm Solutions</span>
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-                <span className="text-gray-900 dark:text-white">Multiply Your</span>{" "}
+                <span className="text-foreground">Multiply Your</span>{" "}
                 <span className="text-white">Firm's Capacity</span>
               </h1>
               
-              <p className="text-lg md:text-xl text-gray-800 dark:text-white/90 max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0">
+              <p className="text-lg md:text-xl text-foreground/90 max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0">
                 Standardize research, memos, and deliverables so every associate performs like a senior — without adding headcount.
               </p>
               
@@ -123,7 +123,7 @@ export default function AccountingFirm() {
                 <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold" asChild>
                   <Link to="/firm-signup">Sign Up Now</Link>
                 </Button>
-                <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 text-base px-8 py-6 h-auto font-semibold" asChild>
+                <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted text-base px-8 py-6 h-auto font-semibold" asChild>
                   <Link to="/request-demo">Request a Demo</Link>
                 </Button>
               </div>
@@ -143,7 +143,7 @@ export default function AccountingFirm() {
       {/* Why Firms Section - With Gradient Background */}
       <section className="py-24 md:py-32 relative overflow-hidden">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900" />
+        <div className="absolute inset-0 bg-gradient-to-b from-muted via-blue-50/40 to-muted dark:from-background dark:via-background dark:to-background" />
         
         {/* Decorative blurs */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -160,7 +160,7 @@ export default function AccountingFirm() {
             {benefits.map((benefit, index) => (
               <div 
                 key={index}
-                className="group p-10 lg:p-12 rounded-2xl bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/80 dark:border-slate-700/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60 dark:hover:shadow-slate-900/40 hover:border-slate-300 dark:hover:border-slate-600"
+                className="group p-10 lg:p-12 rounded-2xl bg-background/80 backdrop-blur-sm border border-border/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-muted hover:border-border"
               >
                 {/* Title - Large */}
                 <h3 className="text-2xl lg:text-[1.75rem] font-bold text-foreground mb-4 leading-tight">
@@ -186,7 +186,7 @@ export default function AccountingFirm() {
       {/* Security & Trust Section */}
       <section className="py-20 md:py-24 relative overflow-hidden">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-blue-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-800/40 dark:to-slate-900" />
+        <div className="absolute inset-0 bg-gradient-to-b from-muted via-blue-50/40 to-muted dark:from-background dark:via-background dark:to-background" />
         
         {/* Decorative blurs */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />

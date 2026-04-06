@@ -58,15 +58,15 @@ export const DisclosureBenefitsSection = memo(function DisclosureBenefitsSection
   return (
     <section 
       ref={sectionRef}
-      className="py-24 md:py-32 bg-white dark:bg-slate-900"
+      className="py-24 md:py-32 bg-background"
     >
       <div className="container px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto">
         {/* Section header */}
         <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
             Key Benefits
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Transform your footnote disclosure process with AI-powered automation
           </p>
         </div>
@@ -93,12 +93,12 @@ export const DisclosureBenefitsSection = memo(function DisclosureBenefitsSection
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-lg font-semibold text-foreground mb-2">
                   {benefit.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-500 dark:text-gray-400 text-[15px] leading-relaxed max-w-[240px]">
+                <p className="text-muted-foreground text-[15px] leading-relaxed max-w-[240px]">
                   {benefit.description}
                 </p>
               </div>

@@ -54,12 +54,12 @@ export default function FAQ() {
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h1 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-6">Frequently Asked Questions</h1>
               <div className="h-px w-24 bg-gradient-to-r from-transparent via-border to-transparent mx-auto mb-6"></div>
-              <p className="text-xl text-gray-900 dark:text-white leading-relaxed">
+              <p className="text-xl text-foreground leading-relaxed">
                 Find answers to common questions about Gaapio.
               </p>
             </div>
 
-            <div className="max-w-3xl mx-auto bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-md border border-gray-200 dark:border-gray-800 transition-all duration-300">
+            <div className="max-w-3xl mx-auto bg-background p-8 rounded-2xl shadow-md border border-border transition-all duration-300">
               <Accordion type="single" collapsible className="w-full" value={openItem} onValueChange={setOpenItem}>
                 <AccordionItem value="item-1">
   <AccordionTrigger className="text-lg font-medium hover:text-primary transition-colors">
@@ -204,10 +204,10 @@ export default function FAQ() {
         </section>
       </main>
       
-      <section className="py-12 bg-white dark:bg-gray-900">
+      <section className="py-12 bg-background">
         <div className="container px-4 md:px-6">
           <div className="text-center animate-fade-in">
-            <p className="text-gray-900 dark:text-white text-sm mb-4">
+            <p className="text-foreground text-sm mb-4">
               Still have questions? Contact us at info@gaapio.com or 
             </p>
             <Button asChild variant="blue" className="rounded-full">

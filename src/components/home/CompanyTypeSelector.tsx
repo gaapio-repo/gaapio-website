@@ -28,7 +28,7 @@ export const CompanyTypeSelector = memo(function CompanyTypeSelector() {
   return (
     <div className="w-full max-w-xl">
       {/* Section label */}
-      <p className="text-sm font-semibold text-gray-800 dark:text-white uppercase tracking-[0.2em] mb-6">
+      <p className="text-sm font-semibold text-foreground uppercase tracking-[0.2em] mb-6">
         Built for:
       </p>
       
@@ -46,7 +46,7 @@ export const CompanyTypeSelector = memo(function CompanyTypeSelector() {
               <div className="relative inline-block">
                 <h3 className={cn(
                   "text-xl md:text-2xl font-bold",
-                  "text-gray-900 dark:text-white",
+                  "text-foreground",
                   "group-hover:text-primary dark:group-hover:text-primary",
                   "transition-colors duration-200"
                 )}>
@@ -62,7 +62,7 @@ export const CompanyTypeSelector = memo(function CompanyTypeSelector() {
               </div>
               
               {/* Subtitle */}
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              <p className="mt-1 text-sm text-muted-foreground">
                 {entry.outcome}
               </p>
             </div>
@@ -70,7 +70,7 @@ export const CompanyTypeSelector = memo(function CompanyTypeSelector() {
             {/* Arrow - appears and slides on hover */}
             <ArrowRight className={cn(
               "flex-shrink-0 w-5 h-5 mt-1",
-              "text-gray-400 dark:text-gray-500",
+              "text-muted-foreground",
               "opacity-0 -translate-x-2",
               "group-hover:opacity-100 group-hover:translate-x-0",
               "group-hover:text-primary",
