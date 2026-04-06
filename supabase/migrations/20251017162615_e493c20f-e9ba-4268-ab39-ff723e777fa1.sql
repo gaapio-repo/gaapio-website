@@ -1,5 +1,5 @@
 -- Create customer_testimonials table
-CREATE TABLE public.customer_testimonials (
+CREATE TABLE IF NOT EXISTS public.customer_testimonials (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
   quote TEXT NOT NULL,
   avatar_url TEXT,
@@ -17,73 +17,90 @@ ALTER TABLE public.customer_testimonials ENABLE ROW LEVEL SECURITY;
 
 -- Create storage bucket for testimonial avatars
 INSERT INTO storage.buckets (id, name, public)
-VALUES ('customer-testimonials', 'customer-testimonials', true);
+VALUES ('customer-testimonials', 'customer-testimonials', true)
+ON CONFLICT (id) DO NOTHING;
 
 -- RLS Policies for customer_testimonials table
+DROP POLICY IF EXISTS "Anyone can view active testimonials" ON public.customer_testimonials;
 CREATE POLICY "Anyone can view active testimonials"
 ON public.customer_testimonials
 FOR SELECT
 USING (is_active = true);
 
+DROP POLICY IF EXISTS "Admins can manage all testimonials" ON public.customer_testimonials;
 CREATE POLICY "Admins can manage all testimonials"
 ON public.customer_testimonials
 FOR ALL
 USING (has_role(auth.uid(), 'admin'::app_role));
 
 -- RLS Policies for storage bucket
+DROP POLICY IF EXISTS "Anyone can view testimonial avatars" ON storage.objects;
 CREATE POLICY "Anyone can view testimonial avatars"
 ON storage.objects
 FOR SELECT
 USING (bucket_id = 'customer-testimonials');
 
+DROP POLICY IF EXISTS "Admins can upload testimonial avatars" ON storage.objects;
 CREATE POLICY "Admins can upload testimonial avatars"
 ON storage.objects
 FOR INSERT
 WITH CHECK (bucket_id = 'customer-testimonials' AND has_role(auth.uid(), 'admin'::app_role));
 
+DROP POLICY IF EXISTS "Admins can update testimonial avatars" ON storage.objects;
 CREATE POLICY "Admins can update testimonial avatars"
 ON storage.objects
 FOR UPDATE
 USING (bucket_id = 'customer-testimonials' AND has_role(auth.uid(), 'admin'::app_role));
 
+DROP POLICY IF EXISTS "Admins can delete testimonial avatars" ON storage.objects;
 CREATE POLICY "Admins can delete testimonial avatars"
 ON storage.objects
 FOR DELETE
 USING (bucket_id = 'customer-testimonials' AND has_role(auth.uid(), 'admin'::app_role));
 
 -- Create trigger for updated_at
+DROP TRIGGER IF EXISTS update_customer_testimonials_updated_at ON public.customer_testimonials;
 CREATE TRIGGER update_customer_testimonials_updated_at
 BEFORE UPDATE ON public.customer_testimonials
 FOR EACH ROW
 EXECUTE FUNCTION public.update_updated_at_column();
 
--- Insert existing hardcoded testimonials
+-- Insert existing hardcoded testimonials (idempotent by customer_name + display_order)
 INSERT INTO public.customer_testimonials (quote, avatar_url, customer_name, customer_title, highlight_words, display_order, is_active)
-VALUES 
-  (
-    'As a Controller, I need to ensure our disclosures are accurate and complete. This tool has become indispensable in our quarterly close process.',
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-    'James Mitchell',
-    'Controller, Tech Innovations Inc.',
-    ARRAY['accurate', 'complete', 'indispensable'],
-    0,
-    true
-  ),
-  (
-    'The guidance update feature alone is worth it. We never miss important changes anymore, and our audit prep time has been cut in half.',
-    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
-    'Sarah Chen',
-    'VP Finance, Growth Capital Partners',
-    ARRAY['never miss', 'cut in half'],
-    1,
-    true
-  ),
-  (
-    'Finally, a solution that understands the complexity of footnote disclosures. The AI suggestions are remarkably accurate and save us countless hours.',
-    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
-    'Michael Rodriguez',
-    'CFO, Precision Manufacturing',
-    ARRAY['remarkably accurate', 'countless hours'],
-    2,
-    true
-  );
+SELECT
+  'As a Controller, I need to ensure our disclosures are accurate and complete. This tool has become indispensable in our quarterly close process.',
+  'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
+  'James Mitchell',
+  'Controller, Tech Innovations Inc.',
+  ARRAY['accurate', 'complete', 'indispensable'],
+  0,
+  true
+WHERE NOT EXISTS (
+  SELECT 1 FROM public.customer_testimonials t WHERE t.customer_name = 'James Mitchell' AND t.display_order = 0
+);
+
+INSERT INTO public.customer_testimonials (quote, avatar_url, customer_name, customer_title, highlight_words, display_order, is_active)
+SELECT
+  'The guidance update feature alone is worth it. We never miss important changes anymore, and our audit prep time has been cut in half.',
+  'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
+  'Sarah Chen',
+  'VP Finance, Growth Capital Partners',
+  ARRAY['never miss', 'cut in half'],
+  1,
+  true
+WHERE NOT EXISTS (
+  SELECT 1 FROM public.customer_testimonials t WHERE t.customer_name = 'Sarah Chen' AND t.display_order = 1
+);
+
+INSERT INTO public.customer_testimonials (quote, avatar_url, customer_name, customer_title, highlight_words, display_order, is_active)
+SELECT
+  'Finally, a solution that understands the complexity of footnote disclosures. The AI suggestions are remarkably accurate and save us countless hours.',
+  'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
+  'Michael Rodriguez',
+  'CFO, Precision Manufacturing',
+  ARRAY['remarkably accurate', 'countless hours'],
+  2,
+  true
+WHERE NOT EXISTS (
+  SELECT 1 FROM public.customer_testimonials t WHERE t.customer_name = 'Michael Rodriguez' AND t.display_order = 2
+);

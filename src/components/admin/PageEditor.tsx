@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
@@ -59,20 +59,18 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
 
   if (isLoading) {
     return (
-      <Card className="w-full">
-        <CardContent className="pt-6 flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
-            <p className="text-muted-foreground">Loading SEO data...</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="w-full rounded-lg bg-muted/70 shadow-sm p-6 flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
+          <p className="text-muted-foreground">Loading SEO data...</p>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card className="w-full border rounded-md">
-      <CardHeader className="pb-3">
+    <div className="w-full rounded-lg bg-muted/70 shadow-sm">
+      <div className="p-6 pb-3">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <CardTitle>SEO Details: {page.title}</CardTitle>
@@ -88,9 +86,9 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
         <p className="text-sm text-muted-foreground">
           Path: {page.path}
         </p>
-      </CardHeader>
+      </div>
       <Separator />
-      <CardContent className="pt-4">
+      <div className="p-6 pt-4">
         <Alert className="mb-6">
           <Info className="h-4 w-4" />
           <AlertTitle>Read-Only View</AlertTitle>
@@ -118,7 +116,7 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
                 {/* Meta Title */}
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Meta Title</Label>
-                  <div className="p-3 bg-muted rounded-md border">
+                  <div className="p-3 bg-muted/70 rounded-md shadow-sm">
                     <p className="font-medium">{seoData.seoTitle}</p>
                     <p className="text-xs text-muted-foreground mt-1">
                       {seoData.seoTitle.length} characters 
@@ -130,7 +128,7 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
                 {/* Meta Description */}
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Meta Description</Label>
-                  <div className="p-3 bg-muted rounded-md border">
+                  <div className="p-3 bg-muted/70 rounded-md shadow-sm">
                     <p>{seoData.description}</p>
                     <p className="text-xs text-muted-foreground mt-1">
                       {seoData.description.length} characters 
@@ -142,7 +140,7 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
                 {/* Keywords */}
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Keywords</Label>
-                  <div className="p-3 bg-muted rounded-md border">
+                  <div className="p-3 bg-muted/70 rounded-md shadow-sm">
                     {seoData.keywords.length > 0 ? (
                       <div className="flex flex-wrap gap-2">
                         {seoData.keywords.map((keyword, index) => (
@@ -160,7 +158,7 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
                 {/* Canonical URL */}
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Canonical URL</Label>
-                  <div className="p-3 bg-muted rounded-md border">
+                  <div className="p-3 bg-muted/70 rounded-md shadow-sm">
                     <code className="text-sm">https://gaapio.com{seoData.canonical}</code>
                   </div>
                 </div>
@@ -168,7 +166,7 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
                 {/* Indexing Status */}
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Search Engine Indexing</Label>
-                  <div className="p-3 bg-muted rounded-md border">
+                  <div className="p-3 bg-muted/70 rounded-md shadow-sm">
                     {seoData.noindex ? (
                       <div className="flex items-center gap-2">
                         <Badge variant="outline" className="text-amber-600 border-amber-600">
@@ -195,7 +193,7 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
                 {seoData.structuredData && (
                   <div className="space-y-2">
                     <Label className="text-sm font-medium">Structured Data (JSON-LD)</Label>
-                    <div className="p-3 bg-muted rounded-md border">
+                    <div className="p-3 bg-muted/70 rounded-md shadow-sm">
                       <Badge variant="secondary">{seoData.structuredData}</Badge>
                     </div>
                   </div>
@@ -209,13 +207,13 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Page Path</Label>
-                  <div className="p-3 bg-muted rounded-md border">
+                  <div className="p-3 bg-muted/70 rounded-md shadow-sm">
                     <code className="text-sm">{page.path}</code>
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Display Title</Label>
-                  <div className="p-3 bg-muted rounded-md border">
+                  <div className="p-3 bg-muted/70 rounded-md shadow-sm">
                     <p className="text-sm">{page.title}</p>
                   </div>
                 </div>
@@ -223,7 +221,7 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
               
               <div className="space-y-2">
                 <Label className="text-sm font-medium">SEO Implementation</Label>
-                <div className="p-3 bg-muted rounded-md border space-y-2">
+                <div className="p-3 bg-muted/70 rounded-md shadow-sm space-y-2">
                   <p className="text-sm">
                     <strong>Component:</strong> <code>&lt;SEO /&gt;</code> from <code>@/components/SEO.tsx</code>
                   </p>
@@ -252,8 +250,8 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
             </div>
           </TabsContent>
         </Tabs>
-      </CardContent>
-      <CardFooter className="flex justify-between border-t p-4 bg-muted/50">
+      </div>
+      <div className="flex justify-between border-t p-4">
         <Button variant="outline" onClick={onClose}>
           Back to Pages
         </Button>
@@ -262,7 +260,7 @@ export function PageEditor({ page, onClose }: PageEditorProps) {
           View Live Page
           <ExternalLink className="h-3 w-3 ml-2" />
         </Button>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 }

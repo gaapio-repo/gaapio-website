@@ -32,7 +32,7 @@ export function AdminUserRow({
   
   return (
     <TableRow>
-      <TableCell className={hasName ? "" : "text-gray-400"}>
+      <TableCell className={hasName ? "" : "text-muted-foreground"}>
         {displayName}
         {!hasName && isCurrentUser && onUpdateName && (
           <Button 

@@ -33,7 +33,7 @@ export const HeroSectionAlt = memo(function HeroSectionAlt({
           {/* Left Column - Text Content */}
           <div className="flex flex-col items-start text-left space-y-6 md:space-y-8 animate-fade-up order-1">
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-              <span className="text-gray-900">
+              <span className="text-foreground">
                 {firstPart}
               </span>
               {" "}
@@ -42,7 +42,7 @@ export const HeroSectionAlt = memo(function HeroSectionAlt({
               </span>
             </h1>
             
-            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-gray-800 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
+            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-foreground max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
               {subtitle}
             </p>
           </div>

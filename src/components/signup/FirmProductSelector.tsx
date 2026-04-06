@@ -53,7 +53,7 @@ export function FirmProductSelector({ selectedProduct, onSelectProduct }: FirmPr
               {/* Card Background */}
               <div className={cn(
                 "absolute inset-0 rounded-2xl overflow-hidden",
-                "bg-white dark:bg-slate-800",
+                "bg-background",
                 "border",
                 isPopular ? "border-gray-900" : "border-border/50"
               )}>

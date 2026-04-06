@@ -76,13 +76,13 @@ export function BenefitsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left column - Heading and description */}
           <div className="space-y-6 lg:sticky lg:top-32">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               Key Benefits
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-md">
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
               AI-powered confidence. CPA-quality output. Enterprise-grade security.
             </p>
-            <p className="text-gray-500 dark:text-gray-400 leading-relaxed max-w-md">
+            <p className="text-muted-foreground leading-relaxed max-w-md">
               Save time, reduce costs, and deliver audit-ready documentation — every time.
             </p>
           </div>
@@ -113,10 +113,10 @@ export function BenefitsSection() {
                 
                 {/* Text content */}
                 <div className="text-left pt-1">
-                  <h3 className="text-[17px] font-semibold text-gray-900 dark:text-white mb-1.5">
+                  <h3 className="text-[17px] font-semibold text-foreground mb-1.5">
                     {benefit.title}
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-[15px] leading-[1.7]">
+                  <p className="text-muted-foreground text-[15px] leading-[1.7]">
                     {benefit.description}
                   </p>
                 </div>

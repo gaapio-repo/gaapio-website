@@ -77,4 +77,5 @@ INSERT INTO public.blog_posts (title, slug, excerpt, content, featured_image, ca
   true,
   false,
   NOW()
-);
+)
+ON CONFLICT (slug) DO NOTHING;

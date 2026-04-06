@@ -19,11 +19,11 @@ export const SOXHeroSection = memo(function SOXHeroSection() {
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up" style={{ animationDelay: "100ms" }}>
-            <span className="text-gray-900 dark:text-white">SOX Controls </span>
+            <span className="text-foreground">SOX Controls </span>
             <span className="text-white">Management</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-800 dark:text-white/90 mb-10 animate-fade-up" style={{ animationDelay: "200ms" }}>
+          <p className="text-xl md:text-2xl text-foreground mb-10 animate-fade-up" style={{ animationDelay: "200ms" }}>
             Streamline SOX compliance with AI-powered control testing and documentation
           </p>
           
@@ -31,7 +31,7 @@ export const SOXHeroSection = memo(function SOXHeroSection() {
             <Button size="lg" variant="black" asChild>
               <Link to="/request-demo">Request Early Access</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted" asChild>
               <Link to="/contact">Learn More</Link>
             </Button>
           </div>
@@ -40,26 +40,26 @@ export const SOXHeroSection = memo(function SOXHeroSection() {
         {/* Visual Element */}
         <div className="flex justify-center animate-fade-up" style={{ animationDelay: "400ms" }}>
           <div className="relative w-full max-w-4xl">
-            <div className="bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-3xl p-8 shadow-2xl border border-gray-200 dark:border-gray-700">
+            <div className="bg-gradient-to-br from-green-50 to-blue-50 dark:from-muted dark:to-muted rounded-3xl p-8 shadow-2xl border border-border">
               {/* Mock Control Dashboard */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-6 shadow-lg">
+              <div className="bg-background rounded-2xl p-6 mb-6 shadow-lg">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-4">
                     <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl">
                       <Shield className="h-6 w-6 text-green-600 dark:text-green-400" />
                     </div>
                     <div>
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-40 mb-2"></div>
-                      <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded w-24"></div>
+                      <div className="h-3 bg-muted rounded w-40 mb-2"></div>
+                      <div className="h-2 bg-muted rounded w-24"></div>
                     </div>
                   </div>
                   <CheckCircle className="h-8 w-8 text-green-500" />
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   {[1, 2, 3].map((i) => (
-                    <div key={i} className="text-center p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                      <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div>
-                      <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mx-auto"></div>
+                    <div key={i} className="text-center p-4 bg-muted rounded-lg">
+                      <div className="h-2 bg-muted rounded w-full mb-2"></div>
+                      <div className="h-6 bg-muted-foreground/30 rounded w-3/4 mx-auto"></div>
                     </div>
                   ))}
                 </div>
@@ -68,16 +68,16 @@ export const SOXHeroSection = memo(function SOXHeroSection() {
               {/* Mock Control List */}
               <div className="grid md:grid-cols-2 gap-4">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md">
+                  <div key={i} className="bg-background rounded-xl p-4 shadow-md">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
                         <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
                       </div>
-                      <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded flex-1"></div>
+                      <div className="h-2 bg-muted rounded flex-1"></div>
                     </div>
                     <div className="space-y-2">
-                      <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded w-full"></div>
-                      <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded w-2/3"></div>
+                      <div className="h-2 bg-muted rounded w-full"></div>
+                      <div className="h-2 bg-muted rounded w-2/3"></div>
                     </div>
                   </div>
                 ))}

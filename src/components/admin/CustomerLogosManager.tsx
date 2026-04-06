@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardDescription, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Switch } from "@/components/ui/switch";
@@ -50,67 +50,62 @@ export function CustomerLogosManager() {
 
   if (isLoading) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Customer Logos</CardTitle>
-          <CardDescription>Loading...</CardDescription>
-        </CardHeader>
-      </Card>
+      <div className="rounded-lg bg-muted/70 shadow-sm p-6">
+        <CardTitle>Customer Logos</CardTitle>
+        <CardDescription>Loading...</CardDescription>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <Card>
-        <CardHeader>
+      <div className="rounded-lg bg-muted/70 shadow-sm p-6 space-y-4">
+        <div>
           <CardTitle>Customer Logos</CardTitle>
           <CardDescription className="text-destructive">
             Error loading customer logos
           </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-8">
-            <p className="text-muted-foreground mb-4">
-              {error instanceof Error ? error.message : "Failed to load customer logos. Please check that the database table and storage bucket are properly configured."}
-            </p>
-            <Button onClick={() => refetch()} variant="outline">
-              Retry
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+        <div className="text-center py-8">
+          <p className="text-muted-foreground mb-4">
+            {error instanceof Error ? error.message : "Failed to load customer logos. Please check that the database table and storage bucket are properly configured."}
+          </p>
+          <Button onClick={() => refetch()} variant="outline">
+            Retry
+          </Button>
+        </div>
+      </div>
     );
   }
 
   return (
     <>
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle>Customer Logos</CardTitle>
-              <CardDescription>
-                Manage customer logos displayed in the "Trusted by" section on the homepage
-              </CardDescription>
-            </div>
-            <Button onClick={handleAdd}>
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle>Customer Logos</CardTitle>
+            <CardDescription>
+              Manage customer logos displayed in the "Trusted by" section on the homepage
+            </CardDescription>
+          </div>
+          <Button onClick={handleAdd}>
+            <Plus className="h-4 w-4 mr-2" />
+            Add Logo
+          </Button>
+        </div>
+
+        {!logos || logos.length === 0 ? (
+          <div className="rounded-lg bg-muted/70 shadow-sm p-6 text-center py-12 text-muted-foreground">
+            <ImageIcon className="h-12 w-12 mx-auto mb-4 opacity-50" />
+            <p className="text-lg font-medium mb-2">No customer logos yet</p>
+            <p className="text-sm mb-4">Add your first customer logo to get started</p>
+            <Button onClick={handleAdd} variant="outline">
               <Plus className="h-4 w-4 mr-2" />
-              Add Logo
+              Add Your First Logo
             </Button>
           </div>
-        </CardHeader>
-        <CardContent>
-          {!logos || logos.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground">
-              <ImageIcon className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p className="text-lg font-medium mb-2">No customer logos yet</p>
-              <p className="text-sm mb-4">Add your first customer logo to get started</p>
-              <Button onClick={handleAdd} variant="outline">
-                <Plus className="h-4 w-4 mr-2" />
-                Add Your First Logo
-              </Button>
-            </div>
-          ) : (
+        ) : (
+          <div className="rounded-lg bg-muted/70 shadow-sm overflow-hidden">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -165,9 +160,9 @@ export function CustomerLogosManager() {
                 ))}
               </TableBody>
             </Table>
-          )}
-        </CardContent>
-      </Card>
+          </div>
+        )}
+      </div>
 
       <CustomerLogoDialog
         open={dialogOpen}

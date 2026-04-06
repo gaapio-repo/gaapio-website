@@ -36,7 +36,7 @@ export function DemoRequestSuccess() {
             scrolling="yes" 
             style={{ border: 0 }}
             title="Schedule a demo with Gaapio"
-            className="bg-white"
+            className="bg-background"
           />
         </div>
       </div>

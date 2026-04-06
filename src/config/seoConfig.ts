@@ -258,6 +258,27 @@ export const seoConfig: Record<string, PageSeoData> = {
   },
 
   // ============================================
+  // FREE TOOLS
+  // ============================================
+  "/comment-letters": {
+    path: "/comment-letters",
+    title: "SEC Comment Letter Browser",
+    seoTitle: "SEC Comment Letter Search — Free Tool by Gaapio",
+    description: "Search and browse SEC comment letters with AI-powered summaries. Filter by ASC topic, year, industry, and letter type. Free, no login required.",
+    keywords: ["SEC comment letters", "EDGAR", "SEC correspondence", "ASC topics", "accounting research", "SEC comment letter search tool"],
+    canonical: "/comment-letters",
+    structuredData: "DatasetSchema"
+  },
+  "/comment-letters/topics": {
+    path: "/comment-letters/topics",
+    title: "ASC Topics in SEC Comment Letters",
+    seoTitle: "Browse SEC Comment Letters by ASC Topic — Gaapio",
+    description: "Explore SEC comment letters organized by ASC Codification topic. See SEC scrutiny patterns across accounting standards.",
+    keywords: ["ASC topics", "SEC comment letter topics", "accounting standards", "FASB ASC", "SEC scrutiny by topic"],
+    canonical: "/comment-letters/topics"
+  },
+
+  // ============================================
   // BLOG & ARTICLES
   // ============================================
   "/blog": {

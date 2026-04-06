@@ -159,7 +159,7 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Form Section */}
         <div className="lg:col-span-2">
-          <Card className="shadow-xl border-border/50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
+          <Card className="shadow-xl border-border/50 bg-background/80 backdrop-blur-sm">
             <CardHeader className="pb-4">
               <CardTitle className="text-2xl">Complete Your Signup</CardTitle>
               <p className="text-muted-foreground">
@@ -365,7 +365,7 @@ export function SignupInfoForm({ selectedProduct, onBack, onSubmit, isLoading }:
 
         {/* Order Summary Sidebar */}
         <div className="lg:col-span-1">
-          <Card className="shadow-xl border-border/50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm sticky top-24">
+          <Card className="shadow-xl border-border/50 bg-background/80 backdrop-blur-sm sticky top-24">
             <CardHeader className="pb-4">
               <CardTitle className="text-lg">Order Summary</CardTitle>
             </CardHeader>

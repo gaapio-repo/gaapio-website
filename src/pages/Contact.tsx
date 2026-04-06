@@ -52,7 +52,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white dark:from-background dark:to-background/95">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-muted to-background">
       <SEO
         title="Contact Gaapio - Get in Touch with Our Team"
         description="Have questions about Gaapio? Contact our team for demos, support, or partnership inquiries. We're here to help with your technical accounting needs."
@@ -77,7 +77,7 @@ export default function Contact() {
               {/* Contact form with enhanced styling to match demo form */}
               <div 
                 ref={contentRef}
-                className="bg-white dark:bg-card border border-gray-200 dark:border-border rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-all duration-300 mb-12 opacity-0"
+                className="bg-background border border-border rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-all duration-300 mb-12 opacity-0"
               >
                 <ContactForm onSubmitSuccess={handleFormSuccess} />
               </div>
@@ -87,7 +87,7 @@ export default function Contact() {
                 ref={cardsRef}
                 className="grid md:grid-cols-3 gap-6 mb-8 opacity-0"
               >
-                <Card className="transition-all duration-300 hover:shadow-lg hover:scale-105 rounded-2xl overflow-hidden border-gray-200 dark:border-border">
+                <Card className="transition-all duration-300 hover:shadow-lg hover:scale-105 rounded-2xl overflow-hidden border-border">
                   <CardContent className="pt-8 pb-6 text-center">
                     <div className="flex justify-center mb-6">
                       <div className="p-4 rounded-full bg-[#4A90F2]">
@@ -102,7 +102,7 @@ export default function Contact() {
                   </CardContent>
                 </Card>
                 
-                <Card className="transition-all duration-300 hover:shadow-lg hover:scale-105 rounded-2xl overflow-hidden border-gray-200 dark:border-border">
+                <Card className="transition-all duration-300 hover:shadow-lg hover:scale-105 rounded-2xl overflow-hidden border-border">
                   <CardContent className="pt-8 pb-6 text-center">
                     <div className="flex justify-center mb-6">
                       <div className="p-4 rounded-full bg-[#4A90F2]">
@@ -117,7 +117,7 @@ export default function Contact() {
                   </CardContent>
                 </Card>
                 
-                <Card className="transition-all duration-300 hover:shadow-lg hover:scale-105 rounded-2xl overflow-hidden border-gray-200 dark:border-border">
+                <Card className="transition-all duration-300 hover:shadow-lg hover:scale-105 rounded-2xl overflow-hidden border-border">
                   <CardContent className="pt-8 pb-6 text-center">
                     <div className="flex justify-center mb-6">
                       <div className="p-4 rounded-full bg-[#4A90F2]">

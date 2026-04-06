@@ -3,16 +3,15 @@ import { Github, Linkedin, Twitter, Youtube, Instagram, Facebook } from "lucide-
 import { Logo } from "@/components/logo";
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
-import { useEffect, useState } from "react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  
+
   // Logo src always the same regardless of theme
   const logoSrc = "/lovable-uploads/e263b9d6-518b-411f-be9f-c36067fd9ad1.png";
-  
+
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-gray-950 text-white">
       {/* Main Footer Content - Ultra compact layout */}
       <div className="container px-4 md:px-6 py-6">
         {/* Grid Layout for Logo & Links */}
@@ -23,151 +22,159 @@ export function Footer() {
               <img src={logoSrc} alt="Gaapio" className="h-12 w-auto" />
             </Link>
           </div>
-          
+
           {/* Three Column Grid Layout for Links */}
           <div className="grid grid-cols-1 md:grid-cols-3 col-span-1 md:col-span-3 gap-4 md:gap-16 text-center md:text-left">
             {/* Company Column */}
             <div className="mb-2 md:mb-0">
-              <h3 className="text-lg font-semibold mb-2 text-white">Company</h3>
+              <h3 className="text-lg font-semibold mb-2">Company</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link 
-                    to="/about-us" 
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  <Link
+                    to="/about-us"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     About
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    to="/blog" 
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  <Link
+                    to="/blog"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Blog
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    to="/request-demo" 
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  <Link
+                    to="/request-demo"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Demo
                   </Link>
                 </li>
                 <li>
-                  <a 
-                    href="https://app.gaapio.com/" 
+                  <a
+                    href="https://app.gaapio.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     App
                   </a>
                 </li>
               </ul>
             </div>
-            
+
             {/* Resources Column */}
             <div className="mb-2 md:mb-0">
-              <h3 className="text-lg font-semibold mb-2 text-white">Resources</h3>
+              <h3 className="text-lg font-semibold mb-2">Resources</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link 
-                    to="/resources" 
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  <Link
+                    to="/resources"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Resource Center
                   </Link>
                 </li>
                 <li>
-                  <a 
-                    href="https://security.gaapio.com" 
+                  <Link
+                    to="/comment-letters"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
+                  >
+                    SEC Comment Letters
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="https://security.gaapio.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Security
                   </a>
                 </li>
                 <li>
-                  <Link 
-                    to="/contact" 
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  <Link
+                    to="/contact"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Report Issue
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    to="/privacy" 
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  <Link
+                    to="/privacy"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Privacy
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    to="/terms-of-service" 
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  <Link
+                    to="/terms-of-service"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Terms of Service
                   </Link>
                 </li>
               </ul>
             </div>
-            
+
             {/* Connect Column */}
             <div>
-              <h3 className="text-lg font-semibold mb-2 text-white">Connect</h3>
+              <h3 className="text-lg font-semibold mb-2">Connect</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link 
-                    to="/contact" 
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                  <Link
+                    to="/contact"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Contact Us
                   </Link>
                 </li>
                 <li className="flex items-center justify-center md:justify-start space-x-2">
-                  <Linkedin className="h-3 w-3 text-gray-300" />
-                  <a 
-                    href="https://www.linkedin.com/company/gaapio" 
+                  <Linkedin className="h-3 w-3 text-gray-400" />
+                  <a
+                    href="https://www.linkedin.com/company/gaapio"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     LinkedIn
                   </a>
                 </li>
                 <li className="flex items-center justify-center md:justify-start space-x-2">
-                  <Instagram className="h-3 w-3 text-gray-300" />
-                  <a 
-                    href="https://www.instagram.com/gaapio_inc/" 
+                  <Instagram className="h-3 w-3 text-gray-400" />
+                  <a
+                    href="https://www.instagram.com/gaapio_inc/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Instagram
                   </a>
                 </li>
                 <li className="flex items-center justify-center md:justify-start space-x-2">
-                  <Facebook className="h-3 w-3 text-gray-300" />
-                  <a 
-                    href="https://www.facebook.com/profile.php?id=61582424325696" 
+                  <Facebook className="h-3 w-3 text-gray-400" />
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61582424325696"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Facebook
                   </a>
                 </li>
                 <li className="flex items-center justify-center md:justify-start space-x-2">
-                  <Twitter className="h-3 w-3 text-gray-300" />
-                  <a 
-                    href="https://x.com/gaapio_inc" 
+                  <Twitter className="h-3 w-3 text-gray-400" />
+                  <a
+                    href="https://x.com/gaapio_inc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     X
                   </a>
@@ -177,31 +184,31 @@ export function Footer() {
           </div>
         </div>
       </div>
-      
+
       {/* Bottom Legal Strip - Ultra compact */}
-      <div className="border-t border-gray-800">
+      <div className="border-t border-white/10">
         <div className="container px-4 md:px-6 py-2 flex flex-col md:flex-row justify-center md:justify-between items-center">
           <p className="text-xs text-gray-400 mb-1 md:mb-0">
             &copy; {currentYear} Gaapio. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2 md:gap-0 md:space-x-6">
-            <Link 
-              to="/privacy" 
-              className="text-xs text-gray-400 hover:underline transition-colors"
+            <Link
+              to="/privacy"
+              className="text-xs text-gray-400 hover:text-white hover:underline transition-colors"
             >
               Privacy Policy
             </Link>
-            <Separator orientation="vertical" className="h-3 hidden md:inline-block bg-gray-700" />
-            <Link 
-              to="/ssa" 
-              className="text-xs text-gray-400 hover:underline transition-colors"
+            <Separator orientation="vertical" className="h-3 hidden md:inline-block bg-white/20" />
+            <Link
+              to="/ssa"
+              className="text-xs text-gray-400 hover:text-white hover:underline transition-colors"
             >
               Terms of Service
             </Link>
-            <Separator orientation="vertical" className="h-3 hidden md:inline-block bg-gray-700" />
-            <Link 
-              to="#" 
-              className="text-xs text-gray-400 hover:underline transition-colors"
+            <Separator orientation="vertical" className="h-3 hidden md:inline-block bg-white/20" />
+            <Link
+              to="#"
+              className="text-xs text-gray-400 hover:text-white hover:underline transition-colors"
             >
               Cookie Policy
             </Link>
