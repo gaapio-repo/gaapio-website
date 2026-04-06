@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Logo } from "@/components/logo";
 import { Link } from "react-router-dom";
-import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain, Shield } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, FileText, FileCheck, FileSearch, Bell, ArrowRight, Lightbulb, Users, ShieldCheck, Briefcase, Brain, Shield, BookOpen, Library } from "lucide-react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
@@ -81,10 +81,32 @@ const companyPages = [
   }
 ];
 
+const resourcePages = [
+  {
+    name: "SEC Comment Letters",
+    href: "/comment-letters",
+    icon: FileSearch,
+    description: "Browse and search SEC comment letters by accounting topic"
+  },
+  {
+    name: "Blog",
+    href: "/blog",
+    icon: BookOpen,
+    description: "Expert insights on technical accounting and AI"
+  },
+  {
+    name: "Reference Library",
+    href: "/resources",
+    icon: Library,
+    description: "Curated links to FASB, SEC, and Big 4 guidance"
+  }
+];
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isCompanyOpen, setIsCompanyOpen] = useState(false);
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [enableSelfSignup, setEnableSelfSignup] = useState(true);
   const [hoveredProduct, setHoveredProduct] = useState(products[0]);
   const [hoveredCompanyPage, setHoveredCompanyPage] = useState(companyPages[0]);
@@ -113,6 +135,7 @@ export function Header() {
   const closeMenu = () => {
     setIsMenuOpen(false);
     setIsProductsOpen(false);
+    setIsResourcesOpen(false);
   };
 
   const toggleProducts = () => {
@@ -121,6 +144,10 @@ export function Header() {
 
   const toggleCompany = () => {
     setIsCompanyOpen(!isCompanyOpen);
+  };
+
+  const toggleResources = () => {
+    setIsResourcesOpen(!isResourcesOpen);
   };
 
   return (
@@ -323,6 +350,44 @@ export function Header() {
                        </NavigationMenuContent>
                 </NavigationMenuItem>
 
+                {/* Resources Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-foreground text-base font-medium hover:text-foreground hover:underline transition-colors px-3 py-2 data-[state=open]:text-foreground">
+                    Resources
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="z-[100]">
+                    <div className="rounded-2xl shadow-2xl bg-muted overflow-hidden border border-border w-[400px]">
+                      <div className="p-6">
+                        <h3 className="text-xs font-semibold text-muted-foreground mb-4 uppercase tracking-wider px-3">
+                          Resources
+                        </h3>
+                        <div className="space-y-1">
+                          {resourcePages.map((page) => (
+                            <NavigationMenuLink key={page.name} asChild>
+                              <Link
+                                to={page.href}
+                                className="flex items-start gap-3 px-3 py-3 rounded-lg transition-all group hover:bg-background"
+                              >
+                                <div className="p-1.5 rounded-md transition-colors flex-shrink-0 bg-muted text-muted-foreground group-hover:bg-[#339CFF] group-hover:text-white">
+                                  <page.icon className="h-4 w-4" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <span className="font-medium text-sm text-foreground block">
+                                    {page.name}
+                                  </span>
+                                  <span className="text-xs text-muted-foreground leading-relaxed block mt-0.5">
+                                    {page.description}
+                                  </span>
+                                </div>
+                              </Link>
+                            </NavigationMenuLink>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
                 <NavigationMenuItem>
                   <Link
                     to="/faq"
@@ -475,6 +540,38 @@ export function Header() {
                   </div>
                 )}
               </div>
+
+              {/* Resources Section */}
+              <div>
+                <button
+                  onClick={toggleResources}
+                  className="w-full flex items-center justify-center px-3 py-2 rounded-md text-base font-medium text-foreground hover:text-foreground hover:bg-muted transition-colors"
+                >
+                  <span>Resources</span>
+                  {isResourcesOpen ? (
+                    <ChevronDown className="h-4 w-4 ml-2" />
+                  ) : (
+                    <ChevronRight className="h-4 w-4 ml-2" />
+                  )}
+                </button>
+
+                {/* Resources Submenu */}
+                {isResourcesOpen && (
+                  <div className="pl-4 space-y-1 mt-1">
+                    {resourcePages.map((page) => (
+                      <Link
+                        key={page.name}
+                        to={page.href}
+                        className="block px-3 py-2 rounded-md text-sm font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"
+                        onClick={closeMenu}
+                      >
+                        {page.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <Link
                 to="/faq"
                 className="block px-3 py-2 rounded-md text-base font-medium text-center transition-colors text-foreground hover:text-foreground hover:bg-muted"
