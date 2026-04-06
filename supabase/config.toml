@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.proxy-sec-pdf]
 verify_jwt = false
+
+[functions.sitemap-letters]
+verify_jwt = false
