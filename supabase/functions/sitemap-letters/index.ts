@@ -14,15 +14,27 @@ Deno.serve(async (req) => {
   try {
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Fetch all accounting-relevant letter slugs and dates
-    const { data: letters, error } = await supabase
-      .from('sec_comment_letters')
-      .select('slug, date_filed')
-      .eq('accounting_relevant', true)
-      .not('slug', 'is', null)
-      .order('date_filed', { ascending: false });
+    // Fetch ALL letter slugs in pages of 1000 (Supabase default limit)
+    const PAGE_SIZE = 1000;
+    let allLetters: { slug: string; date_filed: string }[] = [];
+    let page = 0;
+    while (true) {
+      const from = page * PAGE_SIZE;
+      const to = from + PAGE_SIZE - 1;
+      const { data, error } = await supabase
+        .from('sec_comment_letters')
+        .select('slug, date_filed')
+        .eq('accounting_relevant', true)
+        .not('slug', 'is', null)
+        .order('date_filed', { ascending: false })
+        .range(from, to);
 
-    if (error) throw error;
+      if (error) throw error;
+      if (!data || data.length === 0) break;
+      allLetters = allLetters.concat(data);
+      if (data.length < PAGE_SIZE) break;
+      page++;
+    }
 
     // Fetch topic slugs from the stats view
     const { data: topics, error: topicError } = await supabase
@@ -37,7 +49,7 @@ Deno.serve(async (req) => {
 
     // Individual letter pages
     const seenSlugs = new Set<string>();
-    for (const letter of (letters || [])) {
+    for (const letter of allLetters) {
       if (!letter.slug || seenSlugs.has(letter.slug)) continue;
       seenSlugs.add(letter.slug);
 
