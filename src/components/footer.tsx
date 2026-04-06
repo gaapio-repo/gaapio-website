@@ -3,7 +3,6 @@ import { Github, Linkedin, Twitter, Youtube, Instagram, Facebook } from "lucide-
 import { Logo } from "@/components/logo";
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
-import { useEffect, useState } from "react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -12,7 +11,7 @@ export function Footer() {
   const logoSrc = "/lovable-uploads/e263b9d6-518b-411f-be9f-c36067fd9ad1.png";
 
   return (
-    <footer className="bg-gray-950 dark:bg-gray-950 text-background dark:text-foreground">
+    <footer className="bg-gray-950 text-white">
       {/* Main Footer Content - Ultra compact layout */}
       <div className="container px-4 md:px-6 py-6">
         {/* Grid Layout for Logo & Links */}
@@ -33,7 +32,7 @@ export function Footer() {
                 <li>
                   <Link
                     to="/about-us"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     About
                   </Link>
@@ -41,7 +40,7 @@ export function Footer() {
                 <li>
                   <Link
                     to="/blog"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Blog
                   </Link>
@@ -49,7 +48,7 @@ export function Footer() {
                 <li>
                   <Link
                     to="/request-demo"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Demo
                   </Link>
@@ -59,7 +58,7 @@ export function Footer() {
                     href="https://app.gaapio.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     App
                   </a>
@@ -74,7 +73,7 @@ export function Footer() {
                 <li>
                   <Link
                     to="/resources"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Resource Center
                   </Link>
@@ -82,7 +81,7 @@ export function Footer() {
                 <li>
                   <Link
                     to="/comment-letters"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     SEC Comment Letters
                   </Link>
@@ -92,7 +91,7 @@ export function Footer() {
                     href="https://security.gaapio.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Security
                   </a>
@@ -100,7 +99,7 @@ export function Footer() {
                 <li>
                   <Link
                     to="/contact"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Report Issue
                   </Link>
@@ -108,7 +107,7 @@ export function Footer() {
                 <li>
                   <Link
                     to="/privacy"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Privacy
                   </Link>
@@ -116,7 +115,7 @@ export function Footer() {
                 <li>
                   <Link
                     to="/terms-of-service"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Terms of Service
                   </Link>
@@ -131,51 +130,51 @@ export function Footer() {
                 <li>
                   <Link
                     to="/contact"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Contact Us
                   </Link>
                 </li>
                 <li className="flex items-center justify-center md:justify-start space-x-2">
-                  <Linkedin className="h-3 w-3 text-muted-foreground" />
+                  <Linkedin className="h-3 w-3 text-gray-400" />
                   <a
                     href="https://www.linkedin.com/company/gaapio"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     LinkedIn
                   </a>
                 </li>
                 <li className="flex items-center justify-center md:justify-start space-x-2">
-                  <Instagram className="h-3 w-3 text-muted-foreground" />
+                  <Instagram className="h-3 w-3 text-gray-400" />
                   <a
                     href="https://www.instagram.com/gaapio_inc/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Instagram
                   </a>
                 </li>
                 <li className="flex items-center justify-center md:justify-start space-x-2">
-                  <Facebook className="h-3 w-3 text-muted-foreground" />
+                  <Facebook className="h-3 w-3 text-gray-400" />
                   <a
                     href="https://www.facebook.com/profile.php?id=61582424325696"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     Facebook
                   </a>
                 </li>
                 <li className="flex items-center justify-center md:justify-start space-x-2">
-                  <Twitter className="h-3 w-3 text-muted-foreground" />
+                  <Twitter className="h-3 w-3 text-gray-400" />
                   <a
                     href="https://x.com/gaapio_inc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-background dark:hover:text-foreground hover:underline transition-colors text-sm"
+                    className="text-gray-400 hover:text-white hover:underline transition-colors text-sm"
                   >
                     X
                   </a>
@@ -187,29 +186,29 @@ export function Footer() {
       </div>
 
       {/* Bottom Legal Strip - Ultra compact */}
-      <div className="border-t border-border">
+      <div className="border-t border-white/10">
         <div className="container px-4 md:px-6 py-2 flex flex-col md:flex-row justify-center md:justify-between items-center">
-          <p className="text-xs text-muted-foreground mb-1 md:mb-0">
+          <p className="text-xs text-gray-400 mb-1 md:mb-0">
             &copy; {currentYear} Gaapio. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2 md:gap-0 md:space-x-6">
             <Link
               to="/privacy"
-              className="text-xs text-muted-foreground hover:underline transition-colors"
+              className="text-xs text-gray-400 hover:text-white hover:underline transition-colors"
             >
               Privacy Policy
             </Link>
-            <Separator orientation="vertical" className="h-3 hidden md:inline-block bg-border" />
+            <Separator orientation="vertical" className="h-3 hidden md:inline-block bg-white/20" />
             <Link
               to="/ssa"
-              className="text-xs text-muted-foreground hover:underline transition-colors"
+              className="text-xs text-gray-400 hover:text-white hover:underline transition-colors"
             >
               Terms of Service
             </Link>
-            <Separator orientation="vertical" className="h-3 hidden md:inline-block bg-border" />
+            <Separator orientation="vertical" className="h-3 hidden md:inline-block bg-white/20" />
             <Link
               to="#"
-              className="text-xs text-muted-foreground hover:underline transition-colors"
+              className="text-xs text-gray-400 hover:text-white hover:underline transition-colors"
             >
               Cookie Policy
             </Link>

@@ -584,7 +584,7 @@ export function ABTestManager({
 }: ABTestManagerProps) {
   const { data: tests, isLoading } = useToolABTests(toolSlug);
   const { data: activeTest } = useActiveABTest(toolSlug);
-  const { data: activeResults } = useToolABResults(activeTest?.id ?? "", toolSlug);
+  const { data: activeResults } = useToolABResults(activeTest?.id, toolSlug);
   const createTest = useCreateABTest();
   const updateTest = useUpdateABTest();
 

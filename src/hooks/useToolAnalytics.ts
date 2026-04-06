@@ -293,9 +293,9 @@ function computeABStats(
   };
 }
 
-export function useToolABResults(testId: string, toolSlug: string) {
+export function useToolABResults(testId: string | undefined, toolSlug: string) {
   return useQuery({
-    queryKey: ['tool-ab-results', testId],
+    queryKey: ['tool-ab-results', toolSlug, testId ?? ''],
     queryFn: async () => {
       // Fetch all views and emails for this tool that have an ab_variant_id
       const [viewsRes, emailsRes] = await Promise.all([
@@ -351,7 +351,7 @@ export function useToolABResults(testId: string, toolSlug: string) {
         samplesNeeded,
       } as ABTestResults;
     },
-    enabled: !!testId && !!toolSlug,
+    enabled: Boolean(testId && toolSlug),
     staleTime: 2 * 60 * 1000,
   });
 }
