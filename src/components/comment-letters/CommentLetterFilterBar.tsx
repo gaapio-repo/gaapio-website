@@ -1,10 +1,11 @@
 import { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Search, SlidersHorizontal, X } from 'lucide-react';
+import { Search, SlidersHorizontal, X, Tags } from 'lucide-react';
 import type { CommentLetterFilters } from '@/types/commentLetters';
 import type { TopicStat } from '@/types/commentLetters';
 import { INPUT_STYLES } from './styles';
@@ -19,6 +20,7 @@ interface CommentLetterFilterBarProps {
   };
   topics?: TopicStat[];
   lockedTopic?: string;
+  showTopicsBrowse?: boolean;
 }
 
 export function CommentLetterFilterBar({
@@ -27,6 +29,7 @@ export function CommentLetterFilterBar({
   filterOptions,
   topics,
   lockedTopic,
+  showTopicsBrowse,
 }: CommentLetterFilterBarProps) {
   const [searchValue, setSearchValue] = useState(filters.search || '');
   const debounceRef = useRef<ReturnType<typeof setTimeout>>();
@@ -182,6 +185,41 @@ export function CommentLetterFilterBar({
           {filterDropdowns}
         </CollapsibleContent>
       </Collapsible>
+
+      {/* Toggle + Browse by Topic row */}
+      <div className="flex items-center gap-3">
+        <div className="inline-flex rounded-lg border border-border p-0.5 bg-muted/50">
+          <button
+            onClick={() => onFilterChange({ publicOnly: true })}
+            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+              filters.publicOnly !== false
+                ? 'bg-background text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            Public Companies
+          </button>
+          <button
+            onClick={() => onFilterChange({ publicOnly: false })}
+            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+              filters.publicOnly === false
+                ? 'bg-background text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            All SEC Registrants
+          </button>
+        </div>
+        {showTopicsBrowse && (
+          <Link
+            to="/comment-letters/topics"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+          >
+            <Tags className="h-3.5 w-3.5" />
+            Browse by Topic
+          </Link>
+        )}
+      </div>
 
       {/* Active filters */}
       {activeFilterCount > 0 && (

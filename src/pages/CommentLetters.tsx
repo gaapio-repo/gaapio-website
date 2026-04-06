@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
@@ -37,7 +36,7 @@ export default function CommentLetters() {
     <ToolPageWrapper toolSlug="sec-comment-letters">
     <div className="flex min-h-screen flex-col">
       <SEO
-        title="SEC Comment Letter Browser — Free Search Tool"
+        title="SEC Comment Letter Explorer — Free Search Tool"
         description={`Search and browse ${totalLetters > 0 ? totalLetters.toLocaleString() : ''} SEC comment letters with AI summaries and ASC topic classification. Free, no login required.`}
         canonical="/comment-letters"
         keywords={['SEC comment letters', 'EDGAR', 'SEC correspondence', 'ASC topics', 'accounting research', 'SEC comment letter search']}
@@ -54,7 +53,7 @@ export default function CommentLetters() {
       <Header />
 
       <CommentLetterHero
-        title="SEC Comment Letter Browser"
+        title="SEC Comment Letter Explorer"
         description={totalLetters > 0
           ? `Search ${totalLetters.toLocaleString()} SEC comment letters with AI summaries and ASC topic classification.`
           : 'Search SEC comment letters with AI summaries and ASC topic classification.'}
@@ -68,13 +67,8 @@ export default function CommentLetters() {
             onFilterChange={setFilters}
             filterOptions={filterOptions || { years: [], industries: [], letterTypes: [] }}
             topics={topics}
+            showTopicsBrowse
           />
-
-          <div className="mt-5 mb-2">
-            <Link to="/comment-letters/topics" className="text-sm text-primary hover:underline transition-colors">
-              Browse all {topics?.length || ''} topics →
-            </Link>
-          </div>
 
           {!isLoading && results && (
             <p className="text-xs text-muted-foreground/70 mt-5 mb-3">

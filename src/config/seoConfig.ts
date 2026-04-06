@@ -262,7 +262,7 @@ export const seoConfig: Record<string, PageSeoData> = {
   // ============================================
   "/comment-letters": {
     path: "/comment-letters",
-    title: "SEC Comment Letter Browser",
+    title: "SEC Comment Letter Explorer",
     seoTitle: "SEC Comment Letter Search — Free Tool by Gaapio",
     description: "Search and browse SEC comment letters with AI-powered summaries. Filter by ASC topic, year, industry, and letter type. Free, no login required.",
     keywords: ["SEC comment letters", "EDGAR", "SEC correspondence", "ASC topics", "accounting research", "SEC comment letter search tool"],

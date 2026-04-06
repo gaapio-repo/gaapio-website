@@ -30,6 +30,11 @@ export function useCommentLetters(filters: CommentLetterFilters) {
           .eq('accounting_relevant', true);
       }
 
+      // Public companies filter (default: true — only show companies with tickers)
+      if (filters.publicOnly !== false) {
+        query = query.not('ticker', 'is', null);
+      }
+
       // Search filter
       if (filters.search) {
         const searchTerm = `%${filters.search}%`;

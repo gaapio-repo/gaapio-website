@@ -49,6 +49,7 @@ export interface CommentLetterFilters {
   year?: string;
   letterType?: string;
   industry?: string;
+  publicOnly?: boolean;
   sort?: 'date_desc' | 'date_asc' | 'company_asc';
   page?: number;
 }
