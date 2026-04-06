@@ -52,7 +52,6 @@ export function CommentLetterFilterBar({
     filters.search,
     !lockedTopic && filters.topic,
     filters.year,
-    filters.letterType,
     filters.industry,
   ].filter(Boolean).length;
 
@@ -106,21 +105,6 @@ export function CommentLetterFilterBar({
       </Select>
 
       <Select
-        value={filters.letterType || '_all'}
-        onValueChange={v => onFilterChange({ letterType: v === '_all' ? undefined : v })}
-      >
-        <SelectTrigger className={INPUT_STYLES}>
-          <SelectValue placeholder="All Types" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="_all">All Types</SelectItem>
-          {filterOptions.letterTypes.map(t => (
-            <SelectItem key={t} value={t}>{t}</SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-
-      <Select
         value={filters.industry || '_all'}
         onValueChange={v => onFilterChange({ industry: v === '_all' ? undefined : v })}
       >
@@ -132,6 +116,20 @@ export function CommentLetterFilterBar({
           {filterOptions.industries.map(i => (
             <SelectItem key={i} value={i}>{i}</SelectItem>
           ))}
+        </SelectContent>
+      </Select>
+
+      <Select
+        value={filters.sort || 'date_desc'}
+        onValueChange={v => onFilterChange({ sort: v as CommentLetterFilters['sort'] })}
+      >
+        <SelectTrigger className={INPUT_STYLES}>
+          <SelectValue placeholder="Sort by" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="date_desc">Newest First</SelectItem>
+          <SelectItem value="date_asc">Oldest First</SelectItem>
+          <SelectItem value="company_asc">Company A-Z</SelectItem>
         </SelectContent>
       </Select>
     </div>
@@ -158,19 +156,6 @@ export function CommentLetterFilterBar({
             </button>
           )}
         </div>
-        <Select
-          value={filters.sort || 'date_desc'}
-          onValueChange={v => onFilterChange({ sort: v as CommentLetterFilters['sort'] })}
-        >
-          <SelectTrigger className={`w-full sm:w-48 ${INPUT_STYLES}`}>
-            <SelectValue placeholder="Sort by" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="date_desc">Newest First</SelectItem>
-            <SelectItem value="date_asc">Oldest First</SelectItem>
-            <SelectItem value="company_asc">Company A-Z</SelectItem>
-          </SelectContent>
-        </Select>
       </div>
 
       {/* Desktop: always visible filters */}
@@ -221,14 +206,6 @@ export function CommentLetterFilterBar({
             <Badge variant="secondary" className="gap-1">
               {filters.year}
               <button onClick={() => onFilterChange({ year: undefined })}>
-                <X className="h-3 w-3" />
-              </button>
-            </Badge>
-          )}
-          {filters.letterType && (
-            <Badge variant="secondary" className="gap-1">
-              {filters.letterType}
-              <button onClick={() => onFilterChange({ letterType: undefined })}>
                 <X className="h-3 w-3" />
               </button>
             </Badge>

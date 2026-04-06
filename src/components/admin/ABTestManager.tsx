@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardDescription, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -53,9 +53,8 @@ function CompactResults({
   testName: string;
 }) {
   return (
-    <Card>
-      <CardContent className="pt-4 pb-3 space-y-2">
-        <p className="text-sm font-medium">{testName}</p>
+    <div className="rounded-lg bg-muted/70 shadow-sm p-4 space-y-2">
+      <p className="text-sm font-medium">{testName}</p>
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <p className="text-xs text-muted-foreground">Variant A</p>
@@ -82,8 +81,7 @@ function CompactResults({
             ? "Significant (95%)"
             : `Need ~${results.samplesNeeded} more sessions`}
         </Badge>
-      </CardContent>
-    </Card>
+    </div>
   );
 }
 
@@ -172,7 +170,7 @@ function TestResults({
     <div className="space-y-4">
       {/* Variant config summary */}
       <div className="grid md:grid-cols-2 gap-4">
-        <div className="rounded-lg border bg-gray-50/50 p-4 space-y-1">
+        <div className="rounded-lg bg-muted/70 shadow-sm p-4 space-y-1">
           <div className="flex items-center gap-2 mb-2">
             <div className="h-3 w-3 rounded-full bg-blue-500" />
             <span className="font-medium text-sm">Variant A</span>
@@ -187,7 +185,7 @@ function TestResults({
             <p className="text-xs text-muted-foreground italic mt-1">"{variantAConfig.copy}"</p>
           )}
         </div>
-        <div className="rounded-lg border bg-gray-50/50 p-4 space-y-1">
+        <div className="rounded-lg bg-muted/70 shadow-sm p-4 space-y-1">
           <div className="flex items-center gap-2 mb-2">
             <div className="h-3 w-3 rounded-full bg-purple-500" />
             <span className="font-medium text-sm">Variant B</span>
@@ -205,7 +203,7 @@ function TestResults({
       </div>
 
       {/* Results table */}
-      <div className="overflow-x-auto rounded-lg border">
+      <div className="overflow-x-auto rounded-lg bg-muted/70 shadow-sm">
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-muted/50 border-b">
@@ -311,16 +309,15 @@ function TestForm({ initialValues, onSave, onCancel, saving, isEdit }: TestFormP
   });
 
   return (
-    <Card>
-      <CardHeader>
+    <div className="rounded-lg bg-muted/70 shadow-sm p-6 space-y-6">
+      <div>
         <CardTitle className="text-base">{isEdit ? "Edit A/B Test" : "New A/B Test"}</CardTitle>
         <CardDescription>
           {isEdit
             ? "Update the test configuration. Changes to variants won't affect already-assigned visitors."
             : "Configure two variants of your email gate to test which performs better."}
         </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-6">
+      </div>
         <div className="space-y-2">
           <Label>Test Name</Label>
           <Input
@@ -354,7 +351,7 @@ function TestForm({ initialValues, onSave, onCancel, saving, isEdit }: TestFormP
 
         <div className="grid md:grid-cols-2 gap-6">
           {/* Variant A */}
-          <div className="space-y-4 rounded-lg border-2 border-blue-200 bg-blue-50/30 p-4">
+          <div className="space-y-4 rounded-lg bg-blue-50/50 shadow-sm p-4">
             <div className="flex items-center gap-2">
               <div className="h-3 w-3 rounded-full bg-blue-500" />
               <h4 className="font-medium">Variant A</h4>
@@ -377,7 +374,7 @@ function TestForm({ initialValues, onSave, onCancel, saving, isEdit }: TestFormP
             <div className="space-y-1">
               <Label className="text-sm">Gate Copy</Label>
               <textarea
-                className="w-full rounded-md border bg-white px-3 py-2 text-sm min-h-[80px] resize-y focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-md bg-muted/70 border-0 shadow-sm px-3 py-2 text-sm min-h-[80px] resize-y focus:outline-none focus:ring-2 focus:ring-ring"
                 value={variantACopy}
                 onChange={(e) => setVariantACopy(e.target.value)}
                 placeholder="Custom CTA copy (leave blank for default)"
@@ -386,7 +383,7 @@ function TestForm({ initialValues, onSave, onCancel, saving, isEdit }: TestFormP
           </div>
 
           {/* Variant B */}
-          <div className="space-y-4 rounded-lg border-2 border-purple-200 bg-purple-50/30 p-4">
+          <div className="space-y-4 rounded-lg bg-purple-50/50 shadow-sm p-4">
             <div className="flex items-center gap-2">
               <div className="h-3 w-3 rounded-full bg-purple-500" />
               <h4 className="font-medium">Variant B</h4>
@@ -409,7 +406,7 @@ function TestForm({ initialValues, onSave, onCancel, saving, isEdit }: TestFormP
             <div className="space-y-1">
               <Label className="text-sm">Gate Copy</Label>
               <textarea
-                className="w-full rounded-md border bg-white px-3 py-2 text-sm min-h-[80px] resize-y focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-md bg-muted/70 border-0 shadow-sm px-3 py-2 text-sm min-h-[80px] resize-y focus:outline-none focus:ring-2 focus:ring-ring"
                 value={variantBCopy}
                 onChange={(e) => setVariantBCopy(e.target.value)}
                 placeholder="Custom CTA copy (leave blank for default)"
@@ -447,8 +444,7 @@ function TestForm({ initialValues, onSave, onCancel, saving, isEdit }: TestFormP
             Cancel
           </Button>
         </div>
-      </CardContent>
-    </Card>
+    </div>
   );
 }
 
@@ -479,10 +475,10 @@ function TestRow({
   const hasResults = test.status !== "draft";
 
   return (
-    <div className="border rounded-lg overflow-hidden">
+    <div className="rounded-lg bg-muted/70 shadow-inner hover:shadow-md transition-shadow duration-200 overflow-hidden">
       {/* Row header */}
       <div
-        className={`flex items-center gap-4 p-4 cursor-pointer hover:bg-muted/30 transition-colors ${expanded ? "border-b" : ""}`}
+        className={`flex items-center gap-4 p-4 cursor-pointer hover:bg-muted/50 transition-colors ${expanded ? "border-b" : ""}`}
         onClick={() => setExpanded(!expanded)}
       >
         <div className="flex-1 min-w-0">
@@ -752,21 +748,19 @@ export function ABTestManager({
 
       {/* Empty state */}
       {(!tests || tests.length === 0) && !showForm && (
-        <Card>
-          <CardContent className="py-12 text-center">
-            <div className="mx-auto w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-4">
-              <Eye className="h-6 w-6 text-muted-foreground" />
-            </div>
-            <h3 className="font-medium mb-1">No A/B tests yet</h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              Create a test to experiment with different email gate configurations and find what converts best.
-            </p>
-            <Button onClick={() => setShowForm(true)}>
-              <Plus className="h-4 w-4 mr-1" />
-              Create Your First Test
-            </Button>
-          </CardContent>
-        </Card>
+        <div className="rounded-lg bg-muted/70 shadow-sm p-6 py-12 text-center">
+          <div className="mx-auto w-12 h-12 rounded-full bg-background/60 flex items-center justify-center mb-4">
+            <Eye className="h-6 w-6 text-muted-foreground" />
+          </div>
+          <h3 className="font-medium mb-1">No A/B tests yet</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Create a test to experiment with different email gate configurations and find what converts best.
+          </p>
+          <Button onClick={() => setShowForm(true)}>
+            <Plus className="h-4 w-4 mr-1" />
+            Create Your First Test
+          </Button>
+        </div>
       )}
     </div>
   );

@@ -6,7 +6,7 @@ import {
   CustomerTestimonial,
 } from "@/hooks/useCustomerTestimonials";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -71,50 +71,49 @@ export function TestimonialsManager() {
 
   if (error) {
     return (
-      <Card>
-        <CardContent className="pt-6">
-          <div className="flex flex-col items-center justify-center py-8 text-center">
-            <p className="text-muted-foreground mb-4">
-              {error instanceof Error
-                ? error.message
-                : "Failed to load customer testimonials. Please check that the database table and storage bucket are properly configured."}
-            </p>
-            <Button onClick={() => refetch()} variant="outline">
-              Retry
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="rounded-lg bg-muted/70 shadow-sm p-6">
+        <div className="flex flex-col items-center justify-center py-8 text-center">
+          <p className="text-muted-foreground mb-4">
+            {error instanceof Error
+              ? error.message
+              : "Failed to load customer testimonials. Please check that the database table and storage bucket are properly configured."}
+          </p>
+          <Button onClick={() => refetch()} variant="outline">
+            Retry
+          </Button>
+        </div>
+      </div>
     );
   }
 
   return (
     <>
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
           <CardTitle>Customer Testimonials</CardTitle>
           <Button onClick={handleAdd}>
             <Plus className="h-4 w-4 mr-2" />
             Add Testimonial
           </Button>
-        </CardHeader>
-        <CardContent>
-          {isLoading ? (
-            <div className="flex items-center justify-center py-8">
-              <p className="text-muted-foreground">Loading testimonials...</p>
-            </div>
-          ) : !testimonials || testimonials.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-8 text-center">
-              <p className="text-muted-foreground mb-4">
-                No testimonials yet. Add your first customer testimonial to get
-                started.
-              </p>
-              <Button onClick={handleAdd} variant="outline">
-                <Plus className="h-4 w-4 mr-2" />
-                Add First Testimonial
-              </Button>
-            </div>
-          ) : (
+        </div>
+
+        {isLoading ? (
+          <div className="rounded-lg bg-muted/70 shadow-sm p-6 flex items-center justify-center py-8">
+            <p className="text-muted-foreground">Loading testimonials...</p>
+          </div>
+        ) : !testimonials || testimonials.length === 0 ? (
+          <div className="rounded-lg bg-muted/70 shadow-sm p-6 flex flex-col items-center justify-center py-8 text-center">
+            <p className="text-muted-foreground mb-4">
+              No testimonials yet. Add your first customer testimonial to get
+              started.
+            </p>
+            <Button onClick={handleAdd} variant="outline">
+              <Plus className="h-4 w-4 mr-2" />
+              Add First Testimonial
+            </Button>
+          </div>
+        ) : (
+          <div className="rounded-lg bg-muted/70 shadow-sm overflow-hidden">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -176,9 +175,9 @@ export function TestimonialsManager() {
                 ))}
               </TableBody>
             </Table>
-          )}
-        </CardContent>
-      </Card>
+          </div>
+        )}
+      </div>
 
       <TestimonialDialog
         open={dialogOpen}

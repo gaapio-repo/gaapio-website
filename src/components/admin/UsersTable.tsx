@@ -1,7 +1,6 @@
 
 import { useState } from "react";
-import { Table, TableCaption } from "@/components/ui/table";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table } from "@/components/ui/table";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { usePagination } from "@/hooks/usePagination";
 import { PaginationControls } from "./PaginationControls";
@@ -88,60 +87,61 @@ export function UserSignupsTable() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>User Sign-ups</CardTitle>
-        <CardDescription>
+    <div className="rounded-lg bg-muted/70 shadow-inner p-5">
+      <div className="mb-3">
+        <h2 className="text-xl font-semibold">User Sign-ups</h2>
+        <p className="text-sm text-muted-foreground">
           Users who have subscribed to a paid plan.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <UserSignupsSearch value={searchQuery} onChange={setSearchQuery} />
-        
-        <Table>
-          <TableCaption>A list of users who have signed up.</TableCaption>
-          <UsersTableContent
-            loading={loading}
-            items={paginatedUsers}
-            onEdit={handleOpenEdit}
-            onDelete={handleOpenDelete}
-            searchQuery={searchQuery}
-          />
-        </Table>
+        </p>
+      </div>
+      <UserSignupsSearch value={searchQuery} onChange={setSearchQuery} />
 
-        <PaginationControls
-          currentPage={currentPage}
-          totalPages={totalPages}
-          itemsPerPage={itemsPerPage}
-          onPageChange={goToPage}
-          onItemsPerPageChange={setItemsPerPage}
-        />
+      <div className="rounded-md overflow-hidden">
+        <div className="overflow-x-auto">
+          <Table>
+            <UsersTableContent
+              loading={loading}
+              items={paginatedUsers}
+              onEdit={handleOpenEdit}
+              onDelete={handleOpenDelete}
+              searchQuery={searchQuery}
+            />
+          </Table>
+        </div>
+      </div>
 
-        {editUser && (
-          <>
-            <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-              <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
-                <EditUserDialog
-                  user={editUser}
-                  onSave={handleSaveUser}
-                  onDelete={() => handleOpenDelete(editUser)}
-                  onClose={handleCloseEdit}
-                />
-              </DialogContent>
-            </Dialog>
-            
-            <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-              <DialogContent>
-                <DeleteUserDialog
-                  user={editUser}
-                  onDelete={handleDeleteUser}
-                  onClose={handleCloseDelete}
-                />
-              </DialogContent>
-            </Dialog>
-          </>
-        )}
-      </CardContent>
-    </Card>
+      <PaginationControls
+        currentPage={currentPage}
+        totalPages={totalPages}
+        itemsPerPage={itemsPerPage}
+        onPageChange={goToPage}
+        onItemsPerPageChange={setItemsPerPage}
+      />
+
+      {editUser && (
+        <>
+          <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+            <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+              <EditUserDialog
+                user={editUser}
+                onSave={handleSaveUser}
+                onDelete={() => handleOpenDelete(editUser)}
+                onClose={handleCloseEdit}
+              />
+            </DialogContent>
+          </Dialog>
+
+          <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+            <DialogContent>
+              <DeleteUserDialog
+                user={editUser}
+                onDelete={handleDeleteUser}
+                onClose={handleCloseDelete}
+              />
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
+    </div>
   );
 }

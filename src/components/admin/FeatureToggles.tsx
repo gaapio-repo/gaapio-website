@@ -1,5 +1,4 @@
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useSiteConfig } from "@/hooks/useSiteConfig";
@@ -38,58 +37,47 @@ export function FeatureToggles() {
 
   if (loading) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Feature Toggles</CardTitle>
-          <CardDescription>
-            Enable or disable features on your website
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="flex items-center justify-between">
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-32" />
-                  <Skeleton className="h-3 w-48" />
-                </div>
-                <Skeleton className="h-6 w-11" />
-              </div>
-            ))}
+      <div className="space-y-6">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="flex items-center justify-between">
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-3 w-48" />
+            </div>
+            <Skeleton className="h-6 w-11" />
           </div>
-        </CardContent>
-      </Card>
+        ))}
+      </div>
     );
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Feature Toggles</CardTitle>
-        <CardDescription>
-          Enable or disable features on your website
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-6">
-          {featureToggles.map((toggle) => (
-            <div key={toggle.id} className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor={toggle.id}>{toggle.name}</Label>
-                <p className="text-sm text-muted-foreground">
-                  {toggle.description}
-                </p>
-              </div>
+    <table className="w-full text-sm text-left">
+      <thead>
+        <tr className="border-b text-left text-muted-foreground">
+          <th className="pb-2 font-medium">Feature</th>
+          <th className="pb-2 font-medium">Description</th>
+          <th className="pb-2 font-medium text-right">Enabled</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y">
+        {featureToggles.map((toggle) => (
+          <tr key={toggle.id}>
+            <td className="py-2.5 font-medium">
+              <Label htmlFor={toggle.id}>{toggle.name}</Label>
+            </td>
+            <td className="py-2.5 text-muted-foreground">{toggle.description}</td>
+            <td className="py-2.5 text-right">
               <Switch
                 id={toggle.id}
                 checked={siteConfig?.[toggle.id] ?? true}
                 onCheckedChange={(checked) => handleToggleChange(toggle.id, checked)}
                 disabled={updating}
               />
-            </div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }

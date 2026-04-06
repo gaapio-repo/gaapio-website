@@ -34,6 +34,16 @@
     --ring: 240 5.9% 10%;
 
     --radius: 0.5rem;
+
+    /* Sidebar */
+    --sidebar-background: 240 4.8% 95.9%;
+    --sidebar-foreground: 240 5.9% 10%;
+    --sidebar-primary: 204 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 96.1%;
+    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-ring: 204 100% 50%;
     
     /* Custom benefits section background */
     --benefits-bg: #f4faff; /* light blue-tinted background */
@@ -72,7 +82,17 @@
     --border: 0 0% 25%; /* #404040 in HSL */
     --input: 0 0% 16.5%; /* #2a2a2a in HSL */
     --ring: 204 100% 50%; /* #0099FF in HSL */
-    
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 12%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 204 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 25%;
+    --sidebar-ring: 204 100% 50%;
+
     /* Custom benefits section background for dark mode */
     --benefits-bg: #1A1F2B; /* dark navy-gray background */
     
@@ -101,7 +121,7 @@
   }
 
   /* Updated global fix for header overlap for all pages - standardized padding-top */
-  main {
+  main:not(.admin-main) {
     @apply pt-32 pb-16;
   }
 
@@ -379,6 +399,16 @@
       min-height: min(38vw, 750px);
     }
   }
+}
+
+/* Admin sidebar: pin below the fixed header */
+.admin-sidebar > div:first-child {
+  min-height: calc(100svh - 4rem);
+}
+/* Target the fixed-position sidebar container */
+.admin-sidebar :has(> [data-sidebar="sidebar"]) {
+  top: 4.5rem !important;
+  height: calc(100svh - 5rem) !important;
 }
 
 /* Standardized page container for consistent spacing across all pages */

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminDashboard } from "@/components/admin/AdminDashboard";
 import { CompaniesTable } from "@/components/admin/CompaniesTable";
 import { UserSignupsTable } from "@/components/admin/UsersTable";
@@ -9,8 +8,8 @@ import { AdminPageGuard } from "@/components/admin/AdminPageGuard";
 import { AdminSecurityAlert } from "@/components/admin/AdminSecurityAlert";
 import { AdminFetchErrorAlert } from "@/components/admin/AdminFetchErrorAlert";
 import { FeatureToggles } from "@/components/admin/FeatureToggles";
+import { UnderConstructionToggle } from "@/components/admin/UnderConstructionToggle";
 import { useCurrentAdmin } from "@/hooks/useCurrentAdmin";
-import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { useFetchAdmins } from "@/hooks/useFetchAdmins";
 import { Button } from "@/components/ui/button";
 import { AddAdminDialog } from "@/components/admin/AddAdminDialog";
@@ -18,7 +17,8 @@ import { AdminNameDialog } from "@/components/admin/AdminNameDialog";
 import { Header } from "@/components/header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { ExternalLink, FileEdit, Home, FileText, Shield, CreditCard, Users, Mail, Book } from "lucide-react";
+import { ExternalLink, FileEdit, Home, FileText, Shield, Users, Mail, Book, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { BlogPostsManager } from "@/components/admin/BlogPostsManager";
 import { PageEditor } from "@/components/admin/PageEditor";
 import { CustomerLogosManager } from "@/components/admin/CustomerLogosManager";
@@ -26,6 +26,8 @@ import { TestimonialsManager } from "@/components/admin/TestimonialsManager";
 import { TabVisibilitySettings, AdminTab } from "@/components/admin/TabVisibilitySettings";
 import { ToolsManager } from "@/components/admin/ToolsManager";
 import { Badge } from "@/components/ui/badge";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { AdminSidebar } from "@/components/admin/AdminSidebar";
 
 // Group websites pages into categories
 interface PageCategory {
@@ -37,18 +39,19 @@ interface PageCategory {
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState("dashboard");
-  const { 
-    currentUser, 
-    loading: userLoading, 
+  const {
+    currentUser,
+    loading: userLoading,
     error: userError,
     fixAdminStatus,
-    fetchCurrentUserInfo 
+    fetchCurrentUserInfo
   } = useCurrentAdmin();
-  
+
   const [showAddAdminDialog, setShowAddAdminDialog] = useState(false);
   const [showNameDialog, setShowNameDialog] = useState(false);
   const [selectedPage, setSelectedPage] = useState<{ title: string; path: string; description: string; } | null>(null);
-  
+  const [pageSearch, setPageSearch] = useState("");
+
   // Store the tab visibility settings
   const [tabVisibility, setTabVisibility] = useState<Record<string, boolean>>({
     dashboard: true,
@@ -64,13 +67,13 @@ export default function Admin() {
     tools: true,
     settings: true
   });
-  
+
   // Ensure at least one tab is always visible
   const hasVisibleTabs = Object.values(tabVisibility).some(visible => visible);
-  
-  const { 
-    admins, 
-    loading: adminsLoading, 
+
+  const {
+    admins,
+    loading: adminsLoading,
     error: adminsError,
     fetchAdmins
   } = useFetchAdmins(currentUser);
@@ -79,7 +82,7 @@ export default function Admin() {
   const websitePageCategories: PageCategory[] = [
     {
       id: "products",
-      title: "🚀 Product Pages",
+      title: "Product Pages",
       icon: <FileText className="h-5 w-5" />,
       pages: [
         { title: "Accounting Memos", path: "/accounting-memos", description: "Create audit-ready ASC 606, ASC 842 memos in minutes with AI-powered drafting and version history", seoStatus: "complete" },
@@ -92,7 +95,7 @@ export default function Admin() {
     },
     {
       id: "solutions",
-      title: "💼 Solutions",
+      title: "Solutions",
       icon: <Users className="h-5 w-5" />,
       pages: [
         { title: "Private Company", path: "/solutions/private", description: "Technical accounting solutions for private companies without Big 4 budgets", seoStatus: "complete" },
@@ -102,7 +105,7 @@ export default function Admin() {
     },
     {
       id: "core",
-      title: "🏠 Core Site Pages",
+      title: "Core Site Pages",
       icon: <Home className="h-5 w-5" />,
       pages: [
         { title: "Home Page", path: "/", description: "AI-powered platform built by CPAs for CPAs - memos, disclosures, contract analysis, compliance", seoStatus: "complete" },
@@ -116,7 +119,7 @@ export default function Admin() {
     },
     {
       id: "legal",
-      title: "📝 Legal & Compliance",
+      title: "Legal & Compliance",
       icon: <Shield className="h-5 w-5" />,
       pages: [
         { title: "Privacy Policy", path: "/privacy", description: "Data collection, usage, security, and your rights under GDPR and CCPA", seoStatus: "complete" },
@@ -127,7 +130,7 @@ export default function Admin() {
     },
     {
       id: "access",
-      title: "👥 User Access & Registration",
+      title: "User Access & Registration",
       icon: <Users className="h-5 w-5" />,
       pages: [
         { title: "Login", path: "/login", description: "Admin login portal (noindex)", seoStatus: "complete" },
@@ -137,7 +140,7 @@ export default function Admin() {
     },
     {
       id: "leads",
-      title: "📩 Demo & Sales",
+      title: "Demo & Sales",
       icon: <Mail className="h-5 w-5" />,
       pages: [
         { title: "Request Demo", path: "/request-demo", description: "Schedule a personalized demo of the AI-powered accounting platform", seoStatus: "complete" },
@@ -146,7 +149,7 @@ export default function Admin() {
     },
     {
       id: "blog",
-      title: "📚 Blog & Articles",
+      title: "Blog & Articles",
       icon: <Book className="h-5 w-5" />,
       pages: [
         { title: "Blog", path: "/blog", description: "Expert insights on technical accounting, AI in finance, and ASC standards", seoStatus: "complete" },
@@ -157,7 +160,7 @@ export default function Admin() {
     },
     {
       id: "system",
-      title: "⚙️ System Pages",
+      title: "System Pages",
       icon: <FileText className="h-5 w-5" />,
       pages: [
         { title: "Status", path: "/status", description: "Service health for API, web app, and database systems", seoStatus: "complete" },
@@ -168,20 +171,17 @@ export default function Admin() {
     },
   ];
 
-  // Flatten all pages for other uses if needed
-  const websitePages = websitePageCategories.flatMap(category => category.pages);
-
   useEffect(() => {
     const savedSettings = localStorage.getItem("adminTabVisibility");
     if (savedSettings) {
       try {
         const parsedSettings = JSON.parse(savedSettings);
         const visibility: Record<string, boolean> = {};
-        
+
         parsedSettings.forEach((tab: AdminTab) => {
           visibility[tab.id] = tab.visible;
         });
-        
+
         setTabVisibility(visibility);
       } catch (error) {
         console.error("Error loading tab visibility settings:", error);
@@ -200,7 +200,7 @@ export default function Admin() {
       if (!tabVisibility[activeTab]) {
         const firstVisible = Object.entries(tabVisibility)
           .find(([_, visible]) => visible)?.[0];
-        
+
         if (firstVisible) {
           setActiveTab(firstVisible);
         }
@@ -219,7 +219,7 @@ export default function Admin() {
   // Render SEO status badge
   const renderSeoStatusBadge = (status?: "missing" | "incomplete" | "complete") => {
     if (!status) return null;
-    
+
     switch (status) {
       case "complete":
         return <Badge variant="default" className="bg-green-500">SEO Complete</Badge>;
@@ -232,250 +232,233 @@ export default function Admin() {
     }
   };
 
-  const renderFallback = (message: string) => (
-    <div className="p-8 text-center">
-      <h2 className="text-lg font-medium text-destructive mb-2">Error</h2>
-      <p className="text-muted-foreground">{message}</p>
-      <Button 
-        variant="outline" 
-        className="mt-4"
-        onClick={() => window.location.reload()}
-      >
-        Refresh Page
-      </Button>
-    </div>
-  );
-
   const handleFixAdminStatus = async () => {
     return await fixAdminStatus();
   };
 
+  const renderContent = () => {
+    switch (activeTab) {
+      case "dashboard":
+        return <AdminDashboard />;
+      case "companies":
+        return <CompaniesTable />;
+      case "users":
+        return <UserSignupsTable />;
+      case "contacts":
+        return <ContactTable />;
+      case "demos":
+        return <DemoRequestsTable />;
+      case "logos":
+        return <CustomerLogosManager />;
+      case "testimonials":
+        return <TestimonialsManager />;
+      case "blog":
+        return <BlogPostsManager />;
+      case "webpages":
+        return renderWebpages();
+      case "tools":
+        return <ToolsManager />;
+      case "settings":
+        return renderSettings();
+      default:
+        return <AdminDashboard />;
+    }
+  };
+
+  const renderWebpages = () => {
+    if (selectedPage) {
+      return (
+        <PageEditor
+          page={selectedPage}
+          onClose={() => setSelectedPage(null)}
+        />
+      );
+    }
+
+    return (
+      <div className="space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-semibold">Website Pages</h2>
+            <p className="text-muted-foreground mt-1">Manage content and SEO settings</p>
+          </div>
+          <div className="relative w-full sm:w-72">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search pages..."
+              value={pageSearch}
+              onChange={(e) => setPageSearch(e.target.value)}
+              className="pl-9"
+            />
+          </div>
+        </div>
+
+        <div className="space-y-8">
+          {websitePageCategories.map((category) => {
+            const filteredPages = pageSearch
+              ? category.pages.filter(p =>
+                  p.title.toLowerCase().includes(pageSearch.toLowerCase()) ||
+                  p.description.toLowerCase().includes(pageSearch.toLowerCase())
+                )
+              : category.pages;
+            if (filteredPages.length === 0) return null;
+            return (
+              <div key={category.id} className="space-y-4">
+                <div className="flex items-center gap-2 pb-2 border-b">
+                  {category.icon}
+                  <h3 className="text-lg font-medium">{category.title}</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                  {filteredPages.map((page) => (
+                    <Card key={page.path} className="overflow-hidden bg-muted/70 border-0 shadow-sm">
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="font-medium">{page.title}</h3>
+                          {renderSeoStatusBadge(page.seoStatus)}
+                        </div>
+                        <p className="text-muted-foreground text-sm mb-3">{page.description}</p>
+                        <div className="flex items-center justify-between mt-2">
+                          <Link
+                            to={page.path}
+                            className="text-primary hover:text-primary/80 text-sm flex items-center"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ExternalLink className="h-4 w-4 mr-1" />
+                            View
+                          </Link>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex items-center"
+                            onClick={() => setSelectedPage(page)}
+                          >
+                            <FileEdit className="h-4 w-4 mr-1" />
+                            Edit
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  const renderSettings = () => (
+    <div className="space-y-8">
+      <div className="rounded-lg bg-muted/70 shadow-inner p-5">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold">Admin Users</h2>
+          <Button onClick={() => setShowAddAdminDialog(true)} size="sm">
+            Add Admin User
+          </Button>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left">
+            <thead>
+              <tr className="border-b text-left text-muted-foreground">
+                <th className="pb-2 font-medium">Name</th>
+                <th className="pb-2 font-medium">Email</th>
+                <th className="pb-2 font-medium">Role</th>
+                <th className="pb-2 font-medium"></th>
+              </tr>
+            </thead>
+            <tbody className="divide-y">
+              {admins.map(admin => (
+                <tr key={admin.id}>
+                  <td className="py-2.5 font-medium">
+                    {admin.first_name || admin.last_name ?
+                      `${admin.first_name || ''} ${admin.last_name || ''}`.trim() :
+                      'Unnamed'}
+                  </td>
+                  <td className="py-2.5 text-muted-foreground">{admin.email}</td>
+                  <td className="py-2.5 capitalize">{admin.role}</td>
+                  <td className="py-2.5 text-right">
+                    {admin.user_id === currentUser.id && (!currentUser.first_name && !currentUser.last_name) && (
+                      <Button variant="outline" size="sm" onClick={() => setShowNameDialog(true)}>
+                        Set Your Name
+                      </Button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+              {!adminsLoading && admins.length === 0 && (
+                <tr>
+                  <td colSpan={4} className="text-center py-4 text-muted-foreground">
+                    No admin users found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="rounded-lg bg-muted/70 shadow-inner p-5">
+        <h2 className="text-xl font-semibold mb-4">Admin Portal Settings</h2>
+        <TabVisibilitySettings />
+      </div>
+
+      <div className="rounded-lg bg-muted/70 shadow-inner p-5">
+        <h2 className="text-xl font-semibold mb-4">Feature Toggles</h2>
+        <FeatureToggles />
+        <div className="border-t mt-4 pt-4">
+          <UnderConstructionToggle />
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <AdminPageGuard>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-background">
         <Header />
         {currentUser.isAdmin && !currentUser.displayedInList && (
-          <AdminSecurityAlert 
-            currentUserEmail={currentUser.email} 
-            onFixStatus={handleFixAdminStatus} 
+          <AdminSecurityAlert
+            currentUserEmail={currentUser.email}
+            onFixStatus={handleFixAdminStatus}
           />
         )}
-        
-        <ResponsiveContainer className="py-10 mt-16">
-          <h1 className="text-3xl font-bold mb-8">Admin Portal</h1>
-          
-          <AdminFetchErrorAlert 
-            error={userError || adminsError}
-            onRetry={fetchAdmins}
-            loading={adminsLoading}
-          />
-          
-          {!hasVisibleTabs ? (
-            <div className="p-8 text-center border rounded-md bg-card">
-              <h2 className="text-lg font-medium mb-2">No Tabs Available</h2>
-              <p className="text-muted-foreground mb-4">All admin tabs are currently hidden. Please enable at least one tab in Settings.</p>
-              <Button onClick={() => {
-                setTabVisibility(prev => ({ ...prev, settings: true }));
-                setActiveTab('settings');
-              }}>
-                Go to Settings
-              </Button>
-            </div>
-          ) : (
-            <Tabs defaultValue={activeTab} onValueChange={handleTabChange} className="w-full">
-              <TabsList>
-                {tabVisibility.dashboard && <TabsTrigger value="dashboard">Dashboard</TabsTrigger>}
-                {tabVisibility.companies && <TabsTrigger value="companies">Companies</TabsTrigger>}
-                {tabVisibility.users && <TabsTrigger value="users">Users</TabsTrigger>}
-                {tabVisibility.contacts && <TabsTrigger value="contacts">Contacts</TabsTrigger>}
-                {tabVisibility.demos && <TabsTrigger value="demos">Demo Requests</TabsTrigger>}
-                {tabVisibility.firms && <TabsTrigger value="firms">Firm Signups</TabsTrigger>}
-                {tabVisibility.logos && <TabsTrigger value="logos">Customer Logos</TabsTrigger>}
-                {tabVisibility.testimonials && <TabsTrigger value="testimonials">Customer Quotes</TabsTrigger>}
-                {tabVisibility.blog && <TabsTrigger value="blog">Blog Posts</TabsTrigger>}
-                {tabVisibility.webpages && <TabsTrigger value="webpages">Webpages</TabsTrigger>}
-                {tabVisibility.tools && <TabsTrigger value="tools">Tools</TabsTrigger>}
-                 {tabVisibility.settings && <TabsTrigger value="settings">Settings</TabsTrigger>}
-              </TabsList>
 
-              {tabVisibility.dashboard && (
-                <TabsContent value="dashboard" className="border rounded-md mt-6 bg-card">
-                  <AdminDashboard />
-                </TabsContent>
-              )}
-              
-              {tabVisibility.companies && (
-                <TabsContent value="companies" className="space-y-4">
-                  <CompaniesTable />
-                </TabsContent>
-              )}
-              
-              {tabVisibility.users && (
-                <TabsContent value="users" className="space-y-4">
-                  <UserSignupsTable />
-                </TabsContent>
-              )}
-              
-              {tabVisibility.contacts && (
-                <TabsContent value="contacts" className="space-y-4">
-                  <ContactTable />
-                </TabsContent>
-              )}
-              
-              {tabVisibility.demos && (
-                <TabsContent value="demos" className="space-y-4">
-                  <DemoRequestsTable />
-                </TabsContent>
-              )}
-              
-              
-              {tabVisibility.logos && (
-                <TabsContent value="logos" className="space-y-4">
-                  <CustomerLogosManager />
-                </TabsContent>
-              )}
+        <div className="pt-16 admin-sidebar">
+          <SidebarProvider defaultOpen={true}>
+            <AdminSidebar
+              activeTab={activeTab}
+              onTabChange={handleTabChange}
+              tabVisibility={tabVisibility}
+            />
+            <SidebarInset className="admin-main">
+              <div className="px-4 pt-4 pb-3 lg:px-6 lg:pb-4">
+                <AdminFetchErrorAlert
+                  error={userError || adminsError}
+                  onRetry={fetchAdmins}
+                  loading={adminsLoading}
+                />
 
-              {tabVisibility.testimonials && (
-                <TabsContent value="testimonials" className="space-y-4">
-                  <TestimonialsManager />
-                </TabsContent>
-              )}
-
-              {tabVisibility.blog && (
-                <TabsContent value="blog" className="space-y-4">
-                  <BlogPostsManager />
-                </TabsContent>
-              )}
-              
-              {tabVisibility.webpages && (
-                <TabsContent value="webpages" className="space-y-4">
-                  {selectedPage ? (
-                    <PageEditor 
-                      page={selectedPage} 
-                      onClose={() => setSelectedPage(null)}
-                    />
-                  ) : (
-                    <div className="p-6 border rounded-md bg-card">
-                      <h2 className="text-2xl font-semibold mb-4">Website Pages Management</h2>
-                      <p className="text-muted-foreground mb-6">Manage website pages content and SEO settings</p>
-                      
-                      <div className="space-y-8 mt-6">
-                        {websitePageCategories.map((category) => (
-                          <div key={category.id} className="space-y-4">
-                            <div className="flex items-center gap-2 pb-2 border-b">
-                              {category.icon}
-                              <h3 className="text-xl font-semibold">{category.title}</h3>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                              {category.pages.map((page) => (
-                                <Card key={page.path} className="overflow-hidden">
-                                  <CardContent className="p-4">
-                                    <div className="flex justify-between items-start mb-2">
-                                      <h3 className="font-medium text-lg">{page.title}</h3>
-                                      {renderSeoStatusBadge(page.seoStatus)}
-                                    </div>
-                                    <p className="text-muted-foreground text-sm mb-3">{page.description}</p>
-                                    <div className="flex items-center justify-between mt-2">
-                                      <Link 
-                                        to={page.path} 
-                                        className="text-blue-500 hover:text-blue-700 text-sm flex items-center"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                      >
-                                        <ExternalLink className="h-4 w-4 mr-1" />
-                                        View Page
-                                      </Link>
-                                      <Button 
-                                        variant="outline" 
-                                        size="sm" 
-                                        className="flex items-center"
-                                        onClick={() => setSelectedPage(page)}
-                                      >
-                                        <FileEdit className="h-4 w-4 mr-1" />
-                                        Edit
-                                      </Button>
-                                    </div>
-                                  </CardContent>
-                                </Card>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </TabsContent>
-              )}
-              
-              {tabVisibility.tools && (
-                <TabsContent value="tools" className="space-y-4">
-                  <ToolsManager />
-                </TabsContent>
-              )}
-
-              {tabVisibility.settings && (
-                <TabsContent value="settings" className="space-y-8">
-                  <div className="border rounded-md p-6 bg-card">
-                    <h2 className="text-2xl font-semibold mb-6">Admin Users</h2>
-                    <div className="mb-6">
-                      <Button onClick={() => setShowAddAdminDialog(true)}>
-                        Add Admin User
-                      </Button>
-                    </div>
-                    
-                    <h3 className="text-lg font-medium mb-4">Current Admins</h3>
-                    <div className="space-y-4">
-                      {admins.map(admin => (
-                        <div 
-                          key={admin.id} 
-                          className="flex justify-between items-center p-4 border rounded-md"
-                        >
-                          <div>
-                            <p className="font-medium">
-                              {admin.first_name || admin.last_name ? 
-                                `${admin.first_name || ''} ${admin.last_name || ''}` : 
-                                'Unnamed Admin'}
-                            </p>
-                            <p className="text-muted-foreground text-sm">{admin.email}</p>
-                            <p className="text-xs text-muted-foreground">Role: {admin.role}</p>
-                          </div>
-                          <div>
-                            {admin.user_id === currentUser.id && (!currentUser.first_name && !currentUser.last_name) && (
-                              <Button 
-                                variant="outline" 
-                                size="sm"
-                                onClick={() => setShowNameDialog(true)}
-                              >
-                                Set Your Name
-                              </Button>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                      
-                      {!adminsLoading && admins.length === 0 && (
-                        <p className="text-center py-4 text-muted-foreground">
-                          No admin users found
-                        </p>
-                      )}
-                    </div>
+                {!hasVisibleTabs ? (
+                  <div className="p-8 text-center border rounded-md bg-card">
+                    <h2 className="text-lg font-medium mb-2">No Sections Available</h2>
+                    <p className="text-muted-foreground mb-4">All admin sections are currently hidden. Please enable at least one in Settings.</p>
+                    <Button onClick={() => {
+                      setTabVisibility(prev => ({ ...prev, settings: true }));
+                      setActiveTab('settings');
+                    }}>
+                      Go to Settings
+                    </Button>
                   </div>
-                  
-                  <div className="border rounded-md p-6 bg-card">
-                    <h2 className="text-2xl font-semibold mb-6">Admin Portal Settings</h2>
-                    <TabVisibilitySettings />
-                  </div>
-                  
-                  <div className="border rounded-md p-6 bg-card">
-                    <h2 className="text-2xl font-semibold mb-6">Feature Toggles</h2>
-                    <FeatureToggles />
-                  </div>
-                </TabsContent>
-              )}
-            </Tabs>
-          )}
-        </ResponsiveContainer>
-        
+                ) : (
+                  renderContent()
+                )}
+              </div>
+            </SidebarInset>
+          </SidebarProvider>
+        </div>
+
         {showAddAdminDialog && (
           <AddAdminDialog
             open={showAddAdminDialog}
@@ -483,7 +466,7 @@ export default function Admin() {
             onSuccess={fetchAdmins}
           />
         )}
-        
+
         {showNameDialog && (
           <AdminNameDialog
             open={showNameDialog}
@@ -497,11 +480,9 @@ export default function Admin() {
   );
 
   async function handleUpdateName(firstName: string, lastName: string): Promise<boolean> {
-    // Implementation for updating admin name
     console.log("Updating admin name:", firstName, lastName);
     if (!currentUser.email) return false;
-    
-    // After successful update, refresh admin list
+
     await fetchAdmins();
     return true;
   }

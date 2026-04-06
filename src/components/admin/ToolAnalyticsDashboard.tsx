@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, Download, ChevronRight, FlaskConical, ExternalLink, EyeOff, Eye } from "lucide-react";
@@ -133,21 +133,17 @@ export function ToolAnalyticsDashboard({
           },
           { label: "Emails Captured", value: emailCaptures?.length ?? 0 },
         ].map((metric) => (
-          <Card key={metric.label}>
-            <CardContent className="pt-4 pb-3">
-              <p className="text-xs text-muted-foreground">{metric.label}</p>
-              <p className="text-2xl font-bold">{metric.value}</p>
-            </CardContent>
-          </Card>
+          <div key={metric.label} className="rounded-lg bg-muted/70 shadow-sm p-4">
+            <p className="text-xs text-muted-foreground">{metric.label}</p>
+            <p className="text-2xl font-bold">{metric.value}</p>
+          </div>
         ))}
       </div>
 
       {/* Daily Views Chart */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Daily Views</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className="rounded-lg bg-muted/70 shadow-sm p-6 space-y-4">
+        <CardTitle className="text-base">Daily Views</CardTitle>
+        <div>
           {stats?.dailyViews.length ? (
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={stats.dailyViews}>
@@ -176,20 +172,18 @@ export function ToolAnalyticsDashboard({
               No view data for this period.
             </p>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Conversion Funnel */}
       {stats?.conversionFunnel && stats.conversionFunnel.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Conversion Funnel</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className="rounded-lg bg-muted/70 shadow-sm p-6 space-y-4">
+          <CardTitle className="text-base">Conversion Funnel</CardTitle>
+          <div>
             <div className="flex items-center justify-center gap-2 flex-wrap">
               {stats.conversionFunnel.map((step, i) => (
                 <div key={step.label} className="flex items-center gap-2">
-                  <div className="text-center rounded-lg border p-4 min-w-[140px]">
+                  <div className="text-center rounded-lg bg-background/60 shadow-sm p-4 min-w-[140px]">
                     <p className="text-sm font-medium">{step.label}</p>
                     <p className="text-2xl font-bold">{step.count}</p>
                     <p className="text-xs text-muted-foreground">
@@ -202,17 +196,15 @@ export function ToolAnalyticsDashboard({
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
 
       {/* Two-Column: Top Pages + Referrers */}
       <div className="grid md:grid-cols-2 gap-4">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Top Pages</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className="rounded-lg bg-muted/70 shadow-sm p-6 space-y-4">
+          <CardTitle className="text-base">Top Pages</CardTitle>
+          <div>
             {stats?.topPages.length ? (
               <div className="space-y-2">
                 {stats.topPages.map((p) => (
@@ -230,14 +222,12 @@ export function ToolAnalyticsDashboard({
             ) : (
               <p className="text-sm text-muted-foreground">No page data.</p>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Referrer Breakdown</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className="rounded-lg bg-muted/70 shadow-sm p-6 space-y-4">
+          <CardTitle className="text-base">Referrer Breakdown</CardTitle>
+          <div>
             {stats?.referrerBreakdown.length ? (
               <div className="space-y-2">
                 {stats.referrerBreakdown.map((r) => {
@@ -266,35 +256,31 @@ export function ToolAnalyticsDashboard({
                 No referrer data.
               </p>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Country Breakdown */}
       {stats?.countryBreakdown && stats.countryBreakdown.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Country Breakdown</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-x-6 gap-y-2">
-              {stats.countryBreakdown.slice(0, 10).map((c) => (
-                <div
-                  key={c.country_code}
-                  className="flex items-center justify-between text-sm"
-                >
-                  <span>{c.country_code}</span>
-                  <span className="font-medium tabular-nums">{c.count}</span>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <div className="rounded-lg bg-muted/70 shadow-sm p-6 space-y-4">
+          <CardTitle className="text-base">Country Breakdown</CardTitle>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-x-6 gap-y-2">
+            {stats.countryBreakdown.slice(0, 10).map((c) => (
+              <div
+                key={c.country_code}
+                className="flex items-center justify-between text-sm"
+              >
+                <span>{c.country_code}</span>
+                <span className="font-medium tabular-nums">{c.count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
 
       {/* Email Captures */}
-      <Card>
-        <CardHeader className="flex-row items-center justify-between">
+      <div className="rounded-lg bg-muted/70 shadow-sm p-6 space-y-4">
+        <div className="flex items-center justify-between">
           <CardTitle className="text-base">Email Captures</CardTitle>
           <Button
             variant="outline"
@@ -305,8 +291,8 @@ export function ToolAnalyticsDashboard({
             <Download className="h-4 w-4 mr-1" />
             Export CSV
           </Button>
-        </CardHeader>
-        <CardContent>
+        </div>
+        <div>
           {emailsLoading ? (
             <Skeleton className="h-32" />
           ) : emailCaptures?.length ? (
@@ -351,13 +337,13 @@ export function ToolAnalyticsDashboard({
               No email captures yet.
             </p>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* A/B Test Results Summary */}
       {activeTest && (
-        <Card>
-          <CardHeader className="flex-row items-center justify-between">
+        <div className="rounded-lg bg-muted/70 shadow-sm p-6 space-y-4">
+          <div className="flex items-center justify-between">
             <CardTitle className="text-base flex items-center gap-2">
               <FlaskConical className="h-4 w-4" />
               Active A/B Test: {activeTest.test_name}
@@ -365,13 +351,11 @@ export function ToolAnalyticsDashboard({
             <Button variant="outline" size="sm" onClick={onViewABTests}>
               View Full Results
             </Button>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Traffic split: {100 - activeTest.traffic_split}% / {activeTest.traffic_split}%
-            </p>
-          </CardContent>
-        </Card>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Traffic split: {100 - activeTest.traffic_split}% / {activeTest.traffic_split}%
+          </p>
+        </div>
       )}
     </div>
   );

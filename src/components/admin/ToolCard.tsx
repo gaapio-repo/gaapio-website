@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardDescription, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
@@ -66,7 +66,7 @@ function InternalDomainsEditor({
           value={newDomain}
           onChange={(e) => setNewDomain(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), handleAdd())}
-          className="flex-1"
+          className="flex-1 bg-muted/70 border-0 shadow-sm"
           disabled={disabled}
         />
         <Button
@@ -93,8 +93,8 @@ export function ToolCard({
   updating,
 }: ToolCardProps) {
   return (
-    <Card>
-      <CardHeader>
+    <div className="rounded-lg bg-muted/70 shadow-inner hover:shadow-md transition-shadow duration-200 p-6 space-y-6">
+      <div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Wrench className="h-5 w-5 text-muted-foreground" />
@@ -111,12 +111,11 @@ export function ToolCard({
         {tool.description && (
           <CardDescription>{tool.description}</CardDescription>
         )}
-      </CardHeader>
+      </div>
 
-      <CardContent className="space-y-6">
-        {/* Settings */}
-        <div className="space-y-4">
-          <h4 className="text-sm font-medium">Settings</h4>
+      {/* Settings */}
+      <div className="space-y-4 border-b pb-6">
+        <h4 className="text-sm font-medium">Settings</h4>
 
           <div className="flex items-center justify-between">
             <Label htmlFor={`require-email-${tool.id}`}>Require Email</Label>
@@ -168,15 +167,17 @@ export function ToolCard({
           )}
         </div>
 
-        {/* Internal Domains */}
+      {/* Internal Domains */}
+      <div className="border-b pb-6">
         <InternalDomainsEditor
           domains={tool.internal_domains ?? []}
           onSave={(domains) => onUpdate({ id: tool.id, internal_domains: domains } as any)}
           disabled={updating}
         />
+      </div>
 
-        {/* Quick Stats */}
-        <div>
+      {/* Quick Stats */}
+      <div className="border-b pb-6">
           <h4 className="text-sm font-medium mb-3">Quick Stats (7d)</h4>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div>
@@ -204,33 +205,32 @@ export function ToolCard({
               </p>
             </div>
           </div>
-        </div>
+      </div>
 
-        {/* Actions */}
-        <div className="flex flex-wrap gap-2">
-          <Button variant="outline" size="sm" onClick={onViewAnalytics}>
-            <BarChart3 className="h-4 w-4 mr-1" />
-            View Analytics
-          </Button>
-          <Button variant="outline" size="sm" onClick={onViewABTests}>
-            <FlaskConical className="h-4 w-4 mr-1" />
-            A/B Tests
-            {hasActiveTest && (
-              <Badge variant="default" className="ml-1.5 px-1.5 py-0 text-[10px]">
-                Live
-              </Badge>
-            )}
-          </Button>
-          {tool.base_route && (
-            <Button variant="outline" size="sm" asChild>
-              <a href={tool.base_route} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="h-4 w-4 mr-1" />
-                Open Tool
-              </a>
-            </Button>
+      {/* Actions */}
+      <div className="flex flex-wrap gap-2">
+        <Button variant="outline" size="sm" onClick={onViewAnalytics}>
+          <BarChart3 className="h-4 w-4 mr-1" />
+          View Analytics
+        </Button>
+        <Button variant="outline" size="sm" onClick={onViewABTests}>
+          <FlaskConical className="h-4 w-4 mr-1" />
+          A/B Tests
+          {hasActiveTest && (
+            <Badge variant="default" className="ml-1.5 px-1.5 py-0 text-[10px]">
+              Live
+            </Badge>
           )}
-        </div>
-      </CardContent>
-    </Card>
+        </Button>
+        {tool.base_route && (
+          <Button variant="outline" size="sm" asChild>
+            <a href={tool.base_route} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="h-4 w-4 mr-1" />
+              Open Tool
+            </a>
+          </Button>
+        )}
+      </div>
+    </div>
   );
 }

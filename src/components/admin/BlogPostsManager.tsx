@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -284,8 +284,8 @@ export function BlogPostsManager() {
   };
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
         <CardTitle>Blog Posts</CardTitle>
         <Dialog open={dialogOpen} onOpenChange={(open) => !open && handleDialogClose()}>
           <DialogTrigger asChild>
@@ -459,16 +459,20 @@ export function BlogPostsManager() {
             </div>
           </DialogContent>
         </Dialog>
-      </CardHeader>
+      </div>
 
-      <CardContent>
-        {loading ? (
+      {loading ? (
+        <div className="rounded-lg bg-muted/70 shadow-sm p-6">
           <p className="text-muted-foreground">Loading posts...</p>
-        ) : posts.length === 0 ? (
+        </div>
+      ) : posts.length === 0 ? (
+        <div className="rounded-lg bg-muted/70 shadow-sm p-6">
           <p className="text-muted-foreground">
             No blog posts yet. Create your first post!
           </p>
-        ) : (
+        </div>
+      ) : (
+        <div className="rounded-lg bg-muted/70 shadow-sm overflow-hidden">
           <Table>
             <TableHeader>
               <TableRow>
@@ -557,8 +561,8 @@ export function BlogPostsManager() {
               ))}
             </TableBody>
           </Table>
-        )}
-      </CardContent>
-    </Card>
+        </div>
+      )}
+    </div>
   );
 }

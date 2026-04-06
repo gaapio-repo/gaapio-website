@@ -13,7 +13,7 @@ export function UserSignupsSearch({ value, onChange }: UserSignupsSearchProps) {
         placeholder="Search by name, email, company, or plan..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="max-w-md"
+        className="max-w-md bg-muted/70 border-0 shadow-sm"
       />
     </div>
   );
