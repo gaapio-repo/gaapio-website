@@ -119,6 +119,18 @@
     <changefreq>yearly</changefreq>
   </url>
 
+  <!-- Free Tools -->
+  <url>
+    <loc>https://gaapio.com/comment-letters</loc>
+    <priority>0.9</priority>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://gaapio.com/comment-letters/topics</loc>
+    <priority>0.8</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
   <!-- Other Pages -->
   <url>
     <loc>https://gaapio.com/status</loc>
