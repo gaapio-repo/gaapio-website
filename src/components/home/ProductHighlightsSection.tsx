@@ -54,11 +54,11 @@ export function ProductHighlightsSection() {
     {
       id: "memos",
       label: "MEMOS",
-      title: "Better Memos, Faster.",
+      title: "ChatGPT gets you in the news. Gaapio gets you through an audit.",
       bulletPoints: [
-        "Version history, reviewer comments, and internal sign offs",
-        "Guided prompts + AI follow up questions = accurate AI generated memos",
-        "Exportable Audit package"
+        "Built by CPAs — asks the right questions, the first time",
+        "Consistent, audit-ready formatting that reflects your brand",
+        "Version history, reviewer comments, sign-offs, and exportable audit packages"
       ],
       href: "/accounting-memos",
       icon: FileText,
@@ -66,12 +66,12 @@ export function ProductHighlightsSection() {
     },
     {
       id: "disclosures",
-      label: "FOOTNOTE DISCLOSURES", 
-      title: "Benchmark & AI completed Checklists",
+      label: "FOOTNOTE DISCLOSURES",
+      title: "AI-Completed Checklists. Real Time Savings.",
       bulletPoints: [
-        "AI trained benchmarking",
-        "Footnote requirement checklists",
-        "CPA approved, industry leading formatting"
+        "The ideal AI use case — high-confidence verification, no judgment calls",
+        "Cut manual review time with AI-completed disclosure checklists",
+        "Fast, budget-friendly benchmarking against peers in your industry"
       ],
       href: "/footnote-disclosures",
       icon: FileCheck,
@@ -92,12 +92,12 @@ export function ProductHighlightsSection() {
     },
     {
       id: "updates",
-      label: "GUIDANCE UPDATES",      
-      title: "Apply New Guidance to Your Situation",
+      label: "GUIDANCE UPDATES",
+      title: "Research-Grade Answers, in Seconds",
       bulletPoints: [
-        "Instant alerts for new standards",
-        "Actionable implementation guidance",
-        "Turn new guidance into a memo"
+        "High-accuracy answers backed by verifiable, authoritative sources",
+        "Instant alerts when new standards affect your situation",
+        "Turn new guidance straight into a memo — no blank page"
       ],
       href: "/guidance-updates",
       icon: Bell,
@@ -130,10 +130,10 @@ export function ProductHighlightsSection() {
       <ResponsiveContainer>
         <div className="text-center mb-16 relative z-10">
 
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Gaapio's Modules</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">One Platform. Every Technical Accounting Workflow.</h2>
 
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            We built a platform for a reason, need something that isn't on here? Let us know!
+            Purpose-built modules for memos, disclosures, contracts, and guidance — all connected, all audit-ready.
           </p>
         </div>
         <div 

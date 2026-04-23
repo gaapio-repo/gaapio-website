@@ -38,7 +38,7 @@ export const HeroSection = memo(function HeroSection({
           {/* Left Column - Text Content */}
           <div className="flex flex-col items-start text-left space-y-6 md:space-y-8 animate-fade-up order-1">
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-              <span className="text-foreground">
+              <span className="text-gray-900">
                 {firstPart}
               </span>
               {" "}
@@ -47,7 +47,7 @@ export const HeroSection = memo(function HeroSection({
               </span>
             </h1>
             
-            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-foreground max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
+            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-gray-900 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
               {subtitle}
             </p>
             
@@ -61,7 +61,7 @@ export const HeroSection = memo(function HeroSection({
                   <Link to="/contact">Contact Sales</Link>
                 </Button>
               )}
-              <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted hover:scale-105 text-base px-8 py-6 h-auto font-semibold transition-all" asChild>
+              <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 hover:scale-105 text-base px-8 py-6 h-auto font-semibold transition-all" asChild>
                 <Link to="/request-demo">Request a Demo</Link>
               </Button>
             </div>

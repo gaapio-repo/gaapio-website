@@ -27,8 +27,8 @@ const benefits: BenefitCard[] = [
   },
   {
     icon: Sparkles,
-    title: "Purpose-Built",
-    description: "Gaapio isn't generic AI chat. It's tuned for technical accounting workflows so outputs feel like they were written by an experienced CPA—polished, consistent, and firm-ready."
+    title: "CPA-Built, Not Internet-Trained",
+    description: "Gaapio is built on the real-world judgment of CPAs — not Reddit threads. Every output reflects how your best people actually think: anchored in the codification, grounded in authoritative sources, and ready for auditor scrutiny."
   }
 ];
 
@@ -92,8 +92,11 @@ export function KeyBenefitsSection() {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 tracking-tight">
               Why Gaapio
             </h2>
+            <p className="text-2xl md:text-3xl font-semibold text-foreground mb-6 leading-tight tracking-tight">
+              Anchored in the codification — not your Reddit feed.
+            </p>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Gaapio is built by CPAs who've lived through audits, close cycles, and technical accounting reviews. We combine structured workflows, audit-ready documentation, and purpose-built AI so teams move faster without sacrificing quality.
+              Gaapio is built by CPAs who've lived through audits, close cycles, and technical accounting reviews. Real-world judgment is embedded in every prompt, template, and workflow — so your team moves at AI speed without trading away the quality that keeps you out of trouble.
             </p>
           </div>
           

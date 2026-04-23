@@ -62,14 +62,24 @@ const HeroScreenshotMockup = () => (
   </div>
 );
 
-const benefits = [
+const practiceLanes = [
   {
-    title: "Multiply Staff Leverage",
-    description: "Associates produce senior-level research and memos in minutes.",
+    practice: "Audit Practice",
+    headline: "Consistent workpapers. Every engagement.",
+    bullets: [
+      "Staff produce senior-level technical memos, analyses, and workpapers in minutes",
+      "Codified firm methodology means reviewers see consistent deliverables, not first drafts",
+      "Every conclusion ties back to the codification with source-referenced outputs",
+    ],
   },
   {
-    title: "Increase Margins per Engagement",
-    description: "Standardized workflows cut prep time and deliver consistent output.",
+    practice: "Advisory & Consulting",
+    headline: "Scale senior expertise without senior headcount.",
+    bullets: [
+      "Deliver technical accounting memos, research, and SOX work faster for every client",
+      "Customize templates and workflows to your firm's methodology — not a generic playbook",
+      "Onboard new consultants faster with expertise embedded directly into the tool",
+    ],
   },
 ];
 
@@ -106,24 +116,24 @@ export default function AccountingFirm() {
             {/* Left - Text Content */}
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-                <Briefcase className="h-5 w-5 text-foreground" />
-                <span className="text-sm font-medium text-foreground">Accounting Firm Solutions</span>
+                <Briefcase className="h-5 w-5 text-gray-900" />
+                <span className="text-sm font-medium text-gray-900">Accounting Firm Solutions</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-                <span className="text-foreground">Multiply Your</span>{" "}
+                <span className="text-gray-900">Multiply Your</span>{" "}
                 <span className="text-white">Firm's Capacity</span>
               </h1>
-              
-              <p className="text-lg md:text-xl text-foreground/90 max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0">
-                Standardize research, memos, and deliverables so every associate performs like a senior — without adding headcount.
+
+              <p className="text-lg md:text-xl text-gray-900/90 max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0">
+                Run your audit and advisory practices on one platform. Codify your methodology, level up every associate, and deliver consistent, senior-level work on every engagement.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold" asChild>
                   <Link to="/firm-signup">Sign Up Now</Link>
                 </Button>
-                <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted text-base px-8 py-6 h-auto font-semibold" asChild>
+                <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 text-base px-8 py-6 h-auto font-semibold" asChild>
                   <Link to="/request-demo">Request a Demo</Link>
                 </Button>
               </div>
@@ -150,27 +160,37 @@ export default function AccountingFirm() {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         
         <div className="container px-4 md:px-6 relative z-10">
-          <div className="text-center mb-20">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
-              Why Firms Run on Gaapio
+              Built for Both Sides of Your Practice
             </h2>
+            <p className="text-lg md:text-xl text-muted-foreground">
+              Audit and advisory teams have different workflows — Gaapio runs both, anchored in the same real CPA judgment and your firm's methodology.
+            </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-4xl mx-auto">
-            {benefits.map((benefit, index) => (
-              <div 
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto">
+            {practiceLanes.map((lane, index) => (
+              <div
                 key={index}
                 className="group p-10 lg:p-12 rounded-2xl bg-background/80 backdrop-blur-sm border border-border/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-muted hover:border-border"
               >
-                {/* Title - Large */}
-                <h3 className="text-2xl lg:text-[1.75rem] font-bold text-foreground mb-4 leading-tight">
-                  {benefit.title}
+                <div className="text-sm font-bold text-primary tracking-wider uppercase mb-3">
+                  {lane.practice}
+                </div>
+                <h3 className="text-2xl lg:text-[1.75rem] font-bold text-foreground mb-6 leading-tight">
+                  {lane.headline}
                 </h3>
-                
-                {/* Description - Single sentence, muted */}
-                <p className="text-base lg:text-lg text-muted-foreground">
-                  {benefit.description}
-                </p>
+                <ul className="space-y-3">
+                  {lane.bullets.map((bullet, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary mt-2.5" />
+                      <span className="text-base lg:text-lg text-muted-foreground leading-relaxed">
+                        {bullet}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>

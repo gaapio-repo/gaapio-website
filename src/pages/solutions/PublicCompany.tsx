@@ -189,24 +189,24 @@ export default function PublicCompany() {
             {/* Left - Text Content */}
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-                <Building2 className="h-5 w-5 text-foreground" />
-                <span className="text-sm font-medium text-foreground">Public Company Solutions</span>
+                <Building2 className="h-5 w-5 text-gray-900" />
+                <span className="text-sm font-medium text-gray-900">Public Company Solutions</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-                <span className="text-foreground">SEC-Ready</span>{" "}
+                <span className="text-gray-900">SEC-Ready</span>{" "}
                 <span className="text-white">Technical Accounting</span>
               </h1>
-              
-              <p className="text-lg md:text-xl text-foreground/90 max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0">
+
+              <p className="text-lg md:text-xl text-gray-900/90 max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0">
                 Generate defensible memos, disclosures, and contract analysis for 10-Ks, 10-Qs, and SOX — in minutes, not weeks.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold" asChild>
                   <Link to="/signup">Sign Up Now</Link>
                 </Button>
-                <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted text-base px-8 py-6 h-auto font-semibold" asChild>
+                <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 text-base px-8 py-6 h-auto font-semibold" asChild>
                   <Link to="/request-demo">Request a Demo</Link>
                 </Button>
               </div>

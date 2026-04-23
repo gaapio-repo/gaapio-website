@@ -97,9 +97,11 @@
     --benefits-bg: hsl(0 0% 13%); /* neutral dark background */
 
     /* Hero gradient colors - neutral dark for dark mode */
-    --hero-gradient-from: 0 0% 10%;
-    --hero-gradient-via: 0 0% 12%;
-    --hero-gradient-to: 0 0% 14%;
+    /* Hero gradient stays identical in dark mode — same bright blue as light.
+       Do NOT add dark-mode overrides for --hero-gradient-* here. */
+    --hero-gradient-from: 204 100% 50%;
+    --hero-gradient-via: 200 100% 55%;
+    --hero-gradient-to: 195 100% 60%;
   }
 }
 

@@ -18,14 +18,13 @@ export function TrustBarSection() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1 } // Lower threshold to trigger sooner
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    // Fallback: if element is already in viewport on mount, make visible
     const timeout = setTimeout(() => {
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
@@ -41,7 +40,7 @@ export function TrustBarSection() {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, [logos]); // Re-run when logos load
+  }, [logos]);
 
   // Don't render if feature is disabled
   if (configLoading || (siteConfig && !siteConfig.enable_customer_logos)) {
@@ -53,41 +52,64 @@ export function TrustBarSection() {
     return null;
   }
 
+  // Duplicate logos for seamless marquee loop
+  const doubledLogos = [...logos, ...logos];
+
   return (
     <section
       ref={sectionRef}
-      className="py-8 bg-background border-b border-border"
+      className="py-10 bg-white border-y border-gray-200 overflow-hidden"
     >
       <ResponsiveContainer>
         <div className="text-center">
-          <h3 className="text-sm font-medium text-muted-foreground mb-6 uppercase tracking-wider">
+          <h3 className="text-sm font-medium text-gray-600 mb-6 uppercase tracking-wider">
             Trusted by Leading Organizations
           </h3>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-            {logos.map((logo, index) => (
-              <div 
-                key={logo.id}
+
+          <div className="relative w-full">
+            <div className="flex whitespace-nowrap py-2 overflow-hidden">
+              <div
                 className={cn(
-                  "flex items-center justify-center transition-all duration-700",
-                  isVisible 
-                    ? "opacity-70 translate-y-0 hover:opacity-100" 
-                    : "opacity-0 translate-y-[10px]"
+                  "animate-trustbar-marquee flex shrink-0 gap-12 md:gap-16 pr-12 md:pr-16 items-center transition-opacity duration-700",
+                  isVisible ? "opacity-80" : "opacity-0"
                 )}
-                style={{ 
-                  transitionDelay: `${index * 100}ms`,
-                }}
               >
-              <img
-                  src={logo.logo_url}
-                  alt={logo.company_name}
-                  className="h-8 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
-                  title={logo.company_name}
-                />
+                {doubledLogos.map((logo, index) => (
+                  <div
+                    key={`${logo.id}-${index}`}
+                    className="shrink-0 flex items-center justify-center"
+                  >
+                    <img
+                      src={logo.logo_url}
+                      alt={logo.company_name}
+                      className="h-8 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                      title={logo.company_name}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Gradient fade edges (always white so it blends both modes) */}
+            <div className="pointer-events-none absolute top-0 left-0 h-full w-16 bg-gradient-to-r from-white to-transparent" />
+            <div className="pointer-events-none absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-white to-transparent" />
           </div>
         </div>
       </ResponsiveContainer>
+
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes trustbar-marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .animate-trustbar-marquee {
+              animation: trustbar-marquee 40s linear infinite;
+            }
+          `,
+        }}
+      />
     </section>
   );
 }

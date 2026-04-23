@@ -24,17 +24,17 @@ export const GuidanceHeroSection = memo(function GuidanceHeroSection({
         {/* Text content centered */}
         <div className="max-w-4xl mx-auto mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up">
-            <span className="text-foreground">Stay Current </span>
+            <span className="text-gray-900">Stay Current </span>
             <span className="text-white">with Guidance Updates</span>
           </h1>
-          <p className="text-xl md:text-2xl text-foreground mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
+          <p className="text-xl md:text-2xl text-gray-900 mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
             {subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
             <Button size="lg" variant="black" asChild>
               <Link to="/signup-select">Sign Up Now</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100" asChild>
               <Link to="/request-demo">Request a Demo</Link>
             </Button>
           </div>
@@ -42,31 +42,31 @@ export const GuidanceHeroSection = memo(function GuidanceHeroSection({
         
         {/* Larger static mockup card centered */}
         <div className="flex justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
-          <div className="bg-background rounded-lg shadow-2xl border border-border p-8 max-w-lg w-full hover:scale-105 transition-transform duration-300">
+          <div className="bg-white rounded-lg shadow-2xl border border-gray-200 p-8 max-w-lg w-full hover:scale-105 transition-transform duration-300">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
                 <Bell className="w-5 h-5 text-white" />
               </div>
-              <span className="text-sm font-medium text-blue-600 dark:text-blue-400">New Guidance Alert</span>
+              <span className="text-sm font-medium text-blue-600">New Guidance Alert</span>
             </div>
-            
+
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-muted-foreground" />
-                <h3 className="font-bold text-xl text-foreground">ASC 842 Update — Leases</h3>
+                <FileText className="w-5 h-5 text-gray-500" />
+                <h3 className="font-bold text-xl text-gray-900">ASC 842 Update — Leases</h3>
               </div>
-              
-              <p className="text-muted-foreground text-base leading-relaxed">
+
+              <p className="text-gray-600 text-base leading-relaxed">
                 FASB clarifies embedded lease treatment in service arrangements.
               </p>
-              
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+
+              <div className="flex items-center gap-2 text-sm text-gray-500">
                 <Calendar className="w-4 h-4" />
                 <span>Effective for FYs after Dec 15, 2025</span>
               </div>
-              
-              <div className="pt-4 border-t border-border">
-                <Button size="sm" variant="outline" className="w-full">
+
+              <div className="pt-4 border-t border-gray-200">
+                <Button size="sm" variant="outline" className="w-full border-gray-300 text-gray-900 bg-white hover:bg-gray-100">
                   View Full Analysis
                 </Button>
               </div>
