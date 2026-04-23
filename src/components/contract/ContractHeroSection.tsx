@@ -10,7 +10,7 @@ interface ContractHeroSectionProps {
 
 export const ContractHeroSection = memo(function ContractHeroSection({ 
   title = "AI-Powered Contract Analysis",
-  subtitle = "AI-Powered. Contract-Analyzed"
+  subtitle = "Source-referenced outputs. Customizable templates. Built to flow into your memos, lease schedules, and analyses."
 }: ContractHeroSectionProps) {
   
   return (

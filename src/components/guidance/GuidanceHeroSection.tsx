@@ -11,7 +11,7 @@ interface GuidanceHeroSectionProps {
 
 export const GuidanceHeroSection = memo(function GuidanceHeroSection({ 
   title = "Stay Current with Guidance Updates",
-  subtitle = "AI-Powered. Always Updated."
+  subtitle = "High-accuracy answers, fast — every citation links back to an authoritative source."
 }: GuidanceHeroSectionProps) {
   
   return (

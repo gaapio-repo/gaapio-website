@@ -11,8 +11,8 @@ interface HeroSectionProps {
 }
 
 export const HeroSection = memo(function HeroSection({ 
-  title = "Your AI-Powered Technical Accounting Platform",
-  subtitle = "AI-Powered. CPA-Approved."
+  title = "Your AI-Powered Technical Accounting Assistant",
+  subtitle = "AI With Receipts."
 }: HeroSectionProps) {
   const [isClient, setIsClient] = useState(false);
   const { siteConfig, loading } = useSiteConfig();

@@ -10,7 +10,7 @@ interface HeroSectionProps {
 }
 
 export const HeroSection = memo(function HeroSection({ 
-  subtitle = "AI-Powered. CPA-Approved."
+  subtitle = "ChatGPT gets you in the news. Gaapio gets you through an audit."
 }: HeroSectionProps) {
   const [isClient, setIsClient] = useState(false);
   const [enableSelfSignup, setEnableSelfSignup] = useState(true);

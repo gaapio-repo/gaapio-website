@@ -11,7 +11,7 @@ interface DisclosureHeroSectionProps {
 
 export const DisclosureHeroSection = memo(function DisclosureHeroSection({ 
   title = "Comprehensive Footnote Disclosures",
-  subtitle = "AI-Powered. Compliance-Ready."
+  subtitle = "AI-completed checklists and industry benchmarking — significant time savings on the work AI is built for."
 }: DisclosureHeroSectionProps) {
   
   return (
