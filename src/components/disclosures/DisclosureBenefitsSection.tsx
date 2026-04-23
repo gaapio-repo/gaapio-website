@@ -1,83 +1,109 @@
-import { memo } from "react";
-import { Clock, Shield, Target, Zap, Users, CheckCircle } from "lucide-react";
+import { memo, useEffect, useRef, useState } from "react";
+import { Clock, Shield, Zap, CheckCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export const DisclosureBenefitsSection = memo(function DisclosureBenefitsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   const benefits = [
     {
       icon: Clock,
       title: "Save Time",
-      description: "Generate comprehensive footnote disclosures in minutes, not hours"
+      description: "Generate comprehensive footnote disclosures in minutes, not hours",
+      delay: 0
     },
     {
       icon: Shield,
       title: "Ensure Compliance",
-      description: "Stay current with ASC requirements and audit standards"
-    },
-    {
-      icon: Target,
-      title: "Improve Accuracy",
-      description: "Reduce errors with AI-powered analysis and verification"
+      description: "Stay current with ASC requirements and audit standards",
+      delay: 100
     },
     {
       icon: Zap,
       title: "Boost Efficiency",
-      description: "Streamline your disclosure process with automated workflows"
-    },
-    {
-      icon: Users,
-      title: "Team Collaboration",
-      description: "Enable seamless review and approval processes across your team"
+      description: "Streamline your disclosure process with automated workflows",
+      delay: 200
     },
     {
       icon: CheckCircle,
       title: "Audit Ready",
-      description: "Generate audit-ready documentation with complete traceability"
+      description: "Generate audit-ready documentation with complete traceability",
+      delay: 300
     }
   ];
 
   return (
-    <section className="py-20 md:py-32" style={{ backgroundColor: 'var(--benefits-bg)' }}>
-      <div className="container px-4 md:px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">The Ideal AI Use Case</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Disclosure checklists are high-confidence verification work — no judgment required. That's exactly where AI delivers the biggest time savings without risking audit quality.
+    <section 
+      ref={sectionRef}
+      className="py-24 md:py-32 bg-background"
+    >
+      <div className="container px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto">
+        {/* Section header */}
+        <div className="text-center mb-16 md:mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+            Key Benefits
+          </h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Transform your footnote disclosure process with AI-powered automation
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Benefits grid - no timeline, just clean icons */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
             return (
-              <div
+              <div 
                 key={index}
-                className="text-center p-8 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-md hover:shadow-lg transition-all duration-500 h-full flex flex-col min-h-[280px]"
+                className={cn(
+                  "flex flex-col items-center text-center transition-all duration-500",
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                )}
+                style={{ 
+                  transitionDelay: `${benefit.delay}ms`,
+                  transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
+                }}
               >
-                {/* Icon Circle */}
-                <div className="flex justify-center mb-6">
-                  <Icon className="h-8 w-8 text-[#2B70F7]" />
+                {/* Icon with subtle background */}
+                <div className="w-14 h-14 rounded-full bg-[#0099FF]/10 flex items-center justify-center mb-5">
+                  <Icon className="w-6 h-6 text-[#0099FF]" strokeWidth={1.5} />
                 </div>
-                
-                {/* Content */}
-                <h3 className="text-lg font-bold mb-4">
+
+                {/* Title */}
+                <h3 className="text-lg font-semibold text-foreground mb-2">
                   {benefit.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed flex-grow">
+
+                {/* Description */}
+                <p className="text-muted-foreground text-[15px] leading-relaxed max-w-[240px]">
                   {benefit.description}
                 </p>
               </div>
             );
           })}
-        </div>
-
-        {/* Bottom highlight */}
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-950 px-8 py-4 rounded-full border border-blue-200 dark:border-blue-800">
-            <CheckCircle className="w-6 h-6 text-[#2B70F7]" />
-            <span className="text-lg font-medium text-[#2B70F7]">
-              Compliance-ready footnote disclosures in minutes
-            </span>
-          </div>
         </div>
       </div>
     </section>

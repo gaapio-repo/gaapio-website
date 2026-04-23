@@ -80,6 +80,135 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_posts: {
+        Row: {
+          author: string | null
+          category: string | null
+          content: string
+          created_at: string
+          excerpt: string | null
+          featured_image: string | null
+          id: string
+          is_featured: boolean | null
+          is_published: boolean | null
+          published_at: string | null
+          reading_time: string | null
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author?: string | null
+          category?: string | null
+          content: string
+          created_at?: string
+          excerpt?: string | null
+          featured_image?: string | null
+          id?: string
+          is_featured?: boolean | null
+          is_published?: boolean | null
+          published_at?: string | null
+          reading_time?: string | null
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string | null
+          category?: string | null
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          featured_image?: string | null
+          id?: string
+          is_featured?: boolean | null
+          is_published?: boolean | null
+          published_at?: string | null
+          reading_time?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      checkout_intents: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          first_name: string | null
+          id: string
+          ip_address: string | null
+          last_name: string | null
+          page_url: string | null
+          paid_at: string | null
+          phone: string | null
+          plan: string
+          seats: number | null
+          status: string
+          stripe_customer_id: string | null
+          stripe_session_id: string | null
+          stripe_subscription_id: string | null
+          terms_accepted: boolean | null
+          terms_accepted_at: string | null
+          terms_version: string | null
+          updated_at: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          first_name?: string | null
+          id?: string
+          ip_address?: string | null
+          last_name?: string | null
+          page_url?: string | null
+          paid_at?: string | null
+          phone?: string | null
+          plan: string
+          seats?: number | null
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_session_id?: string | null
+          stripe_subscription_id?: string | null
+          terms_accepted?: boolean | null
+          terms_accepted_at?: string | null
+          terms_version?: string | null
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          first_name?: string | null
+          id?: string
+          ip_address?: string | null
+          last_name?: string | null
+          page_url?: string | null
+          paid_at?: string | null
+          phone?: string | null
+          plan?: string
+          seats?: number | null
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_session_id?: string | null
+          stripe_subscription_id?: string | null
+          terms_accepted?: boolean | null
+          terms_accepted_at?: string | null
+          terms_version?: string | null
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: []
+      }
       companies: {
         Row: {
           amount: number
@@ -96,6 +225,7 @@ export type Database = {
           signup_date: string
           status: string
           stripe_customer_id: string | null
+          stripe_subscription_id: string | null
           trial_end_date: string | null
           updated_at: string
           user_limit: string | null
@@ -115,6 +245,7 @@ export type Database = {
           signup_date?: string
           status: string
           stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
           trial_end_date?: string | null
           updated_at?: string
           user_limit?: string | null
@@ -134,6 +265,7 @@ export type Database = {
           signup_date?: string
           status?: string
           stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
           trial_end_date?: string | null
           updated_at?: string
           user_limit?: string | null
@@ -205,6 +337,7 @@ export type Database = {
       }
       demo_requests: {
         Row: {
+          company: string | null
           created_at: string
           email: string
           first_name: string
@@ -215,6 +348,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          company?: string | null
           created_at?: string
           email: string
           first_name: string
@@ -225,6 +359,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          company?: string | null
           created_at?: string
           email?: string
           first_name?: string
@@ -305,21 +440,63 @@ export type Database = {
       site_config: {
         Row: {
           created_at: string
+          enable_customer_logos: boolean
+          enable_footer_logos: boolean
+          enable_pricing: boolean
+          enable_self_signup: boolean
+          enable_testimonials: boolean
           id: string
           under_construction: boolean
           updated_at: string
         }
         Insert: {
           created_at?: string
+          enable_customer_logos?: boolean
+          enable_footer_logos?: boolean
+          enable_pricing?: boolean
+          enable_self_signup?: boolean
+          enable_testimonials?: boolean
           id?: string
           under_construction?: boolean
           updated_at?: string
         }
         Update: {
           created_at?: string
+          enable_customer_logos?: boolean
+          enable_footer_logos?: boolean
+          enable_pricing?: boolean
+          enable_self_signup?: boolean
+          enable_testimonials?: boolean
           id?: string
           under_construction?: boolean
           updated_at?: string
+        }
+        Relationships: []
+      }
+      stripe_events: {
+        Row: {
+          created_at: string
+          event_type: string
+          id: string
+          payload: Json | null
+          processed: boolean
+          stripe_event_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_type: string
+          id?: string
+          payload?: Json | null
+          processed?: boolean
+          stripe_event_id: string
+        }
+        Update: {
+          created_at?: string
+          event_type?: string
+          id?: string
+          payload?: Json | null
+          processed?: boolean
+          stripe_event_id?: string
         }
         Relationships: []
       }

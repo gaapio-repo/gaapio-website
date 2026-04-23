@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ZapierWebhookSetup } from "./ZapierWebhookSetup";
 import { PaginatedTable } from "./PaginatedTable";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -175,34 +173,32 @@ export function ContactTable() {
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Contact Form Submissions</CardTitle>
-          <CardDescription>
+      <div className="rounded-lg bg-muted/70 shadow-inner p-5">
+        <div className="mb-3">
+          <h2 className="text-xl font-semibold">Contact Form Submissions</h2>
+          <p className="text-sm text-muted-foreground">
             View all contact form inquiries
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="mb-4">
-            <Input
-              placeholder="Search by name, email, company or message..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="max-w-md"
-            />
-          </div>
-          
-          <PaginatedTable
-            data={filteredSubmissions}
-            columns={columns}
-            loading={loading}
-            searchQuery={searchQuery}
-            caption="A list of contact form submissions."
-            noDataMessage="No submissions yet."
+          </p>
+        </div>
+        <div className="mb-3">
+          <Input
+            placeholder="Search by name, email, company or message..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="max-w-md bg-muted/70 border-0 shadow-sm"
           />
-        </CardContent>
-      </Card>
-      
+        </div>
+
+        <PaginatedTable
+          data={filteredSubmissions}
+          columns={columns}
+          loading={loading}
+          searchQuery={searchQuery}
+          caption="A list of contact form submissions."
+          noDataMessage="No submissions yet."
+        />
+      </div>
+
       {selectedContact && (
         <>
           <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
@@ -226,11 +222,6 @@ export function ContactTable() {
           </Dialog>
         </>
       )}
-
-      <ZapierWebhookSetup 
-        webhookType="contact" 
-        description="Connect your contact form to this admin dashboard" 
-      />
     </div>
   );
 }

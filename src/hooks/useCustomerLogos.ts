@@ -122,7 +122,7 @@ export function useUploadCustomerLogo() {
   });
 }
 
-// Update customer logo
+// Update customer logo (metadata only)
 export function useUpdateCustomerLogo() {
   const queryClient = useQueryClient();
 
@@ -151,6 +151,66 @@ export function useUpdateCustomerLogo() {
     },
     onError: (error: Error) => {
       toast.error(`Failed to update logo: ${error.message}`);
+    },
+  });
+}
+
+// Replace customer logo image (upload new file and update DB)
+export function useReplaceCustomerLogoImage() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      logo,
+      newFile,
+    }: {
+      logo: CustomerLogo;
+      newFile: File;
+    }) => {
+      // Upload new file to storage
+      const fileExt = newFile.name.split(".").pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = fileName;
+
+      const { error: uploadError } = await supabase.storage
+        .from("customer-logos")
+        .upload(filePath, newFile);
+
+      if (uploadError) throw uploadError;
+
+      // Get public URL for new file
+      const { data: { publicUrl } } = supabase.storage
+        .from("customer-logos")
+        .getPublicUrl(filePath);
+
+      // Update database with new URL
+      const { data, error: dbError } = await supabase
+        .from("customer_logos")
+        .update({ logo_url: publicUrl })
+        .eq("id", logo.id)
+        .select()
+        .single();
+
+      if (dbError) throw dbError;
+
+      // Try to delete old file (don't fail if this doesn't work)
+      try {
+        const oldUrlParts = logo.logo_url.split("/");
+        const oldFilePath = oldUrlParts[oldUrlParts.length - 1];
+        await supabase.storage.from("customer-logos").remove([oldFilePath]);
+      } catch (e) {
+        console.warn("Could not delete old logo file:", e);
+      }
+
+      return data as CustomerLogo;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["customer-logos-admin"] });
+      queryClient.invalidateQueries({ queryKey: ["customer-logos-active"] });
+      toast.success("Logo image replaced successfully");
+    },
+    onError: (error: Error) => {
+      toast.error(`Failed to replace logo image: ${error.message}`);
     },
   });
 }

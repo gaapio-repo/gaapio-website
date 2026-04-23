@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -48,15 +47,33 @@ export function TabVisibilitySettings() {
       visible: true
     },
     {
-      id: "firms",
-      name: "Firm Signups",
-      description: "Manage firm signup requests",
+      id: "logos",
+      name: "Customer Logos",
+      description: "Manage customer logo carousel",
+      visible: true
+    },
+    {
+      id: "testimonials",
+      name: "Customer Quotes",
+      description: "Manage customer testimonials",
+      visible: true
+    },
+    {
+      id: "blog",
+      name: "Blog Posts",
+      description: "Manage blog articles",
       visible: true
     },
     {
       id: "webpages",
       name: "Webpages",
       description: "Manage website content",
+      visible: true
+    },
+    {
+      id: "tools",
+      name: "Tools",
+      description: "Manage public-facing tools and analytics",
       visible: true
     },
     {
@@ -123,43 +140,41 @@ export function TabVisibilitySettings() {
   };
   
   return (
-    <Card>
-      <CardHeader className="text-center">
-        <CardTitle>Tab Visibility</CardTitle>
-        <CardDescription>
-          Control which tabs are visible in the admin portal
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-6">
+    <div>
+      <table className="w-full text-sm text-left">
+        <thead>
+          <tr className="border-b text-left text-muted-foreground">
+            <th className="pb-2 font-medium">Section</th>
+            <th className="pb-2 font-medium">Description</th>
+            <th className="pb-2 font-medium text-right">Visible</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y">
           {tabs.map((tab) => (
-            <div key={tab.id} className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <div className="font-medium">{tab.name}</div>
-                <p className="text-sm text-muted-foreground">
-                  {tab.description}
-                </p>
-              </div>
-              <Switch
-                id={`tab-${tab.id}`}
-                checked={tab.visible}
-                onCheckedChange={(checked) => handleToggleChange(tab.id, checked)}
-                disabled={tab.id === "settings"} // Always keep settings tab visible
-                aria-label={`Toggle visibility of ${tab.name} tab`}
-              />
-            </div>
+            <tr key={tab.id}>
+              <td className="py-2.5 font-medium">{tab.name}</td>
+              <td className="py-2.5 text-muted-foreground">{tab.description}</td>
+              <td className="py-2.5 text-right">
+                <Switch
+                  id={`tab-${tab.id}`}
+                  checked={tab.visible}
+                  onCheckedChange={(checked) => handleToggleChange(tab.id, checked)}
+                  disabled={tab.id === "settings"}
+                  aria-label={`Toggle visibility of ${tab.name} tab`}
+                />
+              </td>
+            </tr>
           ))}
-          
-          <div className="flex justify-end space-x-2 pt-6 mt-4 border-t">
-            <Button variant="outline" onClick={resetToDefault}>
-              Reset to Default
-            </Button>
-            <Button onClick={saveSettings}>
-              Save Changes
-            </Button>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+        </tbody>
+      </table>
+      <div className="flex justify-end space-x-2 pt-4 mt-4 border-t">
+        <Button variant="outline" onClick={resetToDefault}>
+          Reset to Default
+        </Button>
+        <Button onClick={saveSettings}>
+          Save Changes
+        </Button>
+      </div>
+    </div>
   );
 }

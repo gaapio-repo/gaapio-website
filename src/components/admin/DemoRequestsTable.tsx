@@ -1,8 +1,5 @@
-
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ZapierWebhookSetup } from "./ZapierWebhookSetup";
 import { PaginatedTable } from "./PaginatedTable";
 import { DemoRequest } from "./types/demoRequestTypes";
 import { EditDemoDialog } from "./dialogs/EditDemoDialog";
@@ -36,42 +33,34 @@ export function DemoRequestsTable() {
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Demo Requests</CardTitle>
-          <CardDescription>
+      <div className="rounded-lg bg-muted/70 shadow-inner p-5">
+        <div className="mb-3">
+          <h2 className="text-xl font-semibold">Demo Requests</h2>
+          <p className="text-sm text-muted-foreground">
             View and manage demo requests from potential customers
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="mb-4">
-            <Input
-              placeholder="Search by name, email, or notes..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                handleSearch(e.target.value);
-              }}
-              className="max-w-md"
-            />
-          </div>
-          
-          <PaginatedTable
-            data={requests}
-            columns={columns}
-            loading={loading}
-            searchQuery={searchQuery}
-            caption="A list of demo requests."
-            noDataMessage="No demo requests yet."
+          </p>
+        </div>
+        <div className="mb-3">
+          <Input
+            placeholder="Search by name, email, or notes..."
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              handleSearch(e.target.value);
+            }}
+            className="max-w-md bg-muted/70 border-0 shadow-sm"
           />
-        </CardContent>
-      </Card>
+        </div>
 
-      <ZapierWebhookSetup
-        webhookType="demoRequest"
-        description="Receive a webhook trigger when a new demo request is submitted."
-      />
-
+        <PaginatedTable
+          data={requests}
+          columns={columns}
+          loading={loading}
+          searchQuery={searchQuery}
+          caption="A list of demo requests."
+          noDataMessage="No demo requests yet."
+        />
+      </div>
       {selectedRequest && (
         <>
           <EditDemoDialog

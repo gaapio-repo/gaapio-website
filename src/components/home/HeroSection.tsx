@@ -1,9 +1,9 @@
-
 import { Button } from "@/components/ui/button";
-import { ArrowDownCircle } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { GradientBackground } from "./GradientBackground";
 import { AnimatedMemo } from "./AnimatedMemo";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 
 interface HeroSectionProps {
   title?: string;
@@ -15,77 +15,65 @@ export const HeroSection = memo(function HeroSection({
   subtitle = "AI With Receipts."
 }: HeroSectionProps) {
   const [isClient, setIsClient] = useState(false);
-  const [enableSelfSignup, setEnableSelfSignup] = useState(true);
-  
+  const { siteConfig, loading } = useSiteConfig();
+  const enableSelfSignup = siteConfig?.enable_self_signup ?? true;
+
   useEffect(() => {
     setIsClient(true);
-    
-    // Load the self-signup setting
-    const loadSelfSignupSetting = () => {
-      const savedSetting = localStorage.getItem("enableSelfSignup");
-      setEnableSelfSignup(savedSetting !== null ? savedSetting === "true" : true);
-    };
-    
-    // Initial load
-    loadSelfSignupSetting();
-    
-    // Listen for storage changes (in case admin updates in another tab)
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "enableSelfSignup") {
-        loadSelfSignupSetting();
-      }
-    };
-    
-    window.addEventListener('storage', handleStorageChange);
-    
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, [enableSelfSignup]);
-  
-  // Scroll to Product Highlights section when arrow is clicked
-  const scrollToNextSection = () => {
-    const nextSection = document.getElementById('product-highlights');
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  }, []);
+
+  // Split title into parts for gradient effect
+  const titleParts = title.split(" ");
+  const firstPart = titleParts.slice(0, 2).join(" "); // "Better Accounting"
+  const secondPart = titleParts.slice(2).join(" "); // "Memos. Faster."
 
   return (
-    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 bg-white dark:bg-[#0a1929] overflow-hidden">
-      {/* Hero content with improved spacing */}
-      <div className="container px-4 md:px-6 flex flex-col items-center relative z-10">
-        {/* Text content centered */}
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-8 md:mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up dark:text-white">
-            {title}
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 animate-fade-up dark:text-gray-300" style={{ animationDelay: "100ms" }}>
-            {subtitle}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
-            <Button size="lg" variant="blue" asChild>
-              <Link to="/request-demo">Request a Demo</Link>
-            </Button>
-            <Button size="lg" variant="blueOutline" asChild>
-              <Link to="/contact">Ask a Question</Link>
-            </Button>
+    <section className="relative min-h-[70vh] md:min-h-[65vh] flex items-center pt-24 pb-12 overflow-visible">
+      {/* Gradient Background */}
+      <GradientBackground />
+      
+      {/* Content */}
+      <div className="container px-4 md:px-6 relative z-10">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 xl:gap-16 items-center">
+          {/* Left Column - Text Content */}
+          <div className="flex flex-col items-start text-left space-y-6 md:space-y-8 animate-fade-up order-1">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
+              <span className="text-foreground">
+                {firstPart}
+              </span>
+              {" "}
+              <span className="text-white">
+                {secondPart}
+              </span>
+            </h1>
+            
+            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-foreground max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "100ms" }}>
+              {subtitle}
+            </p>
+            
+            <div className={`flex flex-col sm:flex-row gap-4 animate-fade-up${loading ? " invisible" : ""}`} style={{ animationDelay: "200ms" }}>
+              {enableSelfSignup ? (
+                <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold hover:scale-105 transition-all" asChild>
+                  <Link to="/signup-select">Sign Up Now</Link>
+                </Button>
+              ) : (
+                <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold hover:scale-105 transition-all" asChild>
+                  <Link to="/contact">Contact Sales</Link>
+                </Button>
+              )}
+              <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted hover:scale-105 text-base px-8 py-6 h-auto font-semibold transition-all" asChild>
+                <Link to="/request-demo">Request a Demo</Link>
+              </Button>
+            </div>
+          </div>
+          
+          {/* Right Column - Animated Memo */}
+          <div className="relative min-h-[350px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[550px] xl:min-h-[600px] 2xl:min-h-[700px] -mx-4 sm:mx-0 xl:-mr-8 2xl:-mr-16 overflow-visible animate-fade-up flex justify-center xl:justify-end items-center order-2" style={{ animationDelay: "200ms" }}>
+            <div className="relative w-full h-full flex items-center justify-center xl:justify-end">
+              {isClient && <AnimatedMemo />}
+            </div>
           </div>
         </div>
-        
-        {/* Constrained animated memo display with better mobile spacing */}
-        <div className="hero-memo-container mb-24 md:mb-16">
-          {isClient && <AnimatedMemo />}
-        </div>
-      </div>
-      
-      {/* Down arrow for scrolling to next section - now with proper spacing */}
-      <div 
-        className="animate-fade-up absolute bottom-8 md:bottom-6" 
-        style={{ animationDelay: "400ms" }} 
-        onClick={scrollToNextSection}
-      >
-        <ArrowDownCircle className="h-10 w-10 text-muted-foreground/50 dark:text-gray-400/70 animate-pulse-slow cursor-pointer" aria-hidden="true" />
       </div>
     </section>
   );

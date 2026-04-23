@@ -96,7 +96,7 @@ export function ComplianceSecuritySection() {
           {/* Headline */}
           <h2 
             className={cn(
-              "text-3xl md:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-1000 text-gray-900 dark:text-white text-center",
+              "text-3xl md:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-1000 text-foreground text-center",
               isVisible 
                 ? "opacity-100 translate-y-0" 
                 : "opacity-0 translate-y-[30px]"
@@ -141,7 +141,7 @@ export function ComplianceSecuritySection() {
                 
                 {/* Feature content */}
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">{feature.title}</h3>
+                  <h3 className="text-xl font-bold mb-3 text-foreground">{feature.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
                 </div>
               </div>

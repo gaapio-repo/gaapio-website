@@ -3,6 +3,7 @@ export interface DemoRequestRow {
   id: string;
   first_name: string;
   last_name: string;
+  company: string | null;
   email: string;
   phone: string;
   notes: string | null;
@@ -14,6 +15,7 @@ export interface DemoRequest {
   id: string;
   firstName: string;
   lastName: string;
+  company: string;
   email: string;
   phone: string;
   notes: string;
@@ -24,6 +26,7 @@ export interface DemoRequest {
 export interface DemoRequestFormData {
   firstName: string;
   lastName: string;
+  company: string;
   email: string;
   phone: string;
   notes: string;

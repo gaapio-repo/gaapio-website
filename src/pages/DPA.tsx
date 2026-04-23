@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -10,6 +9,7 @@ import { useState, useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useToast } from "@/components/ui/use-toast";
+import { SEO } from "@/components/SEO";
 
 export default function DPA() {
   const today = format(new Date(), "MMMM d, yyyy");
@@ -157,6 +157,12 @@ export default function DPA() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO 
+        title="Data Processing Addendum - Gaapio GDPR Terms"
+        description="Review Gaapio's Data Processing Addendum (DPA) for GDPR compliance. Understand how we process and protect your data."
+        canonical="/dpa"
+        keywords={['data processing addendum', 'DPA', 'GDPR compliance', 'data protection']}
+      />
       <Header />
       
       <main className="flex-1 pt-28" id="dpa-content">

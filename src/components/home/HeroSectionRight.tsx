@@ -2,15 +2,14 @@ import { Button } from "@/components/ui/button";
 import { ArrowDownCircle } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatedMemoRight } from "./AnimatedMemoRight";
+import { AnimatedMemo } from "./AnimatedMemo";
+import { GradientBackground } from "./GradientBackground";
 
 interface HeroSectionProps {
-  title?: string;
   subtitle?: string;
 }
 
 export const HeroSection = memo(function HeroSection({ 
-  title = "Better Memos, Faster",
   subtitle = "ChatGPT gets you in the news. Gaapio gets you through an audit."
 }: HeroSectionProps) {
   const [isClient, setIsClient] = useState(false);
@@ -42,49 +41,54 @@ export const HeroSection = memo(function HeroSection({
     };
   }, [enableSelfSignup]);
   
-  // Scroll to Product Highlights section when arrow is clicked
+  // Scroll to next section when arrow is clicked
   const scrollToNextSection = () => {
-    const nextSection = document.getElementById('product-highlights');
+    const nextSection = document.getElementById('how-it-works');
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 bg-white dark:bg-[#0a1929] overflow-hidden">
+    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 overflow-hidden">
+      {/* Blue gradient background */}
+      <GradientBackground />
+      
       {/* Hero content with improved spacing */}
       <div className="container px-4 md:px-6 flex flex-col items-center relative z-10">
         {/* Text content centered */}
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-8 md:mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up dark:text-white">
-            {title}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-up text-foreground">
+            Better Memos, <span className="text-white">Faster</span>
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 animate-fade-up dark:text-gray-300" style={{ animationDelay: "100ms" }}>
+          <p className="text-xl md:text-2xl text-foreground mb-10 animate-fade-up" style={{ animationDelay: "100ms" }}>
             {subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
-            <Button size="lg" variant="blue" asChild>
-              <Link to="/request-demo">Request a Demo</Link>
+            <Button size="lg" variant="black" asChild>
+              <Link to="/signup-select">Sign Up Now</Link>
             </Button>
-            <Button size="lg" variant="blueOutline" asChild>
-              <Link to="/contact">Ask a Question</Link>
+            <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground bg-background hover:bg-muted" asChild>
+              <Link to="/request-demo">Request a Demo</Link>
             </Button>
           </div>
         </div>
         
-        {/* Constrained animated memo display with better mobile spacing */}
-        <div className="hero-memo-container mb-24 md:mb-16">
-          {isClient && <AnimatedMemoRight />}
-        </div>
+        {/* Animated memo display - using the same component as homepage */}
+        {isClient && (
+          <div className="hero-memo-container mb-24 md:mb-16">
+            <AnimatedMemo />
+          </div>
+        )}
       </div>
       
-      {/* Down arrow for scrolling to next section - now with proper spacing */}
+      {/* Down arrow for scrolling to next section */}
       <div 
         className="animate-fade-up absolute bottom-8 md:bottom-6" 
         style={{ animationDelay: "400ms" }} 
         onClick={scrollToNextSection}
       >
-        <ArrowDownCircle className="h-10 w-10 text-muted-foreground/50 dark:text-gray-400/70 animate-pulse-slow cursor-pointer" aria-hidden="true" />
+        <ArrowDownCircle className="h-10 w-10 text-muted-foreground/50 animate-pulse-slow cursor-pointer" aria-hidden="true" />
       </div>
     </section>
   );

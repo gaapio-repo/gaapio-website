@@ -68,6 +68,31 @@ export const WaitlistForm = memo(function WaitlistForm() {
         // Don't block the form submission if the webhook fails
       });
 
+      // Sync to CRM via secure edge function
+      try {
+        const domain = trimmedCompany ? trimmedCompany.replace(/^(https?:\/\/)?(www\.)?/, '').split('/')[0] : '';
+        const { data: crmResult, error: crmError } = await supabase.functions.invoke('sync-lead-to-crm', {
+          body: {
+            company_name: trimmedCompany,
+            domain: domain,
+            website: trimmedCompany,
+            first_name: trimmedName.split(' ')[0],
+            last_name: trimmedName.split(' ').slice(1).join(' ') || trimmedName.split(' ')[0],
+            email: trimmedEmail,
+            notes: 'Waitlist signup',
+            source: 'Waitlist'
+          }
+        });
+
+        if (crmError) {
+          console.error('Failed to sync to CRM:', crmError);
+        } else {
+          console.log('Lead synced to CRM:', crmResult);
+        }
+      } catch (error) {
+        console.error('CRM sync error:', error);
+      }
+
       toast({
         title: "You're on the list!",
         description: "Thanks for joining our waitlist. We'll be in touch soon.",

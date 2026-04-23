@@ -30,40 +30,38 @@ export const AnimatedMemo = () => {
   const [loaded, setLoaded] = useState(false);
   const [isDark, setIsDark] = useState(false);
   
-  // Adjust scale and positioning based on screen width
-  const getScale = () => {
-    if (width < 480) return 0.35;   // Mobile phones
-    if (width < 768) return 0.5;    // Tablets
-    if (width < 1024) return 0.6;   // Small laptops
-    return 0.7;                     // Larger screens
-  };
+  // Text sizing now handled via clamp() in CSS, no scale transform needed
 
-  // Get container position based on screen width
+  // All positioning is relative to the background image (percentages)
+  // This ensures the text animation aligns with the memo content area
+  // regardless of screen size
+  
+  // Top position: where the memo content starts (percentage of image height)
   const getTopPosition = () => {
-    if (width < 480) return "85px";  // Higher on mobile
-    if (width < 768) return "110px";
-    return "205px";
+    if (width < 768) return "24%"; // mobile
+    if (width < 1024) return "33%"; // tablets (768-1023)
+    if (width < 1280) return "34%"; // medium (1024-1279)
+    if (width < 1400) return "35%"; // intermediate (1280-1399)
+    if (width < 1600) return "32%"; // large-ish (1400-1599)
+    return "28%"; // xl screens 1600+
   };
+  
+  // Left position: where the main content column starts in the image
+  const getLeftPosition = () => "25%";
+  
+  // Right position: right edge of the memo content area
+  const getRightPosition = () => "-30%";
+  
+  // Height of the text area (percentage of remaining space)
+  const getTextAreaHeight = () => "68%";
 
-  // Get container width based on screen width
-  const getContainerWidth = () => {
-    if (width < 480) return "175%";  // Extra wide on mobile for proper scaling
-    if (width < 768) return "150%";
-    return "175%";
-  };
-
-  // Get left position based on screen width
-  const getLeftPosition = () => {
-    if (width < 480) return "23%";   // Much more to the right on mobile
-    if (width < 768) return "23%";
-    return "23%";
-  };
-
-  // Get container height based on screen width
-  const getContainerHeight = () => {
-    if (width < 480) return "calc(220% - 170px)";  // Taller on mobile
-    if (width < 768) return "calc(200% - 170px)";
-    return "calc(140% - 170px)";
+  // Get max width based on screen width - responsive sizing
+  const getMaxWidth = () => {
+    if (width < 768) return "100%";
+    if (width < 1024) return "min(95vw, 600px)";
+    if (width < 1280) return "min(50vw, 650px)";
+    if (width < 1600) return "min(48vw, 800px)";
+    return "min(45vw, 900px)";
   };
 
   // Apply theme styles directly using JavaScript
@@ -132,30 +130,45 @@ export const AnimatedMemo = () => {
   }, []);
 
   return (
-    <div className="memo-animation-container">
-      <div 
+    <div
+      className="memo-animation-container"
+      style={{
+        position: 'relative',
+        overflow: 'visible',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px'
+      }}
+    >
+      <div
         ref={memoContainerRef}
-        className={`memo-card ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`memo-card-right ${loaded ? 'opacity-100' : 'opacity-0'}`}
         style={{
           backgroundColor: isDark ? "#1a1a1a" : "#ffffff",
           borderColor: isDark ? "#333333" : "#e5e7eb",
           boxShadow: isDark 
             ? "0 0 15px rgba(255,255,255,0.05)" 
             : "0 0 15px rgba(0,0,0,0.1)",
-          maxWidth: "850px",
-          width: "100%"
+          maxWidth: getMaxWidth(),
+          width: "100%",
+          border: "1px solid",
+          borderRadius: "8px",
+          position: "relative",
+          transformOrigin: "center"
         }}
       >
         <img 
           src={isDark ? "/assets/images/gaapio-app-dark.png" : "/assets/images/gaapio-app.png"}
-          alt="Gaapio Revenue Recognition UI" 
+          alt="Gaapio Revenue Recognition UI"
           className="memo-background-image"
           loading="eager"
           fetchPriority="high"
           style={{
             width: "100%",
             height: "auto",
-            objectFit: "contain"
+            objectFit: "contain",
+            borderRadius: "8px"
           }}
         />
         
@@ -165,33 +178,32 @@ export const AnimatedMemo = () => {
             position: "absolute",
             top: getTopPosition(),
             left: getLeftPosition(),
-            right: "2.5%",
+            right: getRightPosition(),
             textAlign: "left",
             lineHeight: "1.2",
             zIndex: 10,
-            height: getContainerHeight(),
+            height: getTextAreaHeight(),
             display: "flex",
             alignItems: "flex-start",
-            width: getContainerWidth()
+            overflow: "hidden"
           }}
         >
-          <div 
-            ref={typedElementRef}
-            className="memo-text"
-            style={{
-              color: isDark ? '#FFFFFF' : '#333',
-              backgroundColor: isDark ? 'transparent' : 'rgba(255, 255, 255, 0.95)',
-              padding: '4px',
-              borderRadius: '4px',
-              width: '100%',
-              fontSize: '12px',
-              transform: `scale(${getScale()})`,
-              transformOrigin: 'top left',
-              whiteSpace: 'pre-wrap',
-              maxHeight: `${100 / getScale()}%`,
-              overflow: 'hidden'
-            }}
-          ></div>
+        <div 
+          ref={typedElementRef}
+          className="memo-text"
+          style={{
+            color: isDark ? '#FFFFFF' : '#333',
+            backgroundColor: isDark ? 'transparent' : 'rgba(255, 255, 255, 0.95)',
+            padding: '4px',
+            borderRadius: '4px',
+            width: '300%',
+            fontSize: '12px',
+            transform: 'scale(0.62)',
+            transformOrigin: 'top left',
+            whiteSpace: 'pre-wrap',
+            overflow: 'hidden'
+          }}
+        ></div>
         </div>
       </div>
     </div>

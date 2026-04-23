@@ -1,22 +1,7 @@
-
 /*
-  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
-  X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
-  Content-Type: text/html
-/*.js
-  Content-Type: text/javascript
-/*.tsx
-  Content-Type: text/javascript
-/*.css
-  Content-Type: text/css
-/*.json
-  Content-Type: application/json
-/*.png
-  Content-Type: image/png
-/*.jpg
-  Content-Type: image/jpeg
-/*.svg
-  Content-Type: image/svg+xml
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), microphone=(), payment=()
 

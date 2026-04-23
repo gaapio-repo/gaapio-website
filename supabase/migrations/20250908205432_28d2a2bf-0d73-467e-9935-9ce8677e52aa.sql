@@ -2,6 +2,7 @@
 DROP POLICY IF EXISTS "Allow all select" ON public.waitlist_submissions;
 
 -- Add a new policy that only allows admin users to view waitlist submissions
+DROP POLICY IF EXISTS "Only admins can view waitlist submissions" ON public.waitlist_submissions;
 CREATE POLICY "Only admins can view waitlist submissions" 
 ON public.waitlist_submissions 
 FOR SELECT 

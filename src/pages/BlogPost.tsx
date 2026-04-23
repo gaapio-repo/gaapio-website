@@ -1,160 +1,179 @@
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { FileText, ArrowLeft, BookOpen, CheckCircle, Shield, History, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowLeft, Clock, User, Calendar, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { SEO } from "@/components/SEO";
+
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string | null;
+  author: string | null;
+  category: string | null;
+  featured_image: string | null;
+  reading_time: string | null;
+  published_at: string | null;
+  created_at: string;
+}
 
 export default function BlogPost() {
+  const { slug } = useParams<{ slug: string }>();
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchPost() {
+      if (!slug) {
+        setError("Post not found");
+        setLoading(false);
+        return;
+      }
+
+      const { data, error: fetchError } = await supabase
+        .from("blog_posts")
+        .select("*")
+        .eq("slug", slug)
+        .eq("is_published", true)
+        .maybeSingle();
+
+      if (fetchError) {
+        console.error("Error fetching post:", fetchError);
+        setError("Failed to load post");
+      } else if (!data) {
+        setError("Post not found");
+      } else {
+        setPost(data);
+      }
+      setLoading(false);
+    }
+
+    fetchPost();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error || !post) {
+    return (
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="flex-1 flex flex-col items-center justify-center gap-6 p-8">
+          <h1 className="text-4xl font-bold">Post Not Found</h1>
+          <p className="text-muted-foreground">The blog post you're looking for doesn't exist or has been unpublished.</p>
+          <Button asChild>
+            <Link to="/blog">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Blog
+            </Link>
+          </Button>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  const publishedDate = post.published_at 
+    ? new Date(post.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+    : new Date(post.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO
+        title={post.title}
+        description={post.excerpt || `Read ${post.title} on the Gaapio blog`}
+        canonical={`/blog/${post.slug}`}
+      />
       <Header />
       
       <main className="flex-1 pt-28">
-        {/* Hero Section with enhanced styling */}
+        {/* Hero Section */}
         <div className="bg-gradient-to-b from-primary/5 to-transparent border-b">
           <ResponsiveContainer className="py-16 md:py-20">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="mb-8 flex justify-center">
-                <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 transition-transform hover:scale-105 duration-300">
-                  <FileText className="h-10 w-10 text-primary" />
-                </div>
-              </div>
+            <div className="max-w-4xl mx-auto">
+              <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2">
+                <Link to="/blog">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Blog
+                </Link>
+              </Button>
               
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
-                Why Technical Accounting Memos Matter
+              {post.category && (
+                <Badge variant="secondary" className="mb-4 bg-primary/10 text-primary hover:bg-primary/15">
+                  {post.category}
+                </Badge>
+              )}
+              
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+                {post.title}
               </h1>
               
-              <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                {post.author && (
+                  <div className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    <span>{post.author}</span>
+                  </div>
+                )}
                 <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4" />
-                  <span>By Zack Larsen, CPA</span>
+                  <Calendar className="h-4 w-4" />
+                  <time>{publishedDate}</time>
                 </div>
-                <span>•</span>
-                <div className="flex items-center gap-2">
-                  <History className="h-4 w-4" />
-                  <time>April 10, 2025</time>
-                </div>
-                <span>•</span>
-                <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/15">
-                  Best Practices
-                </Badge>
+                {post.reading_time && (
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    <span>{post.reading_time}</span>
+                  </div>
+                )}
               </div>
             </div>
           </ResponsiveContainer>
         </div>
 
-        {/* Content Section with improved typography and spacing */}
+        {/* Featured Image */}
+        {post.featured_image && (
+          <ResponsiveContainer className="py-8">
+            <div className="max-w-4xl mx-auto">
+              <img
+                src={post.featured_image}
+                alt={post.title}
+                className="w-full h-auto rounded-xl shadow-lg"
+              />
+            </div>
+          </ResponsiveContainer>
+        )}
+
+        {/* Content Section */}
         <ResponsiveContainer className="py-12 md:py-16">
-          <article className="prose prose-gray dark:prose-invert mx-auto max-w-4xl">
-            <h2 className="flex items-center gap-3 text-2xl font-bold mt-8 mb-4">
-              <BookOpen className="h-6 w-6 text-primary" />
-              What Is a Technical Accounting Memo?
-            </h2>
-            
-            <p className="text-lg leading-relaxed text-muted-foreground mb-6">
-              A technical accounting memo is a formal document prepared by a company's finance or accounting team to analyze and document the rationale behind significant accounting decisions. These typically include judgments around complex areas like:
-            </p>
-            
-            <ul className="space-y-3 my-6">
-              <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <span>Revenue recognition (ASC 606)</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <span>Lease accounting (ASC 842)</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <span>Business combinations (ASC 805)</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <span>Impairment assessments</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <span>Debt vs. equity classification</span>
-              </li>
-            </ul>
-            
-            <p className="text-lg leading-relaxed text-muted-foreground mb-8">
-              The memo outlines the relevant facts, references applicable accounting standards (usually U.S. GAAP or IFRS), explores alternative treatments, and clearly states the company's chosen approach - all backed by authoritative guidance.
-            </p>
-
-            <Separator className="my-12" />
-
-            <h2 className="flex items-center gap-3 text-2xl font-bold mt-8 mb-6">
-              <Shield className="h-6 w-6 text-primary" />
-              Why Do These Memos Matter?
-            </h2>
-            
-            <div className="grid gap-8 my-8">
-              <div>
-                <h3>1. Audit Defense</h3>
-                <p>
-                  Auditors love documentation. A well-written memo demonstrates that management performed a thorough analysis and applied professional judgment. It helps reduce back-and-forth during audits and provides support that your accounting positions are defensible.
-                </p>
-              </div>
-
-              <div>
-                <h3>2. Regulatory Compliance</h3>
-                <p>
-                  Public and private companies alike are held to rigorous standards. Technical memos show regulators (and internal stakeholders) that your company is following the rules - and that your accounting isn't based on guesswork or outdated interpretations.
-                </p>
-              </div>
-
-              <div>
-                <h3>3. Consistency Over Time</h3>
-                <p>
-                  Accounting positions often span multiple periods. Documenting your rationale now ensures continuity and prevents knowledge loss if team members change. When you revisit an issue next quarter or next year, the memo becomes a crucial reference point.
-                </p>
-              </div>
-
-              <div>
-                <h3>4. Stakeholder Confidence</h3>
-                <p>
-                  Whether it's investors, auditors, board members, or potential acquirers, stakeholders want to know your financials are grounded in solid, professional analysis. Well-prepared technical memos help build that confidence.
-                </p>
-              </div>
-            </div>
-
-            <h2>The Problem: Writing These Memos Is a Drag</h2>
-            <p>
-              Despite their importance, technical memos are time-consuming and often get pushed to the back burner. They require deep technical knowledge, careful wording, and meticulous formatting. In fast-paced finance teams, it's easy to fall behind - or worse, skip them altogether.
-            </p>
-
-            <h2>The Solution: AI-Powered, CPA-Approved</h2>
-            <p>
-              That's where Gaapio comes in.
-            </p>
-            <p>
-              Our platform helps accounting teams create high-quality technical memos in seconds. Whether you're addressing ASC 606 or lease classification, Gaapio leverages advanced AI - trained on authoritative guidance - to generate memos that are fast, accurate, and audit-ready.
-            </p>
-            <p>
-              You get the best of both worlds: the efficiency of AI with the credibility of CPA-approved logic.
-            </p>
-
-            <h2>Final Thoughts</h2>
-            <p>
-              Technical accounting memos aren't just documentation - they're protection. They protect your financial statements, your audit trail, and your professional reputation.
-            </p>
-            <p>
-              With tools like Gaapio, you no longer have to choose between speed and accuracy. You get both - in seconds.
-            </p>
-
-            <div className="mt-16 flex justify-center">
-              <Button asChild variant="outline" size="lg" className="gap-2">
-                <Link to="/blog">
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to Blog
-                </Link>
-              </Button>
-            </div>
-          </article>
+          <article
+            className="prose prose-gray dark:prose-invert max-w-4xl [&_*]:!text-left prose-headings:font-bold prose-a:text-primary prose-img:rounded-lg"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+          
+          <div className="mt-16 flex justify-center">
+            <Button asChild variant="outline" size="lg" className="gap-2">
+              <Link to="/blog">
+                <ArrowLeft className="h-4 w-4" />
+                Back to Blog
+              </Link>
+            </Button>
+          </div>
         </ResponsiveContainer>
       </main>
 

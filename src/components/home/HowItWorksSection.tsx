@@ -1,7 +1,59 @@
 
-import { FileSearch, FileCheck, Download } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+
+const steps = [
+  {
+    number: "01",
+    title: "Research",
+    delay: 0,
+    bullets: [
+      "Research guidance quickly",
+      "Upload and analyze contracts for key terms",
+      "Access authoritative sources and Big 4 resources"
+    ]
+  },
+  {
+    number: "02",
+    title: "Analyze",
+    delay: 100,
+    bullets: [
+      "Scope the accounting issue",
+      "Identify risks and grey areas",
+      "Apply relevant standards to the facts"
+    ]
+  },
+  {
+    number: "03",
+    title: "Draft",
+    delay: 200,
+    bullets: [
+      "AI drafts memo with built-in guardrails",
+      "Up-to-date with latest standards",
+      "Guided prompts ensure accuracy"
+    ]
+  },
+  {
+    number: "04",
+    title: "Review & Iterate",
+    delay: 300,
+    bullets: [
+      "AI reviews and suggests improvements",
+      "Internal sign-offs and audit trail",
+      "Full version history and comments"
+    ]
+  },
+  {
+    number: "05",
+    title: "Deliver",
+    delay: 400,
+    bullets: [
+      "Presentation-ready memos",
+      "Exportable audit package",
+      "Organized file cabinet for final versions"
+    ]
+  }
+];
 
 export function HowItWorksSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -15,7 +67,7 @@ export function HowItWorksSection() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.6 } // Trigger when 60% of section is visible
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -33,138 +85,78 @@ export function HowItWorksSection() {
     <section 
       id="how-it-works" 
       ref={sectionRef}
-      className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-[#f4faff] to-white dark:from-[#1A1F2B] dark:to-[#1A1F2B] dark:text-white"
+      className="py-24 md:py-36 relative overflow-hidden"
+      style={{ backgroundColor: '#F8FBFF' }}
     >
-      <div className="container px-4 md:px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-[#f0f0f0]">How It Works</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto dark:text-gray-300">
-            Streamline your technical accounting memos in three powerful steps.
+      {/* Dark mode background overlay */}
+      <div className="absolute inset-0 bg-[#1A1F2B] dark:opacity-100 opacity-0 transition-opacity" />
+      
+      <div className="container px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto relative z-10">
+        <div className="text-center mb-16 md:mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">How It Works</h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Streamline your technical accounting memos in five powerful steps.
           </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-          {/* Step 1 */}
-          <div 
-            className={cn(
-              "flex flex-col bg-white dark:bg-[#1a2234] rounded-2xl p-8 relative overflow-hidden transition-all",
-              "hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_6px_16px_rgba(255,255,255,0.05)] hover:translate-y-[-4px]",
-              "shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_12px_rgba(255,255,255,0.03)]",
-              "dark:border dark:border-white/5",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-            )}
-            style={{ 
-              transitionDelay: "0ms",
-              transitionDuration: "2000ms",
-              transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
-            }}
-          >
-            <div className="absolute right-6 top-4 text-[100px] font-bold opacity-10 text-[#339CFF] dark:text-[rgba(255,255,255,0.05)] dark:opacity-100">
-              01
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8">
+          {steps.map((step) => (
+            <div 
+              key={step.number}
+              className={cn(
+                "group flex flex-col rounded-[18px] py-9 px-7 relative overflow-hidden",
+                "transition-all duration-300 ease-out",
+                "shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.04)]",
+                "dark:shadow-[0_4px_12px_rgba(0,0,0,0.3)]",
+                "hover:shadow-[0_6px_20px_rgba(0,0,0,0.08),0_12px_28px_rgba(0,153,255,0.06)]",
+                "dark:hover:shadow-[0_8px_24px_rgba(0,153,255,0.15)]",
+                "hover:-translate-y-[3px]",
+                "border border-border/80 hover:border-[#0099FF]/25",
+                "dark:border-white/5 dark:hover:border-[#0099FF]/40",
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+              )}
+              style={{ 
+                transitionDelay: `${step.delay}ms`,
+                transitionDuration: "500ms",
+                transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+                backgroundColor: '#FFFFFF',
+              }}
+            >
+              {/* Dark mode background */}
+              <div className="absolute inset-0 bg-[#1a2234] opacity-0 dark:opacity-100 -z-10" />
+              
+              {/* Blue accent line at top */}
+              <div className="absolute top-0 left-0 right-0 h-[4px] bg-[#0099FF] rounded-t-[18px]" />
+              
+              {/* Background step number - decorative */}
+              <div 
+                className="absolute right-3 top-8 text-[72px] font-bold leading-none select-none pointer-events-none"
+                style={{ 
+                  color: 'rgba(0, 153, 255, 0.06)',
+                }}
+              >
+                <span className="dark:hidden">{step.number}</span>
+                <span className="hidden dark:inline text-white/[0.04]">{step.number}</span>
+              </div>
+              
+              {/* Title */}
+              <h3 className="text-[17px] font-semibold text-[#0099FF] mb-5 mt-1 relative z-10 group-hover:text-[#0088EE] transition-colors duration-300">
+                {step.title}
+              </h3>
+              
+              {/* Bullets */}
+              <ul className="text-left space-y-3.5 relative z-10 flex-grow">
+                {step.bullets.map((bullet, idx) => (
+                  <li key={idx} className="flex items-start">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#0099FF]/50 mt-[7px] mr-2.5 flex-shrink-0" />
+                    <span className="text-muted-foreground text-[14px] leading-[1.7] font-normal">
+                      {bullet}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#339CFF20] mb-6 transition-transform duration-300 hover:scale-105 dark:bg-[#339CFF10]">
-              <FileSearch className="h-8 w-8 text-[#339CFF]" />
-            </div>
-            <h3 className="text-xl font-semibold mb-4 relative z-10 dark:text-[#e5e5e5]">Draft</h3>
-            <ul className="text-muted-foreground text-left text-sm space-y-2 dark:text-gray-400">
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>Guided prompts create built-in guardrails for accuracy</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>Up-to-date with latest standards</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>Drafted instantly by trained AI</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>Contract analysis and document upload</span>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Step 2 */}
-          <div 
-            className={cn(
-              "flex flex-col bg-white dark:bg-[#1a2234] rounded-2xl p-8 relative overflow-hidden transition-all",
-              "hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_6px_16px_rgba(255,255,255,0.05)] hover:translate-y-[-4px]",
-              "shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_12px_rgba(255,255,255,0.03)]",
-              "dark:border dark:border-white/5",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-            )}
-            style={{ 
-              transitionDelay: "600ms",
-              transitionDuration: "2000ms",
-              transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
-            }}
-          >
-            <div className="absolute right-6 top-4 text-[100px] font-bold opacity-10 text-[#339CFF] dark:text-[rgba(255,255,255,0.05)] dark:opacity-100">
-              02
-            </div>
-            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#339CFF20] mb-6 transition-transform duration-300 hover:scale-105 dark:bg-[#339CFF10]">
-              <FileCheck className="h-8 w-8 text-[#339CFF]" />
-            </div>
-            <h3 className="text-xl font-semibold mb-4 relative z-10 dark:text-[#e5e5e5]">Review</h3>
-            <ul className="text-muted-foreground text-left text-sm space-y-2 dark:text-gray-400">
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>Proprietary AI reviews and gives suggestions</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>One-click edits and enhancements</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>Internal sign offs and audit trail</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>Full version history and reviewer comments</span>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Step 3 */}
-          <div 
-            className={cn(
-              "flex flex-col bg-white dark:bg-[#1a2234] rounded-2xl p-8 relative overflow-hidden transition-all",
-              "hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_6px_16px_rgba(255,255,255,0.05)] hover:translate-y-[-4px]",
-              "shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_12px_rgba(255,255,255,0.03)]",
-              "dark:border dark:border-white/5",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-            )}
-            style={{ 
-              transitionDelay: "1200ms",
-              transitionDuration: "2000ms",
-              transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
-            }}
-          >
-            <div className="absolute right-6 top-4 text-[100px] font-bold opacity-10 text-[#339CFF] dark:text-[rgba(255,255,255,0.05)] dark:opacity-100">
-              03
-            </div>
-            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#339CFF20] mb-6 transition-transform duration-300 hover:scale-105 dark:bg-[#339CFF10]">
-              <Download className="h-8 w-8 text-[#339CFF]" />
-            </div>
-            <h3 className="text-xl font-semibold mb-4 relative z-10 dark:text-[#e5e5e5]">Deliver</h3>
-            <ul className="text-muted-foreground text-left text-sm space-y-2 dark:text-gray-400">
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>Presentation-ready memos</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>Exportable audit package</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#339CFF] mt-1.5 mr-2 flex-shrink-0"></span>
-                <span>Organized file cabinet for final versions and AI training</span>
-              </li>
-            </ul>
-          </div>
+          ))}
         </div>
       </div>
     </section>

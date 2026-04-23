@@ -1,10 +1,17 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
+import { SEO } from "@/components/SEO";
 
 export default function SSA() {
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO 
+        title="Subscription Services Agreement - Gaapio Terms"
+        description="Read the Gaapio Subscription Services Agreement governing access to our AI-powered accounting platform and related services."
+        canonical="/ssa"
+        keywords={['subscription agreement', 'service terms', 'Gaapio contract']}
+      />
       <Header />
       
       <main className="flex-1 pt-28">
@@ -12,6 +19,8 @@ export default function SSA() {
           <div className="bg-card border border-border rounded-xl p-8 shadow-sm">
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <h1 className="text-3xl font-bold mb-8 text-center">GAAPIO SUBSCRIPTION SERVICES AGREEMENT</h1>
+              
+              <p className="text-center mb-8 text-muted-foreground">As of January 7, 2026</p>
               
               <p className="mb-8">
                 This Subscription Services Agreement ("Agreement") is entered into by and between Gaapio, Inc., 
@@ -94,20 +103,26 @@ export default function SSA() {
                 except those based on Gaapio's income.
               </p>
 
-              <h2 className="text-2xl font-bold mt-8 mb-4">5. TERM & TERMINATION</h2>
+              <h2 className="text-2xl font-bold mt-8 mb-4">5. TERM, RENEWAL, & TERMINATION</h2>
               <h3 className="text-xl font-semibold mt-6 mb-3">5.1 Term.</h3>
               <p>
                 This Agreement shall remain in effect for the duration of all active Subscription Terms unless 
                 earlier terminated.
               </p>
-              <h3 className="text-xl font-semibold mt-6 mb-3">5.2 Termination.</h3>
+              <h3 className="text-xl font-semibold mt-6 mb-3">5.2 Renewal.</h3>
+              <p>
+                Unless explicitly canceled in writing by either party at least thirty (30) days before the 
+                Subscription Term End Date, this Agreement will automatically renew for an additional twelve (12) 
+                months ("Renewal Term").
+              </p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">5.3 Termination.</h3>
               <p className="mb-4">Either party may terminate this Agreement:</p>
               <ul className="list-disc pl-6 mb-4">
                 <li>With written notice of non-renewal delivered at least 30 days before the end of a Subscription Term;</li>
                 <li>For material breach not cured within 30 days (or 14 days for payment breaches);</li>
                 <li>Immediately upon the other party's insolvency or bankruptcy.</li>
               </ul>
-              <h3 className="text-xl font-semibold mt-6 mb-3">5.3 Effect of Termination.</h3>
+              <h3 className="text-xl font-semibold mt-6 mb-3">5.4 Effect of Termination.</h3>
               <p className="mb-4">Upon termination:</p>
               <ul className="list-disc pl-6">
                 <li>All access rights are revoked;</li>
@@ -279,13 +294,7 @@ export default function SSA() {
                 10 (Indemnification), and 12 (Dispute Resolution) shall survive any termination or expiration of this Agreement.
               </p>
 
-              <h2 className="text-2xl font-bold mt-8 mb-4">17. AI TRAINING LIMITATIONS</h2>
-              <p>
-                Gaapio will not use Customer Content to train general-purpose AI models. Any use of Customer Content 
-                is limited to fulfilling Customer's requests or improving performance for that specific Customer account.
-              </p>
-
-              <h2 className="text-2xl font-bold mt-8 mb-4">18. INSURANCE</h2>
+              <h2 className="text-2xl font-bold mt-8 mb-4">17. INSURANCE</h2>
               <p>
                 Gaapio shall maintain commercially reasonable insurance coverage, including general liability and cyber 
                 liability coverage. Upon Customer's reasonable request, but no more than once annually, Gaapio shall 

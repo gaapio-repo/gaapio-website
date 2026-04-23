@@ -1,86 +1,83 @@
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface FeatureToggle {
-  id: string;
+  id: 'enable_customer_logos' | 'enable_testimonials' | 'enable_footer_logos';
   name: string;
   description: string;
-  enabled: boolean;
 }
 
+const featureToggles: FeatureToggle[] = [
+  {
+    id: "enable_customer_logos",
+    name: "Customer Logos Section",
+    description: "Show or hide the customer logos section on the homepage"
+  },
+  {
+    id: "enable_testimonials",
+    name: "Testimonials Section",
+    description: "Show or hide the testimonials section on the homepage"
+  },
+  {
+    id: "enable_footer_logos",
+    name: "Footer Logos",
+    description: "Show or hide partner logos in the footer"
+  }
+];
+
 export function FeatureToggles() {
-  const [featureToggles, setFeatureToggles] = useState<FeatureToggle[]>([
-    {
-      id: "testimonials",
-      name: "Testimonials Section",
-      description: "Show or hide the testimonials section on the homepage",
-      enabled: true
-    },
-    {
-      id: "pricing",
-      name: "Pricing Section",
-      description: "Show or hide the pricing section on the homepage",
-      enabled: true
-    },
-    {
-      id: "footer-logos",
-      name: "Footer Logos",
-      description: "Show or hide partner logos in the footer",
-      enabled: true
-    }
-  ]);
+  const { siteConfig, loading, updating, updateFeatureToggle } = useSiteConfig();
 
-  // Load saved toggle states
-  useEffect(() => {
-    const savedToggles = localStorage.getItem("featureToggles");
-    if (savedToggles) {
-      setFeatureToggles(JSON.parse(savedToggles));
-    }
-  }, []);
-
-  // Save toggle states when changed
-  useEffect(() => {
-    localStorage.setItem("featureToggles", JSON.stringify(featureToggles));
-  }, [featureToggles]);
-
-  const handleToggleChange = (id: string, checked: boolean) => {
-    setFeatureToggles(
-      featureToggles.map((toggle) =>
-        toggle.id === id ? { ...toggle, enabled: checked } : toggle
-      )
-    );
+  const handleToggleChange = async (id: FeatureToggle['id'], checked: boolean) => {
+    await updateFeatureToggle(id, checked);
   };
 
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="flex items-center justify-between">
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-3 w-48" />
+            </div>
+            <Skeleton className="h-6 w-11" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Feature Toggles</CardTitle>
-        <CardDescription>
-          Enable or disable features on your website
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-6">
-          {featureToggles.map((toggle) => (
-            <div key={toggle.id} className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor={toggle.id}>{toggle.name}</Label>
-                <p className="text-sm text-muted-foreground">
-                  {toggle.description}
-                </p>
-              </div>
+    <table className="w-full text-sm text-left">
+      <thead>
+        <tr className="border-b text-left text-muted-foreground">
+          <th className="pb-2 font-medium">Feature</th>
+          <th className="pb-2 font-medium">Description</th>
+          <th className="pb-2 font-medium text-right">Enabled</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y">
+        {featureToggles.map((toggle) => (
+          <tr key={toggle.id}>
+            <td className="py-2.5 font-medium">
+              <Label htmlFor={toggle.id}>{toggle.name}</Label>
+            </td>
+            <td className="py-2.5 text-muted-foreground">{toggle.description}</td>
+            <td className="py-2.5 text-right">
               <Switch
                 id={toggle.id}
-                checked={toggle.enabled}
+                checked={siteConfig?.[toggle.id] ?? true}
                 onCheckedChange={(checked) => handleToggleChange(toggle.id, checked)}
+                disabled={updating}
               />
-            </div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }

@@ -116,6 +116,32 @@ export function useContactForm(onSuccess?: (data: any) => void) {
       console.log("Database save successful, now sending Formsubmit email...");
       await sendFormsubmitEmail(data);
 
+      // Sync to CRM via secure edge function
+      try {
+        const domain = data.company.replace(/^(https?:\/\/)?(www\.)?/, '').split('/')[0];
+        const { data: crmResult, error: crmError } = await supabase.functions.invoke('sync-lead-to-crm', {
+          body: {
+            company_name: data.company,
+            domain: domain,
+            website: data.company,
+            first_name: data.firstName,
+            last_name: data.lastName,
+            email: data.email,
+            phone: data.phone,
+            notes: data.message,
+            source: 'Contact Form'
+          }
+        });
+
+        if (crmError) {
+          console.error('Failed to sync to CRM:', crmError);
+        } else {
+          console.log('Lead synced to CRM:', crmResult);
+        }
+      } catch (error) {
+        console.error('CRM sync error:', error);
+      }
+
       console.log("Contact request saved successfully");
       toast({
         title: "Message sent",

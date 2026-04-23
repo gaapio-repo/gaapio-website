@@ -1,7 +1,5 @@
 
-import { FileText, Shield, CheckCircle2, Clock, ShieldCheck, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { FileText, Shield, CheckCircle2, Clock, ShieldCheck } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +15,7 @@ export function BenefitsSection() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.6 } // Trigger when 60% of section is visible
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -42,25 +40,25 @@ export function BenefitsSection() {
       icon: Clock,
       title: "Time & Cost Savings",
       description: "Cut memo and disclosure creation time by up to 90%. Make your internal team look like rockstars — or save thousands compared to outsourced memos.",
-      delay: 600
+      delay: 100
     },
     {
       icon: FileText,
       title: "CPA-Level Output",
       description: "AI-generated memos and disclosures that match or exceed the quality of experienced CPAs.",
-      delay: 1200
+      delay: 200
     },
     {
       icon: Shield,
       title: "GAAP Compliance",
       description: "Always up-to-date with the latest accounting standards and guidelines.",
-      delay: 1800
+      delay: 300
     },
     {
       icon: ShieldCheck,
       title: "Enterprise-Grade Security",
       description: "Your data stays private — never used to train public AI models. We follow strict security protocols.",
-      delay: 2400
+      delay: 400
     }
   ];
 
@@ -68,77 +66,59 @@ export function BenefitsSection() {
     <section 
       id="benefits" 
       ref={sectionRef}
-      className="py-20 md:py-32 relative"
-      style={{
-        background: "var(--benefits-bg)",
-        color: "var(--benefits-text)"
-      }}
+      className="py-24 md:py-36 relative"
+      style={{ backgroundColor: '#F8FBFF' }}
     >
-      <style>
-        {`
-          :root {
-            --benefits-bg: #f4faff;
-            --benefits-text: inherit;
-            --benefits-divider: #e0e0e0;
-          }
-          
-          .dark {
-            --benefits-bg: #1A1F2B;
-            --benefits-text: #ffffff;
-            --benefits-divider: #2a2f36;
-          }
-        `}
-      </style>
+      {/* Dark mode background overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-800/80 via-slate-800/80 to-slate-800/80 dark:opacity-100 opacity-0 transition-opacity" />
       
-      <div className="container px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-10 gap-12 md:gap-8 lg:gap-16 items-start">
-          {/* Left column - Heading and description (40% width) */}
-          <div className="md:col-span-4 space-y-8">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Key Benefits</h2>
-              <p className="text-xl text-muted-foreground max-w-md">
-                Our trained AI platform will give you confidence in your approach while saving time and money.
-              </p>
-            </div>
-            
-            <div className="pt-4">
-              <Button variant="link" className="group text-[#339CFF] p-0 h-auto font-medium">
-                <div className="flex items-center cursor-pointer">
-                  See Features 
-                  <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </div>
-              </Button>
-            </div>
+      <div className="container px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          {/* Left column - Heading and description */}
+          <div className="space-y-6 lg:sticky lg:top-32">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              Key Benefits
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
+              AI-powered confidence. CPA-quality output. Enterprise-grade security.
+            </p>
+            <p className="text-muted-foreground leading-relaxed max-w-md">
+              Save time, reduce costs, and deliver audit-ready documentation — every time.
+            </p>
           </div>
           
-          {/* Vertical Divider (visible on md screens and up) */}
-          <div className="hidden md:block absolute left-[40%] top-20 bottom-20">
-            <Separator orientation="vertical" className="h-full" style={{ backgroundColor: "var(--benefits-divider)" }} />
-          </div>
-          
-          {/* Right column - Benefits list (60% width) */}
-          <div className="md:col-span-6 space-y-6">
+          {/* Right column - Benefits list */}
+          <div className="space-y-8">
             {benefits.map((benefit, index) => (
               <div 
                 key={index}
                 className={cn(
-                  "flex gap-3 transition-all",
+                  "flex gap-5 transition-all",
                   isVisible 
                     ? "opacity-100 translate-y-0" 
-                    : "opacity-0 translate-y-[30px]"
+                    : "opacity-0 translate-y-[20px]"
                 )}
                 style={{ 
                   transitionDelay: `${benefit.delay}ms`,
-                  transitionDuration: "2000ms",
+                  transitionDuration: "500ms",
                   transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
                 }}
               >
-                <div className="mt-1 text-[#339CFF] flex-shrink-0 min-w-[24px]">
-                  <benefit.icon className="h-5 w-5" />
+                {/* Icon with circular background */}
+                <div className="flex-shrink-0">
+                  <div className="w-11 h-11 rounded-full bg-[#0099FF]/10 dark:bg-[#0099FF]/15 flex items-center justify-center">
+                    <benefit.icon className="h-5 w-5 text-[#0099FF]" strokeWidth={2} />
+                  </div>
                 </div>
-                <div className="text-left max-w-[480px]">
-                  <h3 className="text-lg font-semibold mb-1">{benefit.title}</h3>
-                  <p className="text-muted-foreground">{benefit.description}</p>
+                
+                {/* Text content */}
+                <div className="text-left pt-1">
+                  <h3 className="text-[17px] font-semibold text-foreground mb-1.5">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-muted-foreground text-[15px] leading-[1.7]">
+                    {benefit.description}
+                  </p>
                 </div>
               </div>
             ))}

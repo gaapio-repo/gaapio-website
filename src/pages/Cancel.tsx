@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ResponsiveContainer } from "@/components/layout/ResponsiveContainer";
@@ -6,10 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { XCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 
 export default function Cancel() {
   return (
     <div className="flex min-h-screen flex-col">
+      <SEO 
+        title="Checkout Canceled - Gaapio"
+        description="Your checkout was not completed. Contact support or try again to subscribe to Gaapio."
+        noindex={true}
+      />
       <Header />
       <main className="flex-1 pt-32 pb-16">
         <ResponsiveContainer>
