@@ -39,9 +39,9 @@ export const DisclosureBenefitsSection = memo(function DisclosureBenefitsSection
     <section className="py-20 md:py-32" style={{ backgroundColor: 'var(--benefits-bg)' }}>
       <div className="container px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Key Benefits</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">The Ideal AI Use Case</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Transform your footnote disclosure process with AI-powered automation
+            Disclosure checklists are high-confidence verification work — no judgment required. That's exactly where AI delivers the biggest time savings without risking audit quality.
           </p>
         </div>
 

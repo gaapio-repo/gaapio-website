@@ -8,12 +8,12 @@ interface ContractHeroSectionProps {
 }
 
 export const ContractHeroSection = memo(function ContractHeroSection({ 
-  title = "AI-Powered Contract Analysis",
-  subtitle = "AI-Powered. Contract-Analyzed"
+  title = "Contract Analysis with Receipts",
+  subtitle = "Source-referenced outputs. Customizable templates. Built to flow into your memos, lease schedules, and analyses."
 }: ContractHeroSectionProps) {
   
   return (
-    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 bg-white dark:bg-background overflow-hidden">
+    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 bg-white dark:bg-[#0a1929] overflow-hidden">
       <div className="container px-4 md:px-6 text-center relative z-10">
         
         {/* Text content centered */}

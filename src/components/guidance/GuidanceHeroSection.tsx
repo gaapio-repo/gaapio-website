@@ -10,12 +10,12 @@ interface GuidanceHeroSectionProps {
 }
 
 export const GuidanceHeroSection = memo(function GuidanceHeroSection({ 
-  title = "Stay Current with Guidance Updates",
-  subtitle = "AI-Powered. Always Updated."
+  title = "Research-Grade Guidance, in Seconds",
+  subtitle = "High-accuracy answers, fast — every citation links back to an authoritative source."
 }: GuidanceHeroSectionProps) {
   
   return (
-    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 bg-white dark:bg-background overflow-hidden">
+    <section className="relative min-h-[100vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-32 pb-20 md:pb-12 bg-white dark:bg-[#0a1929] overflow-hidden">
       <div className="container px-4 md:px-6 text-center relative z-10">
         
         {/* Text content centered */}
