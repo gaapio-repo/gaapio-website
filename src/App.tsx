@@ -43,7 +43,8 @@ import SSA from "./pages/SSA";
 import TermsOfService from "./pages/TermsOfService";
 import PrivateCompany from "./pages/solutions/PrivateCompany";
 import PublicCompany from "./pages/solutions/PublicCompany";
-import AccountingFirm from "./pages/solutions/AccountingFirm";
+import AdvisoryConsulting from "./pages/solutions/AdvisoryConsulting";
+import AuditPractice from "./pages/solutions/AuditPractice";
 import { SignupGuard } from "./components/SignupGuard";
 
 function App() {
@@ -71,7 +72,10 @@ function App() {
             <Route path="/home-alt" element={<IndexAlt />} />
             <Route path="/solutions/private" element={<PrivateCompany />} />
             <Route path="/solutions/public" element={<PublicCompany />} />
-            <Route path="/solutions/firm" element={<AccountingFirm />} />
+            <Route path="/solutions/advisory" element={<AdvisoryConsulting />} />
+            <Route path="/solutions/audit" element={<AuditPractice />} />
+            {/* Legacy /solutions/firm route kept for backward compatibility; points to advisory page */}
+            <Route path="/solutions/firm" element={<AdvisoryConsulting />} />
             <Route path="/accounting-memos" element={<AccountingMemos />} />
             <Route path="/footnote-disclosures" element={<FootnoteDisclosures />} />
             <Route path="/contract-analysis" element={<ContractAnalysis />} />

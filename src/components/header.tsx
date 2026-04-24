@@ -106,11 +106,18 @@ const solutionPages = [
     features: ["10-K & 10-Q disclosures, faster", "SOX documentation without spreadsheets", "Defensible outputs auditors trust"],
   },
   {
-    name: "Accounting Firms",
-    href: "/solutions/firm",
+    name: "Advisory & Consulting",
+    href: "/solutions/advisory",
     icon: Briefcase,
-    description: "Serve more clients with the same team",
-    features: ["Serve more clients per staff", "Senior-level work from associates", "Standardized, client-ready deliverables"],
+    description: "Scale senior expertise, not headcount",
+    features: ["Technical memos and SOX work faster", "Customizable firm methodology", "Onboard consultants faster"],
+  },
+  {
+    name: "Audit",
+    href: "/solutions/audit",
+    icon: Briefcase,
+    description: "Consistent workpapers, every engagement",
+    features: ["Senior-level workpaper quality from staff", "Source-referenced to the codification", "Reviewer-ready, peer-review-ready"],
   }
 ];
 

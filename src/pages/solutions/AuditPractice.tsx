@@ -6,62 +6,185 @@ import { useRef, type MouseEvent as ReactMouseEvent } from "react";
 import { GradientBackground } from "@/components/home/GradientBackground";
 import { TrustBarSection } from "@/components/home/TrustBarSection";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
-import { ProductHighlightsSection } from "@/components/home/ProductHighlightsSection";
-import { Building2, FileCheck, Search, Clock, Users, Lock, Shield, Database, FileLock, Sparkles } from "lucide-react";
+import { FirmModulesSection } from "@/components/solutions/FirmModulesSection";
+import { FirmTiersSection } from "@/components/solutions/FirmTiersSection";
+import { ClipboardCheck, FileCheck, BookOpen, GraduationCap, TrendingUp, Lock, Shield, Database, FileLock } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { ServiceSchema } from "@/components/StructuredData";
 import { cn } from "@/lib/utils";
 
-// Primary "hero" pillar — AI-completed disclosure checklist + benchmarking
+// Audit-specific hero mockup — engagement workpaper view with reviewer comment
+const HeroScreenshotMockup = () => (
+  <div className="w-full max-w-xl mx-auto relative">
+    {/* Floating reviewer-ready badge */}
+    <div className="absolute -top-4 -right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-500 text-white text-[11px] font-semibold shadow-lg shadow-green-500/30">
+      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+      Reviewer Ready
+    </div>
+
+    <div className="bg-white rounded-xl border border-gray-200 shadow-2xl overflow-hidden">
+      {/* Window chrome */}
+      <div className="bg-gray-50 px-4 py-2.5 flex items-center gap-3 border-b border-gray-200">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+        </div>
+        <div className="flex-1 text-[11px] font-medium text-gray-500 truncate">
+          Acme Holdings — Q4 Audit / Revenue Memo
+        </div>
+        <div className="w-4 h-4 rounded bg-gray-200" />
+      </div>
+
+      {/* App content */}
+      <div className="flex">
+        {/* Left rail — engagement phases */}
+        <div className="w-2/5 border-r border-gray-200 p-4 bg-gray-50/50 text-[10px]">
+          <div className="text-[9px] font-bold uppercase tracking-wider text-gray-400 mb-3">
+            Engagement
+          </div>
+          <div className="space-y-2.5">
+            {[
+              { label: "Planning", state: "done" },
+              { label: "Fieldwork", state: "done" },
+              { label: "Technical Review", state: "active" },
+              { label: "Partner Sign-Off", state: "todo" },
+            ].map((step) => (
+              <div key={step.label} className="flex items-center gap-2">
+                {step.state === "done" && (
+                  <div className="w-3.5 h-3.5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-2 h-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                )}
+                {step.state === "active" && (
+                  <div className="w-3.5 h-3.5 rounded-full bg-[#0099FF] border-2 border-white shadow-[0_0_0_2px_rgba(0,153,255,0.4)] flex-shrink-0" />
+                )}
+                {step.state === "todo" && (
+                  <div className="w-3.5 h-3.5 rounded-full border-2 border-gray-300 flex-shrink-0" />
+                )}
+                <span className={step.state === "active" ? "font-semibold text-gray-900" : step.state === "done" ? "text-gray-500 line-through" : "text-gray-400"}>
+                  {step.label}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Mini stats */}
+          <div className="mt-5 pt-4 border-t border-gray-200 grid grid-cols-2 gap-2 text-[9px]">
+            <div>
+              <div className="font-bold text-gray-900 text-sm">12</div>
+              <div className="text-gray-500">memos</div>
+            </div>
+            <div>
+              <div className="font-bold text-gray-900 text-sm">48</div>
+              <div className="text-gray-500">citations</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right — memo content */}
+        <div className="flex-1 p-4 space-y-3 text-[10px]">
+          {/* Memo header */}
+          <div className="flex items-center justify-between pb-2 border-b border-gray-200">
+            <div className="flex items-center gap-2">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-[#0099FF]">
+                ASC 606 Memo
+              </span>
+            </div>
+            <div className="text-[9px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 font-medium">
+              Draft v3
+            </div>
+          </div>
+
+          {/* Memo paragraphs with citation highlight */}
+          <div className="space-y-1.5">
+            <div className="h-1.5 bg-gray-200 rounded w-full" />
+            <div className="h-1.5 bg-gray-200 rounded w-11/12" />
+            <div className="h-1.5 bg-gray-200 rounded w-4/5" />
+            {/* Highlighted citation */}
+            <div className="my-2 inline-flex items-center gap-1.5 px-2 py-1 rounded bg-[#0099FF]/10 border border-[#0099FF]/30 text-[9px]">
+              <span className="font-mono font-semibold text-[#0099FF]">ASC 606-10-25-1</span>
+              <span className="text-gray-600">· Contract existence</span>
+            </div>
+            <div className="h-1.5 bg-gray-200 rounded w-full" />
+            <div className="h-1.5 bg-gray-200 rounded w-10/12" />
+            <div className="h-1.5 bg-gray-200 rounded w-9/12" />
+          </div>
+
+          {/* Reviewer comment bubble */}
+          <div className="mt-3 p-2.5 rounded-lg bg-[#0099FF]/5 border border-[#0099FF]/20">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <div className="w-4 h-4 rounded-full bg-[#0099FF] flex items-center justify-center text-white text-[8px] font-bold">
+                K
+              </div>
+              <span className="text-[9px] font-semibold text-gray-700">Partner · Review</span>
+            </div>
+            <div className="space-y-1">
+              <div className="h-1 bg-gray-300 rounded w-full" />
+              <div className="h-1 bg-gray-300 rounded w-4/5" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+// Primary "hero" pillar — the main value statement
 const heroPillar = {
-  category: "Disclosures at Reporting Speed",
-  headline: "Turn annual disclosure prep from scramble into process.",
+  category: "Technical Accounting at Scale",
+  headline: "The work only your best seniors can do — now running across every engagement.",
   description:
-    "Disclosure work is high-stakes, high-volume, and mostly high-confidence verification — exactly where AI delivers without risking audit quality. Gaapio completes your checklists, benchmarks against peers, and drafts updates. Your team reviews, not starts from zero.",
+    "Complex technical accounting used to bottleneck on a handful of experts. Gaapio embeds that judgment into every memo, every engagement, every client — so the hard work gets done faster without losing depth.",
   topics: [
-    "AI-completed ASC checklists",
-    "Peer benchmarking",
-    "Annual roll-forwards",
-    "New-standard impacts",
-    "Draft generation",
-    "Reviewer comments & sign-off",
+    "Revenue recognition (ASC 606)",
+    "Lease accounting (ASC 842)",
+    "Debt & equity analysis",
+    "Business combinations",
+    "Stock compensation",
+    "Going concern support",
+    "Impairment analyses",
+    "Complex consultations",
   ],
 };
 
-// Four supporting pillars
+// Supporting pillars — 4 in a 2x2 grid below the hero pillar
 const supportingPillars = [
   {
     icon: FileCheck,
-    title: "Reviewer-Ready Technical Memos",
+    title: "Reviewer-Ready Memos & Workpapers",
     description:
-      "Produce supportable, auditor-ready memos for ASC 606, ASC 842, debt modifications, stock comp, acquisitions, impairment, and new transactions — in a fraction of the time.",
+      "Cleaner first drafts. Stronger documentation. Consistent outputs firmwide — so partners spend review time on judgment, not rewriting.",
   },
   {
-    icon: Search,
-    title: "Research Grounded in the Codification",
+    icon: BookOpen,
+    title: "Footnote Disclosure Support",
     description:
-      "Every answer cites authoritative sources. Your conclusions are defensible, your reviewers have what they need, and your research hours shrink dramatically.",
+      "Turn disclosure prep from annual scramble into managed process — checklists, benchmarking, and drafting for every client, every year.",
   },
   {
-    icon: Clock,
-    title: "Faster SEC Reporting Cycles",
+    icon: GraduationCap,
+    title: "Upskill Staff Faster",
     description:
-      "Cut reporting bottlenecks across 10-Ks, 10-Qs, S-1s, 8-Ks, and earnings prep. Lean teams ship cleaner filings on tighter timelines.",
+      "A system that teaches while your people work — embedded citations, structured outputs, and defensible conclusions that level up associates engagement by engagement.",
   },
   {
-    icon: Users,
-    title: "Lean-Team Leverage",
+    icon: TrendingUp,
+    title: "Expand Advisory Revenue",
     description:
-      "Operate like a larger technical accounting team without adding headcount — or advisor spend. Handle more internally without sacrificing quality.",
+      "Profitably deliver technical accounting advisory services that previously required scarce senior experts. Scale what was unscalable.",
   },
 ];
 
-// Security & Trust
 const securityItems = [
   {
     icon: Shield,
     title: "Private by Design",
-    description: "Your company data never trains public AI models. Isolated workspaces per organization.",
+    description: "Your client data never trains public AI models. Isolated workspaces per firm.",
   },
   {
     icon: Lock,
@@ -169,137 +292,20 @@ const PillarCard = ({
   );
 };
 
-// Public-company hero mockup — 10-Q disclosure checklist with AI-completed items + peer benchmark
-const HeroScreenshotMockup = () => {
-  const checklistItems = [
-    { label: "ASC 606 — Revenue Recognition", state: "ai" as const },
-    { label: "ASC 842 — Leases", state: "ai" as const },
-    { label: "Income Taxes", state: "ai" as const },
-    { label: "Stock-Based Compensation", state: "ai" as const },
-    { label: "Segment Reporting", state: "review" as const },
-    { label: "Subsequent Events", state: "todo" as const },
-  ];
-
-  return (
-    <div className="w-full max-w-xl mx-auto relative">
-      {/* Floating status badge */}
-      <div className="absolute -top-4 -right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-500 text-white text-[11px] font-semibold shadow-lg shadow-green-500/30">
-        <Sparkles className="w-3 h-3" strokeWidth={2.5} />
-        4 of 6 AI-completed
-      </div>
-
-      <div className="bg-white rounded-xl border border-gray-200 shadow-2xl overflow-hidden">
-        {/* Window chrome */}
-        <div className="bg-gray-50 px-4 py-2.5 flex items-center gap-3 border-b border-gray-200">
-          <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-            <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-            <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
-          </div>
-          <div className="flex-1 text-[11px] font-medium text-gray-500 truncate">
-            Q3 2025 · 10-Q Disclosure Checklist
-          </div>
-          <div className="w-4 h-4 rounded bg-gray-200" />
-        </div>
-
-        {/* Content */}
-        <div className="p-5 space-y-4">
-          {/* Section header */}
-          <div className="flex items-center justify-between pb-3 border-b border-gray-200">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#0099FF]">
-                Checklist
-              </span>
-              <span className="text-[10px] text-gray-400">· 6 items</span>
-            </div>
-            <div className="text-[10px] px-2 py-0.5 rounded bg-gray-100 text-gray-600 font-medium">
-              Filter ▾
-            </div>
-          </div>
-
-          {/* Checklist rows */}
-          <div className="space-y-2">
-            {checklistItems.map((item) => (
-              <div
-                key={item.label}
-                className={cn(
-                  "flex items-center gap-3 py-1.5 px-2 rounded-md text-[11px]",
-                  item.state === "ai" && "bg-[#0099FF]/[0.03]"
-                )}
-              >
-                {item.state === "ai" && (
-                  <div className="w-4 h-4 rounded-full bg-[#0099FF] flex items-center justify-center flex-shrink-0">
-                    <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                )}
-                {item.state === "review" && (
-                  <div className="w-4 h-4 rounded-full bg-amber-400 border-2 border-white shadow-[0_0_0_2px_rgba(251,191,36,0.4)] flex-shrink-0" />
-                )}
-                {item.state === "todo" && (
-                  <div className="w-4 h-4 rounded-full border-2 border-gray-300 flex-shrink-0" />
-                )}
-                <span className={cn(
-                  "flex-1 font-medium",
-                  item.state === "ai" && "text-gray-800",
-                  item.state === "review" && "text-gray-900 font-semibold",
-                  item.state === "todo" && "text-gray-500"
-                )}>
-                  {item.label}
-                </span>
-                {item.state === "ai" && (
-                  <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-[#0099FF]/10 text-[#0099FF]">
-                    <Sparkles className="w-2.5 h-2.5" strokeWidth={2.5} />
-                    AI
-                  </span>
-                )}
-                {item.state === "review" && (
-                  <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-700">
-                    Review
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Peer benchmark bar */}
-          <div className="pt-3 border-t border-gray-200">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-500">
-                Peer Benchmark
-              </span>
-              <span className="text-[10px] text-gray-500">
-                <span className="font-bold text-gray-900">82%</span> match · 12 peers
-              </span>
-            </div>
-            <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-[#0099FF] to-[#00B8FF]"
-                style={{ width: "82%" }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default function PublicCompany() {
+export default function AuditPractice() {
   return (
     <div className="flex min-h-screen flex-col">
       <SEO
-        title="Public Company Accounting Solutions - SEC & SOX Compliance"
-        description="Enterprise-grade compliance solutions for SEC filers. Streamline SOX documentation, accelerate 10-K reporting, and maintain disclosure excellence with AI-powered automation."
-        canonical="/solutions/public"
-        keywords={['public company accounting', 'SEC reporting', 'SOX compliance', '10-K disclosures', 'SEC filer tools']}
+        title="The Technical Accounting Force Multiplier for Firms - Gaapio"
+        description="Scale technical accounting expertise across every engagement. Gaapio helps CPA and audit firms deliver reviewer-ready memos, disclosures, and complex accounting support faster — while helping staff level up."
+        canonical="/solutions/audit"
+        keywords={['CPA firm technical accounting', 'audit firm AI', 'reviewer-ready memos', 'footnote disclosure support', 'upskill audit staff', 'advisory revenue growth']}
       />
       <ServiceSchema
-        name="Gaapio for Public Companies"
-        description="SEC reporting, SOX compliance, and disclosure management solutions for public companies and SEC filers."
-        url="/solutions/public"
-        audience="SEC Filers, Public Company Controllers, Technical Accounting Managers"
+        name="Gaapio for CPA & Audit Firms"
+        description="The technical accounting force multiplier for CPA and audit firms — senior-level memos, disclosure support, and staff enablement across every engagement."
+        url="/solutions/audit"
+        audience="Audit Partners, CPA Firm Partners, Audit Managers, Technical Accounting Reviewers, Advisory Practice Leaders"
       />
       <Header />
       
@@ -312,22 +318,22 @@ export default function PublicCompany() {
             {/* Left - Text Content */}
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-                <Building2 className="h-5 w-5 text-gray-900" />
-                <span className="text-sm font-medium text-gray-900">Public Company Solutions</span>
+                <ClipboardCheck className="h-5 w-5 text-gray-900" />
+                <span className="text-sm font-medium text-gray-900">For CPA &amp; Audit Firms</span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-                <span className="text-gray-900">SEC-Ready</span>{" "}
-                <span className="text-white">Technical Accounting</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-6">
+                <span className="text-gray-900">The Technical Accounting</span>{" "}
+                <span className="text-white">Force Multiplier.</span>
               </h1>
 
               <p className="text-lg md:text-xl text-gray-900/90 max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0">
-                Generate defensible memos, disclosures, and contract analysis for 10-Ks, 10-Qs, and SOX — in minutes, not weeks.
+                Scale technical accounting expertise across every engagement. Deliver reviewer-ready memos, disclosures, and complex accounting support faster — while helping staff level up.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button size="lg" variant="black" className="text-base px-8 py-6 h-auto font-semibold" asChild>
-                  <Link to="/signup">Sign Up Now</Link>
+                  <Link to="/firm-signup">Sign Up Now</Link>
                 </Button>
                 <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 bg-white hover:bg-gray-100 text-base px-8 py-6 h-auto font-semibold" asChild>
                   <Link to="/request-demo">Request a Demo</Link>
@@ -346,7 +352,7 @@ export default function PublicCompany() {
       {/* Trust Bar */}
       <TrustBarSection />
 
-      {/* Why Public Companies Section — premium pillar layout */}
+      {/* Why Firms Section — premium background */}
       <section className="py-24 md:py-32 relative overflow-hidden">
         {/* Base gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-white via-[#f0f8ff] to-white dark:from-background dark:via-[#0a1220] dark:to-background" />
@@ -366,21 +372,22 @@ export default function PublicCompany() {
         {/* Soft radial glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full bg-[#0099FF]/5 dark:bg-[#0099FF]/10 blur-[120px] pointer-events-none" />
 
+
         <div className="container px-4 md:px-6 relative z-10">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <div className="text-xs font-bold tracking-[0.18em] uppercase text-[#0099FF] mb-4">
-              Why Public Companies Run on Gaapio
+              Why Firms Run on Gaapio
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5 tracking-tight leading-[1.05]">
-              Avoid mistakes. Hit deadlines. Keep the team sane.
+              Five ways firms turn Gaapio into a force multiplier.
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Built for lean controller teams under real SEC and audit pressure — the kind that live and die on documentation, deadlines, and defensibility.
+              Technical accounting work that used to bottleneck on a few senior experts — now running across every engagement, every client, every staff level.
             </p>
           </div>
 
           <div className="max-w-6xl mx-auto space-y-6 lg:space-y-8">
-            {/* Hero pillar — AI-Completed Disclosure Checklist */}
+            {/* Hero pillar — full-width feature card with premium treatment */}
             <div className="group relative overflow-hidden rounded-3xl bg-background/80 backdrop-blur-xl border border-border/80 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_32px_-8px_rgba(15,23,42,0.1)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_32px_-8px_rgba(0,0,0,0.5)] p-10 lg:p-14 transition-all duration-500 hover:-translate-y-1 hover:border-[#0099FF]/40 hover:shadow-[0_0_0_1px_rgba(0,153,255,0.2),0_40px_80px_-16px_rgba(0,153,255,0.3)]">
               {/* Decorative auroras */}
               <div
@@ -419,6 +426,7 @@ export default function PublicCompany() {
                   </p>
                 </div>
 
+                {/* Topic chips — elevated treatment */}
                 <div className="lg:col-span-2">
                   <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground mb-5 flex items-center gap-3">
                     <span>Coverage</span>
@@ -439,7 +447,7 @@ export default function PublicCompany() {
               </div>
             </div>
 
-            {/* 2x2 supporting pillars */}
+            {/* 2x2 supporting pillars — premium card treatment */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
               {supportingPillars.map((pillar, index) => (
                 <PillarCard key={index} pillar={pillar} index={index} />
@@ -449,10 +457,13 @@ export default function PublicCompany() {
         </div>
       </section>
 
-      {/* Modules Section */}
-      <ProductHighlightsSection />
+      {/* Firm Tiers Section - Package pricing */}
+      <FirmTiersSection />
 
-      {/* Security & Trust — premium icon-card grid */}
+      {/* Modules Section - Using the tabbed layout */}
+      <FirmModulesSection />
+
+      {/* Security & Trust Section — premium icon-card grid */}
       <section className="py-24 md:py-32 relative overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-[#f0f8ff]/40 to-muted/50 dark:from-background dark:via-[#0a1220] dark:to-background" />
@@ -478,10 +489,10 @@ export default function PublicCompany() {
               Security &amp; Trust
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5 tracking-tight leading-[1.05]">
-              Built for the security expectations of public company finance teams.
+              Built for the security expectations of audit teams.
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Your data is sensitive. Our infrastructure reflects that.
+              Your client data is sensitive. Our infrastructure reflects that.
             </p>
           </div>
 
@@ -493,12 +504,14 @@ export default function PublicCompany() {
                   key={index}
                   className="group relative overflow-hidden rounded-2xl p-7 bg-background/80 backdrop-blur-xl border border-border/80 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_-8px_rgba(15,23,42,0.08)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_24px_-8px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-1 hover:border-[#0099FF]/40 hover:shadow-[0_0_0_1px_rgba(0,153,255,0.15),0_24px_48px_-12px_rgba(0,153,255,0.25)]"
                 >
+                  {/* Corner aurora */}
                   <div
                     className="pointer-events-none absolute -bottom-12 -right-12 w-40 h-40 rounded-full blur-3xl opacity-20 group-hover:opacity-60 transition-opacity duration-500"
                     style={{ background: "radial-gradient(circle, rgba(0,153,255,0.25), transparent 70%)" }}
                   />
 
                   <div className="relative">
+                    {/* Icon with shield treatment */}
                     <div className="mb-5 w-11 h-11 rounded-xl flex items-center justify-center bg-gradient-to-br from-white to-[#f0f8ff] dark:from-white/[0.08] dark:to-white/[0.02] border border-[#0099FF]/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 group-hover:border-[#0099FF]/50">
                       <ItemIcon className="w-5 h-5 text-[#0099FF]" strokeWidth={1.5} />
                     </div>
@@ -519,7 +532,7 @@ export default function PublicCompany() {
 
       {/* CTA Section */}
       <FinalCtaSection />
-
+      
       <Footer />
     </div>
   );

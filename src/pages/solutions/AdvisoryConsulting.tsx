@@ -62,23 +62,23 @@ const HeroScreenshotMockup = () => (
   </div>
 );
 
-const practiceLanes = [
+const advisoryUseCases = [
   {
-    practice: "Audit Practice",
-    headline: "Consistent workpapers. Every engagement.",
+    category: "Technical Accounting Consulting",
+    headline: "Deliver senior-level technical work on every engagement.",
     bullets: [
-      "Staff produce senior-level technical memos, analyses, and workpapers in minutes",
-      "Codified firm methodology means reviewers see consistent deliverables, not first drafts",
-      "Every conclusion ties back to the codification with source-referenced outputs",
+      "Generate audit-ready memos for revenue, leases, debt, stock comp, and business combinations in minutes",
+      "Combine Gaapio's CPA judgment with your firm's methodology — consultants operate from the same playbook",
+      "Source-referenced outputs tie every conclusion back to the codification, not a blog post",
     ],
   },
   {
-    practice: "Advisory & Consulting",
-    headline: "Scale senior expertise without senior headcount.",
+    category: "Managed Services & SOX Advisory",
+    headline: "Scale recurring client work without scaling headcount.",
     bullets: [
-      "Deliver technical accounting memos, research, and SOX work faster for every client",
-      "Customize templates and workflows to your firm's methodology — not a generic playbook",
-      "Onboard new consultants faster with expertise embedded directly into the tool",
+      "Standardize disclosure checklists, control documentation, and close-cycle deliverables across clients",
+      "Onboard new consultants faster with expertise embedded directly into prompts and templates",
+      "Customize templates per client or industry — consistent output, client-specific branding",
     ],
   },
 ];
@@ -90,20 +90,20 @@ const securityItems = [
   "SOC 2–aligned infrastructure and controls",
 ];
 
-export default function AccountingFirm() {
+export default function AdvisoryConsulting() {
   return (
     <div className="flex min-h-screen flex-col">
       <SEO
-        title="CPA Firm Solutions - AI Technical Accounting for Firms"
-        description="AI-powered technical accounting platform for CPA firms. Upskill staff, increase leverage, and deliver higher-quality client work faster with multi-client workflows."
-        canonical="/solutions/firm"
-        keywords={['CPA firm software', 'accounting firm tools', 'multi-client accounting', 'CPA practice management', 'firm leverage']}
+        title="Advisory & Consulting Solutions - AI for CPA Firm Advisory Practices"
+        description="AI-powered technical accounting for CPA firm advisory and consulting practices. Scale senior expertise, standardize client deliverables, and onboard consultants faster."
+        canonical="/solutions/advisory"
+        keywords={['CPA advisory software', 'technical accounting consulting', 'managed services accounting', 'SOX advisory tools', 'consulting firm AI']}
       />
       <ServiceSchema
-        name="Gaapio for Accounting Firms"
-        description="Multi-client workflows and advisory preparation tools for CPA firms to scale technical accounting services."
-        url="/solutions/firm"
-        audience="CPA Firms, Accounting Partners, Technical Accounting Consultants"
+        name="Gaapio for Advisory & Consulting Practices"
+        description="Technical accounting and managed-services tools for CPA firm advisory and consulting practices — standardize client deliverables and scale senior expertise."
+        url="/solutions/advisory"
+        audience="CPA Firm Advisory Partners, Technical Accounting Consultants, Managed Services Leaders"
       />
       <Header />
       
@@ -117,16 +117,16 @@ export default function AccountingFirm() {
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
                 <Briefcase className="h-5 w-5 text-gray-900" />
-                <span className="text-sm font-medium text-gray-900">Accounting Firm Solutions</span>
+                <span className="text-sm font-medium text-gray-900">Advisory &amp; Consulting</span>
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-                <span className="text-gray-900">Multiply Your</span>{" "}
-                <span className="text-white">Firm's Capacity</span>
+                <span className="text-gray-900">Scale Senior Expertise.</span>{" "}
+                <span className="text-white">Not Headcount.</span>
               </h1>
 
               <p className="text-lg md:text-xl text-gray-900/90 max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0">
-                Run your audit and advisory practices on one platform. Codify your methodology, level up every associate, and deliver consistent, senior-level work on every engagement.
+                Deliver senior-level technical memos, research, and SOX work for every client — anchored in the codification and your firm's methodology. One platform, every engagement.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -162,27 +162,27 @@ export default function AccountingFirm() {
         <div className="container px-4 md:px-6 relative z-10">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
-              Built for Both Sides of Your Practice
+              Built for How Advisory Practices Actually Work
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Audit and advisory teams have different workflows — Gaapio runs both, anchored in the same real CPA judgment and your firm's methodology.
+              From one-off technical accounting memos to recurring managed services, Gaapio combines your firm's methodology with real CPA judgment — so every deliverable reflects senior-level thinking.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto">
-            {practiceLanes.map((lane, index) => (
+            {advisoryUseCases.map((useCase, index) => (
               <div
                 key={index}
                 className="group p-10 lg:p-12 rounded-2xl bg-background/80 backdrop-blur-sm border border-border/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-muted hover:border-border"
               >
                 <div className="text-sm font-bold text-primary tracking-wider uppercase mb-3">
-                  {lane.practice}
+                  {useCase.category}
                 </div>
                 <h3 className="text-2xl lg:text-[1.75rem] font-bold text-foreground mb-6 leading-tight">
-                  {lane.headline}
+                  {useCase.headline}
                 </h3>
                 <ul className="space-y-3">
-                  {lane.bullets.map((bullet, i) => (
+                  {useCase.bullets.map((bullet, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary mt-2.5" />
                       <span className="text-base lg:text-lg text-muted-foreground leading-relaxed">

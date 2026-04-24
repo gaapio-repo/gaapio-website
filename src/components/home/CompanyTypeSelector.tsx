@@ -17,10 +17,16 @@ const entryPoints = [
     href: "/solutions/public",
   },
   {
-    id: "firm",
-    title: "Accounting Firms",
-    outcome: "Multi-client efficiency & advisory workflows",
-    href: "/solutions/firm",
+    id: "advisory",
+    title: "Advisory & Consulting",
+    outcome: "Scale senior expertise across every client engagement",
+    href: "/solutions/advisory",
+  },
+  {
+    id: "audit",
+    title: "Audit",
+    outcome: "Consistent workpapers and reviewer-ready documentation",
+    href: "/solutions/audit",
   },
 ];
 
